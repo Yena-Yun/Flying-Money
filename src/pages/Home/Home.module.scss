@@ -2,32 +2,43 @@
 
 .container {
   @include flexbox-column;
+  position: relative;
   width: 375px;
   height: 667px;
-  padding: 1.5rem;
   margin: 20px auto 0;
   border-radius: 1.5rem;
   background-color: var(--color-white);
+  overflow-y: hidden;
 
-  .titleHeader {
-    @include flexbox-column;
-    margin-bottom: 1.5rem;
+  .innerContainer {
+    width: 100%;
+    height: 90%;
+    padding: 1.5rem;
+    margin: 20px auto 0;
+    overflow-y: auto;
 
-    .title {
-      font-size: var(--text-size-lg);
-      font-weight: var(--font-weight-bold);
-    }
-
-    .subTitle {
+    .addNewItemButton {
+      @include flexbox-column;
+      width: 100%;
+      height: 100px;
       font-size: var(--text-size-md);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      border-radius: 1rem;
+      background-color: var(--color-background);
+      cursor: pointer;
+
+      .addNewItemIcon {
+        font-size: var(--text-size-lg);
+        cursor: pointer;
+      }
+
+      p {
+        font-family: 'Nanum Pen Script';
+        font-size: var(--text-size-md);
+        cursor: pointer;
+      }
     }
-  }
-
-  .mainImageContainer {
-    margin-bottom: 0.8rem;
-  }
-
-  .randomPhrases {
-    @include flexbox-column;
   }
 }

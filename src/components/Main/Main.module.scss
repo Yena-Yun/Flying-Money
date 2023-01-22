@@ -1,0 +1,28 @@
+@import 'styles/mixins';
+
+.container {
+  @include flexbox-column;
+
+  .titleHeader {
+    @include flexbox-column;
+    margin-bottom: 1.5rem;
+
+    .title {
+      font-size: var(--text-size-lg);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .subTitle {
+      font-size: var(--text-size-md);
+    }
+  }
+
+  .mainImageContainer {
+    margin-bottom: 0.8rem;
+  }
+
+  .randomPhrases {
+    @include flexbox-column;
+    margin-bottom: 1.8rem;
+  }
+}

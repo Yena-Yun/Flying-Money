@@ -4,8 +4,9 @@
   --color-primary: #7877b8;
   --color-background: #ede7e9;
   --color-pink: #f06d86;
-  --color-dart-pink: #ae2c47;
+  --color-dark-pink: #ae2c47;
   --color-yellow: #ecc955;
+  --color-blue: #83c7d5;
   --color-black: #282828;
   --color-white: #ffffff;
 
@@ -46,12 +47,13 @@ body {
 
   ::-webkit-scrollbar {
     display: block;
-    height: 12px;
+    width: 0.6rem;
   }
 
   ::-webkit-scrollbar-thumb {
     background: var(--color-gray-2);
     border-radius: 10px;
+    height: 30%;
   }
 
   font-family: 'Nanum Pen Script', 'Hi Melody', 'Shrikhand', cursive,
