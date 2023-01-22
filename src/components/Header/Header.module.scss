@@ -1,0 +1,21 @@
+@import 'styles/mixins';
+
+.header {
+  @include flexbox-row(space-between, center);
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: lightblue;
+
+  .time {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .status {
+    @include flexbox-row;
+    gap: 0.2rem;
+
+    .wifi {
+      margin-right: -0.1rem;
+    }
+  }
+}

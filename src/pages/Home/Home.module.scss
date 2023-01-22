@@ -1,0 +1,33 @@
+@import 'styles/mixins';
+
+.container {
+  @include flexbox-column;
+  width: 375px;
+  height: 667px;
+  padding: 1.5rem;
+  margin: 20px auto 0;
+  border-radius: 1.5rem;
+  background-color: var(--color-white);
+
+  .titleHeader {
+    @include flexbox-column;
+    margin-bottom: 1.5rem;
+
+    .title {
+      font-size: var(--text-size-lg);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .subTitle {
+      font-size: var(--text-size-md);
+    }
+  }
+
+  .mainImageContainer {
+    margin-bottom: 0.8rem;
+  }
+
+  .randomPhrases {
+    @include flexbox-column;
+  }
+}

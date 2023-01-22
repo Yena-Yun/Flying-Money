@@ -17,5 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+   "include": ["**/*.ts", "**/*.tsx", "src/styles/svg/main_category/index.ts"],
+  "exclude": ["node_modules"]
 }
