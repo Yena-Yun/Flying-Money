@@ -20,3 +20,8 @@ export const expenseListState = atom<Transaction[]>({
   key: 'expenseList',
   default: [],
 });
+
+export const selectedDateState = atom({
+  key: 'selectedDate',
+  default: new Date(),
+});

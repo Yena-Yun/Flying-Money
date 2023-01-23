@@ -1,26 +1,18 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { format, addMonths, subMonths } from 'date-fns';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { toggleCalendarSelector } from 'recoil/selector';
 import { RenderDateCells } from './DateCells/DateCells';
 import { DAYS } from 'utils/constants/constants';
 import styles from './Calendar.module.scss';
-import { closeModalSelector, toggleCalendarSelector } from 'recoil/selector';
-import { isOpenCalendarState } from 'recoil/atom';
 
 export const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const setCloseModal = useSetRecoilState(closeModalSelector);
-  const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const setOpenCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const changeMonth = (moveTo: string) => {
     if (moveTo === 'PREV') setCurrentMonth(subMonths(currentMonth, 1));
     else setCurrentMonth(addMonths(currentMonth, 1));
-  };
-
-  const onDateClick = (day: Date) => {
-    setSelectedDate(day);
   };
 
   return (
@@ -55,11 +47,7 @@ export const Calendar = () => {
               </div>
             ))}
           </div>
-          <RenderDateCells
-            currentMonth={currentMonth}
-            selectedDate={selectedDate}
-            onDateClick={onDateClick}
-          />
+          <RenderDateCells currentMonth={currentMonth} />
         </div>
       </div>
     </>

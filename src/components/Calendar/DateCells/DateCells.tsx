@@ -1,3 +1,4 @@
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   format,
   isSameDay,
@@ -8,24 +9,22 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
+import { selectedDateState } from 'recoil/atom';
 import styles from './DateCells.module.scss';
+import { setSelectedDateSelector } from 'recoil/selector';
 
 interface DateCellProps {
   currentMonth: Date;
-  selectedDate: Date;
-  onDateClick: (prev: Date) => void;
-  mini?: boolean;
 }
 
-export const RenderDateCells = ({
-  currentMonth,
-  selectedDate,
-  onDateClick,
-}: DateCellProps) => {
+export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
+
+  const selectedDate = useRecoilValue(selectedDateState);
+  const setSelectedDate = useSetRecoilState(setSelectedDateSelector);
 
   const rows: JSX.Element[] = [];
   let dates: JSX.Element[] = [];
@@ -41,7 +40,7 @@ export const RenderDateCells = ({
         <div
           className={styles.date}
           key={date.toString()}
-          onClick={() => onDateClick(cloneDay)}
+          onClick={() => setSelectedDate(() => cloneDay)}
         >
           <span
             className={

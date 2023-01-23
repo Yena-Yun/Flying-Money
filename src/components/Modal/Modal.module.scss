@@ -45,7 +45,7 @@
 
     .inputGroup {
       position: relative;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
 
       .subTitle {
         font-size: var(--text-size-md);
@@ -60,6 +60,12 @@
           margin-top: -0.2rem;
           margin-left: 0.5rem;
           cursor: pointer;
+        }
+
+        .selectedDate {
+          margin-top: -0.4rem;
+          margin-left: 0.8rem;
+          font-size: var(--text-size-md);
         }
       }
 
@@ -123,7 +129,7 @@
 
   .submitButtonContainer {
     position: absolute;
-    bottom: 0;
+    bottom: 0.5rem;
     width: 84%;
     padding-bottom: 1rem;
 

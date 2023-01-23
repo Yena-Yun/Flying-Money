@@ -5,12 +5,13 @@ import { closeModalSelector, toggleCalendarSelector } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { CiCalendar } from 'react-icons/ci';
 import styles from './Modal.module.scss';
-import { isOpenCalendarState } from 'recoil/atom';
+import { isOpenCalendarState, selectedDateState } from 'recoil/atom';
 import classnames from 'classnames';
 
 export const ModalTest = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
+  const selectedDate = useRecoilValue(selectedDateState);
   const setOpenCalendar = useSetRecoilState(toggleCalendarSelector);
   const [voteItemCount, setVoteItemCount] = useState(0);
 
@@ -36,6 +37,14 @@ export const ModalTest = () => {
                 >
                   <CiCalendar />
                 </div>
+                <div
+                  className={styles.selectedDate}
+                >{`${selectedDate.toLocaleString('ko-KR', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  weekday: 'long',
+                })}`}</div>
               </div>
             </div>
 
