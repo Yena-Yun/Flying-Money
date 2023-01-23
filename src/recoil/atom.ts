@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { Transaction } from 'types/types';
 
 export const isOpenModalState = atom({
   key: 'isOpenModal',
@@ -8,4 +9,14 @@ export const isOpenModalState = atom({
 export const isOpenCalendarState = atom({
   key: 'isOpenCalendar',
   default: false,
+});
+
+export const clickedTabState = atom({
+  key: 'clickedTab',
+  default: '',
+});
+
+export const expenseListState = atom<Transaction[]>({
+  key: 'expenseList',
+  default: [],
 });

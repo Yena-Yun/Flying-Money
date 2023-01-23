@@ -1,5 +1,10 @@
 import { selector } from 'recoil';
-import { isOpenCalendarState, isOpenModalState } from './atom';
+import {
+  clickedTabState,
+  expenseListState,
+  isOpenCalendarState,
+  isOpenModalState,
+} from './atom';
 
 export const openModalSelector = selector({
   key: 'openModalSelector',
@@ -24,5 +29,20 @@ export const toggleCalendarSelector = selector({
     const isOpenCalendar = get(isOpenCalendarState);
     if (isOpenCalendar) set(isOpenCalendarState, false);
     else set(isOpenCalendarState, true);
+  },
+});
+
+export const tabClickSelector = selector({
+  key: 'tabClickSelector',
+  get: ({ get }) => {
+    const tabName = get(clickedTabState);
+    const list = get(expenseListState);
+
+    switch (tabName) {
+      case '태그별':
+      // return list.filter(({ items }) => items.tag === '화장품');
+      default:
+        return list;
+    }
   },
 });
