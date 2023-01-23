@@ -6,7 +6,7 @@ import { MainList } from 'components/MainList/MainList';
 import styles from './Home.module.scss';
 import { openModalSelector } from 'recoil/selector';
 import { isOpenModalState } from 'recoil/atom';
-import { Modal } from 'components/Modal/Modal';
+import { ModalTest } from 'components/Modal/Modal';
 
 export const Home = () => {
   const isOpenModal = useRecoilValue(isOpenModalState);
@@ -14,7 +14,7 @@ export const Home = () => {
 
   return (
     <>
-      {isOpenModal && <Modal />}
+      {isOpenModal && <ModalTest />}
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <Header />

@@ -16,21 +16,6 @@ export const closeModalSelector = selector({
     set(isOpenModalState, false);
   },
 });
-// export const openCalendarSelector = selector({
-//   key: 'openCalendarSelector',
-//   get: () => {},
-//   set: ({ set }) => {
-//     set(isOpenCalendarState, true);
-//   },
-// });
-
-// export const closeCalendarSelector = selector({
-//   key: 'closeCalendarSelector',
-//   get: () => {},
-//   set: ({ set }) => {
-//     set(isOpenCalendarState, false);
-//   },
-// });
 
 export const toggleCalendarSelector = selector({
   key: 'closeCalendarSelector',

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "baseUrl": "src",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -17,6 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-   "include": ["**/*.ts", "**/*.tsx", "src/styles/svg/main_category/index.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "src/styles/svg/main_category/index.ts"],
   "exclude": ["node_modules"]
 }
