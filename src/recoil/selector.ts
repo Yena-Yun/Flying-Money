@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { isOpenModalState } from './atom';
+import { isOpenCalendarState, isOpenModalState } from './atom';
 
 export const openModalSelector = selector({
   key: 'openModalSelector',
@@ -14,5 +14,30 @@ export const closeModalSelector = selector({
   get: () => {},
   set: ({ set }) => {
     set(isOpenModalState, false);
+  },
+});
+// export const openCalendarSelector = selector({
+//   key: 'openCalendarSelector',
+//   get: () => {},
+//   set: ({ set }) => {
+//     set(isOpenCalendarState, true);
+//   },
+// });
+
+// export const closeCalendarSelector = selector({
+//   key: 'closeCalendarSelector',
+//   get: () => {},
+//   set: ({ set }) => {
+//     set(isOpenCalendarState, false);
+//   },
+// });
+
+export const toggleCalendarSelector = selector({
+  key: 'closeCalendarSelector',
+  get: () => {},
+  set: ({ get, set }) => {
+    const isOpenCalendar = get(isOpenCalendarState);
+    if (isOpenCalendar) set(isOpenCalendarState, false);
+    else set(isOpenCalendarState, true);
   },
 });

@@ -8,7 +8,7 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
-import styles from './index.module.scss';
+import styles from './DateCells.module.scss';
 
 interface DateCellProps {
   currentMonth: Date;
@@ -21,7 +21,6 @@ export const RenderDateCells = ({
   currentMonth,
   selectedDate,
   onDateClick,
-  mini,
 }: DateCellProps) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
@@ -40,12 +39,12 @@ export const RenderDateCells = ({
 
       dates.push(
         <div
-          className={`${styles.date} ${mini && styles.mini}`}
+          className={styles.date}
           key={date.toString()}
           onClick={() => onDateClick(cloneDay)}
         >
           <span
-            className={`${
+            className={
               !isSameMonth(date, monthStart)
                 ? styles.disabled
                 : isSameDay(date, currentMonth)
@@ -55,7 +54,7 @@ export const RenderDateCells = ({
                 : format(currentMonth, 'M') !== format(date, 'M')
                 ? styles.notValid
                 : styles.valid
-            } ${mini && styles.mini}`}
+            }
           >
             {formatDate}
           </span>

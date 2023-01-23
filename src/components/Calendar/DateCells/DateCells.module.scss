@@ -1,0 +1,43 @@
+@import 'styles/mixins';
+
+.month {
+  .week {
+    @include flexbox;
+
+    .date {
+      @include flexbox-row(center, flex-start);
+      width: 2rem;
+      height: 2rem;
+      font-size: var(--text-size-14);
+      color: var(--color-black);
+      border-bottom: 0.74px solid var(--color-gray-1);
+      cursor: pointer;
+
+      span {
+        &.current {
+          @include flexbox-row;
+          width: 1.2rem;
+          height: 1.2rem;
+          border-radius: 50%;
+          background-color: var(--color-gray-1);
+        }
+
+        &.selected {
+          @include flexbox-row;
+          width: 1.1rem;
+          height: 1.1rem;
+          border-radius: 50%;
+          color: var(--color-white);
+          background-color: var(--color-black);
+        }
+
+        &.disabled {
+          width: 0.6rem;
+          height: 1rem;
+          color: var(--color-gray-2);
+          cursor: default;
+        }
+      }
+    }
+  }
+}

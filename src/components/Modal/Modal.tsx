@@ -1,19 +1,24 @@
-import { Calendar } from 'components/Calendar';
-import { useSetRecoilState } from 'recoil';
-import { closeModalSelector } from 'recoil/selector';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { closeModalSelector, toggleCalendarSelector } from 'recoil/selector';
+import { Calendar } from 'components/Calendar/Calendar';
+import { CiCalendar } from 'react-icons/ci';
 import styles from './Modal.module.scss';
+import { isOpenCalendarState } from 'recoil/atom';
 
 export const Modal = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
+  const isOpenCalender = useRecoilValue(isOpenCalendarState);
+  const setOpenCalendar = useSetRecoilState(toggleCalendarSelector);
 
   return (
     <>
       <div className={styles.background} onClick={() => setCloseModal()}></div>
       <div className={styles.container}>
         <form className={styles.innerContainer}>
-          <div className={styles.date}>
-            <Calendar />
+          <div className={styles.date} onClick={() => setOpenCalendar()}>
+            <CiCalendar />
           </div>
+          {isOpenCalender ? <Calendar /> : null}
           <div className={styles.title}>
             <input placeholder='제목/장소' />
           </div>

@@ -20,12 +20,15 @@
     position: relative;
     width: 300px;
     height: 400px;
+    padding: 1.5rem 1rem;
     border-radius: 1rem;
     background-color: var(--color-white);
 
     .date {
-      @include flexbox-row;
+      @include flexbox-row(flex-start, center);
       gap: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
     }
 
     .title {
