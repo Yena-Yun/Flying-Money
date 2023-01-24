@@ -11,9 +11,9 @@ export const isOpenCalendarState = atom({
   default: false,
 });
 
-export const clickedTabState = atom({
+export const clickedTabState = atom<string>({
   key: 'clickedTab',
-  default: '',
+  default: 'all',
 });
 
 export const expenseListState = atom<Transaction[]>({

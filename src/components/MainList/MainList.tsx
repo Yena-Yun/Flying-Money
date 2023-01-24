@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import classnames from 'classnames';
-import { useRecoilValue } from 'recoil';
+import { clickedTabState, transactionState } from 'recoil/atom';
 import styles from './MainList.module.scss';
-import { transactionState } from 'recoil/atom';
 
 export const MainList = () => {
-  const [clickedTab, setClickedTab] = useState('');
+  const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
   const transaction = useRecoilValue(transactionState);
-
-  const handleTabClick = (e: React.MouseEvent<HTMLLIElement>) => {
-    setClickedTab('');
-    const { id } = e.currentTarget;
-    setClickedTab(id);
-  };
 
   return (
     <section className={styles.showExpenseList}>
@@ -23,7 +16,7 @@ export const MainList = () => {
             styles.filterTabItem,
             clickedTab === 'all' && styles.selected
           )}
-          onClick={handleTabClick}
+          onClick={(e) => setClickedTab(e.currentTarget.id)}
         >
           전체
         </li>
@@ -33,7 +26,7 @@ export const MainList = () => {
             styles.filterTabItem,
             clickedTab === 'byTag' && styles.selected
           )}
-          onClick={handleTabClick}
+          onClick={(e) => setClickedTab(e.currentTarget.id)}
         >
           태그별
         </li>

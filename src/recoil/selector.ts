@@ -41,12 +41,19 @@ export const tabClickSelector = selector({
     const tabName = get(clickedTabState);
     const list = get(expenseListState);
 
-    switch (tabName) {
-      case '태그별':
-      // return list.filter(({ items }) => items.tag === '화장품');
-      default:
-        return list;
-    }
+    // switch (tabName) {
+    //   case '태그별':
+    //   // return list.filter(({ items }) => items.tag === '화장품');
+    //   default:
+    //     return list;
+    // }
+
+    return tabName;
+  },
+  set: ({ set }, newTab) => {
+    // const tabName = get(clickedTabState);
+    // const list = get(expenseListState);
+    set(clickedTabState, newTab);
   },
 });
 

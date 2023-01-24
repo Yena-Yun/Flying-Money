@@ -1,12 +1,12 @@
-import { Header } from 'components/Header/Header';
-import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { HiOutlinePlusCircle } from 'react-icons/hi2';
+import { isOpenModalState } from 'recoil/atom';
+import { openModalSelector } from 'recoil/selector';
+import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
 import { MainList } from 'components/MainList/MainList';
-import styles from './Home.module.scss';
-import { openModalSelector } from 'recoil/selector';
-import { isOpenModalState } from 'recoil/atom';
 import { ModalTest } from 'components/Modal/Modal';
+import styles from './Home.module.scss';
 
 export const Home = () => {
   const isOpenModal = useRecoilValue(isOpenModalState);

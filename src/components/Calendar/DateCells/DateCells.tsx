@@ -10,12 +10,12 @@ import {
   endOfWeek,
 } from 'date-fns';
 import { selectedDateState, transactionState } from 'recoil/atom';
-import styles from './DateCells.module.scss';
 import {
   setSelectedDateSelector,
   toggleCalendarSelector,
 } from 'recoil/selector';
 import { Transaction } from 'types/types';
+import styles from './DateCells.module.scss';
 
 interface DateCellProps {
   currentMonth: Date;
