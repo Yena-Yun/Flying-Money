@@ -1,11 +1,16 @@
 import { useRecoilValue, useRecoilState } from 'recoil';
 import classnames from 'classnames';
-import { clickedTabState, transactionState } from 'recoil/atom';
+import {
+  clickedTabState,
+  transactionListState,
+  transactionState,
+} from 'recoil/atom';
 import styles from './MainList.module.scss';
+import { transactionListSelector } from 'recoil/selector';
 
 export const MainList = () => {
   const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
-  const transaction = useRecoilValue(transactionState);
+  const transactionList = useRecoilValue(transactionListState);
 
   return (
     <section className={styles.showExpenseList}>
@@ -32,22 +37,24 @@ export const MainList = () => {
         </li>
       </ul>
       <ul className={styles.expenseItemList}>
-        <li className={styles.expenseItem}>
-          <div className={styles.info}>
-            <div className={styles.date}>
-              {transaction.date.toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })}
+        {transactionList.map(({ id, date, title, items }) => (
+          <li key={id} className={styles.expenseItem}>
+            <div className={styles.info}>
+              <div className={styles.date}>
+                {date.toLocaleString('ko-KR', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                })}
+              </div>
+              <div className={styles.title}>{title}</div>
+              <div className={styles.name}>
+                {items.name !== '' && '•'} {items.name}
+              </div>
             </div>
-            <div className={styles.title}>{transaction.title}</div>
-            <div className={styles.name}>
-              {transaction.items.name !== '' && '•'} {transaction.items.name}
-            </div>
-          </div>
-          <div className={styles.price}>{transaction.items.price}</div>
-        </li>
+            <div className={styles.price}>{items.price}</div>
+          </li>
+        ))}
       </ul>
     </section>
   );

@@ -10,6 +10,7 @@ import {
   closeModalSelector,
   toggleCalendarSelector,
   expenseItemSelector,
+  transactionListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { CiCalendar } from 'react-icons/ci';
@@ -34,6 +35,7 @@ export const ModalTest = () => {
   // const [expenseItemList, setExpenseItemList] = useState<Item[]>([expenseItem]);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<Transaction>(transactionState);
+  const setTransactionList = useSetRecoilState(transactionListSelector);
 
   return (
     <>
@@ -166,8 +168,10 @@ export const ModalTest = () => {
                 resetExpenseItem();
                 setExpenseTransaction({
                   ...expenseTransaction,
+                  id: uuid4(),
                   items: expenseItem,
                 });
+                setTransactionList();
               }}
             >
               등록

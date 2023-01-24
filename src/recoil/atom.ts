@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { Item, Transaction } from 'types/types';
+import uuid4 from 'uuid4';
 
 export const isOpenModalState = atom({
   key: 'isOpenModal',
@@ -42,4 +43,9 @@ export const transactionState = atom<Transaction>({
     title: '',
     items: { name: '', price: 0 },
   },
+});
+
+export const transactionListState = atom<Transaction[]>({
+  key: 'transactionList',
+  default: [],
 });

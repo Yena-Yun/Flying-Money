@@ -2,10 +2,10 @@ import { selector, DefaultValue } from 'recoil';
 import {
   clickedTabState,
   expenseItemState,
-  expenseListState,
   isOpenCalendarState,
   isOpenModalState,
   selectedDateState,
+  transactionListState,
   transactionState,
 } from './atom';
 
@@ -38,29 +38,17 @@ export const toggleCalendarSelector = selector({
 export const tabClickSelector = selector({
   key: 'tabClickSelector',
   get: ({ get }) => {
-    const tabName = get(clickedTabState);
-    const list = get(expenseListState);
-
-    // switch (tabName) {
-    //   case '태그별':
-    //   // return list.filter(({ items }) => items.tag === '화장품');
-    //   default:
-    //     return list;
-    // }
-
-    return tabName;
+    return get(clickedTabState);
   },
   set: ({ set }, newTab) => {
-    // const tabName = get(clickedTabState);
-    // const list = get(expenseListState);
     set(clickedTabState, newTab);
   },
 });
 
-export const setSelectedDateSelector = selector({
-  key: 'setSelectedDateSelector',
+export const selectedDateSelector = selector({
+  key: 'selectedDateSelector',
   get: () => {
-    return new Date(); // get에 원형값 적어주기
+    return new Date(); // void 피하기 -> get에 원형값 입력
   },
   set: ({ set }, newDate) => {
     // DefaultValue 임포트
@@ -79,7 +67,7 @@ export const expenseItemSelector = selector({
       tag: '',
     };
   },
-  set: ({ get, set }, newValue) => {
+  set: ({ set }, newValue) => {
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
@@ -104,5 +92,18 @@ export const transactionSelector = selector({
     } else {
       set(transactionState, newValue);
     }
+  },
+});
+
+export const transactionListSelector = selector({
+  key: 'transactionListSelector',
+  get: () => {
+    // return [];
+  },
+  set: ({ get, set }) => {
+    const item = get(transactionState);
+    const list = get(transactionListState);
+
+    set(transactionListState, [...list, item]);
   },
 });
