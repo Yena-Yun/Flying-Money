@@ -1,19 +1,33 @@
 import { useState } from 'react';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { closeModalSelector, toggleCalendarSelector } from 'recoil/selector';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import {
+  closeModalSelector,
+  toggleCalendarSelector,
+  expenseItemSelector,
+} from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { CiCalendar } from 'react-icons/ci';
 import styles from './Modal.module.scss';
-import { isOpenCalendarState, selectedDateState } from 'recoil/atom';
+import {
+  expenseItemState,
+  isOpenCalendarState,
+  selectedDateState,
+  transactionState,
+} from 'recoil/atom';
 import classnames from 'classnames';
+import { Item, Transaction } from 'types/types';
+import uuid4 from 'uuid4';
 
 export const ModalTest = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const selectedDate = useRecoilValue(selectedDateState);
-  const setOpenCalendar = useSetRecoilState(toggleCalendarSelector);
-  const [voteItemCount, setVoteItemCount] = useState(0);
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+  const [expenseItem, setExpenseItem] = useRecoilState<Item>(expenseItemState);
+  // const [expenseItemList, setExpenseItemList] = useState<Item[]>([expenseItem]);
+  const [expenseTransaction, setExpenseTransaction] =
+    useRecoilState<Transaction>(transactionState);
 
   return (
     <>
@@ -24,7 +38,7 @@ export const ModalTest = () => {
 
       <div className={styles.popupSection}>
         <div className={styles.popup}>
-          {isOpenCalender ? <Calendar /> : null}
+          {isOpenCalender && <Calendar />}
           <h2 className={styles.title}>항목 등록하기</h2>
 
           <div className={styles.mainContainer}>
@@ -33,7 +47,7 @@ export const ModalTest = () => {
                 <h3 className={styles.subTitle}>날짜</h3>
                 <div
                   className={classnames(styles.dateIcon, styles.icon)}
-                  onClick={() => setOpenCalendar()}
+                  onClick={() => setToggleCalendar()}
                 >
                   <CiCalendar />
                 </div>
@@ -51,7 +65,16 @@ export const ModalTest = () => {
             <div className={styles.inputGroup}>
               <h3 className={styles.subTitle}>제목</h3>
               <div className={styles.inputItem}>
-                <input placeholder='제목을 입력해주세요.' />
+                <input
+                  id='title'
+                  placeholder='제목을 입력해주세요.'
+                  onChange={(e) =>
+                    setExpenseTransaction({
+                      ...expenseTransaction,
+                      title: e.target.value,
+                    })
+                  }
+                />
               </div>
             </div>
 
@@ -61,17 +84,33 @@ export const ModalTest = () => {
               {/* 기존에 초기값으로 1개 있는 항목 */}
               <div className={styles.inputItemGroup}>
                 <div className={styles.inputItem}>
-                  <input placeholder='항목명' />
+                  <input
+                    id='name'
+                    placeholder='항목명'
+                    onChange={(e) => {
+                      setExpenseItem({ ...expenseItem, name: e.target.value });
+                    }}
+                  />
                 </div>
                 <div className={styles.inputItem}>
-                  <input type='number' placeholder='가격' />
+                  <input
+                    id='price'
+                    type='number'
+                    placeholder='가격'
+                    onChange={(e) =>
+                      setExpenseItem({
+                        ...expenseItem,
+                        price: parseInt(e.target.value),
+                      })
+                    }
+                  />
                 </div>
               </div>
               {/* '항목 추가' 클릭 시 추가되는 항목 */}
-              {voteItemCount > 0 &&
-                [...Array(voteItemCount).keys()].map((voteItem, id) => (
+              {/* {expenseItemList.length > 1 &&
+                expenseItemList.map(({ id: index, name, price, tag }) => (
                   <div
-                    key={id}
+                    key={index}
                     className={classnames(
                       styles.inputItemGroup,
                       styles.addedInputItemGroup
@@ -88,7 +127,12 @@ export const ModalTest = () => {
                         styles.removeItemButton,
                         styles.icon
                       )}
-                      onClick={() => setVoteItemCount((prev) => prev - 1)}
+                      onClick={() => {
+                        setItemCount((prev) => prev - 1);
+                        setExpenseItemList(
+                          expenseItemList.filter(({ id }) => id !== index)
+                        );
+                      }}
                     >
                       <HiOutlineMinusCircle />
                     </div>
@@ -96,20 +140,34 @@ export const ModalTest = () => {
                 ))}
               <div
                 className={styles.addItemButton}
-                onClick={() => setVoteItemCount((prev) => prev + 1)}
+                onClick={() => {
+                  setItemCount((prev) => prev + 1);
+                  setExpenseItemList([
+                    ...expenseItemList,
+                    { id: uuid4(), name: '', price: 0, tag: '' },
+                  ]);
+                }}
               >
                 <div className={classnames(styles.addIcon, styles.icon)}>
                   <HiOutlinePlusCircle />
                 </div>
                 <div className={styles.addItemText}>항목 추가</div>
-              </div>
+              </div> */}
             </div>
           </div>
 
           <div className={styles.submitButtonContainer}>
             <button
               className={styles.submitButton}
-              onClick={() => setCloseModal()}
+              onClick={() => {
+                setCloseModal();
+                console.log(expenseItem);
+
+                setExpenseTransaction({
+                  ...expenseTransaction,
+                  items: expenseItem,
+                });
+              }}
             >
               등록
             </button>

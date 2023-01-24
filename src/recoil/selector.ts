@@ -1,10 +1,12 @@
 import { selector, DefaultValue } from 'recoil';
 import {
   clickedTabState,
+  expenseItemState,
   expenseListState,
   isOpenCalendarState,
   isOpenModalState,
   selectedDateState,
+  transactionState,
 } from './atom';
 
 export const openModalSelector = selector({
@@ -58,5 +60,42 @@ export const setSelectedDateSelector = selector({
     if (newDate instanceof DefaultValue) {
       return newDate;
     } else set(selectedDateState, newDate);
+  },
+});
+
+export const expenseItemSelector = selector({
+  key: 'expenseItemSelector',
+  get: () => {
+    return {
+      name: '',
+      price: 0,
+      tag: '',
+    };
+  },
+  set: ({ get, set }, newValue) => {
+    if (newValue instanceof DefaultValue) {
+      return newValue;
+    } else {
+      set(expenseItemState, newValue);
+    }
+  },
+});
+
+export const transactionSelector = selector({
+  key: 'transactionSelector',
+  get: ({ get }) => {
+    return {
+      id: '',
+      date: new Date(),
+      title: '',
+      items: get(expenseItemState),
+    };
+  },
+  set: ({ get, set }, newValue) => {
+    if (newValue instanceof DefaultValue) {
+      return newValue;
+    } else {
+      set(transactionState, newValue);
+    }
   },
 });

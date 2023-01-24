@@ -8,7 +8,7 @@ import styles from './Calendar.module.scss';
 
 export const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const setOpenCalendar = useSetRecoilState(toggleCalendarSelector);
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const changeMonth = (moveTo: string) => {
     if (moveTo === 'PREV') setCurrentMonth(subMonths(currentMonth, 1));
@@ -19,7 +19,7 @@ export const Calendar = () => {
     <>
       <div
         className={styles.background}
-        onClick={() => setOpenCalendar()}
+        onClick={() => setToggleCalendar()}
       ></div>
       <div className={styles.container}>
         <div className={styles.innerContainer}>

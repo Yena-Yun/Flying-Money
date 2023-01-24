@@ -16,7 +16,8 @@
     "react-scripts": "5.0.1",
     "recoil": "^0.7.6",
     "sass": "^1.57.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "uuid4": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid4": "^2.0.0",
     "date-fns": "^2.29.3",
     "react-icons": "^4.7.1"
   }

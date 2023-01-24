@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import { useRecoilValue } from 'recoil';
 import styles from './MainList.module.scss';
+import { transactionState } from 'recoil/atom';
 
 export const MainList = () => {
   const [clickedTab, setClickedTab] = useState('');
+  const transaction = useRecoilValue(transactionState);
 
   const handleTabClick = (e: React.MouseEvent<HTMLLIElement>) => {
     setClickedTab('');
@@ -39,17 +42,12 @@ export const MainList = () => {
         <li className={styles.expenseItem}>
           <div className={styles.info}>
             <div className={styles.date}>
-              {new Date()
-                .toLocaleString('ko-KR', {
-                  year: 'numeric',
-                  month: '2-digit', // 앞에 0 붙여주기
-                  day: 'numeric',
-                })
-                .slice(2)}
+              {transaction.date.toLocaleString().slice(0, 11)}
             </div>
-            <div className={styles.title}>팀별 회식하기</div>
+            <div className={styles.title}>{transaction.title}</div>
+            <div className={styles.name}>• {transaction.items.name}</div>
           </div>
-          <div className={styles.price}>20,000</div>
+          <div className={styles.price}>{transaction.items.price}</div>
         </li>
       </ul>
     </section>

@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   format,
   isSameDay,
@@ -9,9 +9,13 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
-import { selectedDateState } from 'recoil/atom';
+import { selectedDateState, transactionState } from 'recoil/atom';
 import styles from './DateCells.module.scss';
-import { setSelectedDateSelector } from 'recoil/selector';
+import {
+  setSelectedDateSelector,
+  toggleCalendarSelector,
+} from 'recoil/selector';
+import { Transaction } from 'types/types';
 
 interface DateCellProps {
   currentMonth: Date;
@@ -25,6 +29,9 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
 
   const selectedDate = useRecoilValue(selectedDateState);
   const setSelectedDate = useSetRecoilState(setSelectedDateSelector);
+  const [expenseTransaction, setExpenseTransaction] =
+    useRecoilState<Transaction>(transactionState);
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const rows: JSX.Element[] = [];
   let dates: JSX.Element[] = [];
@@ -40,7 +47,14 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
         <div
           className={styles.date}
           key={date.toString()}
-          onClick={() => setSelectedDate(() => cloneDay)}
+          onClick={() => {
+            setSelectedDate(() => cloneDay);
+            setExpenseTransaction({
+              ...expenseTransaction,
+              date: cloneDay,
+            });
+            setToggleCalendar();
+          }}
         >
           <span
             className={
