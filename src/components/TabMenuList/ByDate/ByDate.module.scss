@@ -1,0 +1,65 @@
+@import 'styles/mixins';
+
+.container {
+  width: 100%;
+  min-height: 12rem;
+  padding: 0 0.5rem;
+  padding-bottom: 1.5rem;
+
+  .header {
+    @include flexbox-row(space-between, flex-start);
+    margin-bottom: 1rem;
+
+    .inputGroup {
+      @include flexbox;
+      position: relative;
+      gap: 1rem;
+
+      .dateIcon {
+        margin-top: 0.2rem;
+        cursor: pointer;
+      }
+
+      .selectedDate {
+        font-size: var(--text-size-md);
+      }
+
+      &.totalExpense {
+        .expense {
+          font-size: var(--text-size-md);
+          font-weight: var(--font-weight-bold);
+        }
+      }
+    }
+  }
+
+  .filteredList {
+    .expenseItem {
+      @include flexbox-row(space-between, center);
+      width: 100%;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.4rem;
+      border: 1px solid var(--color-primary);
+      border-radius: 1rem;
+
+      .info {
+        @include flexbox-column(center, flex-start);
+
+        .title {
+          font-size: var(--text-size-md);
+          font-weight: var(--font-weight-bold);
+        }
+
+        .name {
+          color: var(--color-gray-4);
+        }
+      }
+
+      .price {
+        font-size: var(--text-size-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-blue);
+      }
+    }
+  }
+}

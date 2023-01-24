@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import { Item, Transaction } from 'types/types';
-import uuid4 from 'uuid4';
 
 export const isOpenModalState = atom({
   key: 'isOpenModal',

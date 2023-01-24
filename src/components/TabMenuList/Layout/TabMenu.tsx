@@ -5,6 +5,8 @@ import { TAB_MENU } from 'utils/constants/constants';
 import styles from './TabMenu.module.scss';
 import { All } from '../All/All';
 import { ByWeek } from '../ByWeek/ByWeek';
+import { ByDate } from '../ByDate/ByDate';
+import { ByTag } from '../ByTag/ByTag';
 
 export const TabMenu = () => {
   const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
@@ -32,9 +34,9 @@ export const TabMenu = () => {
       ) : clickedTab === 'byWeek' ? (
         <ByWeek />
       ) : clickedTab === 'byDate' ? (
-        <div></div>
+        <ByDate />
       ) : clickedTab === 'byTag' ? (
-        <div></div>
+        <ByTag />
       ) : null}
     </section>
   );
