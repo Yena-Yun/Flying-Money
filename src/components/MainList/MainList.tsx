@@ -38,10 +38,13 @@ export const MainList = () => {
               </div>
               <div className={styles.title}>{title}</div>
               <div className={styles.name}>
-                {items.name !== '' && '•'} {items.name}
+                {items[0].name !== '' && '•'} {items[0].name}
+                {items.length > 1 && ` 외 +${items.length - 1}`}
               </div>
             </div>
-            <div className={styles.price}>{items.price}</div>
+            <div className={styles.price}>
+              {items.map(({ price }) => price).reduce((acc, cur) => acc + cur)}
+            </div>
           </li>
         ))}
       </ul>

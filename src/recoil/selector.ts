@@ -1,7 +1,7 @@
 import { selector, DefaultValue } from 'recoil';
 import {
   clickedTabState,
-  expenseItemState,
+  expenseListState,
   isOpenCalendarState,
   isOpenModalState,
   selectedDateState,
@@ -58,20 +58,16 @@ export const selectedDateSelector = selector({
   },
 });
 
-export const expenseItemSelector = selector({
-  key: 'expenseItemSelector',
+export const expenseListSelector = selector({
+  key: 'expenseListSelector',
   get: () => {
-    return {
-      name: '',
-      price: 0,
-      tag: '',
-    };
+    return [];
   },
   set: ({ set }, newValue) => {
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      set(expenseItemState, newValue);
+      set(expenseListState, newValue);
     }
   },
 });
@@ -83,7 +79,7 @@ export const transactionSelector = selector({
       id: '',
       date: new Date(),
       title: '',
-      items: get(expenseItemState),
+      items: get(expenseListState),
     };
   },
   set: ({ get, set }, newValue) => {

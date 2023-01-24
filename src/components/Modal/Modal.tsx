@@ -9,14 +9,14 @@ import {
 import {
   closeModalSelector,
   toggleCalendarSelector,
-  expenseItemSelector,
   transactionListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { CiCalendar } from 'react-icons/ci';
 import styles from './Modal.module.scss';
 import {
-  expenseItemState,
+  // expenseItemState,
+  expenseListState,
   isOpenCalendarState,
   selectedDateState,
   transactionState,
@@ -30,9 +30,8 @@ export const ModalTest = () => {
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const selectedDate = useRecoilValue(selectedDateState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const [expenseItem, setExpenseItem] = useRecoilState<Item>(expenseItemState);
-  const resetExpenseItem = useResetRecoilState(expenseItemState);
-  // const [expenseItemList, setExpenseItemList] = useState<Item[]>([expenseItem]);
+  const [expenseItemList, setExpenseItemList] =
+    useRecoilState<Item[]>(expenseListState);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<Transaction>(transactionState);
   const setTransactionList = useSetRecoilState(transactionListSelector);
@@ -87,32 +86,9 @@ export const ModalTest = () => {
             <div className={styles.inputGroup}>
               <h3 className={styles.subTitle}>항목</h3>
 
-              {/* 기존에 초기값으로 1개 있는 항목 */}
-              <div className={styles.inputItemGroup}>
-                <div className={styles.inputItem}>
-                  <input
-                    placeholder='항목명'
-                    onChange={(e) => {
-                      setExpenseItem({ ...expenseItem, name: e.target.value });
-                    }}
-                  />
-                </div>
-                <div className={styles.inputItem}>
-                  <input
-                    type='number'
-                    placeholder='가격'
-                    onChange={(e) =>
-                      setExpenseItem({
-                        ...expenseItem,
-                        price: parseInt(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-              </div>
               {/* '항목 추가' 클릭 시 추가되는 항목 */}
-              {/* {expenseItemList.length > 1 &&
-                expenseItemList.map(({ id: index, name, price, tag }) => (
+              {expenseItemList.length > 0 &&
+                expenseItemList.map(({ id: index, name, price }) => (
                   <div
                     key={index}
                     className={classnames(
@@ -121,10 +97,33 @@ export const ModalTest = () => {
                     )}
                   >
                     <div className={styles.inputItem}>
-                      <input placeholder='항목명' />
+                      <input
+                        placeholder='항목명'
+                        onChange={(e) => {
+                          setExpenseItemList(
+                            expenseItemList.map((item) =>
+                              item.id === index
+                                ? { ...item, name: e.target.value }
+                                : item
+                            )
+                          );
+                        }}
+                      />
                     </div>
                     <div className={styles.inputItem}>
-                      <input type='number' placeholder='가격' />
+                      <input
+                        type='number'
+                        placeholder='가격'
+                        onChange={(e) => {
+                          setExpenseItemList(
+                            expenseItemList.map((item) =>
+                              item.id === index
+                                ? { ...item, price: parseInt(e.target.value) }
+                                : item
+                            )
+                          );
+                        }}
+                      />
                     </div>
                     <div
                       className={classnames(
@@ -132,7 +131,6 @@ export const ModalTest = () => {
                         styles.icon
                       )}
                       onClick={() => {
-                        setItemCount((prev) => prev - 1);
                         setExpenseItemList(
                           expenseItemList.filter(({ id }) => id !== index)
                         );
@@ -145,10 +143,9 @@ export const ModalTest = () => {
               <div
                 className={styles.addItemButton}
                 onClick={() => {
-                  setItemCount((prev) => prev + 1);
                   setExpenseItemList([
                     ...expenseItemList,
-                    { id: uuid4(), name: '', price: 0, tag: '' },
+                    { id: uuid4(), name: '', price: 0 },
                   ]);
                 }}
               >
@@ -156,7 +153,7 @@ export const ModalTest = () => {
                   <HiOutlinePlusCircle />
                 </div>
                 <div className={styles.addItemText}>항목 추가</div>
-              </div> */}
+              </div>
             </div>
           </div>
 
@@ -165,11 +162,11 @@ export const ModalTest = () => {
               className={styles.submitButton}
               onClick={() => {
                 setCloseModal();
-                resetExpenseItem();
+                // resetExpenseItem();
                 setExpenseTransaction({
                   ...expenseTransaction,
                   id: uuid4(),
-                  items: expenseItem,
+                  items: expenseItemList,
                 });
                 setTransactionList();
               }}

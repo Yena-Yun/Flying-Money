@@ -17,22 +17,22 @@ export const clickedTabState = atom<string>({
   default: 'all',
 });
 
-export const expenseListState = atom<Transaction[]>({
-  key: 'expenseList',
-  default: [],
-});
-
 export const selectedDateState = atom({
   key: 'selectedDate',
   default: new Date(),
 });
 
-export const expenseItemState = atom<Item>({
-  key: 'expenseItem',
-  default: {
-    name: '',
-    price: 0,
-  },
+// export const expenseItemState = atom<Item>({
+//   key: 'expenseItem',
+//   default: {
+//     name: '',
+//     price: 0,
+//   },
+// });
+
+export const expenseListState = atom<Item[]>({
+  key: 'expenseList',
+  default: [],
 });
 
 export const transactionState = atom<Transaction>({
@@ -41,7 +41,7 @@ export const transactionState = atom<Transaction>({
     id: '',
     date: new Date(),
     title: '',
-    items: { name: '', price: 0 },
+    items: [],
   },
 });
 
