@@ -1,29 +1,22 @@
-import { useState } from 'react';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import classnames from 'classnames';
+import uuid4 from 'uuid4';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
+import { CiCalendar } from 'react-icons/ci';
 import {
-  useRecoilValue,
-  useSetRecoilState,
-  useRecoilState,
-  useResetRecoilState,
-} from 'recoil';
+  expenseListState,
+  isOpenCalendarState,
+  selectedDateState,
+  transactionState,
+} from 'recoil/atom';
 import {
   closeModalSelector,
   toggleCalendarSelector,
   transactionListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
-import { CiCalendar } from 'react-icons/ci';
-import styles from './Modal.module.scss';
-import {
-  // expenseItemState,
-  expenseListState,
-  isOpenCalendarState,
-  selectedDateState,
-  transactionState,
-} from 'recoil/atom';
-import classnames from 'classnames';
 import { Item, Transaction } from 'types/types';
-import uuid4 from 'uuid4';
+import styles from './Modal.module.scss';
 
 export const ModalTest = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);

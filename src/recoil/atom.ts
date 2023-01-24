@@ -22,13 +22,13 @@ export const selectedDateState = atom({
   default: new Date(),
 });
 
-// export const expenseItemState = atom<Item>({
-//   key: 'expenseItem',
-//   default: {
-//     name: '',
-//     price: 0,
-//   },
-// });
+export const filteredWeekState = atom({
+  key: 'filteredWeek',
+  default: {
+    start: '',
+    end: '',
+  },
+});
 
 export const expenseListState = atom<Item[]>({
   key: 'expenseList',

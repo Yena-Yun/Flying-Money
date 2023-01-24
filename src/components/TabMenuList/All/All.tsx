@@ -1,30 +1,13 @@
-import { useRecoilValue, useRecoilState } from 'recoil';
-import classnames from 'classnames';
-import { clickedTabState, transactionListState } from 'recoil/atom';
-import { TAB_MENU } from 'utils/constants/constants';
-import styles from './MainList.module.scss';
+import { useRecoilValue } from 'recoil';
+import { transactionListState } from 'recoil/atom';
+import { TabMenu } from '../Layout/TabMenu';
+import styles from './All.module.scss';
 
-export const MainList = () => {
-  const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
+export const All = () => {
   const transactionList = useRecoilValue(transactionListState);
 
   return (
-    <section className={styles.showExpenseList}>
-      <ul className={styles.filterTabList}>
-        {TAB_MENU.map(({ id, name }) => (
-          <li
-            key={id}
-            id={id}
-            className={classnames(
-              styles.filterTabItem,
-              clickedTab === id && styles.selected
-            )}
-            onClick={(e) => setClickedTab(e.currentTarget.id)}
-          >
-            {name}
-          </li>
-        ))}
-      </ul>
+    <TabMenu>
       <ul className={styles.expenseItemList}>
         {transactionList.map(({ id, date, title, items }) => (
           <li key={id} className={styles.expenseItem}>
@@ -48,6 +31,6 @@ export const MainList = () => {
           </li>
         ))}
       </ul>
-    </section>
+    </TabMenu>
   );
 };

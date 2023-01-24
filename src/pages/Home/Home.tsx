@@ -4,7 +4,7 @@ import { isOpenModalState } from 'recoil/atom';
 import { openModalSelector } from 'recoil/selector';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
-import { MainList } from 'components/MainList/MainList';
+import { All } from 'components/TabMenuList/All/All';
 import { ModalTest } from 'components/Modal/Modal';
 import styles from './Home.module.scss';
 
@@ -19,7 +19,7 @@ export const Home = () => {
         <div className={styles.innerContainer}>
           <Header />
           <Main />
-          <MainList />
+          <All />
           <button
             className={styles.addNewItemButton}
             onClick={() => setOpenModal()}

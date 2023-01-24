@@ -1,0 +1,26 @@
+@import 'styles/mixins';
+
+.showExpenseList {
+  @include flexbox-column;
+  width: 100%;
+
+  .filterTabList {
+    @include flexbox-row(flex-start, center);
+    width: 100%;
+    margin-bottom: 0.8rem;
+    border-bottom: 2px solid var(--color-background);
+
+    .filterTabItem {
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &.selected {
+        font-weight: var(--font-weight-bold);
+      }
+
+      &:first-child {
+        margin-right: 0.3rem;
+      }
+    }
+  }
+}
