@@ -1,15 +1,12 @@
-import { ReactNode } from 'react';
 import { useRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { clickedTabState } from 'recoil/atom';
 import { TAB_MENU } from 'utils/constants/constants';
 import styles from './TabMenu.module.scss';
+import { All } from '../All/All';
+import { ByWeek } from '../ByWeek/ByWeek';
 
-export type TabMenuType = {
-  children: ReactNode | ReactNode[];
-};
-
-export const TabMenu = ({ children }: TabMenuType) => {
+export const TabMenu = () => {
   const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
 
   return (
@@ -30,7 +27,15 @@ export const TabMenu = ({ children }: TabMenuType) => {
         ))}
       </ul>
 
-      {children}
+      {clickedTab === 'all' ? (
+        <All />
+      ) : clickedTab === 'byWeek' ? (
+        <ByWeek />
+      ) : clickedTab === 'byDate' ? (
+        <div></div>
+      ) : clickedTab === 'byTag' ? (
+        <div></div>
+      ) : null}
     </section>
   );
 };

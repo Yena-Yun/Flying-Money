@@ -2,6 +2,7 @@ import { selector, DefaultValue } from 'recoil';
 import {
   clickedTabState,
   expenseListState,
+  filteredWeekState,
   isOpenCalendarState,
   isOpenModalState,
   selectedDateState,
@@ -56,6 +57,15 @@ export const selectedDateSelector = selector({
       return newDate;
     } else set(selectedDateState, newDate);
   },
+});
+
+export const filteredWeekSelector = selector({
+  key: 'filteredWeekSelector',
+  get: ({ get }) => {
+    const weekStart = get(filteredWeekState).start;
+    const weekEnd = get(filteredWeekState).end;
+  },
+  set: () => {},
 });
 
 export const expenseListSelector = selector({
