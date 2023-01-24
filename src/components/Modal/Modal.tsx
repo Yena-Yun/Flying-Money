@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import {
+  useRecoilValue,
+  useSetRecoilState,
+  useRecoilState,
+  useResetRecoilState,
+} from 'recoil';
 import {
   closeModalSelector,
   toggleCalendarSelector,
@@ -25,6 +30,7 @@ export const ModalTest = () => {
   const selectedDate = useRecoilValue(selectedDateState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const [expenseItem, setExpenseItem] = useRecoilState<Item>(expenseItemState);
+  const resetExpenseItem = useResetRecoilState(expenseItemState);
   // const [expenseItemList, setExpenseItemList] = useState<Item[]>([expenseItem]);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<Transaction>(transactionState);
@@ -42,24 +48,22 @@ export const ModalTest = () => {
           <h2 className={styles.title}>항목 등록하기</h2>
 
           <div className={styles.mainContainer}>
-            <div className={styles.inputGroup}>
-              <div className={styles.date}>
-                <h3 className={styles.subTitle}>날짜</h3>
-                <div
-                  className={classnames(styles.dateIcon, styles.icon)}
-                  onClick={() => setToggleCalendar()}
-                >
-                  <CiCalendar />
-                </div>
-                <div
-                  className={styles.selectedDate}
-                >{`${selectedDate.toLocaleString('ko-KR', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  weekday: 'long',
-                })}`}</div>
+            <div className={classnames(styles.inputGroup, styles.date)}>
+              <h3 className={styles.subTitle}>날짜</h3>
+              <div
+                className={classnames(styles.dateIcon, styles.icon)}
+                onClick={() => setToggleCalendar()}
+              >
+                <CiCalendar />
               </div>
+              <div
+                className={styles.selectedDate}
+              >{`${selectedDate.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                weekday: 'long',
+              })}`}</div>
             </div>
 
             <div className={styles.inputGroup}>
@@ -85,7 +89,6 @@ export const ModalTest = () => {
               <div className={styles.inputItemGroup}>
                 <div className={styles.inputItem}>
                   <input
-                    id='name'
                     placeholder='항목명'
                     onChange={(e) => {
                       setExpenseItem({ ...expenseItem, name: e.target.value });
@@ -94,7 +97,6 @@ export const ModalTest = () => {
                 </div>
                 <div className={styles.inputItem}>
                   <input
-                    id='price'
                     type='number'
                     placeholder='가격'
                     onChange={(e) =>
@@ -161,8 +163,7 @@ export const ModalTest = () => {
               className={styles.submitButton}
               onClick={() => {
                 setCloseModal();
-                console.log(expenseItem);
-
+                resetExpenseItem();
                 setExpenseTransaction({
                   ...expenseTransaction,
                   items: expenseItem,

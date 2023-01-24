@@ -35,10 +35,16 @@ export const MainList = () => {
         <li className={styles.expenseItem}>
           <div className={styles.info}>
             <div className={styles.date}>
-              {transaction.date.toLocaleString().slice(0, 11)}
+              {transaction.date.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })}
             </div>
             <div className={styles.title}>{transaction.title}</div>
-            <div className={styles.name}>• {transaction.items.name}</div>
+            <div className={styles.name}>
+              {transaction.items.name !== '' && '•'} {transaction.items.name}
+            </div>
           </div>
           <div className={styles.price}>{transaction.items.price}</div>
         </li>
