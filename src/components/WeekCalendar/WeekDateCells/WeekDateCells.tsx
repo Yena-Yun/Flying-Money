@@ -28,12 +28,6 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
 
   const [selectedWeek, setSelectedWeek] = useState(new Date());
 
-  // console.log(currentMonth);
-  // console.log(monthStart);
-  // console.log(monthEnd);
-  // console.log(startDate);
-  // console.log(endDate);
-
   const selectedDate = useRecoilValue(selectedDateState);
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =

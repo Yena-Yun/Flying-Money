@@ -1,6 +1,5 @@
 import { useRecoilValue } from 'recoil';
 import { transactionListState } from 'recoil/atom';
-import { TabMenu } from '../Layout/TabMenu';
 import styles from './All.module.scss';
 
 export const All = () => {

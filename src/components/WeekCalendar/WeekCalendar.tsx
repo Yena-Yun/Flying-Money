@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { format, addMonths, subMonths } from 'date-fns';
-import { toggleCalendarSelector } from 'recoil/selector';
 import { RenderDateCells } from './WeekDateCells/WeekDateCells';
 import { DAYS } from 'utils/constants/constants';
 import styles from './WeekCalendar.module.scss';
 
 export const WeekCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const changeMonth = (moveTo: string) => {
     if (moveTo === 'PREV') setCurrentMonth(subMonths(currentMonth, 1));
