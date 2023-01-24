@@ -22,3 +22,22 @@ export const RANDOM_PHRASES = [
 ];
 
 export const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+
+export const TAB_MENU = [
+  {
+    id: 'all',
+    name: '전체',
+  },
+  {
+    id: 'byWeek',
+    name: '주별',
+  },
+  {
+    id: 'byDate',
+    name: '날짜별',
+  },
+  {
+    id: 'byTag',
+    name: '태그별',
+  },
+];

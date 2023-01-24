@@ -1,12 +1,8 @@
 import { useRecoilValue, useRecoilState } from 'recoil';
 import classnames from 'classnames';
-import {
-  clickedTabState,
-  transactionListState,
-  transactionState,
-} from 'recoil/atom';
+import { clickedTabState, transactionListState } from 'recoil/atom';
+import { TAB_MENU } from 'utils/constants/constants';
 import styles from './MainList.module.scss';
-import { transactionListSelector } from 'recoil/selector';
 
 export const MainList = () => {
   const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
@@ -15,26 +11,19 @@ export const MainList = () => {
   return (
     <section className={styles.showExpenseList}>
       <ul className={styles.filterTabList}>
-        <li
-          id='all'
-          className={classnames(
-            styles.filterTabItem,
-            clickedTab === 'all' && styles.selected
-          )}
-          onClick={(e) => setClickedTab(e.currentTarget.id)}
-        >
-          전체
-        </li>
-        <li
-          id='byTag'
-          className={classnames(
-            styles.filterTabItem,
-            clickedTab === 'byTag' && styles.selected
-          )}
-          onClick={(e) => setClickedTab(e.currentTarget.id)}
-        >
-          태그별
-        </li>
+        {TAB_MENU.map(({ id, name }) => (
+          <li
+            key={id}
+            id={id}
+            className={classnames(
+              styles.filterTabItem,
+              clickedTab === id && styles.selected
+            )}
+            onClick={(e) => setClickedTab(e.currentTarget.id)}
+          >
+            {name}
+          </li>
+        ))}
       </ul>
       <ul className={styles.expenseItemList}>
         {transactionList.map(({ id, date, title, items }) => (
