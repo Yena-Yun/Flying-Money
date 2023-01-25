@@ -18,3 +18,8 @@ export type Item = {
   tag?: string; // 태그: 까페, 밥, 화장품, 옷 등 (**작성자가 직접 태그 설정**)
   description?: string;
 };
+
+export type Tag = {
+  id: string;
+  name: string;
+};

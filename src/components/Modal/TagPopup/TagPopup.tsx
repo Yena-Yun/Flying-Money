@@ -1,11 +1,20 @@
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
-import classnames from 'classnames';
-import uuid4 from 'uuid4';
-import { toggleTagPopupSelector } from 'recoil/selector';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { addTagSelector, toggleTagPopupSelector } from 'recoil/selector';
 import styles from './TagPopup.module.scss';
+import { tagGroupState } from 'recoil/atom';
+import React, { useState } from 'react';
 
 export const TagPopup = () => {
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
+  const setAddTag = useSetRecoilState(addTagSelector);
+  const tags = useRecoilValue(tagGroupState);
+  const [value, setValue] = useState('');
+
+  const handleTagSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setAddTag(value);
+    setValue('');
+  };
 
   return (
     <>
@@ -16,11 +25,21 @@ export const TagPopup = () => {
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <div className={styles.mainContainer}>
-            <div className={styles.inputGroup}>
-              <div className={styles.inputItem}>
-                <input id='title' placeholder='태그를 입력해주세요.' />
-              </div>
+            <div className={styles.tagGroup}>
+              {tags.map(({ id, name }) => (
+                <div key={id} className={styles.tag}>
+                  {name}
+                </div>
+              ))}
             </div>
+            <form onSubmit={handleTagSubmit} className={styles.inputItem}>
+              <input
+                id='title'
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder='태그'
+              />
+            </form>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { selector, DefaultValue } from 'recoil';
+import uuid4 from 'uuid4';
 import {
   clickedTabState,
   expenseListState,
@@ -7,6 +8,7 @@ import {
   isOpenModalState,
   isOpenTagPopupState,
   selectedDateState,
+  tagGroupState,
   transactionListState,
   transactionState,
 } from './atom';
@@ -54,6 +56,22 @@ export const tabClickSelector = selector({
   },
   set: ({ set }, newTab) => {
     set(clickedTabState, newTab);
+  },
+});
+
+export const addTagSelector = selector({
+  key: 'addTagSelector',
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }, newTag) => {
+    const tags = get(tagGroupState);
+
+    if (newTag instanceof DefaultValue) {
+      return newTag;
+    } else {
+      set(tagGroupState, [...tags, { id: uuid4(), name: newTag }]);
+    }
   },
 });
 

@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Item, Transaction } from 'types/types';
+import { Item, Tag, Transaction } from 'types/types';
 
 export const isOpenModalState = atom({
   key: 'isOpenModal',
@@ -14,6 +14,11 @@ export const isOpenCalendarState = atom({
 export const isOpenTagPopupState = atom({
   key: 'isOpenTagPopup',
   default: false,
+});
+
+export const tagGroupState = atom<Tag[]>({
+  key: 'tagGroup',
+  default: [],
 });
 
 export const clickedTabState = atom<string>({

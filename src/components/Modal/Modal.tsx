@@ -33,12 +33,16 @@ export const Modal = () => {
   const setTransactionList = useSetRecoilState(transactionListSelector);
   const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
   const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
+  const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
   return (
     <>
       <div
         className={styles.popupBackground}
-        onClick={() => setCloseModal()}
+        onClick={() => {
+          setCloseModal();
+          setCloseTagPopup();
+        }}
       ></div>
 
       <div className={styles.popupSection}>
