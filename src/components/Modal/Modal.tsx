@@ -81,7 +81,7 @@ export const ModalTest = () => {
 
               {/* '항목 추가' 클릭 시 추가되는 항목 */}
               {expenseItemList.length > 0 &&
-                expenseItemList.map(({ id: index, name, price }) => (
+                expenseItemList.map(({ id: index }) => (
                   <div
                     key={index}
                     className={classnames(
@@ -89,34 +89,59 @@ export const ModalTest = () => {
                       styles.addedInputItemGroup
                     )}
                   >
-                    <div className={styles.inputItem}>
-                      <input
-                        placeholder='항목명'
-                        onChange={(e) => {
-                          setExpenseItemList(
-                            expenseItemList.map((item) =>
-                              item.id === index
-                                ? { ...item, name: e.target.value }
-                                : item
-                            )
-                          );
-                        }}
-                      />
-                    </div>
-                    <div className={styles.inputItem}>
-                      <input
-                        type='number'
-                        placeholder='가격'
-                        onChange={(e) => {
-                          setExpenseItemList(
-                            expenseItemList.map((item) =>
-                              item.id === index
-                                ? { ...item, price: parseInt(e.target.value) }
-                                : item
-                            )
-                          );
-                        }}
-                      />
+                    <div className={styles.mainInputGroup}>
+                      <div className={styles.inputItem}>
+                        <input
+                          placeholder='항목명'
+                          onChange={(e) => {
+                            setExpenseItemList(
+                              expenseItemList.map((item) =>
+                                item.id === index
+                                  ? { ...item, name: e.target.value }
+                                  : item
+                              )
+                            );
+                          }}
+                        />
+                      </div>
+                      <div className={styles.priceTagGroup}>
+                        <div className={styles.inputItem}>
+                          <input
+                            type='number'
+                            placeholder='가격'
+                            onChange={(e) => {
+                              setExpenseItemList(
+                                expenseItemList.map((item) =>
+                                  item.id === index
+                                    ? {
+                                        ...item,
+                                        price: parseInt(e.target.value),
+                                      }
+                                    : item
+                                )
+                              );
+                            }}
+                          />
+                        </div>
+                        <div className={styles.inputItem}>
+                          <input
+                            type='number'
+                            placeholder='태그'
+                            onChange={(e) => {
+                              setExpenseItemList(
+                                expenseItemList.map((item) =>
+                                  item.id === index
+                                    ? {
+                                        ...item,
+                                        price: parseInt(e.target.value),
+                                      }
+                                    : item
+                                )
+                              );
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div
                       className={classnames(

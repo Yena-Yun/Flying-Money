@@ -39,12 +39,13 @@
   }
 
   .mainContainer {
+    width: 100%;
     height: 24rem;
-    padding-right: 1rem;
     overflow-y: auto;
 
     .inputGroup {
       position: relative;
+      width: 90%;
       margin-bottom: 1.2rem;
 
       .subTitle {
@@ -70,16 +71,12 @@
       }
 
       .inputItem {
-        position: relative;
-        width: 90%;
-        margin-bottom: 0.5rem;
         padding: 0.75rem 0.9rem;
         border: 1px solid var(--color-gray-2);
         border-radius: 0.5rem;
 
         input {
           width: 100%;
-          height: 100%;
           border: none;
 
           &::placeholder {
@@ -87,40 +84,54 @@
             color: var(--color-gray-4);
           }
         }
-
-        .removeItemButton {
-          position: absolute;
-          top: 1rem;
-          right: 10rem;
-          cursor: pointer;
-        }
       }
 
       .inputItemGroup {
-        @include flexbox;
-        width: 90%;
-        gap: 0.5rem;
+        position: relative;
 
         &.addedInputItemGroup {
-          width: 97.4%;
+          width: 100%;
         }
 
-        & .inputItem:first-child {
-          flex: 1;
+        .mainInputGroup {
+          @include flexbox-column(center, flex-start);
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+
+          .inputItem:first-child {
+            width: 100%;
+          }
+
+          .priceTagGroup {
+            @include flexbox;
+            gap: 0.5rem;
+
+            .inputItem:first-child {
+              flex: 1;
+            }
+
+            .inputItem:nth-child(2) {
+              flex: 2;
+            }
+          }
         }
 
-        & .inputItem:nth-child(2) {
-          flex: 0.5;
+        .removeItemButton {
+          position: absolute;
+          top: 2.3rem;
+          right: -1.8rem;
+          cursor: pointer;
         }
       }
 
       .addItemButton {
         @include flexbox-row(flex-start, center);
-        margin-top: 1rem;
+        width: fit-content;
+        margin-top: 1.5rem;
         cursor: pointer;
 
         .addItemText {
-          margin-top: -0.1rem;
+          margin-top: -0.3rem;
           margin-left: 0.4rem;
         }
       }
