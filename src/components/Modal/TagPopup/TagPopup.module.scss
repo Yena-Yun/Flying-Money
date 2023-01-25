@@ -4,6 +4,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
+  // background-color: rgba(0, 0, 0, 0.3);
   z-index: 250;
 }
 
@@ -27,6 +28,8 @@
 
       .tagGroup {
         @include flexbox-row(flex-start, center);
+        flex-wrap: wrap;
+
         gap: 0.3rem;
         margin-bottom: 0.7rem;
 

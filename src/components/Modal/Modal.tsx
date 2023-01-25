@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import classnames from 'classnames';
 import uuid4 from 'uuid4';
@@ -17,22 +18,27 @@ import {
   transactionListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
+import { TagPopup } from './TagPopup/TagPopup';
 import { Item, Transaction } from 'types/types';
 import styles from './Modal.module.scss';
-import { TagPopup } from './TagPopup/TagPopup';
 
 export const Modal = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const selectedDate = useRecoilValue(selectedDateState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+
   const [expenseItemList, setExpenseItemList] =
     useRecoilState<Item[]>(expenseListState);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<Transaction>(transactionState);
   const setTransactionList = useSetRecoilState(transactionListSelector);
+
   const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
   const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
+
+  const [clickedTagPopupIndex, setClickedTagPopupIndex] = useState('');
+
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
   return (
@@ -87,8 +93,6 @@ export const Modal = () => {
 
             <div className={styles.inputGroup}>
               <h3 className={styles.subTitle}>항목</h3>
-
-              {/* '항목 추가' 클릭 시 추가되는 항목 */}
               {expenseItemList.length > 0 &&
                 expenseItemList.map(({ id: index }) => (
                   <div
@@ -134,12 +138,21 @@ export const Modal = () => {
                         </div>
                         <div
                           className={styles.tagInput}
-                          onClick={() => setOpenTagPopup()}
+                          data-id={index}
+                          onClick={(e) => {
+                            setClickedTagPopupIndex('');
+                            setOpenTagPopup();
+                            setClickedTagPopupIndex(
+                              String(e.currentTarget.dataset.id)
+                            );
+                          }}
                         >
                           <div className={styles.tag}>태그</div>
                         </div>
                       </div>
-                      {isOpenTagPopup && <TagPopup />}
+                      {clickedTagPopupIndex === index && isOpenTagPopup && (
+                        <TagPopup />
+                      )}
                     </div>
                     <div
                       className={classnames(
@@ -161,7 +174,7 @@ export const Modal = () => {
                 onClick={() => {
                   setExpenseItemList([
                     ...expenseItemList,
-                    { id: uuid4(), name: '', price: 0 },
+                    { id: uuid4(), name: '', price: 0, tag: '' },
                   ]);
                 }}
               >

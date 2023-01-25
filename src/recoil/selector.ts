@@ -44,6 +44,7 @@ export const toggleTagPopupSelector = selector({
   get: () => {},
   set: ({ get, set }) => {
     const isOpenTagPopup = get(isOpenTagPopupState);
+
     if (isOpenTagPopup) set(isOpenTagPopupState, false);
     else set(isOpenTagPopupState, true);
   },

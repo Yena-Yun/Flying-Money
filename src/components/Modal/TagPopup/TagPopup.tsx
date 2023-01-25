@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { tagGroupState } from 'recoil/atom';
 import { addTagSelector, toggleTagPopupSelector } from 'recoil/selector';
 import styles from './TagPopup.module.scss';
-import { tagGroupState } from 'recoil/atom';
-import React, { useState } from 'react';
 
 export const TagPopup = () => {
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
