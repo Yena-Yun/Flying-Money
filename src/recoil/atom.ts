@@ -11,6 +11,11 @@ export const isOpenCalendarState = atom({
   default: false,
 });
 
+export const isOpenTagPopupState = atom({
+  key: 'isOpenTagPopup',
+  default: false,
+});
+
 export const clickedTabState = atom<string>({
   key: 'clickedTab',
   default: 'all',

@@ -6,19 +6,22 @@ import { CiCalendar } from 'react-icons/ci';
 import {
   expenseListState,
   isOpenCalendarState,
+  isOpenTagPopupState,
   selectedDateState,
   transactionState,
 } from 'recoil/atom';
 import {
   closeModalSelector,
   toggleCalendarSelector,
+  toggleTagPopupSelector,
   transactionListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { Item, Transaction } from 'types/types';
 import styles from './Modal.module.scss';
+import { TagPopup } from './TagPopup/TagPopup';
 
-export const ModalTest = () => {
+export const Modal = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const selectedDate = useRecoilValue(selectedDateState);
@@ -28,6 +31,8 @@ export const ModalTest = () => {
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<Transaction>(transactionState);
   const setTransactionList = useSetRecoilState(transactionListSelector);
+  const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
+  const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
   return (
     <>
@@ -123,25 +128,14 @@ export const ModalTest = () => {
                             }}
                           />
                         </div>
-                        <div className={styles.inputItem}>
-                          <input
-                            type='number'
-                            placeholder='태그'
-                            onChange={(e) => {
-                              setExpenseItemList(
-                                expenseItemList.map((item) =>
-                                  item.id === index
-                                    ? {
-                                        ...item,
-                                        price: parseInt(e.target.value),
-                                      }
-                                    : item
-                                )
-                              );
-                            }}
-                          />
+                        <div
+                          className={styles.tagInput}
+                          onClick={() => setOpenTagPopup()}
+                        >
+                          <div className={styles.tag}>태그</div>
                         </div>
                       </div>
+                      {isOpenTagPopup && <TagPopup />}
                     </div>
                     <div
                       className={classnames(

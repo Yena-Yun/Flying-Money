@@ -5,6 +5,7 @@ import {
   filteredWeekState,
   isOpenCalendarState,
   isOpenModalState,
+  isOpenTagPopupState,
   selectedDateState,
   transactionListState,
   transactionState,
@@ -27,12 +28,22 @@ export const closeModalSelector = selector({
 });
 
 export const toggleCalendarSelector = selector({
-  key: 'closeCalendarSelector',
+  key: 'toggleCalendarSelector',
   get: () => {},
   set: ({ get, set }) => {
     const isOpenCalendar = get(isOpenCalendarState);
     if (isOpenCalendar) set(isOpenCalendarState, false);
     else set(isOpenCalendarState, true);
+  },
+});
+
+export const toggleTagPopupSelector = selector({
+  key: 'toggleTagPopupSelector',
+  get: () => {},
+  set: ({ get, set }) => {
+    const isOpenTagPopup = get(isOpenTagPopupState);
+    if (isOpenTagPopup) set(isOpenTagPopupState, false);
+    else set(isOpenTagPopupState, true);
   },
 });
 

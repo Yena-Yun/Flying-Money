@@ -4,7 +4,7 @@ import { isOpenModalState } from 'recoil/atom';
 import { openModalSelector } from 'recoil/selector';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
-import { ModalTest } from 'components/Modal/Modal';
+import { Modal } from 'components/Modal/Modal';
 import { TabMenu } from 'components/TabMenuList/Layout/TabMenu';
 import styles from './Home.module.scss';
 
@@ -14,7 +14,7 @@ export const Home = () => {
 
   return (
     <>
-      {isOpenModal && <ModalTest />}
+      {isOpenModal && <Modal />}
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <Header />
