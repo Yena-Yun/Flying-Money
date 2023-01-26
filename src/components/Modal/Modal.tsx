@@ -99,6 +99,7 @@ export const Modal = () => {
                       title: e.target.value,
                     })
                   }
+                  autoFocus
                 />
               </div>
             </div>
@@ -117,7 +118,6 @@ export const Modal = () => {
                     <div className={styles.mainInputGroup}>
                       <div className={styles.inputItem}>
                         <input
-                          autoFocus
                           placeholder='항목명'
                           onChange={(e) => {
                             setExpenseItemList(
@@ -163,7 +163,7 @@ export const Modal = () => {
                           {tag !== '' ? (
                             <div className={styles.tag}>{tag}</div>
                           ) : (
-                            <div className={styles.tag}>태그 등록</div>
+                            <div className={styles.tag}>태그 등록하기</div>
                           )}
                         </div>
                       </div>

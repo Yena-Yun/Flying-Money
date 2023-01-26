@@ -32,34 +32,32 @@ export const TagPopup = () => {
       ></div>
       <div className={styles.container}>
         <div className={styles.innerContainer}>
-          <div className={styles.mainContainer}>
-            <div className={styles.tagGroup}>
-              {savedTagGroup.map(({ id, name }) => {
-                return (
-                  <div
-                    key={id}
-                    className={styles.tag}
-                    onClick={() => {
-                      setExpenseItemList(name);
-                      setCloseTagPopup();
-                    }}
-                  >
-                    {name}
-                  </div>
-                );
-              })}
-            </div>
-            <form onSubmit={handleTagSubmit} className={styles.inputItem}>
-              <input
-                value={value}
-                autoFocus
-                onChange={(e) => {
-                  setValue(e.target.value);
-                }}
-                placeholder='태그'
-              />
-            </form>
+          <div className={styles.tagGroup}>
+            {savedTagGroup.map(({ id, name }) => {
+              return (
+                <div
+                  key={id}
+                  className={styles.tag}
+                  onClick={() => {
+                    setExpenseItemList(name);
+                    setCloseTagPopup();
+                  }}
+                >
+                  {name}
+                </div>
+              );
+            })}
           </div>
+          <form onSubmit={handleTagSubmit} className={styles.inputItem}>
+            <input
+              value={value}
+              autoFocus
+              onChange={(e) => {
+                setValue(e.target.value);
+              }}
+              placeholder='태그'
+            />
+          </form>
         </div>
       </div>
     </>

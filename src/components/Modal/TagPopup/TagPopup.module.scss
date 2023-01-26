@@ -2,8 +2,8 @@
 
 .background {
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 22.8rem;
+  height: 30rem;
   // background-color: rgba(0, 0, 0, 0.3);
   z-index: 250;
 }
@@ -11,11 +11,13 @@
 .container {
   position: absolute;
   top: 3.3em;
-  left: 8.2rem;
+  left: 8.5rem;
   z-index: 300;
 
   .innerContainer {
+    position: relative;
     width: 13rem;
+    min-height: 6rem;
     padding: 0.7rem 0.8rem;
     border: 1px solid var(--color-gray-2);
     border-radius: 0.6rem;
@@ -23,43 +25,39 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     overflow-y: auto;
 
-    .mainContainer {
+    .tagGroup {
+      @include flexbox-row(flex-start, center);
+      flex-wrap: wrap;
+      gap: 0.3rem;
       width: 100%;
+      min-height: 3rem;
+      margin-bottom: 0.7rem;
 
-      .tagGroup {
-        @include flexbox-row(flex-start, center);
-        flex-wrap: wrap;
-
-        gap: 0.3rem;
-        margin-bottom: 0.7rem;
-
-        .tag {
-          width: fit-content;
-          min-width: 2rem;
-          padding: 0.2rem 0.5rem;
-          color: var(--color-dark-pink);
-          border: 1px solid var(--color-pink);
-          border-radius: 0.8rem;
-          text-align: center;
-          cursor: pointer;
-        }
+      .tag {
+        width: fit-content;
+        padding: 0.2rem 0.5rem;
+        color: var(--color-dark-pink);
+        border: 1px solid var(--color-pink);
+        border-radius: 0.8rem;
+        text-align: center;
+        cursor: pointer;
       }
+    }
 
-      .inputItem {
+    .inputItem {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      font-size: var(--text-size-xs);
+      border: 1px solid var(--color-gray-2);
+      border-radius: 0.5rem;
+
+      input {
         width: 100%;
-        padding: 0.5rem 0.75rem;
-        font-size: var(--text-size-xs);
-        border: 1px solid var(--color-gray-2);
-        border-radius: 0.5rem;
+        border: none;
 
-        input {
-          width: 100%;
-          border: none;
-
-          &::placeholder {
-            font-size: var(--text-size-14);
-            color: var(--color-gray-4);
-          }
+        &::placeholder {
+          font-size: var(--text-size-14);
+          color: var(--color-gray-3);
         }
       }
     }
