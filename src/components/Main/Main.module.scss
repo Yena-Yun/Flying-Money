@@ -2,6 +2,7 @@
 
 .container {
   @include flexbox-column;
+  padding: 2.5rem 0 1.5rem;
 
   .titleHeader {
     @include flexbox-column;
@@ -18,11 +19,15 @@
   }
 
   .mainImageContainer {
-    margin-bottom: 0.8rem;
+    width: 6rem;
+    margin-bottom: 1rem;
+
+    img {
+      width: 100%;
+    }
   }
 
   .randomPhrases {
     @include flexbox-column;
-    margin-bottom: 1.8rem;
   }
 }

@@ -13,8 +13,8 @@ export const Home = () => {
     <>
       {isOpenModal && <Modal />}
       <div className={styles.container}>
+        <Header />
         <div className={styles.innerContainer}>
-          <Header />
           <Main />
           <TabMenu />
         </div>
