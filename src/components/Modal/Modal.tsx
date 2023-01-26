@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import {
-  useRecoilValue,
-  useSetRecoilState,
-  useRecoilState,
-  useResetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import classnames from 'classnames';
 import uuid4 from 'uuid4';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
 import { CiCalendar } from 'react-icons/ci';
 import {
+  clickedTagPopupIndexState,
   expenseListState,
   isOpenCalendarState,
   isOpenTagPopupState,
@@ -31,8 +27,13 @@ import styles from './Modal.module.scss';
 export const Modal = () => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
-  const selectedDate = useRecoilValue(selectedDateState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+
+  const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
+  const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
+  const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
+
+  const selectedDate = useRecoilValue(selectedDateState);
 
   const [expenseItemList, setExpenseItemList] =
     useRecoilState<Item[]>(expenseListState);
@@ -40,14 +41,9 @@ export const Modal = () => {
     useRecoilState<Transaction>(transactionState);
   const setTransactionList = useSetRecoilState(transactionListSelector);
 
-  const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
-  const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
-
-  const [clickedTagPopupIndex, setClickedTagPopupIndex] = useState('');
-
-  const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
-
-  const transactionList = useRecoilValue(transactionListState);
+  const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
+    clickedTagPopupIndexState
+  );
 
   return (
     <>
@@ -102,7 +98,7 @@ export const Modal = () => {
             <div className={styles.inputGroup}>
               <h3 className={styles.subTitle}>항목</h3>
               {expenseItemList.length > 0 &&
-                expenseItemList.map(({ id: index }) => (
+                expenseItemList.map(({ id: index, tag }) => (
                   <div
                     key={index}
                     className={classnames(
@@ -155,21 +151,11 @@ export const Modal = () => {
                             );
                           }}
                         >
-                          {expenseItemList.map(({ tag }) => (
-                            <>
-                              {tag.length > 0 ? (
-                                <div className={styles.tagGroup}>
-                                  {tag.map(({ id, name }) => (
-                                    <div key={id} className={styles.tag}>
-                                      {name}
-                                    </div>
-                                  ))}
-                                </div>
-                              ) : (
-                                <div className={styles.tag}>태그</div>
-                              )}
-                            </>
-                          ))}
+                          {tag !== '' ? (
+                            <div className={styles.tag}>{tag}</div>
+                          ) : (
+                            <div className={styles.tag}>태그 등록</div>
+                          )}
                         </div>
                       </div>
                       {clickedTagPopupIndex === index && isOpenTagPopup && (
@@ -196,7 +182,7 @@ export const Modal = () => {
                 onClick={() => {
                   setExpenseItemList([
                     ...expenseItemList,
-                    { id: uuid4(), name: '', price: 0, tag: [] },
+                    { id: uuid4(), name: '', price: 0, tag: '' },
                   ]);
                 }}
               >

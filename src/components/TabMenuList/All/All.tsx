@@ -1,9 +1,5 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import {
-  savedTagGroupState,
-  transactionListState,
-  transactionState,
-} from 'recoil/atom';
+import { transactionListState, transactionState } from 'recoil/atom';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 
 import styles from './All.module.scss';
@@ -11,7 +7,6 @@ import { openModalSelector } from 'recoil/selector';
 
 export const All = () => {
   const transactionList = useRecoilValue(transactionListState);
-  const tags = useRecoilValue(savedTagGroupState);
   const setOpenModal = useSetRecoilState(openModalSelector);
   const resetTransactionList = useResetRecoilState(transactionState);
 
@@ -36,13 +31,7 @@ export const All = () => {
             </div>
             <div className={styles.priceTagGroup}>
               <div className={styles.tagGroup}>
-                {items
-                  .flatMap(({ tag }) => tag)
-                  .map(({ id, name }) => (
-                    <div key={id} className={styles.tag}>
-                      {name}
-                    </div>
-                  ))}
+                <div className={styles.tag}>{items[0].tag}</div>
               </div>
               <div className={styles.price}>
                 {items

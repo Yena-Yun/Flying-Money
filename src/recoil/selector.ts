@@ -11,10 +11,11 @@ import {
   savedTagGroupState,
   transactionListState,
   transactionState,
+  clickedTagPopupIndexState,
 } from './atom';
 
 export const openModalSelector = selector({
-  key: 'openModalSelector',
+  key: 'handleOpenModal',
   get: () => {},
   set: ({ set }) => {
     set(isOpenModalState, true);
@@ -22,7 +23,7 @@ export const openModalSelector = selector({
 });
 
 export const closeModalSelector = selector({
-  key: 'closeModalSelector',
+  key: 'handleCloseModal',
   get: () => {},
   set: ({ set }) => {
     set(isOpenModalState, false);
@@ -30,7 +31,7 @@ export const closeModalSelector = selector({
 });
 
 export const toggleCalendarSelector = selector({
-  key: 'toggleCalendarSelector',
+  key: 'handleToggleCalendar',
   get: () => {},
   set: ({ get, set }) => {
     const isOpenCalendar = get(isOpenCalendarState);
@@ -40,7 +41,7 @@ export const toggleCalendarSelector = selector({
 });
 
 export const toggleTagPopupSelector = selector({
-  key: 'toggleTagPopupSelector',
+  key: 'handleToggleTagPopup',
   get: () => {},
   set: ({ get, set }) => {
     const isOpenTagPopup = get(isOpenTagPopupState);
@@ -51,7 +52,7 @@ export const toggleTagPopupSelector = selector({
 });
 
 export const tabClickSelector = selector({
-  key: 'tabClickSelector',
+  key: 'handleTabClick',
   get: ({ get }) => {
     return get(clickedTabState);
   },
@@ -61,7 +62,7 @@ export const tabClickSelector = selector({
 });
 
 export const addTagSelector = selector({
-  key: 'addTagSelector',
+  key: 'handleAddTag',
   get: () => {
     return '';
   },
@@ -77,7 +78,7 @@ export const addTagSelector = selector({
 });
 
 export const selectedDateSelector = selector({
-  key: 'selectedDateSelector',
+  key: 'handleSelectedDate',
   get: () => {
     return new Date(); // void 피하기 -> get에 원형값 입력
   },
@@ -90,21 +91,30 @@ export const selectedDateSelector = selector({
 });
 
 export const expenseListSelector = selector({
-  key: 'expenseListSelector',
+  key: 'handleExpenseList',
   get: () => {
-    return [];
+    return '';
   },
-  set: ({ set }, newValue) => {
+  set: ({ get, set }, newValue) => {
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      set(expenseListState, newValue);
+      const expenseItemList = get(expenseListState);
+      const clickedTagPopupIndex = get(clickedTagPopupIndexState);
+
+      const result = expenseItemList.map((item) => {
+        return item.id === clickedTagPopupIndex
+          ? { ...item, tag: newValue }
+          : item;
+      });
+
+      set(expenseListState, result);
     }
   },
 });
 
 export const transactionSelector = selector({
-  key: 'transactionSelector',
+  key: 'handleTransaction',
   get: ({ get }) => {
     return {
       id: '',
@@ -113,7 +123,7 @@ export const transactionSelector = selector({
       items: get(expenseListState),
     };
   },
-  set: ({ get, set }, newValue) => {
+  set: ({ set }, newValue) => {
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
@@ -123,7 +133,7 @@ export const transactionSelector = selector({
 });
 
 export const transactionListSelector = selector({
-  key: 'transactionListSelector',
+  key: 'handleTransactionList',
   get: () => {},
   set: ({ get, set }) => {
     const item = get(transactionState);
