@@ -76,6 +76,23 @@ export const addTagSelector = selector({
   },
 });
 
+// export const tagStateSelector = selector({
+//   key: '',
+//   get: ({ get }) => {
+//     const expenseList = get(expenseListState);
+
+//     const result = expenseList.map(({ tag }) => {
+
+//     })
+
+//     return [];
+//   },
+//   set: ({ get, set }) => {
+//     const expenseList = get(expenseListState);
+//     set(expenseListState, );
+//   }
+// })
+
 export const selectedDateSelector = selector({
   key: 'selectedDateSelector',
   get: () => {

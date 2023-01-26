@@ -15,7 +15,7 @@ export type Item = {
   id: string;
   name: string; // 상품이나 서비스 이름
   price: number; // 금액
-  tag: string; // 태그: 까페, 밥, 화장품, 옷 등 (**작성자가 직접 태그 설정**)
+  tag: Tag[]; // 태그: 까페, 밥, 화장품, 옷 등 (**작성자가 직접 태그 설정**)
   description?: string;
 };
 

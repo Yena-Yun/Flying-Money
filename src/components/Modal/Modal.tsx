@@ -9,6 +9,7 @@ import {
   isOpenCalendarState,
   isOpenTagPopupState,
   selectedDateState,
+  tagGroupState,
   transactionState,
 } from 'recoil/atom';
 import {
@@ -40,6 +41,8 @@ export const Modal = () => {
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useState('');
 
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
+
+  const tags = useRecoilValue(tagGroupState);
 
   return (
     <>
@@ -147,7 +150,17 @@ export const Modal = () => {
                             );
                           }}
                         >
-                          <div className={styles.tag}>태그</div>
+                          {tags.length > 0 ? (
+                            <div className={styles.tagGroup}>
+                              {tags.map(({ id, name }) => (
+                                <div key={id} className={styles.tag}>
+                                  {name}
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className={styles.tag}>태그</div>
+                          )}
                         </div>
                       </div>
                       {clickedTagPopupIndex === index && isOpenTagPopup && (
@@ -174,7 +187,7 @@ export const Modal = () => {
                 onClick={() => {
                   setExpenseItemList([
                     ...expenseItemList,
-                    { id: uuid4(), name: '', price: 0, tag: '' },
+                    { id: uuid4(), name: '', price: 0, tag: [] },
                   ]);
                 }}
               >
