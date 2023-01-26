@@ -1,5 +1,9 @@
-import { useState } from 'react';
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import {
+  useRecoilValue,
+  useSetRecoilState,
+  useRecoilState,
+  useResetRecoilState,
+} from 'recoil';
 import classnames from 'classnames';
 import uuid4 from 'uuid4';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
@@ -10,7 +14,6 @@ import {
   isOpenCalendarState,
   isOpenTagPopupState,
   selectedDateState,
-  transactionListState,
   transactionState,
 } from 'recoil/atom';
 import {
@@ -37,9 +40,14 @@ export const Modal = () => {
 
   const [expenseItemList, setExpenseItemList] =
     useRecoilState<Item[]>(expenseListState);
-  const [expenseTransaction, setExpenseTransaction] =
+
+  const resetExpenseItemList = useResetRecoilState(expenseListState);
+
+  const [transaction, setTransaction] =
     useRecoilState<Transaction>(transactionState);
+
   const setTransactionList = useSetRecoilState(transactionListSelector);
+  const resetTransaction = useResetRecoilState(transactionState);
 
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
     clickedTagPopupIndexState
@@ -86,8 +94,8 @@ export const Modal = () => {
                   id='title'
                   placeholder='제목을 입력해주세요.'
                   onChange={(e) =>
-                    setExpenseTransaction({
-                      ...expenseTransaction,
+                    setTransaction({
+                      ...transaction,
                       title: e.target.value,
                     })
                   }
@@ -109,6 +117,7 @@ export const Modal = () => {
                     <div className={styles.mainInputGroup}>
                       <div className={styles.inputItem}>
                         <input
+                          autoFocus
                           placeholder='항목명'
                           onChange={(e) => {
                             setExpenseItemList(
@@ -200,13 +209,16 @@ export const Modal = () => {
               onClick={() => {
                 setCloseModal();
 
-                setExpenseTransaction({
-                  ...expenseTransaction,
+                setTransaction({
+                  ...transaction,
                   id: uuid4(),
                   items: expenseItemList,
                 });
 
                 setTransactionList();
+
+                resetExpenseItemList();
+                resetTransaction();
               }}
             >
               등록

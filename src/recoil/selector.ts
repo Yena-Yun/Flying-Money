@@ -3,7 +3,6 @@ import uuid4 from 'uuid4';
 import {
   clickedTabState,
   expenseListState,
-  filteredWeekState,
   isOpenCalendarState,
   isOpenModalState,
   isOpenTagPopupState,

@@ -36,14 +36,6 @@ export const selectedDateState = atom({
   default: new Date(),
 });
 
-export const filteredWeekState = atom({
-  key: 'filteredWeek',
-  default: {
-    start: '',
-    end: '',
-  },
-});
-
 export const expenseListState = atom<Item[]>({
   key: 'expenseList',
   default: [],

@@ -31,19 +31,15 @@
           font-weight: var(--font-weight-bold);
         }
 
-        .name {
-          color: var(--color-gray-4);
-        }
-      }
-
-      .priceTagGroup {
-        @include flexbox-column(center, flex-end);
-
-        .tagGroup {
+        .nameTagGroup {
           @include flexbox-row(flex-start, center);
           flex-wrap: wrap;
           gap: 0.3rem;
           margin-bottom: 0.3rem;
+
+          .name {
+            color: var(--color-gray-4);
+          }
 
           .tag {
             width: fit-content;
@@ -55,12 +51,12 @@
             text-align: center;
           }
         }
+      }
 
-        .price {
-          font-size: var(--text-size-lg);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-blue);
-        }
+      .price {
+        font-size: var(--text-size-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-blue);
       }
     }
   }

@@ -24,20 +24,16 @@ export const All = () => {
                 })}
               </div>
               <div className={styles.title}>{title}</div>
-              <div className={styles.name}>
-                {items[0].name !== '' && '•'} {items[0].name}
+              <div className={styles.nameTagGroup}>
+                <div className={styles.name}>
+                  {items[0].name !== '' && '•'} {items[0].name}
+                </div>
+                <div className={styles.tag}>{items[0].tag}</div>
                 {items.length > 1 && ` 외 +${items.length - 1}`}
               </div>
             </div>
-            <div className={styles.priceTagGroup}>
-              <div className={styles.tagGroup}>
-                <div className={styles.tag}>{items[0].tag}</div>
-              </div>
-              <div className={styles.price}>
-                {items
-                  .map(({ price }) => price)
-                  .reduce((acc, cur) => acc + cur)}
-              </div>
+            <div className={styles.price}>
+              {items.map(({ price }) => price).reduce((acc, cur) => acc + cur)}
             </div>
           </li>
         ))}

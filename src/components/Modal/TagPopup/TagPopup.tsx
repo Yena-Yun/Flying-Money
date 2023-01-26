@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  clickedTagPopupIndexState,
-  expenseListState,
-  savedTagGroupState,
-} from 'recoil/atom';
-import { expenseListSelector, toggleTagPopupSelector } from 'recoil/selector';
-import { Item } from 'types/types';
 import uuid4 from 'uuid4';
+import { savedTagGroupState } from 'recoil/atom';
+import { expenseListSelector, toggleTagPopupSelector } from 'recoil/selector';
 import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
-  const [expenseItemList, setExpenseItemList] =
-    useRecoilState(expenseListSelector);
+  const setExpenseItemList = useSetRecoilState(expenseListSelector);
 
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(savedTagGroupState);
-
-  const clickedTagPopupIndex = useRecoilValue(clickedTagPopupIndexState);
 
   const [value, setValue] = useState('');
 
