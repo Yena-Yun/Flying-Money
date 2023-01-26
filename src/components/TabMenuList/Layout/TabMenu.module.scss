@@ -1,8 +1,8 @@
 @import 'styles/mixins';
 
 .showExpenseList {
-  @include flexbox-column;
   width: 100%;
+  height: 14rem;
 
   .filterTabList {
     @include flexbox-row(flex-start, center);

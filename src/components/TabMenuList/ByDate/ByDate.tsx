@@ -52,8 +52,10 @@ export const ByDate = () => {
       </div>
       <div className={styles.filteredList}>
         {transactionList
-          .filter(({ date }) =>
-            selectedDate.toString().includes(date.toString())
+          .filter(
+            ({ date }) =>
+              selectedDate.toString().slice(0, 15) ===
+              date.toString().slice(0, 15)
           )
           .map(({ id, title, items }) => (
             <li key={id} className={styles.expenseItem}>

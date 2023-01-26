@@ -18,26 +18,5 @@
     padding: 1.5rem;
     margin: 1.25rem auto 0;
     overflow-y: auto;
-
-    .addNewItemButton {
-      @include flexbox-column;
-      width: 100%;
-      height: 100px;
-      font-size: var(--text-size-md);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-primary);
-      border: 1px solid var(--color-primary);
-      border-radius: 1rem;
-      background-color: var(--color-background);
-
-      .addNewItemIcon {
-        font-size: var(--text-size-lg);
-      }
-
-      p {
-        font-family: 'Nanum Pen Script';
-        font-size: var(--text-size-md);
-      }
-    }
   }
 }

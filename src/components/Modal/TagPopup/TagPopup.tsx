@@ -46,6 +46,7 @@ export const TagPopup = () => {
               {expenseItemList.length > 0 &&
                 expenseItemList.map(({ id: index }) => (
                   <input
+                    key={index}
                     id='title'
                     value={value}
                     onChange={(e) => {
