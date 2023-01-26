@@ -16,9 +16,14 @@ export const isOpenTagPopupState = atom({
   default: false,
 });
 
-export const tagGroupState = atom<Tag[]>({
-  key: 'tagGroup',
+export const savedTagGroupState = atom<Tag[]>({
+  key: 'savedTagGroup',
   default: [],
+});
+
+export const clickedTagPopupIndexState = atom({
+  key: 'clickedTagPopupIndex',
+  default: '',
 });
 
 export const clickedTabState = atom<string>({

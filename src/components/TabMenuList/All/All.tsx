@@ -1,5 +1,9 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { tagGroupState, transactionListState } from 'recoil/atom';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import {
+  savedTagGroupState,
+  transactionListState,
+  transactionState,
+} from 'recoil/atom';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 
 import styles from './All.module.scss';
@@ -7,8 +11,9 @@ import { openModalSelector } from 'recoil/selector';
 
 export const All = () => {
   const transactionList = useRecoilValue(transactionListState);
-  const tags = useRecoilValue(tagGroupState);
+  const tags = useRecoilValue(savedTagGroupState);
   const setOpenModal = useSetRecoilState(openModalSelector);
+  const resetTransactionList = useResetRecoilState(transactionState);
 
   return (
     <div className={styles.container}>
@@ -31,11 +36,13 @@ export const All = () => {
             </div>
             <div className={styles.priceTagGroup}>
               <div className={styles.tagGroup}>
-                {tags.map(({ id, name }) => (
-                  <div key={id} className={styles.tag}>
-                    {name}
-                  </div>
-                ))}
+                {items
+                  .flatMap(({ tag }) => tag)
+                  .map(({ id, name }) => (
+                    <div key={id} className={styles.tag}>
+                      {name}
+                    </div>
+                  ))}
               </div>
               <div className={styles.price}>
                 {items
@@ -48,7 +55,10 @@ export const All = () => {
       </ul>
       <button
         className={styles.addNewItemButton}
-        onClick={() => setOpenModal()}
+        onClick={() => {
+          setOpenModal();
+          resetTransactionList();
+        }}
       >
         <div className={styles.addNewItemIcon}>
           <HiOutlinePlusCircle />

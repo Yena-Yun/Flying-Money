@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import {
+  useRecoilValue,
+  useSetRecoilState,
+  useRecoilState,
+  useResetRecoilState,
+} from 'recoil';
 import classnames from 'classnames';
 import uuid4 from 'uuid4';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
@@ -9,7 +14,7 @@ import {
   isOpenCalendarState,
   isOpenTagPopupState,
   selectedDateState,
-  tagGroupState,
+  transactionListState,
   transactionState,
 } from 'recoil/atom';
 import {
@@ -42,7 +47,7 @@ export const Modal = () => {
 
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
-  const tags = useRecoilValue(tagGroupState);
+  const transactionList = useRecoilValue(transactionListState);
 
   return (
     <>
@@ -150,17 +155,21 @@ export const Modal = () => {
                             );
                           }}
                         >
-                          {tags.length > 0 ? (
-                            <div className={styles.tagGroup}>
-                              {tags.map(({ id, name }) => (
-                                <div key={id} className={styles.tag}>
-                                  {name}
+                          {expenseItemList.map(({ tag }) => (
+                            <>
+                              {tag.length > 0 ? (
+                                <div className={styles.tagGroup}>
+                                  {tag.map(({ id, name }) => (
+                                    <div key={id} className={styles.tag}>
+                                      {name}
+                                    </div>
+                                  ))}
                                 </div>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className={styles.tag}>태그</div>
-                          )}
+                              ) : (
+                                <div className={styles.tag}>태그</div>
+                              )}
+                            </>
+                          ))}
                         </div>
                       </div>
                       {clickedTagPopupIndex === index && isOpenTagPopup && (
@@ -204,12 +213,13 @@ export const Modal = () => {
               className={styles.submitButton}
               onClick={() => {
                 setCloseModal();
-                // resetExpenseItem();
+
                 setExpenseTransaction({
                   ...expenseTransaction,
                   id: uuid4(),
                   items: expenseItemList,
                 });
+
                 setTransactionList();
               }}
             >

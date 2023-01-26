@@ -8,7 +8,7 @@ import {
   isOpenModalState,
   isOpenTagPopupState,
   selectedDateState,
-  tagGroupState,
+  savedTagGroupState,
   transactionListState,
   transactionState,
 } from './atom';
@@ -66,32 +66,15 @@ export const addTagSelector = selector({
     return '';
   },
   set: ({ get, set }, newTag) => {
-    const tags = get(tagGroupState);
+    const tags = get(savedTagGroupState);
 
     if (newTag instanceof DefaultValue) {
       return newTag;
     } else {
-      set(tagGroupState, [...tags, { id: uuid4(), name: newTag }]);
+      set(savedTagGroupState, [...tags, { id: uuid4(), name: newTag }]);
     }
   },
 });
-
-// export const tagStateSelector = selector({
-//   key: '',
-//   get: ({ get }) => {
-//     const expenseList = get(expenseListState);
-
-//     const result = expenseList.map(({ tag }) => {
-
-//     })
-
-//     return [];
-//   },
-//   set: ({ get, set }) => {
-//     const expenseList = get(expenseListState);
-//     set(expenseListState, );
-//   }
-// })
 
 export const selectedDateSelector = selector({
   key: 'selectedDateSelector',
@@ -104,15 +87,6 @@ export const selectedDateSelector = selector({
       return newDate;
     } else set(selectedDateState, newDate);
   },
-});
-
-export const filteredWeekSelector = selector({
-  key: 'filteredWeekSelector',
-  get: ({ get }) => {
-    const weekStart = get(filteredWeekState).start;
-    const weekEnd = get(filteredWeekState).end;
-  },
-  set: () => {},
 });
 
 export const expenseListSelector = selector({
@@ -150,9 +124,7 @@ export const transactionSelector = selector({
 
 export const transactionListSelector = selector({
   key: 'transactionListSelector',
-  get: () => {
-    // return [];
-  },
+  get: () => {},
   set: ({ get, set }) => {
     const item = get(transactionState);
     const list = get(transactionListState);
