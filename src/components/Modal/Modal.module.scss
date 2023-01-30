@@ -1,187 +1,160 @@
 @import 'styles/mixins';
 
-.popupBackground {
-  position: fixed;
+.title {
+  font-size: var(--text-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-black);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.icon {
+  font-size: 1.4rem;
+}
+
+.mainContainer {
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 200;
-  cursor: pointer;
-}
+  height: 24rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
 
-.popupSection {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 250;
-}
+  .inputGroup {
+    position: relative;
+    width: 90%;
+    margin-bottom: 1.2rem;
 
-.popup {
-  position: relative;
-  width: 27rem;
-  height: 35rem;
-  padding: 2.5rem 1.5rem 2rem 2rem;
-  background-color: var(--color-white);
-  border-radius: 1rem;
-  z-index: 300;
+    .subTitle {
+      font-size: var(--text-size-md);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: 0.5rem;
+    }
 
-  .title {
-    font-size: var(--text-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-black);
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
+    &.date {
+      @include flexbox-row(flex-start, center);
 
-  .icon {
-    font-size: 1.4rem;
-  }
+      .dateIcon {
+        margin-top: -0.2rem;
+        margin-left: 0.5rem;
+        cursor: pointer;
+      }
 
-  .mainContainer {
-    width: 100%;
-    height: 24rem;
-    padding-bottom: 2rem;
-    overflow-y: auto;
-
-    .inputGroup {
-      position: relative;
-      width: 90%;
-      margin-bottom: 1.2rem;
-
-      .subTitle {
+      .selectedDate {
+        margin-top: -0.4rem;
+        margin-left: 0.8rem;
         font-size: var(--text-size-md);
-        font-weight: var(--font-weight-semibold);
-        margin-bottom: 0.5rem;
       }
+    }
 
-      &.date {
-        @include flexbox-row(flex-start, center);
+    .inputItem {
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--color-gray-2);
+      border-radius: 0.5rem;
 
-        .dateIcon {
-          margin-top: -0.2rem;
-          margin-left: 0.5rem;
-          cursor: pointer;
-        }
+      input {
+        width: 100%;
+        border: none;
 
-        .selectedDate {
-          margin-top: -0.4rem;
-          margin-left: 0.8rem;
-          font-size: var(--text-size-md);
+        &::placeholder {
+          font-size: var(--text-size-14);
+          color: var(--color-gray-4);
         }
       }
+    }
 
-      .inputItem {
-        padding: 0.75rem 0.9rem;
-        border: 1px solid var(--color-gray-2);
-        border-radius: 0.5rem;
+    .inputItemGroup {
+      position: relative;
 
-        input {
-          width: 100%;
-          border: none;
-
-          &::placeholder {
-            font-size: var(--text-size-14);
-            color: var(--color-gray-4);
-          }
-        }
+      &.addedInputItemGroup {
+        width: 100%;
       }
 
-      .inputItemGroup {
+      .mainInputGroup {
+        @include flexbox-column(center, flex-start);
         position: relative;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
 
-        &.addedInputItemGroup {
+        .inputItem:first-child {
           width: 100%;
         }
 
-        .mainInputGroup {
-          @include flexbox-column(center, flex-start);
-          position: relative;
+        .priceTagGroup {
+          @include flexbox;
+          width: 100%;
           gap: 0.5rem;
-          margin-bottom: 1rem;
 
           .inputItem:first-child {
-            width: 100%;
+            flex: 1;
           }
 
-          .priceTagGroup {
-            @include flexbox;
-            width: 100%;
-            gap: 0.5rem;
+          .tagInput {
+            flex: 1.5;
+            color: var(--color-gray-3);
+            padding: 0.75rem 0.9rem;
+            border: 1px solid var(--color-gray-2);
+            border-radius: 0.2rem;
+            cursor: pointer;
 
-            .inputItem:first-child {
-              flex: 1;
+            &:hover {
+              background-color: var(--color-gray-2);
             }
 
-            .tagInput {
-              flex: 1.5;
-              color: var(--color-gray-3);
-              padding: 0.75rem 0.9rem;
-              border: 1px solid var(--color-gray-2);
-              border-radius: 0.2rem;
-              cursor: pointer;
+            .tagGroup {
+              @include flexbox-row(flex-start, center);
+              flex-wrap: wrap;
+              gap: 0.3rem;
 
-              &:hover {
-                background-color: var(--color-gray-2);
-              }
-
-              .tagGroup {
-                @include flexbox-row(flex-start, center);
-                flex-wrap: wrap;
-                gap: 0.3rem;
-
-                .tag {
-                  width: fit-content;
-                  min-width: 2rem;
-                  padding: 0.1rem 0.5rem;
-                  color: var(--color-dark-pink);
-                  border: 1px solid var(--color-pink);
-                  border-radius: 0.8rem;
-                  text-align: center;
-                  cursor: pointer;
-                }
+              .tag {
+                width: fit-content;
+                min-width: 2rem;
+                padding: 0.1rem 0.5rem;
+                color: var(--color-dark-pink);
+                border: 1px solid var(--color-pink);
+                border-radius: 0.8rem;
+                text-align: center;
+                cursor: pointer;
               }
             }
           }
-        }
-
-        .removeItemButton {
-          position: absolute;
-          top: 1rem;
-          right: -1.8rem;
-          cursor: pointer;
         }
       }
 
-      .addItemButton {
-        @include flexbox-row(flex-start, center);
-        width: fit-content;
-        padding: 0.5rem 0.8rem 0.5rem 0;
-        margin-top: 1.5rem;
+      .removeItemButton {
+        position: absolute;
+        top: 1rem;
+        right: -1.8rem;
         cursor: pointer;
+      }
+    }
 
-        .addItemText {
-          margin-top: -0.3rem;
-          margin-left: 0.4rem;
-        }
+    .addItemButton {
+      @include flexbox-row(flex-start, center);
+      width: fit-content;
+      padding: 0.5rem 0.8rem 0.5rem 0;
+      margin-top: 1.5rem;
+      cursor: pointer;
+
+      .addItemText {
+        margin-top: -0.3rem;
+        margin-left: 0.4rem;
       }
     }
   }
+}
 
-  .submitButtonContainer {
-    position: absolute;
-    bottom: 0.5rem;
-    width: 84%;
-    padding-bottom: 1rem;
+.submitButtonContainer {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 84%;
+  padding-bottom: 1rem;
 
-    .submitButton {
-      @include flexbox-row;
-      width: 100%;
-      height: 3rem;
-      color: var(--color-white);
-      border-radius: 6px;
-      background: var(--color-primary);
-      cursor: pointer;
-    }
+  .submitButton {
+    @include flexbox-row;
+    width: 100%;
+    height: 3rem;
+    color: var(--color-white);
+    border-radius: 6px;
+    background: var(--color-primary);
+    cursor: pointer;
   }
 }
