@@ -25,3 +25,6 @@ export type Tag = {
   id: string;
   name: string;
 };
+
+export type TabMenuIdType = 'all' | 'byWeek' | 'byDate' | 'byTag';
+export type TabMenuStringType = '전체' | '주별' | '날짜별' | '태그별';

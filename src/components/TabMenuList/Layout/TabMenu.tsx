@@ -22,7 +22,7 @@ export const TabMenu = () => {
               styles.filterTabItem,
               clickedTab === id && styles.selected
             )}
-            onClick={(e) => setClickedTab(e.currentTarget.id)}
+            onClick={() => setClickedTab(id)}
           >
             {name}
           </li>

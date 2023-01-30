@@ -1,5 +1,9 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { transactionListState, transactionState } from 'recoil/atom';
+import {
+  clickedExpenseCardState,
+  transactionListState,
+  transactionState,
+} from 'recoil/atom';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 
 import styles from './All.module.scss';
@@ -9,6 +13,7 @@ export const All = () => {
   const transactionList = useRecoilValue(transactionListState);
   const setOpenModal = useSetRecoilState(openModalSelector);
   const resetTransactionList = useResetRecoilState(transactionState);
+  const clickedExpenseCard = useRecoilValue(clickedExpenseCardState);
 
   return (
     <div className={styles.container}>

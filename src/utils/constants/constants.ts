@@ -1,3 +1,5 @@
+import { TabMenuIdType, TabMenuStringType } from 'types/types';
+
 export const RANDOM_PHRASES = [
   {
     line1: 'Gone with the wind~',
@@ -38,7 +40,7 @@ export const MONTHS = [
   '12월',
 ];
 
-export const TAB_MENU = [
+export const TAB_MENU: { id: TabMenuIdType; name: TabMenuStringType }[] = [
   {
     id: 'all',
     name: '전체',

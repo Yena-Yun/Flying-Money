@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Item, Tag, Transaction } from 'types/types';
+import { Item, TabMenuIdType, Tag, Transaction } from 'types/types';
 import uuid4 from 'uuid4';
 
 export const isOpenModalState = atom({
@@ -27,7 +27,12 @@ export const clickedTagPopupIndexState = atom({
   default: '',
 });
 
-export const clickedTabState = atom<string>({
+export const clickedExpenseCardState = atom({
+  key: 'clickedExpenseCard',
+  default: '',
+});
+
+export const clickedTabState = atom<TabMenuIdType>({
   key: 'clickedTab',
   default: 'all',
 });
