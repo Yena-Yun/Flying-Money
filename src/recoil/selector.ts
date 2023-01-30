@@ -45,8 +45,11 @@ export const toggleDetailModalSelector = selector({
   get: () => {},
   set: ({ get, set }) => {
     const isOpenDetailModal = get(isOpenDetailModalState);
-    if (isOpenDetailModal) set(isOpenCalendarState, false);
-    else set(isOpenCalendarState, true);
+
+    console.log(isOpenDetailModal);
+
+    if (isOpenDetailModal) set(isOpenDetailModalState, false);
+    else set(isOpenDetailModalState, true);
   },
 });
 

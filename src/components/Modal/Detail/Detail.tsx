@@ -1,15 +1,15 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { clickedExpenseCardState, transactionListState } from 'recoil/atom';
-import { closeModalSelector } from 'recoil/selector';
+import { toggleDetailModalSelector } from 'recoil/selector';
 import { ModalLayout } from '../Layout/ModalLayout';
 import styles from './Detail.module.scss';
 
 export const Detail = () => {
-  const setCloseModal = useSetRecoilState(closeModalSelector);
+  const setCloseDetailModal = useSetRecoilState(toggleDetailModalSelector);
   const transactionList = useRecoilValue(transactionListState);
   const clickedExpenseCard = useRecoilValue(clickedExpenseCardState);
 
-  const { id, date, title, items } = transactionList.filter(
+  const { date, title, items } = transactionList.filter(
     ({ id }) => id === clickedExpenseCard
   )[0];
 
@@ -47,7 +47,7 @@ export const Detail = () => {
       <div className={styles.confirmButtonContainer}>
         <button
           className={styles.confirmButton}
-          onClick={() => setCloseModal()}
+          onClick={() => setCloseDetailModal()}
         >
           확인
         </button>

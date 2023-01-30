@@ -1,20 +1,28 @@
-import { useRecoilValue } from 'recoil';
-import { clickedExpenseCardState, isOpenModalState } from 'recoil/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  clickedExpenseCardState,
+  isOpenDetailModalState,
+  isOpenModalState,
+} from 'recoil/atom';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
 import { Modal } from 'components/Modal/Modal';
 import { TabMenu } from 'components/TabMenuList/Layout/TabMenu';
 import styles from './Home.module.scss';
 import { Detail } from 'components/Modal/Detail/Detail';
+import { toggleDetailModalSelector } from 'recoil/selector';
 
 export const Home = () => {
   const isOpenModal = useRecoilValue(isOpenModalState);
   const clickedExpenseCard = useRecoilValue(clickedExpenseCardState);
+  const [isOpenDetailModal, setIsOpenDetailModal] = useRecoilState(
+    isOpenDetailModalState
+  );
 
   return (
     <>
       {isOpenModal && <Modal />}
-      {clickedExpenseCard && <Detail />}
+      {clickedExpenseCard !== '' && isOpenDetailModal && <Detail />}
       <div className={styles.container}>
         <Header />
         <div className={styles.innerContainer}>
