@@ -1,14 +1,20 @@
 import { ReactNode } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { closeModalSelector, toggleTagPopupSelector } from 'recoil/selector';
+import {
+  closeModalSelector,
+  toggleDetailModalSelector,
+  toggleTagPopupSelector,
+} from 'recoil/selector';
 import styles from './ModalLayout.module.scss';
 
 type ModalLayoutType = {
-  children: ReactNode[];
+  modalRole: string;
+  children: ReactNode | ReactNode[];
 };
 
-export const ModalLayout = ({ children }: ModalLayoutType) => {
+export const ModalLayout = ({ modalRole, children }: ModalLayoutType) => {
   const setCloseModal = useSetRecoilState(closeModalSelector);
+  const setCloseDetailModal = useSetRecoilState(toggleDetailModalSelector);
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
   return (
@@ -16,8 +22,11 @@ export const ModalLayout = ({ children }: ModalLayoutType) => {
       <div
         className={styles.popupBackground}
         onClick={() => {
-          setCloseModal();
-          setCloseTagPopup();
+          modalRole === 'add'
+            ? setCloseModal()
+            : modalRole === 'detail'
+            ? setCloseDetailModal()
+            : setCloseTagPopup();
         }}
       ></div>
       <div className={styles.popupSection}>
