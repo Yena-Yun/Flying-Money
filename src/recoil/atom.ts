@@ -7,6 +7,11 @@ export const isOpenModalState = atom({
   default: false,
 });
 
+export const isOpenDetailModalState = atom({
+  key: 'isOpenDetailModal',
+  default: false,
+});
+
 export const isOpenCalendarState = atom({
   key: 'isOpenCalendar',
   default: false,

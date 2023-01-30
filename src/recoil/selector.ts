@@ -11,6 +11,7 @@ import {
   transactionListState,
   transactionState,
   clickedTagPopupIndexState,
+  isOpenDetailModalState,
 } from './atom';
 
 export const openModalSelector = selector({
@@ -35,6 +36,16 @@ export const toggleCalendarSelector = selector({
   set: ({ get, set }) => {
     const isOpenCalendar = get(isOpenCalendarState);
     if (isOpenCalendar) set(isOpenCalendarState, false);
+    else set(isOpenCalendarState, true);
+  },
+});
+
+export const toggleDetailModalSelector = selector({
+  key: 'toggleDetailModalSelector',
+  get: () => {},
+  set: ({ get, set }) => {
+    const isOpenDetailModal = get(isOpenDetailModalState);
+    if (isOpenDetailModal) set(isOpenCalendarState, false);
     else set(isOpenCalendarState, true);
   },
 });
