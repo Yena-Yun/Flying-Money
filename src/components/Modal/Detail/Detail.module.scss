@@ -1,0 +1,86 @@
+@import 'styles/mixins';
+
+.icon {
+  font-size: 1.4rem;
+}
+
+.modalTitle {
+  font-size: var(--text-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-black);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.mainContainer {
+  width: 100%;
+  height: 18rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+
+  .header {
+    .title {
+      margin-bottom: 1rem;
+      font-size: var(--text-size-md);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .date {
+      margin-bottom: 1rem;
+      font-size: var(--text-size-md);
+      color: var(--color-gray-4);
+    }
+  }
+
+  .info {
+    @include flexbox-column(center, flex-start);
+
+    .nameTagGroup {
+      @include flexbox-row(flex-start, center);
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.3rem;
+
+      .name {
+        color: var(--color-gray-4);
+      }
+
+      .tag {
+        width: fit-content;
+        min-width: 2rem;
+        padding: 0.1rem 0.5rem;
+        color: var(--color-dark-pink);
+        border: 1px solid var(--color-pink);
+        border-radius: 0.8rem;
+        text-align: center;
+      }
+
+      .price {
+        color: var(--color-gray-6);
+      }
+    }
+  }
+
+  .total {
+    font-size: var(--text-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-blue);
+  }
+}
+
+.confirmButtonContainer {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 84%;
+  padding-bottom: 1rem;
+
+  .confirmButton {
+    @include flexbox-row;
+    width: 100%;
+    height: 3rem;
+    color: var(--color-white);
+    border-radius: 6px;
+    background: var(--color-primary);
+    cursor: pointer;
+  }
+}
