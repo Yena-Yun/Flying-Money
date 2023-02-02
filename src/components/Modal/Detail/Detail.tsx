@@ -1,13 +1,17 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { clickedExpenseCardState, transactionListState } from 'recoil/atom';
-import { toggleDetailModalSelector } from 'recoil/selector';
+import { clickedExpenseIndexState, transactionListState } from 'recoil/atom';
+import {
+  deleteTransactionListSelector,
+  toggleDetailModalSelector,
+} from 'recoil/selector';
 import { ModalLayout } from '../Layout/ModalLayout';
 import styles from './Detail.module.scss';
 
 export const Detail = () => {
   const setCloseDetailModal = useSetRecoilState(toggleDetailModalSelector);
   const transactionList = useRecoilValue(transactionListState);
-  const clickedExpenseCard = useRecoilValue(clickedExpenseCardState);
+  const clickedExpenseCard = useRecoilValue(clickedExpenseIndexState);
+  const setDeleteTransaction = useSetRecoilState(deleteTransactionListSelector);
 
   const { date, title, items } = transactionList.filter(
     ({ id }) => id === clickedExpenseCard
@@ -44,12 +48,21 @@ export const Detail = () => {
         </div>
       </div>
 
-      <div className={styles.confirmButtonContainer}>
+      <div className={styles.actionButtonContainer}>
         <button
           className={styles.confirmButton}
           onClick={() => setCloseDetailModal()}
         >
           확인
+        </button>
+        <button
+          className={styles.deleteButton}
+          onClick={() => {
+            setDeleteTransaction();
+            setCloseDetailModal();
+          }}
+        >
+          삭제
         </button>
       </div>
     </ModalLayout>

@@ -20,7 +20,7 @@ import {
   closeModalSelector,
   toggleCalendarSelector,
   toggleTagPopupSelector,
-  transactionListSelector,
+  addTransactionListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { TagPopup } from './TagPopup/TagPopup';
@@ -35,21 +35,15 @@ export const Modal = () => {
 
   const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
   const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
-  const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
   const selectedDate = useRecoilValue(selectedDateState);
-
   const [expenseItemList, setExpenseItemList] =
     useRecoilState<Item[]>(expenseListState);
-
   const resetExpenseItemList = useResetRecoilState(expenseListState);
-
   const [transaction, setTransaction] =
     useRecoilState<Transaction>(transactionState);
-
-  const setTransactionList = useSetRecoilState(transactionListSelector);
+  const addTransactionList = useSetRecoilState(addTransactionListSelector);
   const resetTransaction = useResetRecoilState(transactionState);
-
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
     clickedTagPopupIndexState
   );
@@ -204,7 +198,7 @@ export const Modal = () => {
               items: expenseItemList,
             });
 
-            setTransactionList();
+            addTransactionList();
 
             resetExpenseItemList();
             resetTransaction();

@@ -32,7 +32,7 @@ export const clickedTagPopupIndexState = atom({
   default: '',
 });
 
-export const clickedExpenseCardState = atom({
+export const clickedExpenseIndexState = atom({
   key: 'clickedExpenseCard',
   default: '',
 });

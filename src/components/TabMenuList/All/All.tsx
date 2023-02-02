@@ -5,7 +5,7 @@ import {
   useSetRecoilState,
 } from 'recoil';
 import {
-  clickedExpenseCardState,
+  clickedExpenseIndexState,
   isOpenDetailModalState,
   transactionListState,
   transactionState,
@@ -21,7 +21,7 @@ export const All = () => {
   const setOpenModal = useSetRecoilState(openModalSelector);
   const resetTransactionList = useResetRecoilState(transactionState);
   const [clickedExpenseCard, setClickedExpenseCard] = useRecoilState(
-    clickedExpenseCardState
+    clickedExpenseIndexState
   );
   const setIsOpenDetailModal = useSetRecoilState(toggleDetailModalSelector);
 
@@ -32,6 +32,7 @@ export const All = () => {
       <ul className={styles.expenseItemList}>
         {transactionList.map(({ id, date, title, items }) => (
           <li
+            key={id}
             className={styles.expenseItem}
             onClick={() => {
               setClickedExpenseCard(id);

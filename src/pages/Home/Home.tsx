@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  clickedExpenseCardState,
+  clickedExpenseIndexState,
   isOpenDetailModalState,
   isOpenModalState,
 } from 'recoil/atom';
@@ -14,7 +14,7 @@ import { toggleDetailModalSelector } from 'recoil/selector';
 
 export const Home = () => {
   const isOpenModal = useRecoilValue(isOpenModalState);
-  const clickedExpenseCard = useRecoilValue(clickedExpenseCardState);
+  const clickedExpenseCard = useRecoilValue(clickedExpenseIndexState);
   const [isOpenDetailModal, setIsOpenDetailModal] = useRecoilState(
     isOpenDetailModalState
   );

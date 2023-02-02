@@ -12,6 +12,7 @@ import {
   transactionState,
   clickedTagPopupIndexState,
   isOpenDetailModalState,
+  clickedExpenseIndexState,
 } from './atom';
 
 export const openModalSelector = selector({
@@ -45,8 +46,6 @@ export const toggleDetailModalSelector = selector({
   get: () => {},
   set: ({ get, set }) => {
     const isOpenDetailModal = get(isOpenDetailModalState);
-
-    console.log(isOpenDetailModal);
 
     if (isOpenDetailModal) set(isOpenDetailModalState, false);
     else set(isOpenDetailModalState, true);
@@ -145,13 +144,26 @@ export const transactionSelector = selector({
   },
 });
 
-export const transactionListSelector = selector({
-  key: 'handleTransactionList',
+export const addTransactionListSelector = selector({
+  key: 'addTransactionList',
   get: () => {},
   set: ({ get, set }) => {
     const item = get(transactionState);
     const list = get(transactionListState);
 
     set(transactionListState, [...list, item]);
+  },
+});
+
+export const deleteTransactionListSelector = selector({
+  key: 'deleteTransactionList',
+  get: () => {},
+  set: ({ get, set }) => {
+    const list = get(transactionListState);
+    const index = get(clickedExpenseIndexState);
+
+    const deletedList = list.filter(({ id }) => id !== index);
+
+    set(transactionListState, deletedList);
   },
 });
