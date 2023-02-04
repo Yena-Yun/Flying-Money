@@ -73,21 +73,21 @@ export const tabClickSelector = selector({
   },
 });
 
-export const addTagSelector = selector({
-  key: 'handleAddTag',
-  get: () => {
-    return '';
-  },
-  set: ({ get, set }, newTag) => {
-    const tags = get(savedTagGroupState);
+// export const addTagSelector = selector({
+//   key: 'handleAddTag',
+//   get: () => {
+//     return '';
+//   },
+//   set: ({ get, set }, newTag) => {
+//     const tags = get(savedTagGroupState);
 
-    if (newTag instanceof DefaultValue) {
-      return newTag;
-    } else {
-      set(savedTagGroupState, [...tags, { id: uuid4(), name: newTag }]);
-    }
-  },
-});
+//     if (newTag instanceof DefaultValue) {
+//       return newTag;
+//     } else {
+//       set(savedTagGroupState, [...tags, { id: uuid4(), name: newTag }]);
+//     }
+//   },
+// });
 
 export const selectedDateSelector = selector({
   key: 'handleSelectedDate',

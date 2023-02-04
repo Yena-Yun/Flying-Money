@@ -10,14 +10,13 @@
 
 .container {
   position: absolute;
-  top: 3.3em;
+  top: 3.2em;
   left: 8.5rem;
   z-index: 300;
 
   .innerContainer {
     position: relative;
     width: 13rem;
-    min-height: 6rem;
     padding: 0.7rem 0.8rem;
     border: 1px solid var(--color-gray-2);
     border-radius: 0.6rem;
@@ -30,21 +29,37 @@
       flex-wrap: wrap;
       gap: 0.3rem;
       width: 100%;
-      min-height: 3rem;
+      min-height: 2rem;
       margin-bottom: 0.7rem;
 
-      .tag {
+      .tagWrap {
+        @include flexbox-row;
+        position: relative;
         width: fit-content;
-        padding: 0.2rem 0.5rem;
-        color: var(--color-dark-pink);
+        padding: 0.2rem 0.2rem 0.2rem 0.6rem;
         border: 1px solid var(--color-pink);
         border-radius: 0.8rem;
-        text-align: center;
         cursor: pointer;
+
+        .tag {
+          color: var(--color-dark-pink);
+        }
+
+        .deleteTagIcon {
+          @include flexbox-column;
+          width: 0.8rem;
+          height: 0.8rem;
+          margin-left: 0.2rem;
+          border-radius: 0.3rem;
+
+          &:hover {
+            background-color: rgba(240, 109, 134, 0.2);
+          }
+        }
       }
     }
 
-    .inputItem {
+    .inputForm {
       width: 100%;
       padding: 0.5rem 0.75rem;
       font-size: var(--text-size-xs);
