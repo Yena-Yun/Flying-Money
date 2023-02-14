@@ -6,10 +6,10 @@ import {
 } from 'recoil/atom';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
-import { Modal } from 'components/Modal/Modal';
 import { TabMenu } from 'components/TabMenuList/Layout/TabMenu';
 import styles from './Home.module.scss';
 import { Detail } from 'components/Modal/Detail/Detail';
+import { Add } from 'components/Modal/Add/Add';
 
 export const Home = () => {
   const isOpenModal = useRecoilValue(isOpenModalState);
@@ -18,7 +18,7 @@ export const Home = () => {
 
   return (
     <>
-      {isOpenModal && <Modal />}
+      {isOpenModal && <Add />}
       {clickedExpenseIndex !== '' && isOpenDetailModal && <Detail />}
       <div className={styles.container}>
         <Header />
