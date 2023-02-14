@@ -1,5 +1,4 @@
 import { selector, DefaultValue } from 'recoil';
-import uuid4 from 'uuid4';
 import {
   clickedTabState,
   expenseListState,
@@ -7,7 +6,6 @@ import {
   isOpenModalState,
   isOpenTagPopupState,
   selectedDateState,
-  savedTagGroupState,
   transactionListState,
   transactionState,
   clickedTagPopupIndexState,
@@ -16,19 +14,17 @@ import {
   listState,
 } from './atom';
 
-export const openModalSelector = selector({
-  key: 'handleOpenModal',
+export const toggleAddModalSelector = selector({
+  key: 'toggleAddModal',
   get: () => {},
-  set: ({ set }) => {
-    set(isOpenModalState, true);
-  },
-});
+  set: ({ get, set }) => {
+    const isOpenModal = get(isOpenModalState);
 
-export const closeModalSelector = selector({
-  key: 'handleCloseModal',
-  get: () => {},
-  set: ({ set }) => {
-    set(isOpenModalState, false);
+    if (isOpenModal) {
+      set(isOpenModalState, false);
+    } else {
+      set(isOpenModalState, true);
+    }
   },
 });
 

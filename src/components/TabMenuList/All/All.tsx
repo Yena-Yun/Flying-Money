@@ -13,12 +13,15 @@ import {
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 
 import styles from './All.module.scss';
-import { openModalSelector, toggleDetailModalSelector } from 'recoil/selector';
+import {
+  toggleAddModalSelector,
+  toggleDetailModalSelector,
+} from 'recoil/selector';
 import { Detail } from 'components/Modal/Detail/Detail';
 
 export const All = () => {
   const transactionList = useRecoilValue(transactionListState);
-  const setOpenModal = useSetRecoilState(openModalSelector);
+  const setOpenModal = useSetRecoilState(toggleAddModalSelector);
   const resetTransactionList = useResetRecoilState(transactionState);
   const [clickedExpenseCard, setClickedExpenseCard] = useRecoilState(
     clickedExpenseIndexState

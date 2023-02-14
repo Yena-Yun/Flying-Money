@@ -12,9 +12,9 @@ import {
   transactionState,
 } from 'recoil/atom';
 import {
-  closeModalSelector,
   addTransactionListSelector,
   addListSelector,
+  toggleAddModalSelector,
 } from 'recoil/selector';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Date } from './Date/Date';
@@ -25,7 +25,7 @@ import { ItemType, TransactionType } from 'types/types';
 import styles from './Add.module.scss';
 
 export const Add = () => {
-  const setCloseModal = useSetRecoilState(closeModalSelector);
+  const setCloseModal = useSetRecoilState(toggleAddModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
 
   const expenseItemList = useRecoilValue<ItemType[]>(expenseListState);
