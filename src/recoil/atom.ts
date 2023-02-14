@@ -1,14 +1,15 @@
 import { atom } from 'recoil';
-import { Item, List, TabMenuIdType, Tag, Transaction } from 'types/types';
+import {
+  ItemType,
+  ListType,
+  TabMenuIdType,
+  TagType,
+  TransactionType,
+} from 'types/types';
 import uuid4 from 'uuid4';
 
 export const isOpenModalState = atom({
   key: 'isOpenModal',
-  default: false,
-});
-
-export const isOpenDetailModalState = atom({
-  key: 'isOpenDetailModal',
   default: false,
 });
 
@@ -17,12 +18,22 @@ export const isOpenCalendarState = atom({
   default: false,
 });
 
+export const selectedDateState = atom({
+  key: 'selectedDate',
+  default: new Date(),
+});
+
+export const isOpenDetailModalState = atom({
+  key: 'isOpenDetailModal',
+  default: false,
+});
+
 export const isOpenTagPopupState = atom({
   key: 'isOpenTagPopup',
   default: false,
 });
 
-export const savedTagGroupState = atom<Tag[]>({
+export const savedTagGroupState = atom<TagType[]>({
   key: 'savedTagGroup',
   default: [],
 });
@@ -42,17 +53,12 @@ export const clickedTabState = atom<TabMenuIdType>({
   default: 'all',
 });
 
-export const selectedDateState = atom({
-  key: 'selectedDate',
-  default: new Date(),
-});
-
-export const expenseListState = atom<Item[]>({
+export const expenseListState = atom<ItemType[]>({
   key: 'expenseList',
   default: [{ id: uuid4(), name: '', price: 0, tag: '' }],
 });
 
-export const transactionState = atom<Transaction>({
+export const transactionState = atom<TransactionType>({
   key: 'transaction',
   default: {
     id: '',
@@ -61,7 +67,7 @@ export const transactionState = atom<Transaction>({
   },
 });
 
-export const listState = atom<List>({
+export const listState = atom<ListType>({
   key: 'list',
   default: {
     title: '',
@@ -69,7 +75,7 @@ export const listState = atom<List>({
   },
 });
 
-export const transactionListState = atom<Transaction[]>({
+export const transactionListState = atom<TransactionType[]>({
   key: 'transactionList',
   default: [],
 });

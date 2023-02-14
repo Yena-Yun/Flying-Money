@@ -6,7 +6,6 @@ import {
 } from 'recoil';
 import {
   clickedExpenseIndexState,
-  clickedTagPopupIndexState,
   isOpenDetailModalState,
   transactionListState,
   transactionState,
@@ -27,8 +26,6 @@ export const All = () => {
   const setIsOpenDetailModal = useSetRecoilState(toggleDetailModalSelector);
 
   const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
-
-  console.log(transactionList);
 
   return (
     <div className={styles.container}>

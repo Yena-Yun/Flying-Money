@@ -1,21 +1,21 @@
 // 지출 내역
-export type Transaction = {
+export type TransactionType = {
   id: string; // uuid4
   date: Date; // 달력 라이브러리
-  list: List[];
+  list: ListType[];
 };
 
-export type List = {
+export type ListType = {
   title: string; // 지출 제목
-  items: Item[]; // 지출한 상품과 서비스 항목
+  items: ItemType[]; // 지출한 상품과 서비스 항목
   diary?: string[]; // 그날 있었던 일 간단 기록 (문자열 배열, optional)
 };
 
 // 지출 내역 변수
-export const transactions: Transaction[] = [];
+export const transactions: TransactionType[] = [];
 
 // 각 장소에서 쓴 항목
-export type Item = {
+export type ItemType = {
   id: string;
   name: string; // 상품이나 서비스 이름
   price: number; // 금액
@@ -23,9 +23,9 @@ export type Item = {
   description?: string;
 };
 
-export const savedTags: Tag[] = [];
+export const savedTags: TagType[] = [];
 
-export type Tag = {
+export type TagType = {
   id: string;
   name: string;
 };

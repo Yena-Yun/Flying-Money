@@ -33,12 +33,16 @@ export const closeModalSelector = selector({
 });
 
 export const toggleCalendarSelector = selector({
-  key: 'handleToggleCalendar',
+  key: 'toggleCalendar',
   get: () => {},
   set: ({ get, set }) => {
     const isOpenCalendar = get(isOpenCalendarState);
-    if (isOpenCalendar) set(isOpenCalendarState, false);
-    else set(isOpenCalendarState, true);
+
+    if (isOpenCalendar) {
+      set(isOpenCalendarState, false);
+    } else {
+      set(isOpenCalendarState, true);
+    }
   },
 });
 
