@@ -6,7 +6,7 @@ import {
 } from 'recoil';
 import uuid4 from 'uuid4';
 import {
-  expenseListState,
+  listItemState,
   isOpenCalendarState,
   listState,
   transactionState,
@@ -28,8 +28,8 @@ export const Add = () => {
   const setCloseModal = useSetRecoilState(toggleModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
 
-  const expenseItemList = useRecoilValue<ItemType[]>(expenseListState);
-  const resetExpenseItemList = useResetRecoilState(expenseListState);
+  const expenseItemList = useRecoilValue<ItemType[]>(listItemState);
+  const resetExpenseItemList = useResetRecoilState(listItemState);
 
   const [list, setList] = useRecoilState(listState);
   const setListToTransaction = useSetRecoilState(addListSelector);

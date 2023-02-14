@@ -7,7 +7,7 @@ import {
 import classnames from 'classnames';
 import {
   clickedTagPopupIndexState,
-  expenseListState,
+  listItemState,
   isOpenTagPopupState,
 } from 'recoil/atom';
 import { toggleTagPopupSelector } from 'recoil/selector';
@@ -22,26 +22,50 @@ export const List = () => {
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
     clickedTagPopupIndexState
   );
-  const [expenseItemList, setExpenseItemList] =
-    useRecoilState<ItemType[]>(expenseListState);
-  const resetExpenseItemList = useResetRecoilState(expenseListState);
+  const [listItem, setListItem] = useRecoilState<ItemType[]>(listItemState);
+  const resetItemList = useResetRecoilState(listItemState);
+
+  const handleAddItem = () => {
+    resetItemList();
+  };
 
   return (
     <div className={styles.inputGroupWrap}>
       <h3 className={styles.subTitle}>항목</h3>
 
-      {expenseItemList.length > 0 &&
-        expenseItemList.map(({ id: index, tag }) => (
-          <div key={index} className={styles.inputItemGroup}>
-            <div className={styles.inputGroup}>
-              <div className={classnames(styles.inputItem, styles.nameInput)}>
+      {listItem.map(({ id: index, tag }) => (
+        <div key={index} className={styles.inputItemGroup}>
+          <div className={styles.inputGroup}>
+            <div className={classnames(styles.inputItem, styles.nameInput)}>
+              <input
+                placeholder='항목명'
+                onChange={(e) => {
+                  setListItem(
+                    listItem.map((item) =>
+                      item.id === index
+                        ? { ...item, name: e.target.value }
+                        : item
+                    )
+                  );
+                }}
+              />
+            </div>
+
+            <div className={styles.priceTagGroup}>
+              <div className={classnames(styles.inputItem, styles.priceInput)}>
                 <input
-                  placeholder='항목명'
+                  type='number'
+                  placeholder='가격'
                   onChange={(e) => {
-                    setExpenseItemList(
-                      expenseItemList.map((item) =>
+                    if (typeof e.target.value !== 'number') return;
+
+                    setListItem(
+                      listItem.map((item) =>
                         item.id === index
-                          ? { ...item, name: e.target.value }
+                          ? {
+                              ...item,
+                              price: parseInt(e.target.value),
+                            }
                           : item
                       )
                     );
@@ -49,61 +73,36 @@ export const List = () => {
                 />
               </div>
 
-              <div className={styles.priceTagGroup}>
-                <div
-                  className={classnames(styles.inputItem, styles.priceInput)}
-                >
-                  <input
-                    type='number'
-                    placeholder='가격'
-                    onChange={(e) => {
-                      setExpenseItemList(
-                        expenseItemList.map((item) =>
-                          item.id === index
-                            ? {
-                                ...item,
-                                price: parseInt(e.target.value),
-                              }
-                            : item
-                        )
-                      );
-                    }}
-                  />
-                </div>
-
-                <div
-                  className={styles.tagOpenButton}
-                  data-id={index}
-                  onClick={(e) => {
-                    setClickedTagPopupIndex('');
-                    setOpenTagPopup();
-                    setClickedTagPopupIndex(String(e.currentTarget.dataset.id));
-                  }}
-                >
-                  {tag !== '' ? (
-                    <div className={styles.tag}>{tag}</div>
-                  ) : (
-                    <div className={styles.tag}>태그 등록하기</div>
-                  )}
-                </div>
+              <div
+                className={styles.tagOpenButton}
+                data-id={index}
+                onClick={(e) => {
+                  setOpenTagPopup();
+                  setClickedTagPopupIndex(String(e.currentTarget.dataset.id));
+                }}
+              >
+                {tag ? (
+                  <div className={styles.tag}>{tag}</div>
+                ) : (
+                  <div className={styles.tag}>태그 등록하기</div>
+                )}
               </div>
-              {clickedTagPopupIndex === index && isOpenTagPopup && <TagPopup />}
             </div>
-
-            <div
-              className={styles.removeItemButton}
-              onClick={() => {
-                setExpenseItemList(
-                  expenseItemList.filter(({ id }) => id !== index)
-                );
-              }}
-            >
-              <HiOutlineMinusCircle />
-            </div>
+            {clickedTagPopupIndex === index && isOpenTagPopup && <TagPopup />}
           </div>
-        ))}
 
-      <div className={styles.addItemButton} onClick={resetExpenseItemList}>
+          <div
+            className={styles.removeItemButton}
+            onClick={() => {
+              setListItem(listItem.filter(({ id }) => id !== index));
+            }}
+          >
+            <HiOutlineMinusCircle />
+          </div>
+        </div>
+      ))}
+
+      <div className={styles.addItemButton} onClick={handleAddItem}>
         <div className={styles.addIcon}>
           <HiOutlinePlusCircle />
         </div>

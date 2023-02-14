@@ -28,6 +28,20 @@ export const selectedDateState = atom({
   default: new Date(),
 });
 
+export const listState = atom<ListType>({
+  key: 'list',
+  default: {
+    title: '',
+    items: [],
+    diaries: [],
+  },
+});
+
+export const listItemState = atom<ItemType[]>({
+  key: 'listItem',
+  default: [{ id: uuid4(), name: '', price: 0, tag: '' }],
+});
+
 export const isOpenTagPopupState = atom({
   key: 'isOpenTagPopup',
   default: false,
@@ -53,25 +67,12 @@ export const clickedTabState = atom<TabMenuIdType>({
   default: 'all',
 });
 
-export const expenseListState = atom<ItemType[]>({
-  key: 'expenseList',
-  default: [{ id: uuid4(), name: '', price: 0, tag: '' }],
-});
-
 export const transactionState = atom<TransactionType>({
   key: 'transaction',
   default: {
     id: '',
     date: new Date(),
     lists: [],
-  },
-});
-
-export const listState = atom<ListType>({
-  key: 'list',
-  default: {
-    title: '',
-    items: [],
   },
 });
 

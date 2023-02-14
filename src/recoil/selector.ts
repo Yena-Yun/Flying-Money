@@ -1,7 +1,7 @@
 import { selector, DefaultValue } from 'recoil';
 import {
   clickedTabState,
-  expenseListState,
+  listItemState,
   isOpenCalendarState,
   isOpenTagPopupState,
   selectedDateState,
@@ -49,6 +49,19 @@ export const toggleCalendarSelector = selector({
   },
 });
 
+export const selectedDateSelector = selector({
+  key: 'handleSelectDate',
+  get: () => {
+    return new Date(); // void 에러 피하기 -> get에 default값 입력
+  },
+  set: ({ set }, newDate) => {
+    // DefaultValue 임포트
+    if (newDate instanceof DefaultValue) {
+      return newDate;
+    } else set(selectedDateState, newDate);
+  },
+});
+
 export const toggleTagPopupSelector = selector({
   key: 'toggleTagPopup',
   get: () => {},
@@ -73,21 +86,8 @@ export const tabClickSelector = selector({
   },
 });
 
-export const selectedDateSelector = selector({
-  key: 'handleSelectDate',
-  get: () => {
-    return new Date(); // void 피하기 -> get에 원형값 입력
-  },
-  set: ({ set }, newDate) => {
-    // DefaultValue 임포트
-    if (newDate instanceof DefaultValue) {
-      return newDate;
-    } else set(selectedDateState, newDate);
-  },
-});
-
-export const addTagToExpenseListSelector = selector({
-  key: 'addTagToExpenseList',
+export const addTagToItemSelector = selector({
+  key: 'addTagToItem',
   get: () => {
     return '';
   },
@@ -95,7 +95,7 @@ export const addTagToExpenseListSelector = selector({
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      const expenseItemList = get(expenseListState);
+      const expenseItemList = get(listItemState);
       const clickedTagPopupIndex = get(clickedTagPopupIndexState);
 
       const result = expenseItemList.map((item) => {
@@ -104,7 +104,7 @@ export const addTagToExpenseListSelector = selector({
           : item;
       });
 
-      set(expenseListState, result);
+      set(listItemState, result);
     }
   },
 });
