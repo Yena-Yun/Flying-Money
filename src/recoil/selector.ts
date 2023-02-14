@@ -13,6 +13,7 @@ import {
   clickedTagPopupIndexState,
   isOpenDetailModalState,
   clickedExpenseIndexState,
+  listState,
 } from './atom';
 
 export const openModalSelector = selector({
@@ -73,22 +74,6 @@ export const tabClickSelector = selector({
   },
 });
 
-// export const addTagSelector = selector({
-//   key: 'handleAddTag',
-//   get: () => {
-//     return '';
-//   },
-//   set: ({ get, set }, newTag) => {
-//     const tags = get(savedTagGroupState);
-
-//     if (newTag instanceof DefaultValue) {
-//       return newTag;
-//     } else {
-//       set(savedTagGroupState, [...tags, { id: uuid4(), name: newTag }]);
-//     }
-//   },
-// });
-
 export const selectedDateSelector = selector({
   key: 'handleSelectedDate',
   get: () => {
@@ -102,7 +87,7 @@ export const selectedDateSelector = selector({
   },
 });
 
-export const expenseListSelector = selector({
+export const addTagToExpenseListSelector = selector({
   key: 'handleExpenseList',
   get: () => {
     return '';
@@ -125,21 +110,38 @@ export const expenseListSelector = selector({
   },
 });
 
-export const transactionSelector = selector({
-  key: 'handleTransaction',
-  get: ({ get }) => {
-    return {
-      id: '',
-      date: new Date(),
-      title: '',
-      items: get(expenseListState),
-    };
-  },
-  set: ({ set }, newValue) => {
-    if (newValue instanceof DefaultValue) {
-      return newValue;
+// export const transactionSelector = selector({
+//   key: 'handleTransaction',
+//   get: ({ get }) => {
+//     return {
+//       id: '',
+//       date: new Date(),
+//       list: [],
+//     };
+//   },
+//   set: ({ set }, newValue) => {
+//     if (newValue instanceof DefaultValue) {
+//       return newValue;
+//     } else {
+//       set(transactionState, newValue);
+//     }
+//   },
+// });
+
+export const addListSelector = selector({
+  key: 'addListSelector',
+  get: () => {},
+  set: ({ get, set }) => {
+    const list = get(listState);
+    const transaction = get(transactionState);
+
+    if (list instanceof DefaultValue) {
+      return list;
     } else {
-      set(transactionState, newValue);
+      set(transactionState, {
+        ...transaction,
+        list: [...transaction.list, list],
+      });
     }
   },
 });
@@ -148,10 +150,40 @@ export const addTransactionListSelector = selector({
   key: 'addTransactionList',
   get: () => {},
   set: ({ get, set }) => {
-    const item = get(transactionState);
-    const list = get(transactionListState);
+    const transaction = get(transactionState);
+    const transactionList = get(transactionListState);
 
-    set(transactionListState, [...list, item]);
+    if (
+      transactionList.find(
+        ({ date }) =>
+          date.toString().slice(0, 15) ===
+          transaction.date.toString().slice(0, 15)
+      )
+    ) {
+      const addedList = transactionList.map((listItem) => {
+        if (
+          listItem.date.toString().slice(0, 15) ===
+          transaction.date.toString().slice(0, 15)
+        ) {
+          listItem.list.map((item) => {
+            return {
+              ...item,
+              title: item.title,
+              items: item.items,
+            };
+          });
+        }
+
+        return listItem;
+      });
+
+      console.log(addedList);
+
+      // set(transactionListState, [...list, addedList!]);
+      // set(transactionListState, addedList);
+    } else {
+      set(transactionListState, [...transactionList, transaction]);
+    }
   },
 });
 
