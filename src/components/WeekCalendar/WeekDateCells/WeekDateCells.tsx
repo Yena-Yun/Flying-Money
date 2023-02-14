@@ -11,7 +11,7 @@ import {
 } from 'date-fns';
 import { selectedDateState, transactionState } from 'recoil/atom';
 import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
-import { Transaction } from 'types/types';
+import { TransactionType } from 'types/types';
 import styles from './WeekDateCells.module.scss';
 import classnames from 'classnames';
 import { useState } from 'react';
@@ -31,7 +31,7 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
   const selectedDate = useRecoilValue(selectedDateState);
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
-    useRecoilState<Transaction>(transactionState);
+    useRecoilState<TransactionType>(transactionState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const rows: JSX.Element[] = [];
