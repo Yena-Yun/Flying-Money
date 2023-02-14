@@ -9,7 +9,6 @@ import {
 import { toggleCalendarSelector } from 'recoil/selector';
 import { WeekCalendar } from 'components/WeekCalendar/WeekCalendar';
 import styles from './ByDate.module.scss';
-import { listeners } from 'process';
 
 export const ByDate = () => {
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
