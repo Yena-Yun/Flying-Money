@@ -12,14 +12,14 @@ import { Detail } from 'components/Modal/Detail/Detail';
 import { Add } from 'components/Modal/Add/Add';
 
 export const Home = () => {
-  const isOpenModal = useRecoilValue(isOpenAddModalState);
-  const clickedExpenseIndex = useRecoilValue(clickedExpenseIndexState);
+  const isOpenAddModal = useRecoilValue(isOpenAddModalState);
+  const clickedIndex = useRecoilValue(clickedExpenseIndexState);
   const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
 
   return (
     <>
-      {isOpenModal && <Add />}
-      {clickedExpenseIndex !== '' && isOpenDetailModal && <Detail />}
+      {isOpenAddModal && <Add />}
+      {clickedIndex !== '' && isOpenDetailModal && <Detail />}
       <div className={styles.container}>
         <Header />
         <div className={styles.innerContainer}>
