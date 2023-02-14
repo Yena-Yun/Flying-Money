@@ -27,7 +27,7 @@ export const List = () => {
   const resetExpenseItemList = useResetRecoilState(expenseListState);
 
   return (
-    <div className={styles.inputGroup}>
+    <div className={styles.inputGroupWrap}>
       <h3 className={styles.subTitle}>항목</h3>
 
       {expenseItemList.length > 0 &&
