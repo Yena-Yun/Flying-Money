@@ -3,12 +3,15 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { IoIosClose } from 'react-icons/io';
 import { savedTagGroupState, expenseListState } from 'recoil/atom';
-import { expenseListSelector, toggleTagPopupSelector } from 'recoil/selector';
+import {
+  addTagToExpenseListSelector,
+  toggleTagPopupSelector,
+} from 'recoil/selector';
 import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
-  const setExpenseItem = useSetRecoilState(expenseListSelector);
+  const setExpenseItem = useSetRecoilState(addTagToExpenseListSelector);
   const setExpenseItemList = useSetRecoilState(expenseListState);
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(savedTagGroupState);
   const [value, setValue] = useState('');

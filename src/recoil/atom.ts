@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Item, TabMenuIdType, Tag, Transaction } from 'types/types';
+import { Item, List, TabMenuIdType, Tag, Transaction } from 'types/types';
 import uuid4 from 'uuid4';
 
 export const isOpenModalState = atom({
@@ -57,6 +57,13 @@ export const transactionState = atom<Transaction>({
   default: {
     id: '',
     date: new Date(),
+    list: [],
+  },
+});
+
+export const listState = atom<List>({
+  key: 'list',
+  default: {
     title: '',
     items: [],
   },

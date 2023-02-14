@@ -13,6 +13,7 @@ import {
   expenseListState,
   isOpenCalendarState,
   isOpenTagPopupState,
+  listState,
   selectedDateState,
   transactionState,
 } from 'recoil/atom';
@@ -21,10 +22,11 @@ import {
   toggleCalendarSelector,
   toggleTagPopupSelector,
   addTransactionListSelector,
+  addListSelector,
 } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { TagPopup } from './TagPopup/TagPopup';
-import { Item, Transaction } from 'types/types';
+import { Item, List, Transaction } from 'types/types';
 import styles from './Modal.module.scss';
 import { ModalLayout } from './Layout/ModalLayout';
 
@@ -37,9 +39,15 @@ export const Modal = () => {
   const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
 
   const selectedDate = useRecoilValue(selectedDateState);
+
   const [expenseItemList, setExpenseItemList] =
     useRecoilState<Item[]>(expenseListState);
   const resetExpenseItemList = useResetRecoilState(expenseListState);
+
+  const [list, setList] = useRecoilState<List>(listState);
+  const [listToTransaction, setListToTransaction] =
+    useRecoilState(addListSelector);
+
   const [transaction, setTransaction] =
     useRecoilState<Transaction>(transactionState);
   const addTransactionList = useSetRecoilState(addTransactionListSelector);
@@ -80,8 +88,8 @@ export const Modal = () => {
               id='title'
               placeholder='제목을 입력해주세요.'
               onChange={(e) =>
-                setTransaction({
-                  ...transaction,
+                setList({
+                  ...list,
                   title: e.target.value,
                 })
               }
@@ -169,15 +177,7 @@ export const Modal = () => {
                 </div>
               </div>
             ))}
-          <div
-            className={styles.addItemButton}
-            onClick={() => {
-              setExpenseItemList([
-                ...expenseItemList,
-                { id: uuid4(), name: '', price: 0, tag: '' },
-              ]);
-            }}
-          >
+          <div className={styles.addItemButton} onClick={resetExpenseItemList}>
             <div className={classnames(styles.addIcon, styles.icon)}>
               <HiOutlinePlusCircle />
             </div>
@@ -190,18 +190,25 @@ export const Modal = () => {
         <button
           className={styles.submitButton}
           onClick={() => {
-            setCloseModal();
+            setList({
+              ...list,
+              items: expenseItemList,
+            });
+
+            setListToTransaction();
 
             setTransaction({
               ...transaction,
               id: uuid4(),
-              items: expenseItemList,
+              list: [...transaction.list, list],
             });
 
             addTransactionList();
 
             resetExpenseItemList();
             resetTransaction();
+
+            setCloseModal();
           }}
         >
           등록

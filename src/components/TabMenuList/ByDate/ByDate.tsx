@@ -44,7 +44,9 @@ export const ByDate = () => {
               .filter(({ date }) =>
                 selectedDate.toString().includes(date.toString())
               )
-              .flatMap(({ items }) => items.map((item) => item.price))
+              .flatMap(({ list }) =>
+                list.flatMap(({ items }) => items.map(({ price }) => price))
+              )
               .reduce((acc, cur) => acc + cur, 0)}
             원
           </div>
@@ -57,22 +59,24 @@ export const ByDate = () => {
               selectedDate.toString().slice(0, 15) ===
               date.toString().slice(0, 15)
           )
-          .map(({ id, title, items }) => (
-            <li key={id} className={styles.expenseItem}>
-              <div className={styles.info}>
-                <div className={styles.title}>{title}</div>
-                <div className={styles.name}>
-                  {items[0].name !== '' && '•'} {items[0].name}
-                  {items.length > 1 && ` 외 +${items.length - 1}`}
+          .map(({ id, list }) =>
+            list.map(({ title, items }) => (
+              <li key={id} className={styles.expenseItem}>
+                <div className={styles.info}>
+                  <div className={styles.title}>{title}</div>
+                  <div className={styles.name}>
+                    {items[0].name !== '' && '•'} {items[0].name}
+                    {items.length > 1 && ` 외 +${items.length - 1}`}
+                  </div>
                 </div>
-              </div>
-              <div className={styles.price}>
-                {items
-                  .map(({ price }) => price)
-                  .reduce((acc, cur) => acc + cur)}
-              </div>
-            </li>
-          ))}
+                <div className={styles.price}>
+                  {items
+                    .map(({ price }) => price)
+                    .reduce((acc, cur) => acc + cur)}
+                </div>
+              </li>
+            ))
+          )}
       </div>
     </div>
   );
