@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
-import { IoIosClose } from 'react-icons/io';
 import { savedTagGroupState, expenseListState } from 'recoil/atom';
 import {
   addTagToExpenseListSelector,
   toggleTagPopupSelector,
 } from 'recoil/selector';
+import { IoIosClose } from 'react-icons/io';
 import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
@@ -69,9 +69,7 @@ export const TagPopup = () => {
             <input
               value={value}
               autoFocus
-              onChange={(e) => {
-                setValue(e.target.value);
-              }}
+              onChange={(e) => setValue(e.target.value)}
               placeholder='태그'
             />
           </form>

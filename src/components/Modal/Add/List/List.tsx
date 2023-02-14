@@ -19,14 +19,12 @@ import styles from './List.module.scss';
 export const List = () => {
   const isOpenTagPopup = useRecoilValue(isOpenTagPopupState);
   const setOpenTagPopup = useSetRecoilState(toggleTagPopupSelector);
-
-  const [expenseItemList, setExpenseItemList] =
-    useRecoilState<ItemType[]>(expenseListState);
-  const resetExpenseItemList = useResetRecoilState(expenseListState);
-
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
     clickedTagPopupIndexState
   );
+  const [expenseItemList, setExpenseItemList] =
+    useRecoilState<ItemType[]>(expenseListState);
+  const resetExpenseItemList = useResetRecoilState(expenseListState);
 
   return (
     <div className={styles.inputGroup}>
