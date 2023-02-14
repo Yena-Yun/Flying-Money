@@ -13,7 +13,7 @@ export const Detail = () => {
   const clickedExpenseCard = useRecoilValue(clickedExpenseIndexState);
   const setDeleteTransaction = useSetRecoilState(deleteTransactionListSelector);
 
-  const { date, list } = transactionList.find(
+  const { date, lists } = transactionList.find(
     ({ id }) => id === clickedExpenseCard
   )!;
 
@@ -22,7 +22,7 @@ export const Detail = () => {
       <h2 className={styles.modalTitle}>상세</h2>
 
       <div className={styles.mainContainer}>
-        {list.map(({ title, items }) => (
+        {lists.map(({ title, items }) => (
           <>
             <div className={styles.header}>
               <div className={styles.title}>{title}</div>

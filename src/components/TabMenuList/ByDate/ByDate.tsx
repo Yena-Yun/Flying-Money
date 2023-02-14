@@ -9,6 +9,7 @@ import {
 import { toggleCalendarSelector } from 'recoil/selector';
 import { WeekCalendar } from 'components/WeekCalendar/WeekCalendar';
 import styles from './ByDate.module.scss';
+import { listeners } from 'process';
 
 export const ByDate = () => {
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
@@ -44,8 +45,8 @@ export const ByDate = () => {
               .filter(({ date }) =>
                 selectedDate.toString().includes(date.toString())
               )
-              .flatMap(({ list }) =>
-                list.flatMap(({ items }) => items.map(({ price }) => price))
+              .flatMap(({ lists }) =>
+                lists.flatMap(({ items }) => items.map(({ price }) => price))
               )
               .reduce((acc, cur) => acc + cur, 0)}
             원
@@ -59,8 +60,8 @@ export const ByDate = () => {
               selectedDate.toString().slice(0, 15) ===
               date.toString().slice(0, 15)
           )
-          .map(({ id, list }) =>
-            list.map(({ title, items }) => (
+          .map(({ id, lists }) =>
+            lists.map(({ title, items }) => (
               <li key={id} className={styles.expenseItem}>
                 <div className={styles.info}>
                   <div className={styles.title}>{title}</div>

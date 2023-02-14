@@ -1,13 +1,13 @@
 export type TransactionType = {
   id: string; // uuid4
   date: Date; // 달력 라이브러리
-  list: ListType[];
+  lists: ListType[];
 };
 
 export type ListType = {
   title: string; // 지출 내역의 제목
   items: ItemType[]; // 지출한 상품과 서비스 항목 배열
-  diary?: string[]; // 그날 있었던 일 간단 기록 (문자열 배열, optional)
+  diaries?: string[]; // 그날 있었던 일 간단 기록 (문자열 배열, optional)
 };
 
 // 지출에 포함된 항목들

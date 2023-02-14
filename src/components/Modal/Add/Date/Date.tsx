@@ -5,8 +5,8 @@ import { CiCalendar } from 'react-icons/ci';
 import styles from './Date.module.scss';
 
 export const Date = () => {
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const selectedDate = useRecoilValue(selectedDateState);
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   return (
     <div className={styles.inputGroup}>

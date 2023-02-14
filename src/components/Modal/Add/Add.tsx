@@ -64,7 +64,7 @@ export const Add = () => {
             setTransaction({
               ...transaction,
               id: uuid4(),
-              list: [...transaction.list, list],
+              lists: [...transaction.lists, list],
             });
 
             addTransactionList();

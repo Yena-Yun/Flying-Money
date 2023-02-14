@@ -63,7 +63,7 @@ export const transactionState = atom<TransactionType>({
   default: {
     id: '',
     date: new Date(),
-    list: [],
+    lists: [],
   },
 });
 

@@ -121,7 +121,7 @@ export const addListSelector = selector({
     } else {
       set(transactionState, {
         ...transaction,
-        list: [...transaction.list, list],
+        lists: [...transaction.lists, list],
       });
     }
   },
@@ -146,11 +146,11 @@ export const addTransactionListSelector = selector({
           listItem.date.toString().slice(0, 15) ===
           transaction.date.toString().slice(0, 15)
         ) {
-          listItem.list.map((item) => {
+          listItem.lists.map((list) => {
             return {
-              ...item,
-              title: item.title,
-              items: item.items,
+              ...list,
+              title: list.title,
+              items: list.items,
             };
           });
         }

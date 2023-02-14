@@ -27,7 +27,7 @@ export const All = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.expenseItemList}>
-        {transactionList.map(({ id, date, list }) => (
+        {transactionList.map(({ id, date, lists }) => (
           <li
             key={id}
             className={styles.expenseItem}
@@ -37,7 +37,7 @@ export const All = () => {
             }}
           >
             {clickedExpenseCard === id && isOpenDetailModal && <Detail />}
-            {list.map(({ items }) => (
+            {lists.map(({ items }) => (
               <>
                 <div className={styles.info}>
                   <div className={styles.date}>
@@ -47,7 +47,7 @@ export const All = () => {
                       day: '2-digit',
                     })}
                   </div>
-                  <div className={styles.title}>{list[0].title}</div>
+                  <div className={styles.title}>{lists[0].title}</div>
                   <div className={styles.nameTagGroup}>
                     <div className={styles.name}>
                       {items[0].name !== '' && '•'} {items[0].name}
