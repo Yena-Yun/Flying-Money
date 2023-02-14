@@ -3,7 +3,6 @@ import {
   clickedTabState,
   expenseListState,
   isOpenCalendarState,
-  isOpenModalState,
   isOpenTagPopupState,
   selectedDateState,
   transactionListState,
@@ -12,6 +11,7 @@ import {
   isOpenDetailModalState,
   clickedExpenseIndexState,
   listState,
+  isOpenAddModalState,
 } from './atom';
 
 export const toggleModalSelector = selector({
@@ -20,13 +20,13 @@ export const toggleModalSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const isOpenModal = get(isOpenModalState);
+    const isOpenModal = get(isOpenAddModalState);
     const isOpenDetailModal = get(isOpenDetailModalState);
 
     if (flag === 'add' && isOpenModal) {
-      set(isOpenModalState, false);
+      set(isOpenAddModalState, false);
     } else if (flag === 'add' && !isOpenModal) {
-      set(isOpenModalState, true);
+      set(isOpenAddModalState, true);
     } else if (flag === 'detail' && isOpenDetailModal) {
       set(isOpenDetailModalState, false);
     } else {

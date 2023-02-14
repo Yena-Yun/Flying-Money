@@ -8,8 +8,13 @@ import {
 } from 'types/types';
 import uuid4 from 'uuid4';
 
-export const isOpenModalState = atom({
-  key: 'isOpenModal',
+export const isOpenAddModalState = atom({
+  key: 'isOpenAddModal',
+  default: false,
+});
+
+export const isOpenDetailModalState = atom({
+  key: 'isOpenDetailModal',
   default: false,
 });
 
@@ -21,11 +26,6 @@ export const isOpenCalendarState = atom({
 export const selectedDateState = atom({
   key: 'selectedDate',
   default: new Date(),
-});
-
-export const isOpenDetailModalState = atom({
-  key: 'isOpenDetailModal',
-  default: false,
 });
 
 export const isOpenTagPopupState = atom({
