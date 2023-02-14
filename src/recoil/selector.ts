@@ -14,16 +14,23 @@ import {
   listState,
 } from './atom';
 
-export const toggleAddModalSelector = selector({
-  key: 'toggleAddModal',
-  get: () => {},
-  set: ({ get, set }) => {
+export const toggleModalSelector = selector({
+  key: 'toggleModal',
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }, flag) => {
     const isOpenModal = get(isOpenModalState);
+    const isOpenDetailModal = get(isOpenDetailModalState);
 
-    if (isOpenModal) {
+    if (flag === 'add' && isOpenModal) {
       set(isOpenModalState, false);
-    } else {
+    } else if (flag === 'add' && !isOpenModal) {
       set(isOpenModalState, true);
+    } else if (flag === 'detail' && isOpenDetailModal) {
+      set(isOpenDetailModalState, false);
+    } else {
+      set(isOpenDetailModalState, true);
     }
   },
 });
@@ -42,25 +49,17 @@ export const toggleCalendarSelector = selector({
   },
 });
 
-export const toggleDetailModalSelector = selector({
-  key: 'toggleDetailModalSelector',
-  get: () => {},
-  set: ({ get, set }) => {
-    const isOpenDetailModal = get(isOpenDetailModalState);
-
-    if (isOpenDetailModal) set(isOpenDetailModalState, false);
-    else set(isOpenDetailModalState, true);
-  },
-});
-
 export const toggleTagPopupSelector = selector({
-  key: 'handleToggleTagPopup',
+  key: 'toggleTagPopup',
   get: () => {},
   set: ({ get, set }) => {
     const isOpenTagPopup = get(isOpenTagPopupState);
 
-    if (isOpenTagPopup) set(isOpenTagPopupState, false);
-    else set(isOpenTagPopupState, true);
+    if (isOpenTagPopup) {
+      set(isOpenTagPopupState, false);
+    } else {
+      set(isOpenTagPopupState, true);
+    }
   },
 });
 
@@ -75,7 +74,7 @@ export const tabClickSelector = selector({
 });
 
 export const selectedDateSelector = selector({
-  key: 'handleSelectedDate',
+  key: 'handleSelectDate',
   get: () => {
     return new Date(); // void 피하기 -> get에 원형값 입력
   },
@@ -88,7 +87,7 @@ export const selectedDateSelector = selector({
 });
 
 export const addTagToExpenseListSelector = selector({
-  key: 'handleExpenseList',
+  key: 'addTagToExpenseList',
   get: () => {
     return '';
   },
@@ -110,26 +109,8 @@ export const addTagToExpenseListSelector = selector({
   },
 });
 
-// export const transactionSelector = selector({
-//   key: 'handleTransaction',
-//   get: ({ get }) => {
-//     return {
-//       id: '',
-//       date: new Date(),
-//       list: [],
-//     };
-//   },
-//   set: ({ set }, newValue) => {
-//     if (newValue instanceof DefaultValue) {
-//       return newValue;
-//     } else {
-//       set(transactionState, newValue);
-//     }
-//   },
-// });
-
 export const addListSelector = selector({
-  key: 'addListSelector',
+  key: 'addList',
   get: () => {},
   set: ({ get, set }) => {
     const list = get(listState);
@@ -176,11 +157,6 @@ export const addTransactionListSelector = selector({
 
         return listItem;
       });
-
-      console.log(addedList);
-
-      // set(transactionListState, [...list, addedList!]);
-      // set(transactionListState, addedList);
     } else {
       set(transactionListState, [...transactionList, transaction]);
     }

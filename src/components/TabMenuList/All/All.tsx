@@ -10,25 +10,19 @@ import {
   transactionListState,
   transactionState,
 } from 'recoil/atom';
-import { HiOutlinePlusCircle } from 'react-icons/hi2';
-
-import styles from './All.module.scss';
-import {
-  toggleAddModalSelector,
-  toggleDetailModalSelector,
-} from 'recoil/selector';
+import { toggleModalSelector } from 'recoil/selector';
 import { Detail } from 'components/Modal/Detail/Detail';
+import { HiOutlinePlusCircle } from 'react-icons/hi2';
+import styles from './All.module.scss';
 
 export const All = () => {
+  const setOpenModal = useSetRecoilState(toggleModalSelector);
   const transactionList = useRecoilValue(transactionListState);
-  const setOpenModal = useSetRecoilState(toggleAddModalSelector);
-  const resetTransactionList = useResetRecoilState(transactionState);
+  const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
   const [clickedExpenseCard, setClickedExpenseCard] = useRecoilState(
     clickedExpenseIndexState
   );
-  const setIsOpenDetailModal = useSetRecoilState(toggleDetailModalSelector);
-
-  const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
+  const resetTransactionList = useResetRecoilState(transactionState);
 
   return (
     <div className={styles.container}>
@@ -39,7 +33,7 @@ export const All = () => {
             className={styles.expenseItem}
             onClick={() => {
               setClickedExpenseCard(id);
-              setIsOpenDetailModal();
+              setOpenModal('detail');
             }}
           >
             {clickedExpenseCard === id && isOpenDetailModal && <Detail />}
@@ -75,7 +69,7 @@ export const All = () => {
       <button
         className={styles.addNewItemButton}
         onClick={() => {
-          setOpenModal();
+          setOpenModal('add');
           resetTransactionList();
         }}
       >
