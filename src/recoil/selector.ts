@@ -87,6 +87,54 @@ export const tabClickSelector = selector({
   },
 });
 
+export const addListToTransactionSelector = selector({
+  key: 'addListToTransactionList',
+  get: () => {},
+  set: ({ get, set }) => {
+    const list = get(listState);
+    const transaction = get(transactionState);
+
+    set(transactionState, {
+      ...transaction, // id, date
+      lists: [...transaction.lists, list],
+    });
+  },
+});
+
+/* 하나의 날짜(transaction)에 같은 날짜로 항목이 추가될 경우 하나의 transaction에 몰아넣음 */
+export const addTransactionListSelector = selector({
+  key: 'addTransactionToTransactionList',
+  get: () => {},
+  set: ({ get, set }) => {
+    const transaction = get(transactionState);
+    const transactionList = get(transactionListState);
+
+    console.log(transaction);
+
+    const selectedTransaction = transactionList.find(
+      (transactionListItem) => transactionListItem.id === transaction.id
+    );
+
+    console.log(selectedTransaction);
+
+    const addedTransaction =
+      selectedTransaction === undefined
+        ? transaction
+        : {
+            ...selectedTransaction,
+            lists: [...selectedTransaction.lists, ...transaction.lists],
+          };
+
+    console.log(addedTransaction);
+
+    const filteredTransaction = transactionList.filter(
+      (transactionListItem) => transactionListItem.id !== addedTransaction.id
+    );
+
+    set(transactionListState, [...filteredTransaction, addedTransaction]);
+  },
+});
+
 export const addTagToItemSelector = selector({
   key: 'addTagToItem',
   get: () => {
@@ -107,44 +155,6 @@ export const addTagToItemSelector = selector({
 
       set(itemState, result);
     }
-  },
-});
-
-export const addListToTransactionSelector = selector({
-  key: 'addListToTransaction',
-  get: () => {},
-  set: ({ get, set }) => {
-    const list = get(listState);
-    const transaction = get(transactionState);
-
-    set(transactionState, {
-      ...transaction,
-      id: uuid4(),
-      lists: [...transaction.lists, list],
-    });
-  },
-});
-
-/* 하나의 날짜(transaction)에 같은 날짜로 항목이 추가될 경우 하나의 transaction에 몰아넣음 */
-export const addTransactionListSelector = selector({
-  key: 'addTransactionToTransactionList',
-  get: () => {},
-  set: ({ get, set }) => {
-    const transaction = get(transactionState);
-    const transactionList = get(transactionListState);
-
-    const result = transactionList.find(
-      (transactionListItem) =>
-        transactionListItem.date.toString().slice(0, 15) ===
-        transaction.date.toString().slice(0, 15)
-    );
-
-    const addedTransaction =
-      result !== undefined
-        ? { ...result, id: uuid4(), lists: transaction.lists }
-        : transaction;
-
-    set(transactionListState, [...transactionList, addedTransaction]);
   },
 });
 
