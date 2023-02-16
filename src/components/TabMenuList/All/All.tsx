@@ -40,17 +40,17 @@ export const All = () => {
             }}
           >
             {clickedExpenseCard === id && isOpenDetailModal && <Detail />}
-            {lists.map(({ id, items }) => (
+            <div className={styles.date}>
+              {date.toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </div>
+            {lists.map(({ id, title, items }) => (
               <div key={id} className={styles.itemList}>
                 <div className={styles.info}>
-                  <div className={styles.date}>
-                    {date.toLocaleString('ko-KR', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </div>
-                  <div className={styles.title}>{lists[0].title}</div>
+                  <div className={styles.title}>{title}</div>
                   <div className={styles.nameTagGroup}>
                     <div className={styles.name}>
                       {items[0].name !== '' && '•'} {items[0].name}
