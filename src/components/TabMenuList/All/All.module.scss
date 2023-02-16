@@ -11,7 +11,6 @@
     margin-bottom: 1rem;
 
     .expenseItem {
-      @include flexbox-row(space-between, center);
       width: 100%;
       padding: 0.4rem 1rem;
       margin-bottom: 0.4rem;
@@ -20,44 +19,48 @@
       background-color: var(--color-white);
       cursor: pointer;
 
-      .info {
-        @include flexbox-column(center, flex-start);
+      .itemList {
+        @include flexbox-row(space-between, center);
 
-        .date {
-          color: var(--color-gray-4);
-        }
+        .info {
+          @include flexbox-column(center, flex-start);
 
-        .title {
-          font-size: var(--text-size-md);
-          font-weight: var(--font-weight-bold);
-        }
-
-        .nameTagGroup {
-          @include flexbox-row(flex-start, center);
-          flex-wrap: wrap;
-          gap: 0.3rem;
-          margin-bottom: 0.3rem;
-
-          .name {
+          .date {
             color: var(--color-gray-4);
           }
 
-          .tag {
-            width: fit-content;
-            min-width: 2rem;
-            padding: 0.1rem 0.5rem;
-            color: var(--color-dark-pink);
-            border: 1px solid var(--color-pink);
-            border-radius: 0.8rem;
-            text-align: center;
+          .title {
+            font-size: var(--text-size-md);
+            font-weight: var(--font-weight-bold);
+          }
+
+          .nameTagGroup {
+            @include flexbox-row(flex-start, center);
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 0.3rem;
+
+            .name {
+              color: var(--color-gray-4);
+            }
+
+            .tag {
+              width: fit-content;
+              min-width: 2rem;
+              padding: 0.1rem 0.5rem;
+              color: var(--color-dark-pink);
+              border: 1px solid var(--color-pink);
+              border-radius: 0.8rem;
+              text-align: center;
+            }
           }
         }
-      }
 
-      .price {
-        font-size: var(--text-size-lg);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-blue);
+        .price {
+          font-size: var(--text-size-lg);
+          font-weight: var(--font-weight-bold);
+          color: var(--color-blue);
+        }
       }
     }
   }

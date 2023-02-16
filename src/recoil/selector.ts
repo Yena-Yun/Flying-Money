@@ -1,7 +1,7 @@
 import { selector, DefaultValue } from 'recoil';
 import {
   clickedTabState,
-  listItemState,
+  itemState,
   isOpenCalendarState,
   isOpenTagPopupState,
   selectedDateState,
@@ -13,6 +13,8 @@ import {
   listState,
   isOpenAddModalState,
 } from './atom';
+import uuid4 from 'uuid4';
+import { TransactionType } from 'types/types';
 
 export const toggleModalSelector = selector({
   key: 'toggleModal',
@@ -95,7 +97,7 @@ export const addTagToItemSelector = selector({
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      const expenseItemList = get(listItemState);
+      const expenseItemList = get(itemState);
       const clickedTagPopupIndex = get(clickedTagPopupIndexState);
 
       const result = expenseItemList.map((item) => {
@@ -104,62 +106,72 @@ export const addTagToItemSelector = selector({
           : item;
       });
 
-      set(listItemState, result);
+      set(itemState, result);
     }
   },
 });
 
-export const addListSelector = selector({
-  key: 'addList',
+export const addListToTransactionSelector = selector({
+  key: 'addListToTransaction',
   get: () => {},
   set: ({ get, set }) => {
     const list = get(listState);
     const transaction = get(transactionState);
 
-    if (list instanceof DefaultValue) {
-      return list;
-    } else {
-      set(transactionState, {
-        ...transaction,
-        lists: [...transaction.lists, list],
-      });
-    }
+    console.log(list);
+
+    // if (list instanceof DefaultValue) {
+    // return list;
+    // } else {
+    set(transactionState, {
+      ...transaction,
+      id: uuid4(),
+      lists: [...transaction.lists, list],
+    });
+
+    // console.log(transaction); // setter 아래라서 의미 x
+    // }
   },
 });
 
+/* 하나의 날짜(transaction)에 같은 날짜로 항목이 추가될 경우 하나의 transaction에 몰아넣음 */
 export const addTransactionListSelector = selector({
-  key: 'addTransactionList',
+  key: 'addTransactionToTransactionList',
   get: () => {},
   set: ({ get, set }) => {
     const transaction = get(transactionState);
     const transactionList = get(transactionListState);
 
-    if (
-      transactionList.find(
-        ({ date }) =>
-          date.toString().slice(0, 15) ===
-          transaction.date.toString().slice(0, 15)
-      )
-    ) {
-      const addedList = transactionList.map((listItem) => {
-        if (
-          listItem.date.toString().slice(0, 15) ===
-          transaction.date.toString().slice(0, 15)
-        ) {
-          listItem.lists.map((list) => {
-            return {
-              ...list,
-              title: list.title,
-              items: list.items,
-            };
-          });
-        }
+    console.log(transaction);
 
-        return listItem;
-      });
-    } else {
-      set(transactionListState, [...transactionList, transaction]);
-    }
+    const result =
+      // transactionList.length > 0
+      // ?
+      // transactionList.map((transactionListItem) => {
+      //   console.log(transactionListItem);
+
+      //   return transactionListItem.date.toString().slice(0, 15) ===
+      //     transaction.date.toString().slice(0, 15)
+      //     ? { ...transactionListItem, lists: transaction.lists }
+      //     : transaction;
+      // });
+      // : transaction;
+      transactionList.find(
+        (transactionListItem) =>
+          transactionListItem.date.toString().slice(0, 15) ===
+          transaction.date.toString().slice(0, 15)
+      );
+
+    console.log(result);
+
+    const addedTransaction =
+      result !== undefined
+        ? { ...result, lists: transaction.lists }
+        : transaction;
+
+    console.log(addedTransaction);
+
+    set(transactionListState, [...transactionList, addedTransaction]);
   },
 });
 

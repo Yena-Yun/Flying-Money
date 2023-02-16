@@ -37,7 +37,7 @@ export const listState = atom<ListType>({
   },
 });
 
-export const listItemState = atom<ItemType[]>({
+export const itemState = atom<ItemType[]>({
   key: 'listItem',
   default: [{ id: uuid4(), name: '', price: 0, tag: '' }],
 });
@@ -52,13 +52,13 @@ export const savedTagGroupState = atom<TagType[]>({
   default: [],
 });
 
-export const clickedTagPopupIndexState = atom({
-  key: 'clickedTagPopupIndex',
+export const clickedExpenseIndexState = atom({
+  key: 'clickedExpenseCard',
   default: '',
 });
 
-export const clickedExpenseIndexState = atom({
-  key: 'clickedExpenseCard',
+export const clickedTagPopupIndexState = atom({
+  key: 'clickedTagPopupIndex',
   default: '',
 });
 

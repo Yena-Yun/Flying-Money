@@ -6,14 +6,14 @@ import {
 } from 'recoil';
 import uuid4 from 'uuid4';
 import {
-  listItemState,
+  itemState,
   isOpenCalendarState,
   listState,
   transactionState,
 } from 'recoil/atom';
 import {
   addTransactionListSelector,
-  addListSelector,
+  addListToTransactionSelector,
   toggleModalSelector,
 } from 'recoil/selector';
 import { ModalLayout } from '../Layout/ModalLayout';
@@ -28,15 +28,19 @@ export const Add = () => {
   const setCloseModal = useSetRecoilState(toggleModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
 
-  const expenseItemList = useRecoilValue<ItemType[]>(listItemState);
-  const resetExpenseItemList = useResetRecoilState(listItemState);
+  const expenseItemList = useRecoilValue<ItemType[]>(itemState);
+  const resetExpenseItemList = useResetRecoilState(itemState);
 
   const [list, setList] = useRecoilState(listState);
-  const setListToTransaction = useSetRecoilState(addListSelector);
+  const setListToTransactionList = useSetRecoilState(
+    addListToTransactionSelector
+  );
 
   const [transaction, setTransaction] =
     useRecoilState<TransactionType>(transactionState);
-  const addTransactionList = useSetRecoilState(addTransactionListSelector);
+  const setTransactionToTransactionList = useSetRecoilState(
+    addTransactionListSelector
+  );
   const resetTransaction = useResetRecoilState(transactionState);
 
   return (
@@ -59,15 +63,8 @@ export const Add = () => {
               items: expenseItemList,
             });
 
-            setListToTransaction();
-
-            setTransaction({
-              ...transaction,
-              id: uuid4(),
-              lists: [...transaction.lists, list],
-            });
-
-            addTransactionList();
+            setListToTransactionList();
+            setTransactionToTransactionList();
 
             resetExpenseItemList();
             resetTransaction();

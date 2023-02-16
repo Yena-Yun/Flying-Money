@@ -22,7 +22,10 @@ export const All = () => {
   const [clickedExpenseCard, setClickedExpenseCard] = useRecoilState(
     clickedExpenseIndexState
   );
-  const resetTransactionList = useResetRecoilState(transactionState);
+  const resetTransactionToTransactionList =
+    useResetRecoilState(transactionState);
+
+  console.log(transactionList);
 
   return (
     <div className={styles.container}>
@@ -37,8 +40,8 @@ export const All = () => {
             }}
           >
             {clickedExpenseCard === id && isOpenDetailModal && <Detail />}
-            {lists.map(({ items }) => (
-              <>
+            {lists.map(({ title, items }) => (
+              <div key={`${title}_${items}`} className={styles.itemList}>
                 <div className={styles.info}>
                   <div className={styles.date}>
                     {date.toLocaleString('ko-KR', {
@@ -61,7 +64,7 @@ export const All = () => {
                     .map(({ price }) => price)
                     .reduce((acc, cur) => acc + cur)}
                 </div>
-              </>
+              </div>
             ))}
           </li>
         ))}
@@ -70,7 +73,7 @@ export const All = () => {
         className={styles.addNewItemButton}
         onClick={() => {
           setOpenModal('add');
-          resetTransactionList();
+          resetTransactionToTransactionList();
         }}
       >
         <div className={styles.addNewItemIcon}>

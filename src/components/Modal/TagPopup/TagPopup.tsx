@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
-import { savedTagGroupState, listItemState } from 'recoil/atom';
+import { savedTagGroupState, itemState } from 'recoil/atom';
 import { addTagToItemSelector, toggleTagPopupSelector } from 'recoil/selector';
 import { IoIosClose } from 'react-icons/io';
 import styles from './TagPopup.module.scss';
@@ -9,7 +9,7 @@ import styles from './TagPopup.module.scss';
 export const TagPopup = () => {
   const setCloseTagPopup = useSetRecoilState(toggleTagPopupSelector);
   const setAddTagToItem = useSetRecoilState(addTagToItemSelector);
-  const setListItem = useSetRecoilState(listItemState);
+  const setItems = useSetRecoilState(itemState);
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(savedTagGroupState);
   const [value, setValue] = useState('');
 
@@ -23,8 +23,8 @@ export const TagPopup = () => {
   };
 
   const handleTagDelete = (id: string, name: string) => {
-    setListItem((listItem) =>
-      listItem.filter(({ name: itemName }) => itemName !== name)
+    setItems((items) =>
+      items.filter(({ name: itemName }) => itemName !== name)
     );
     setSavedTagGroup((savedTagGroup) =>
       savedTagGroup.filter(({ id: index }) => index !== id)

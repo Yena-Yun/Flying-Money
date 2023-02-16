@@ -7,7 +7,7 @@ import {
 import classnames from 'classnames';
 import {
   clickedTagPopupIndexState,
-  listItemState,
+  itemState,
   isOpenTagPopupState,
 } from 'recoil/atom';
 import { toggleTagPopupSelector } from 'recoil/selector';
@@ -22,8 +22,8 @@ export const List = () => {
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
     clickedTagPopupIndexState
   );
-  const [listItem, setListItem] = useRecoilState<ItemType[]>(listItemState);
-  const resetItemList = useResetRecoilState(listItemState);
+  const [items, setItems] = useRecoilState<ItemType[]>(itemState);
+  const resetItemList = useResetRecoilState(itemState);
 
   const handleAddItem = () => {
     resetItemList();
@@ -33,15 +33,15 @@ export const List = () => {
     <div className={styles.inputGroupWrap}>
       <h3 className={styles.subTitle}>항목</h3>
 
-      {listItem.map(({ id: index, tag }) => (
+      {items.map(({ id: index, tag }) => (
         <div key={index} className={styles.inputItemGroup}>
           <div className={styles.inputGroup}>
             <div className={classnames(styles.inputItem, styles.nameInput)}>
               <input
                 placeholder='항목명'
                 onChange={(e) => {
-                  setListItem(
-                    listItem.map((item) =>
+                  setItems(
+                    items.map((item) =>
                       item.id === index
                         ? { ...item, name: e.target.value }
                         : item
@@ -59,8 +59,8 @@ export const List = () => {
                   onChange={(e) => {
                     if (typeof e.target.value !== 'number') return;
 
-                    setListItem(
-                      listItem.map((item) =>
+                    setItems(
+                      items.map((item) =>
                         item.id === index
                           ? {
                               ...item,
@@ -94,7 +94,7 @@ export const List = () => {
           <div
             className={styles.removeItemButton}
             onClick={() => {
-              setListItem(listItem.filter(({ id }) => id !== index));
+              setItems(items.filter(({ id }) => id !== index));
             }}
           >
             <HiOutlineMinusCircle />
