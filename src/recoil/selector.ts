@@ -96,7 +96,7 @@ export const addListToTransactionSelector = selector({
 
     set(transactionState, {
       ...transaction, // id, date
-      lists: [...transaction.lists, list],
+      lists: [...transaction.lists, { ...list, id: uuid4() }],
     });
   },
 });
@@ -109,13 +109,9 @@ export const addTransactionListSelector = selector({
     const transaction = get(transactionState);
     const transactionList = get(transactionListState);
 
-    console.log(transaction);
-
     const selectedTransaction = transactionList.find(
       (transactionListItem) => transactionListItem.id === transaction.id
     );
-
-    console.log(selectedTransaction);
 
     const addedTransaction =
       selectedTransaction === undefined
@@ -124,8 +120,6 @@ export const addTransactionListSelector = selector({
             ...selectedTransaction,
             lists: [...selectedTransaction.lists, ...transaction.lists],
           };
-
-    console.log(addedTransaction);
 
     const filteredTransaction = transactionList.filter(
       (transactionListItem) => transactionListItem.id !== addedTransaction.id
