@@ -19,15 +19,17 @@
       background-color: var(--color-white);
       cursor: pointer;
 
+      .date {
+        margin-bottom: 0.2rem;
+        font-size: var(--text-size-md);
+        color: var(--color-gray-4);
+      }
+
       .itemList {
         @include flexbox-row(space-between, center);
 
         .info {
           @include flexbox-column(center, flex-start);
-
-          .date {
-            color: var(--color-gray-4);
-          }
 
           .title {
             font-size: var(--text-size-md);
