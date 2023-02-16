@@ -26,7 +26,7 @@ export const List = () => {
   const resetItemList = useResetRecoilState(itemState);
 
   const handleAddItem = () => {
-    resetItemList();
+    console.log(items);
   };
 
   return (
@@ -57,7 +57,7 @@ export const List = () => {
                   type='number'
                   placeholder='가격'
                   onChange={(e) => {
-                    if (typeof e.target.value !== 'number') return;
+                    if (isNaN(e.target.valueAsNumber)) return;
 
                     setItems(
                       items.map((item) =>
