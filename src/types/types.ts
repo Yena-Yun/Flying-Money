@@ -5,6 +5,7 @@ export type TransactionType = {
 };
 
 export type ListType = {
+  id: string;
   title: string; // 지출 내역의 제목
   items: ItemType[]; // 지출한 상품과 서비스 항목 (배열)
   diaries?: string[]; // 그날 있었던 일 간단 기록 (문자열 배열, optional)

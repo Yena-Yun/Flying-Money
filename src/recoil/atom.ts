@@ -31,6 +31,7 @@ export const selectedDateState = atom({
 export const listState = atom<ListType>({
   key: 'list',
   default: {
+    id: '',
     title: '',
     items: [],
     diaries: [],

@@ -40,8 +40,8 @@ export const All = () => {
             }}
           >
             {clickedExpenseCard === id && isOpenDetailModal && <Detail />}
-            {lists.map(({ title, items }) => (
-              <div key={`${title}_${items}`} className={styles.itemList}>
+            {lists.map(({ id, items }) => (
+              <div key={id} className={styles.itemList}>
                 <div className={styles.info}>
                   <div className={styles.date}>
                     {date.toLocaleString('ko-KR', {

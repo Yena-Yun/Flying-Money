@@ -14,7 +14,6 @@ import {
   isOpenAddModalState,
 } from './atom';
 import uuid4 from 'uuid4';
-import { TransactionType } from 'types/types';
 
 export const toggleModalSelector = selector({
   key: 'toggleModal',
@@ -118,19 +117,11 @@ export const addListToTransactionSelector = selector({
     const list = get(listState);
     const transaction = get(transactionState);
 
-    console.log(list);
-
-    // if (list instanceof DefaultValue) {
-    // return list;
-    // } else {
     set(transactionState, {
       ...transaction,
       id: uuid4(),
       lists: [...transaction.lists, list],
     });
-
-    // console.log(transaction); // setter 아래라서 의미 x
-    // }
   },
 });
 
@@ -142,34 +133,16 @@ export const addTransactionListSelector = selector({
     const transaction = get(transactionState);
     const transactionList = get(transactionListState);
 
-    console.log(transaction);
-
-    const result =
-      // transactionList.length > 0
-      // ?
-      // transactionList.map((transactionListItem) => {
-      //   console.log(transactionListItem);
-
-      //   return transactionListItem.date.toString().slice(0, 15) ===
-      //     transaction.date.toString().slice(0, 15)
-      //     ? { ...transactionListItem, lists: transaction.lists }
-      //     : transaction;
-      // });
-      // : transaction;
-      transactionList.find(
-        (transactionListItem) =>
-          transactionListItem.date.toString().slice(0, 15) ===
-          transaction.date.toString().slice(0, 15)
-      );
-
-    console.log(result);
+    const result = transactionList.find(
+      (transactionListItem) =>
+        transactionListItem.date.toString().slice(0, 15) ===
+        transaction.date.toString().slice(0, 15)
+    );
 
     const addedTransaction =
       result !== undefined
-        ? { ...result, lists: transaction.lists }
+        ? { ...result, id: uuid4(), lists: transaction.lists }
         : transaction;
-
-    console.log(addedTransaction);
 
     set(transactionListState, [...transactionList, addedTransaction]);
   },
