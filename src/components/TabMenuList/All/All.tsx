@@ -55,7 +55,9 @@ export const All = () => {
                     <div className={styles.name}>
                       {items[0].name !== '' && '•'} {items[0].name}
                     </div>
-                    <div className={styles.tag}>{items[0].tag}</div>
+                    {items[0].tag && (
+                      <div className={styles.tag}>{items[0].tag}</div>
+                    )}
                     {items.length > 1 && ` 외 +${items.length - 1}`}
                   </div>
                 </div>
