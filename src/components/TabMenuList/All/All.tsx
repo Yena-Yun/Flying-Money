@@ -5,27 +5,34 @@ import {
   useSetRecoilState,
 } from 'recoil';
 import {
-  clickedExpenseIndexState,
+  clickedIndexState,
   isOpenDetailModalState,
   transactionListState,
   transactionState,
 } from 'recoil/atom';
 import { toggleModalSelector } from 'recoil/selector';
 import { Detail } from 'components/Modal/Detail/Detail';
+import { formatDate } from 'hooks/formatDate';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import styles from './All.module.scss';
 
 export const All = () => {
   const setOpenModal = useSetRecoilState(toggleModalSelector);
-  const transactionList = useRecoilValue(transactionListState);
   const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
-  const [clickedExpenseCard, setClickedExpenseCard] = useRecoilState(
-    clickedExpenseIndexState
-  );
+  const transactionList = useRecoilValue(transactionListState);
+  const [clickedIndex, setClickedIndex] = useRecoilState(clickedIndexState);
   const resetTransactionToTransactionList =
     useResetRecoilState(transactionState);
 
-  console.log(transactionList);
+  const openAddModal = () => {
+    setOpenModal('add');
+    resetTransactionToTransactionList();
+  };
+
+  const openDetailModal = (id: string) => {
+    setClickedIndex(id);
+    setOpenModal('detail');
+  };
 
   return (
     <div className={styles.container}>
@@ -34,19 +41,10 @@ export const All = () => {
           <li
             key={id}
             className={styles.expenseItem}
-            onClick={() => {
-              setClickedExpenseCard(id);
-              setOpenModal('detail');
-            }}
+            onClick={() => openDetailModal(id)}
           >
-            {clickedExpenseCard === id && isOpenDetailModal && <Detail />}
-            <div className={styles.date}>
-              {date.toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-              })}
-            </div>
+            {clickedIndex === id && isOpenDetailModal && <Detail />}
+            <div className={styles.date}>{formatDate(date)}</div>
             {lists.map(({ id, title, items }) => (
               <div key={id} className={styles.itemList}>
                 <div className={styles.info}>
@@ -71,13 +69,7 @@ export const All = () => {
           </li>
         ))}
       </ul>
-      <button
-        className={styles.addNewItemButton}
-        onClick={() => {
-          setOpenModal('add');
-          resetTransactionToTransactionList();
-        }}
-      >
+      <button className={styles.addNewItemButton} onClick={openAddModal}>
         <div className={styles.addNewItemIcon}>
           <HiOutlinePlusCircle />
         </div>
