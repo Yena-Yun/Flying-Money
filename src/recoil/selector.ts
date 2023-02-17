@@ -12,6 +12,7 @@ import {
   clickedIndexState,
   listState,
   isOpenAddModalState,
+  isOpenToastState,
 } from './atom';
 import uuid4 from 'uuid4';
 
@@ -32,6 +33,22 @@ export const toggleModalSelector = selector({
       set(isOpenDetailModalState, false);
     } else {
       set(isOpenDetailModalState, true);
+    }
+  },
+});
+
+export const toggleToastSelector = selector({
+  key: 'toggleToast',
+  get: () => {},
+  set: ({ get, set }) => {
+    const isOpenToast = get(isOpenToastState);
+
+    console.log(isOpenToast);
+
+    if (isOpenToast) {
+      set(isOpenToastState, false);
+    } else {
+      set(isOpenToastState, true);
     }
   },
 });

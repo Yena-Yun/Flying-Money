@@ -18,6 +18,11 @@ export const isOpenDetailModalState = atom({
   default: false,
 });
 
+export const isOpenToastState = atom({
+  key: 'isOpenToast',
+  default: false,
+});
+
 export const isOpenCalendarState = atom({
   key: 'isOpenCalendar',
   default: false,
