@@ -9,10 +9,6 @@ import styles from './List.module.scss';
 export const List = () => {
   const [items, setItems] = useRecoilState<ItemType[]>(itemState);
 
-  const handleAddItem = () => {
-    setItems((prev) => [...prev, { id: uuid4(), name: '', price: 0, tag: '' }]);
-  };
-
   return (
     <div className={styles.inputGroupWrap}>
       <h3 className={styles.subTitle}>항목</h3>
@@ -21,18 +17,28 @@ export const List = () => {
         <div key={index} className={styles.inputItemGroup}>
           <Input index={index} tag={tag} />
 
-          <div
-            className={styles.removeItemButton}
-            onClick={() => {
-              setItems(items.filter(({ id }) => id !== index));
-            }}
-          >
-            <HiOutlineMinusCircle />
-          </div>
+          {parseInt(index) > 1 && (
+            <div
+              className={styles.removeItemButton}
+              onClick={() => {
+                setItems(items.filter(({ id }) => id !== index));
+              }}
+            >
+              <HiOutlineMinusCircle />
+            </div>
+          )}
         </div>
       ))}
 
-      <div className={styles.addItemButton} onClick={handleAddItem}>
+      <div
+        className={styles.addItemButton}
+        onClick={() => {
+          setItems((prev) => [
+            ...prev,
+            { id: uuid4(), name: '', price: 0, tag: '' },
+          ]);
+        }}
+      >
         <div className={styles.addIcon}>
           <HiOutlinePlusCircle />
         </div>
