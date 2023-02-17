@@ -1,10 +1,10 @@
+import { useEffect, useRef } from 'react';
 import {
   useRecoilValue,
   useSetRecoilState,
   useRecoilState,
   useResetRecoilState,
 } from 'recoil';
-import uuid4 from 'uuid4';
 import {
   itemState,
   isOpenCalendarState,
@@ -21,27 +21,32 @@ import { Date } from './Date/Date';
 import { Title } from './Title/Title';
 import { List } from './List/List';
 import { Calendar } from 'components/Calendar/Calendar';
-import { ItemType, TransactionType } from 'types/types';
+import { ItemType } from 'types/types';
 import styles from './Add.module.scss';
 
 export const Add = () => {
   const setCloseModal = useSetRecoilState(toggleModalSelector);
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
 
-  const expenseItemList = useRecoilValue<ItemType[]>(itemState);
-  const resetExpenseItemList = useResetRecoilState(itemState);
+  const items = useRecoilValue<ItemType[]>(itemState);
+  const resetItems = useResetRecoilState(itemState);
 
   const [list, setList] = useRecoilState(listState);
   const setListToTransactionList = useSetRecoilState(
     addListToTransactionSelector
   );
 
-  const [transaction, setTransaction] =
-    useRecoilState<TransactionType>(transactionState);
   const setTransactionToTransactionList = useSetRecoilState(
     addTransactionListSelector
   );
   const resetTransaction = useResetRecoilState(transactionState);
+
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (items.length < 2) return;
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [items]);
 
   return (
     <ModalLayout modalRole='add'>
@@ -52,6 +57,7 @@ export const Add = () => {
         <Date />
         <Title />
         <List />
+        <div ref={bottomRef} />
       </div>
 
       <div className={styles.submitButtonWrap}>
@@ -60,13 +66,13 @@ export const Add = () => {
           onClick={() => {
             setList({
               ...list,
-              items: expenseItemList,
+              items: items,
             });
 
             setListToTransactionList();
             setTransactionToTransactionList();
 
-            resetExpenseItemList();
+            resetItems();
             resetTransaction();
 
             setCloseModal('add');
