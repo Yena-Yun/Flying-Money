@@ -1,6 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { selectedDateState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
+import { formatDate } from 'hooks/formatDate';
 import { CiCalendar } from 'react-icons/ci';
 import styles from './Date.module.scss';
 
@@ -14,15 +15,7 @@ export const Date = () => {
       <div className={styles.dateIcon} onClick={() => setToggleCalendar()}>
         <CiCalendar />
       </div>
-      <div className={styles.selectedDate}>{`${selectedDate.toLocaleString(
-        'ko-KR',
-        {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          weekday: 'long',
-        }
-      )}`}</div>
+      <div className={styles.selectedDate}>{formatDate(selectedDate)}</div>
     </div>
   );
 };
