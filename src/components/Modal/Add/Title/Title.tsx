@@ -5,6 +5,13 @@ import styles from './Title.module.scss';
 export const Title = () => {
   const [list, setList] = useRecoilState(listState);
 
+  const handleAddTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setList({
+      ...list,
+      title: e.target.value,
+    });
+  };
+
   return (
     <div className={styles.inputGroup}>
       <label htmlFor='title' className={styles.subTitle}>
@@ -15,12 +22,7 @@ export const Title = () => {
           id='title'
           placeholder='제목을 입력해주세요.'
           autoFocus
-          onChange={(e) =>
-            setList({
-              ...list,
-              title: e.target.value,
-            })
-          }
+          onChange={handleAddTitle}
         />
       </div>
     </div>

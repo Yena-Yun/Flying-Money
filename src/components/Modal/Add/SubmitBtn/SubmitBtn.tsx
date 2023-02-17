@@ -28,25 +28,24 @@ export const SubmitBtn = () => {
   );
   const resetTransaction = useResetRecoilState(transactionState);
 
+  const submitTransaction = () => {
+    setList({
+      ...list,
+      items,
+    });
+
+    setListToTransactionList();
+    setTransactionToTransactionList();
+
+    resetItems();
+    resetTransaction();
+
+    setCloseModal('add');
+  };
+
   return (
     <div className={styles.submitButtonWrap}>
-      <button
-        className={styles.submitButton}
-        onClick={() => {
-          setList({
-            ...list,
-            items,
-          });
-
-          setListToTransactionList();
-          setTransactionToTransactionList();
-
-          resetItems();
-          resetTransaction();
-
-          setCloseModal('add');
-        }}
-      >
+      <button className={styles.submitButton} onClick={submitTransaction}>
         등록
       </button>
     </div>

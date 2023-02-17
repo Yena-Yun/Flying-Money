@@ -13,19 +13,24 @@ export const TagPopup = () => {
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(savedTagGroupState);
   const [value, setValue] = useState('');
 
-  const handleTagSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSetTag = (name: string) => {
+    setAddTagToItem(name);
+    setCloseTagPopup();
+  };
 
+  const handleSubmitTag = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (value.length < 1) return;
 
     setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: value }]);
     setValue('');
   };
 
-  const handleTagDelete = (id: string, name: string) => {
+  const handleDeleteTag = (id: string, name: string) => {
     setItems((items) =>
       items.filter(({ name: itemName }) => itemName !== name)
     );
+
     setSavedTagGroup((savedTagGroup) =>
       savedTagGroup.filter(({ id: index }) => index !== id)
     );
@@ -45,16 +50,13 @@ export const TagPopup = () => {
                 <div key={id} className={styles.tagWrap}>
                   <div
                     className={styles.tag}
-                    onClick={() => {
-                      setAddTagToItem(name);
-                      setCloseTagPopup();
-                    }}
+                    onClick={() => handleSetTag(name)}
                   >
                     {name}
                   </div>
                   <div
                     className={styles.deleteTagIcon}
-                    onClick={() => handleTagDelete(id, name)}
+                    onClick={() => handleDeleteTag(id, name)}
                   >
                     <IoIosClose />
                   </div>
@@ -62,12 +64,12 @@ export const TagPopup = () => {
               );
             })}
           </div>
-          <form onSubmit={handleTagSubmit} className={styles.inputForm}>
+          <form onSubmit={handleSubmitTag} className={styles.inputForm}>
             <input
               value={value}
+              placeholder='태그'
               autoFocus
               onChange={(e) => setValue(e.target.value)}
-              placeholder='태그'
             />
           </form>
         </div>
