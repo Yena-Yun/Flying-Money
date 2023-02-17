@@ -1,15 +1,16 @@
 import { useRecoilState } from 'recoil';
 import classnames from 'classnames';
-import { clickedTabState } from 'recoil/atom';
-import { TAB_MENU } from 'utils/constants/constants';
-import styles from './TabMenu.module.scss';
+import { clickedTabNameState } from 'recoil/atom';
 import { All } from '../All/All';
 import { ByWeek } from '../ByWeek/ByWeek';
 import { ByDate } from '../ByDate/ByDate';
 import { ByTag } from '../ByTag/ByTag';
+import { TAB_MENU } from 'utils/constants/constants';
+import styles from './TabMenu.module.scss';
 
 export const TabMenu = () => {
-  const [clickedTab, setClickedTab] = useRecoilState(clickedTabState);
+  const [clickedTabName, setClickedTabName] =
+    useRecoilState(clickedTabNameState);
 
   return (
     <section className={styles.showExpenseList}>
@@ -17,25 +18,24 @@ export const TabMenu = () => {
         {TAB_MENU.map(({ id, name }) => (
           <li
             key={id}
-            id={id}
             className={classnames(
               styles.filterTabItem,
-              clickedTab === id && styles.selected
+              clickedTabName === id && styles.selected
             )}
-            onClick={() => setClickedTab(id)}
+            onClick={() => setClickedTabName(id)}
           >
             {name}
           </li>
         ))}
       </ul>
 
-      {clickedTab === 'all' ? (
+      {clickedTabName === 'all' ? (
         <All />
-      ) : clickedTab === 'byWeek' ? (
+      ) : clickedTabName === 'byWeek' ? (
         <ByWeek />
-      ) : clickedTab === 'byDate' ? (
+      ) : clickedTabName === 'byDate' ? (
         <ByDate />
-      ) : clickedTab === 'byTag' ? (
+      ) : clickedTabName === 'byTag' ? (
         <ByTag />
       ) : null}
     </section>

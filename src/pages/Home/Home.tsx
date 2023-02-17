@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import {
-  clickedExpenseIndexState,
+  clickedIndexState,
   isOpenDetailModalState,
   isOpenAddModalState,
 } from 'recoil/atom';
@@ -13,7 +13,7 @@ import { Add } from 'components/Modal/Add/Add';
 
 export const Home = () => {
   const isOpenAddModal = useRecoilValue(isOpenAddModalState);
-  const clickedIndex = useRecoilValue(clickedExpenseIndexState);
+  const clickedIndex = useRecoilValue(clickedIndexState);
   const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
 
   return (

@@ -1,6 +1,6 @@
 import { selector, DefaultValue } from 'recoil';
 import {
-  clickedTabState,
+  clickedTabNameState,
   itemState,
   isOpenCalendarState,
   isOpenTagPopupState,
@@ -9,7 +9,7 @@ import {
   transactionState,
   clickedTagPopupIndexState,
   isOpenDetailModalState,
-  clickedExpenseIndexState,
+  clickedIndexState,
   listState,
   isOpenAddModalState,
 } from './atom';
@@ -80,10 +80,10 @@ export const toggleTagPopupSelector = selector({
 export const tabClickSelector = selector({
   key: 'handleTabClick',
   get: ({ get }) => {
-    return get(clickedTabState);
+    return get(clickedTabNameState);
   },
   set: ({ set }, newTab) => {
-    set(clickedTabState, newTab);
+    set(clickedTabNameState, newTab);
   },
 });
 
@@ -157,7 +157,7 @@ export const deleteTransactionListSelector = selector({
   get: () => {},
   set: ({ get, set }) => {
     const list = get(transactionListState);
-    const index = get(clickedExpenseIndexState);
+    const index = get(clickedIndexState);
 
     const deletedList = list.filter(({ id }) => id !== index);
 

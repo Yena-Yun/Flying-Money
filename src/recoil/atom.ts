@@ -67,8 +67,8 @@ export const savedTagGroupState = atom<TagType[]>({
   default: [],
 });
 
-export const clickedExpenseIndexState = atom({
-  key: 'clickedExpenseCard',
+export const clickedIndexState = atom({
+  key: 'clickedIndex',
   default: '',
 });
 
@@ -77,7 +77,7 @@ export const clickedTagPopupIndexState = atom({
   default: '',
 });
 
-export const clickedTabState = atom<TabMenuIdType>({
+export const clickedTabNameState = atom<TabMenuIdType>({
   key: 'clickedTab',
   default: 'all',
 });
