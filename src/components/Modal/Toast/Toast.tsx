@@ -1,20 +1,32 @@
 import { useSetRecoilState } from 'recoil';
 import {
-  deleteTransactionListSelector,
+  deleteItemSelector,
+  deleteTransactionSelector,
   toggleModalSelector,
   toggleToastSelector,
 } from 'recoil/selector';
 import styles from './Toast.module.scss';
 
-export const Toast = () => {
-  const setCloseToast = useSetRecoilState(toggleToastSelector);
+type ToastType = {
+  role: string;
+};
+
+export const Toast = ({ role }: ToastType) => {
   const setCloseModal = useSetRecoilState(toggleModalSelector);
-  const setDeleteTransaction = useSetRecoilState(deleteTransactionListSelector);
+  const setCloseToast = useSetRecoilState(toggleToastSelector);
+  const setDeleteTransaction = useSetRecoilState(deleteTransactionSelector);
+  const setDeleteItem = useSetRecoilState(deleteItemSelector);
 
   const deleteTransaction = () => {
-    setDeleteTransaction();
     setCloseToast();
-    setCloseModal('detail');
+
+    if (role === 'detail') {
+      setCloseModal('detail');
+      setDeleteTransaction();
+    } else if (role === 'byDateDetail') {
+      setCloseModal('byDateDetail');
+      setDeleteItem();
+    } else return;
   };
 
   return (
