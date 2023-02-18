@@ -27,8 +27,8 @@ export const Detail = () => {
 
   return (
     <>
-      {isOpenToast && <Toast />}
-      <ModalLayout modalRole='detail'>
+      {isOpenToast && <Toast role='detail' />}
+      <ModalLayout role='detail'>
         <h2 className={styles.modalTitle}>상세</h2>
 
         <div className={styles.mainContainer}>
