@@ -18,6 +18,11 @@ export const isOpenDetailModalState = atom({
   default: false,
 });
 
+export const isOpenByDateDetailModalState = atom({
+  key: 'isOpenByDateDetailModal',
+  default: false,
+});
+
 export const isOpenToastState = atom({
   key: 'isOpenToast',
   default: false,
@@ -74,6 +79,11 @@ export const savedTagGroupState = atom<TagType[]>({
 
 export const clickedIndexState = atom({
   key: 'clickedIndex',
+  default: '',
+});
+
+export const clickedItemIndexState = atom({
+  key: 'clickedItemIndex',
   default: '',
 });
 
