@@ -1,0 +1,85 @@
+@import 'styles/mixins';
+
+.modalTitle {
+  font-size: var(--text-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-black);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.mainContainer {
+  width: 100%;
+  margin-bottom: 5rem;
+  overflow-y: auto;
+
+  .title {
+    margin-bottom: 1rem;
+    font-size: var(--text-size-md);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .info {
+    @include flexbox-row(flex-start, center);
+
+    .nameTagGroup {
+      @include flexbox-column(center, flex-start);
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.3rem;
+
+      .name {
+        color: var(--color-gray-4);
+      }
+
+      .tag {
+        width: fit-content;
+        min-width: 2rem;
+        padding: 0.1rem 0.5rem;
+        color: var(--color-dark-pink);
+        border: 1px solid var(--color-pink);
+        border-radius: 0.8rem;
+        text-align: center;
+      }
+    }
+
+    .price {
+      color: var(--color-gray-6);
+    }
+  }
+
+  .total {
+    font-size: var(--text-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-blue);
+  }
+}
+
+.actionButtonContainer {
+  @include flexbox-row;
+  position: absolute;
+  bottom: 0.5rem;
+  gap: 0.5rem;
+  width: 84%;
+  padding-bottom: 1rem;
+
+  .confirmButton {
+    @include flexbox-row;
+    flex: 1;
+    height: 3rem;
+    color: var(--color-white);
+    border-radius: 6px;
+    background: var(--color-primary);
+    cursor: pointer;
+  }
+
+  .deleteButton {
+    flex: 1;
+    height: 3rem;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    background: var(--color-white);
+    cursor: pointer;
+  }
+}
