@@ -2,15 +2,13 @@
 
 .container {
   width: 100%;
-  min-height: 12rem;
-  padding: 0 0.5rem;
-  padding-bottom: 1.5rem;
+  height: 90%;
 
   .filteredList {
-    @include flexbox-column(center, flex-start);
+    width: 100%;
+    margin-bottom: 1rem;
 
     .expenseItem {
-      @include flexbox-column(center, flex-start);
       width: 100%;
       padding: 0.5rem 1rem;
       margin-bottom: 0.4rem;
