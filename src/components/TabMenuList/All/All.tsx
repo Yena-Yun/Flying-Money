@@ -1,26 +1,18 @@
-import {
-  useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import {
   clickedIndexState,
-  isOpenDetailModalState,
   transactionListState,
   transactionState,
 } from 'recoil/atom';
 import { toggleModalSelector } from 'recoil/selector';
-import { Detail } from 'components/Modal/Detail/Detail';
 import { formatDate } from 'hooks/formatDate';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import styles from './All.module.scss';
 
 export const All = () => {
   const setOpenModal = useSetRecoilState(toggleModalSelector);
-  const isOpenDetailModal = useRecoilValue(isOpenDetailModalState);
   const transactionList = useRecoilValue(transactionListState);
-  const [clickedIndex, setClickedIndex] = useRecoilState(clickedIndexState);
+  const setClickedIndex = useSetRecoilState(clickedIndexState);
   const resetTransactionToTransactionList =
     useResetRecoilState(transactionState);
 
@@ -43,7 +35,6 @@ export const All = () => {
             className={styles.expenseItem}
             onClick={() => openDetailModal(id)}
           >
-            {clickedIndex === id && isOpenDetailModal && <Detail />}
             <div className={styles.date}>{formatDate(date)}</div>
             {lists.map(({ id, title, items }) => (
               <div key={id} className={styles.itemList}>
