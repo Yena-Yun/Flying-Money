@@ -13,6 +13,8 @@ import {
   listState,
   isOpenAddModalState,
   isOpenToastState,
+  isOpenByDateDetailModalState,
+  clickedItemIndexState,
 } from './atom';
 import uuid4 from 'uuid4';
 
@@ -24,6 +26,7 @@ export const toggleModalSelector = selector({
   set: ({ get, set }, flag) => {
     const isOpenModal = get(isOpenAddModalState);
     const isOpenDetailModal = get(isOpenDetailModalState);
+    const isOpenByDateDetailModal = get(isOpenByDateDetailModalState);
 
     if (flag === 'add' && isOpenModal) {
       set(isOpenAddModalState, false);
@@ -31,9 +34,13 @@ export const toggleModalSelector = selector({
       set(isOpenAddModalState, true);
     } else if (flag === 'detail' && isOpenDetailModal) {
       set(isOpenDetailModalState, false);
-    } else {
+    } else if (flag === 'detail' && !isOpenDetailModal) {
       set(isOpenDetailModalState, true);
-    }
+    } else if (flag === 'byDateDetail' && isOpenByDateDetailModal) {
+      set(isOpenByDateDetailModalState, false);
+    } else if (flag === 'byDateDetail' && !isOpenByDateDetailModal) {
+      set(isOpenByDateDetailModalState, true);
+    } else return;
   },
 });
 
@@ -167,14 +174,38 @@ export const addTagToItemSelector = selector({
   },
 });
 
-export const deleteTransactionListSelector = selector({
-  key: 'deleteTransactionList',
+export const deleteTransactionSelector = selector({
+  key: 'deleteTransaction',
   get: () => {},
   set: ({ get, set }) => {
-    const list = get(transactionListState);
+    const transaction = get(transactionListState);
     const index = get(clickedIndexState);
 
-    const deletedList = list.filter(({ id }) => id !== index);
+    const deletedList = transaction.filter(({ id }) => id !== index);
+
+    set(transactionListState, deletedList);
+  },
+});
+
+export const deleteItemSelector = selector({
+  key: 'deleteItem',
+  get: () => {},
+  set: ({ get, set }) => {
+    const transactionList = get(transactionListState);
+    const index = get(clickedIndexState);
+    const itemIndex = get(clickedItemIndexState);
+
+    const deletedItem = transactionList
+      .find(({ id }) => id === index)!
+      .lists.filter(({ id }) => id === itemIndex)!;
+
+    const deletedList = transactionList.map((transaction) => {
+      if (transaction.id === index) {
+        return { ...transaction, lists: deletedItem };
+      } else {
+        return transaction;
+      }
+    });
 
     set(transactionListState, deletedList);
   },
