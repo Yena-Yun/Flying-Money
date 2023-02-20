@@ -19,7 +19,7 @@ export const ByDate = () => {
   const { id: index, lists } = transactionList.filter(
     ({ date }) =>
       selectedDate.toString().slice(0, 15) === date.toString().slice(0, 15)
-  )[0];
+  )[0] || { id: '', lists: [] };
 
   const openDetailModal = (id: string) => {
     setClickedIndex(index);
