@@ -18,14 +18,6 @@ export const TagPopup = () => {
     setCloseTagPopup();
   };
 
-  const handleSubmitTag = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (value.length < 1) return;
-
-    setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: value }]);
-    setValue('');
-  };
-
   const handleDeleteTag = (id: string, name: string) => {
     setItems((items) =>
       items.filter(({ name: itemName }) => itemName !== name)
@@ -34,6 +26,14 @@ export const TagPopup = () => {
     setSavedTagGroup((savedTagGroup) =>
       savedTagGroup.filter(({ id: index }) => index !== id)
     );
+  };
+
+  const handleSubmitTag = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (value.length < 1) return;
+
+    setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: value }]);
+    setValue('');
   };
 
   return (
