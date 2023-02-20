@@ -30,25 +30,27 @@ export const ByDate = () => {
   return (
     <div className={styles.container}>
       <Header />
-      <ul className={styles.filteredList}>
-        {lists.map(({ id, title, items }) => (
-          <li
-            key={id}
-            className={styles.expenseItem}
-            onClick={() => openDetailModal(id)}
-          >
-            <div className={styles.title}>{title}</div>
-            {items.map(({ id, name, price }) => (
-              <div key={id} className={styles.item}>
-                <div className={styles.name}>
-                  {items[0].name !== '' && '•'} {name}
+      {lists.length > 0 && (
+        <ul className={styles.filteredList}>
+          {lists.map(({ id, title, items }) => (
+            <li
+              key={id}
+              className={styles.expenseItem}
+              onClick={() => openDetailModal(id)}
+            >
+              <div className={styles.title}>{title}</div>
+              {items.map(({ id, name, price }) => (
+                <div key={id} className={styles.item}>
+                  <div className={styles.name}>
+                    {items[0].name !== '' && '•'} {name}
+                  </div>
+                  <div className={styles.price}>{price}</div>
                 </div>
-                <div className={styles.price}>{price}</div>
-              </div>
-            ))}
-          </li>
-        ))}
-      </ul>
+              ))}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
