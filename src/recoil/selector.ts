@@ -4,7 +4,7 @@ import {
   itemState,
   isOpenCalendarState,
   isOpenTagPopupState,
-  selectedDateState,
+  addModalSelectedDateState,
   transactionListState,
   transactionState,
   clickedTagPopupIndexState,
@@ -81,7 +81,7 @@ export const selectedDateSelector = selector({
     // DefaultValue 임포트
     if (newDate instanceof DefaultValue) {
       return newDate;
-    } else set(selectedDateState, newDate);
+    } else set(addModalSelectedDateState, newDate);
   },
 });
 

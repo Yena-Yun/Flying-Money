@@ -33,8 +33,18 @@ export const isOpenCalendarState = atom({
   default: false,
 });
 
-export const selectedDateState = atom({
-  key: 'selectedDate',
+export const addModalSelectedDateState = atom({
+  key: 'addModalSelectedDate',
+  default: new Date(),
+});
+
+export const filterByDateSelectedDateState = atom({
+  key: 'filterByDateSelectedDate',
+  default: new Date(),
+});
+
+export const filterByWeekStartDateState = atom({
+  key: 'filterByWeekStartDate',
   default: new Date(),
 });
 
@@ -93,6 +103,6 @@ export const clickedTagPopupIndexState = atom({
 });
 
 export const clickedTabNameState = atom<TabMenuIdType>({
-  key: 'clickedTab',
+  key: 'clickedTabName',
   default: 'all',
 });
