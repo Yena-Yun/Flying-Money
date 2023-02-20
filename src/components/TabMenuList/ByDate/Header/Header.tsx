@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import {
-  selectedDateState,
+  filterByDateSelectedDateState,
   isOpenCalendarState,
   transactionListState,
 } from 'recoil/atom';
@@ -14,7 +14,7 @@ import styles from './Header.module.scss';
 export const Header = () => {
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const selectedDate = useRecoilValue(selectedDateState);
+  const selectedDate = useRecoilValue(filterByDateSelectedDateState);
   const transactionList = useRecoilValue(transactionListState);
 
   const filterPriceOnDate = () => {

@@ -9,7 +9,7 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
-import { selectedDateState, transactionState } from 'recoil/atom';
+import { addModalSelectedDateState, transactionState } from 'recoil/atom';
 import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
 import { TransactionType } from 'types/types';
 import styles from './WeekDateCells.module.scss';
@@ -28,7 +28,7 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
 
   const [selectedWeek, setSelectedWeek] = useState(new Date());
 
-  const selectedDate = useRecoilValue(selectedDateState);
+  const selectedDate = useRecoilValue(addModalSelectedDateState);
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TransactionType>(transactionState);

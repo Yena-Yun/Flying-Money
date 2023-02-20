@@ -1,9 +1,9 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
-  selectedDateState,
   transactionListState,
   clickedIndexState,
   clickedItemIndexState,
+  filterByDateSelectedDateState,
 } from 'recoil/atom';
 import { toggleModalSelector } from 'recoil/selector';
 import { Header } from './Header/Header';
@@ -11,7 +11,7 @@ import styles from './ByDate.module.scss';
 
 export const ByDate = () => {
   const setOpenModal = useSetRecoilState(toggleModalSelector);
-  const selectedDate = useRecoilValue(selectedDateState);
+  const selectedDate = useRecoilValue(filterByDateSelectedDateState);
   const transactionList = useRecoilValue(transactionListState);
   const setClickedIndex = useSetRecoilState(clickedIndexState);
   const setClickedItemIndex = useSetRecoilState(clickedItemIndexState);

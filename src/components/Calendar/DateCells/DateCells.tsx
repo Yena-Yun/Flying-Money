@@ -9,7 +9,11 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
-import { selectedDateState, transactionState } from 'recoil/atom';
+import {
+  addModalSelectedDateState,
+  filterByDateSelectedDateState,
+  transactionState,
+} from 'recoil/atom';
 import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
 import { TransactionType } from 'types/types';
 import styles from './DateCells.module.scss';
@@ -19,18 +23,22 @@ interface DateCellProps {
 }
 
 export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
-  const monthStart = startOfMonth(currentMonth);
-  const monthEnd = endOfMonth(currentMonth);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
-
-  const selectedDate = useRecoilValue(selectedDateState);
+  const addModalSelectedDate = useRecoilValue(addModalSelectedDateState);
+  const filterByDateSelectedDate = useRecoilValue(
+    filterByDateSelectedDateState
+  );
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TransactionType>(transactionState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
+  const monthStart = startOfMonth(currentMonth);
+  const monthEnd = endOfMonth(currentMonth);
+  const startDate = startOfWeek(monthStart);
+  const endDate = endOfWeek(monthEnd);
+
   const rows: JSX.Element[] = [];
+
   let dates: JSX.Element[] = [];
   let date = startDate;
   let formatDate = '';
@@ -59,7 +67,7 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
                 ? styles.disabled
                 : isSameDay(date, currentMonth)
                 ? styles.current
-                : isSameDay(date, selectedDate)
+                : isSameDay(date, addModalSelectedDate)
                 ? styles.selected
                 : format(currentMonth, 'M') !== format(date, 'M')
                 ? styles.notValid

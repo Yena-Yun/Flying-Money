@@ -1,12 +1,12 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { selectedDateState } from 'recoil/atom';
+import { addModalSelectedDateState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import { formatDate } from 'hooks/formatDate';
 import { CiCalendar } from 'react-icons/ci';
 import styles from './Date.module.scss';
 
 export const Date = () => {
-  const selectedDate = useRecoilValue(selectedDateState);
+  const selectedDate = useRecoilValue(addModalSelectedDateState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   return (

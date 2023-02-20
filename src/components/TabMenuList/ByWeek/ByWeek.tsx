@@ -3,14 +3,14 @@ import classnames from 'classnames';
 import { addDays } from 'date-fns';
 import { CiCalendar } from 'react-icons/ci';
 import { WeekCalendar } from 'components/WeekCalendar/WeekCalendar';
-import { selectedDateState, isOpenCalendarState } from 'recoil/atom';
+import { addModalSelectedDateState, isOpenCalendarState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const selectedDate = useRecoilValue(selectedDateState);
+  const selectedDate = useRecoilValue(addModalSelectedDateState);
 
   return (
     <div className={styles.container}>
