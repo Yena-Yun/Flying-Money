@@ -6,7 +6,7 @@ import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
 import { byWeekStartDateState, isOpenByWeekCalendarState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
-import { formatDateWeekday } from 'utils/hooks/formatDate';
+import { formatDate } from 'utils/hooks/formatDate';
 import styles from './Header.module.scss';
 
 export const Header = () => {
@@ -28,15 +28,17 @@ export const Header = () => {
             setIsSelectSomeDate(false);
           }}
         >
-          {formatDateWeekday(selectedDate)}
+          {formatDate(selectedDate)}
         </div>
         -
         <div className={styles.selectedDate}>
-          {formatDateWeekday(addDays(selectedDate, 6))}
+          {formatDate(addDays(selectedDate, 6))}
         </div>
       </div>
       <div className={styles.header}>
-        {isSelectSomeDate && <p>시작 날짜를 선택하세요.</p>}
+        {isSelectSomeDate && (
+          <p className={styles.guide}>시작 날짜를 선택하세요</p>
+        )}
       </div>
     </div>
   );

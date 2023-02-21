@@ -7,9 +7,10 @@ import {
 } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
-import { formatDateWeekday } from 'utils/hooks/formatDate';
+import { formatDate } from 'utils/hooks/formatDate';
 import { CiCalendar } from 'react-icons/ci';
 import styles from './Header.module.scss';
+import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
 
 export const Header = () => {
   const isOpenCalender = useRecoilValue(isOpenByDateCalendarState);
@@ -27,16 +28,15 @@ export const Header = () => {
 
   return (
     <div className={styles.header}>
+      {isOpenCalender && <MiniCalendar tabName='byDate' />}
+
       <div className={classnames(styles.inputGroup, styles.period)}>
+        <CalendarIcon />
         <div
-          className={classnames(styles.dateIcon, styles.icon)}
+          className={styles.selectedDate}
           onClick={() => setToggleCalendar('byDate')}
         >
-          <CiCalendar />
-        </div>
-        {isOpenCalender && <MiniCalendar tabName='byDate' />}
-        <div className={styles.selectedDate}>
-          {formatDateWeekday(selectedDate)}
+          {formatDate(selectedDate)}
         </div>
       </div>
       <div className={classnames(styles.inputGroup, styles.totalExpense)}>
