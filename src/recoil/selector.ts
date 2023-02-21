@@ -17,6 +17,8 @@ import {
   clickedItemIndexState,
   isOpenByDateCalendarState,
   isOpenByWeekCalendarState,
+  filterByDateSelectedDateState,
+  filterByWeekStartDateState,
 } from './atom';
 import uuid4 from 'uuid4';
 
@@ -96,6 +98,27 @@ export const selectedDateSelector = selector({
     if (newDate instanceof DefaultValue) {
       return newDate;
     } else set(addModalSelectedDateState, newDate);
+  },
+});
+
+export const selectedMiniDateSelector = selector({
+  key: 'handleMiniSelectDate',
+  get: () => {
+    return {
+      flag: '',
+      newDate: new Date(),
+    };
+  },
+  set: ({ set }, newValue) => {
+    if (newValue instanceof DefaultValue) {
+      return newValue;
+    } else {
+      if (newValue.flag === 'byDate') {
+        set(filterByDateSelectedDateState, newValue.newDate);
+      } else {
+        set(filterByWeekStartDateState, newValue.newDate);
+      }
+    }
   },
 });
 

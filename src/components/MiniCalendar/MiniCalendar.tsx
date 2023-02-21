@@ -1,19 +1,33 @@
-import { useState } from 'react';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { format, addMonths, subMonths } from 'date-fns';
+import { toggleCalendarSelector } from 'recoil/selector';
 import { DateCells } from './DateCells/DateCells';
 import { DAYS } from 'utils/constants/constants';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import styles from './WeekCalendar.module.scss';
-import { toggleCalendarSelector } from 'recoil/selector';
-import { useSetRecoilState } from 'recoil';
+import styles from './MiniCalendar.module.scss';
+import {
+  filterByDateSelectedDateState,
+  filterByWeekStartDateState,
+} from 'recoil/atom';
 
-export const MiniCalendar = ({ tabName }: { tabName: string }) => {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+type MiniCalendarType = {
+  tabName: string;
+};
+
+export const MiniCalendar = ({ tabName }: MiniCalendarType) => {
+  const [currentMonth, setCurrentMonth] = useRecoilState(
+    tabName === 'byDate'
+      ? filterByDateSelectedDateState
+      : filterByWeekStartDateState
+  );
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const changeMonth = (moveTo: string) => {
-    if (moveTo === 'PREV') setCurrentMonth(subMonths(currentMonth, 1));
-    else setCurrentMonth(addMonths(currentMonth, 1));
+    if (moveTo === 'PREV') {
+      setCurrentMonth(subMonths(currentMonth, 1));
+    } else {
+      setCurrentMonth(addMonths(currentMonth, 1));
+    }
   };
 
   return (
@@ -50,7 +64,7 @@ export const MiniCalendar = ({ tabName }: { tabName: string }) => {
               </div>
             ))}
           </div>
-          <DateCells currentMonth={currentMonth} />
+          <DateCells currentMonth={currentMonth} tabName={tabName} />
         </div>
       </div>
     </>

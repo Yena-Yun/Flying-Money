@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   format,
@@ -9,30 +10,42 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
-import { addModalSelectedDateState, transactionState } from 'recoil/atom';
-import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
-import { TransactionType } from 'types/types';
-import styles from './WeekDateCells.module.scss';
 import classnames from 'classnames';
-import { useState } from 'react';
+import {
+  addModalSelectedDateState,
+  filterByDateSelectedDateState,
+  filterByWeekStartDateState,
+  transactionState,
+} from 'recoil/atom';
+import {
+  selectedDateSelector,
+  selectedMiniDateSelector,
+  toggleCalendarSelector,
+} from 'recoil/selector';
+import { TransactionType } from 'types/types';
+import styles from './DateCells.module.scss';
 
-interface DateCellProps {
+type DateCellType = {
   currentMonth: Date;
-}
+  tabName: string;
+};
 
-export const DateCells = ({ currentMonth }: DateCellProps) => {
+export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
 
-  const [selectedWeek, setSelectedWeek] = useState(new Date());
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+  const selectedDate = useRecoilValue(
+    tabName === 'byDate'
+      ? filterByDateSelectedDateState
+      : filterByWeekStartDateState
+  );
+  const setSelectedDate = useSetRecoilState(selectedMiniDateSelector);
 
-  const selectedDate = useRecoilValue(addModalSelectedDateState);
-  const setSelectedDate = useSetRecoilState(selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TransactionType>(transactionState);
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const rows: JSX.Element[] = [];
   let dates: JSX.Element[] = [];
@@ -49,12 +62,19 @@ export const DateCells = ({ currentMonth }: DateCellProps) => {
           className={styles.date}
           key={date.toString()}
           onClick={() => {
-            setSelectedDate(() => cloneDay);
+            setSelectedDate(() => {
+              return { flag: tabName, newDate: cloneDay };
+            });
             setExpenseTransaction({
               ...expenseTransaction,
               date: cloneDay,
             });
-            setToggleCalendar('byWeek');
+
+            if (tabName === 'byDate') {
+              setToggleCalendar('byDate');
+            } else {
+              setToggleCalendar('byWeek');
+            }
           }}
         >
           <span
@@ -83,12 +103,9 @@ export const DateCells = ({ currentMonth }: DateCellProps) => {
         id={date.toString()}
         key={date.toString()}
         className={classnames(
-          styles.week,
-          selectedWeek === startOfWeek(date) && styles.selectedWeek
+          styles.week
+          // selectedWeek === startOfWeek(date) && styles.selectedWeek
         )}
-        onClick={(e) =>
-          setSelectedWeek(startOfWeek(parseInt(e.currentTarget.id)))
-        }
       >
         {dates}
       </div>
