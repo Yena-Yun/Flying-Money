@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/uuid4": "^2.0.0",
     "date-fns": "^2.29.3",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.7.1",
+    "react-toastify": "^9.1.1"
   }
 }

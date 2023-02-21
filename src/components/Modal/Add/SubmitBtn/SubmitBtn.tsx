@@ -10,7 +10,14 @@ import {
   addListToTransactionSelector,
   toggleModalSelector,
 } from 'recoil/selector';
+import { toast } from 'react-toastify';
 import { ItemType } from 'types/types';
+import {
+  ITEM_ID,
+  NAME_ID,
+  PRICE_ID,
+  TITLE_ID,
+} from 'utils/constants/constants';
 import styles from './SubmitBtn.module.scss';
 
 export const SubmitBtn = () => {
@@ -33,11 +40,17 @@ export const SubmitBtn = () => {
     const noPriceItem = items.map((item) => !item.price)[0];
 
     if (noNameItem && noPriceItem) {
-      alert('항목을 하나 이상 입력해주세요!');
+      toast.info('항목을 하나 이상 입력해주세요!', {
+        toastId: ITEM_ID,
+      });
     } else if (noNameItem) {
-      alert('항목명을 입력해주세요!');
+      toast.info('항목명을 입력해주세요!', {
+        toastId: NAME_ID,
+      });
     } else if (noPriceItem) {
-      alert('가격을 입력해주세요!');
+      toast.info('가격을 입력해주세요!', {
+        toastId: PRICE_ID,
+      });
     } else if (!noNameItem && !noPriceItem) {
       return true;
     }
@@ -45,7 +58,9 @@ export const SubmitBtn = () => {
 
   const submitTransaction = () => {
     if (!list.title) {
-      alert('제목을 입력해주세요!');
+      toast.info('제목을 입력해주세요!', {
+        toastId: TITLE_ID,
+      });
     } else {
       if (validateList()) {
         setList({
