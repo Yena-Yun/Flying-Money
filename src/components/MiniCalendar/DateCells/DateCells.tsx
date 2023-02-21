@@ -1,10 +1,6 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import * as F from 'date-fns';
-import {
-  byDateSelectedDateState,
-  byWeekStartDateState,
-  transactionState,
-} from 'recoil/atom';
+import { transactionState } from 'recoil/atom';
 import {
   selectedMiniDateSelector,
   toggleCalendarSelector,
@@ -13,19 +9,15 @@ import { DateCellType, TransactionType } from 'types/types';
 import styles from './DateCells.module.scss';
 
 export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+  const setSelectedDate = useSetRecoilState(selectedMiniDateSelector);
+  const [expenseTransaction, setExpenseTransaction] =
+    useRecoilState<TransactionType>(transactionState);
+
   const monthStart = F.startOfMonth(currentMonth);
   const monthEnd = F.endOfMonth(currentMonth);
   const startDate = F.startOfWeek(monthStart);
   const endDate = F.endOfWeek(monthEnd);
-
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const selectedDate = useRecoilValue(
-    tabName === 'byDate' ? byDateSelectedDateState : byWeekStartDateState
-  );
-  const setSelectedDate = useSetRecoilState(selectedMiniDateSelector);
-
-  const [expenseTransaction, setExpenseTransaction] =
-    useRecoilState<TransactionType>(transactionState);
 
   const rows: JSX.Element[] = [];
   let dates: JSX.Element[] = [];
@@ -42,9 +34,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
           className={styles.date}
           key={date.toString()}
           onClick={() => {
-            setSelectedDate(() => {
-              return { flag: tabName, newDate: cloneDay };
-            });
+            setSelectedDate(() => ({ flag: tabName, newDate: cloneDay }));
 
             setExpenseTransaction({
               ...expenseTransaction,
@@ -64,11 +54,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
                 ? styles.disabled
                 : F.isSameDay(date, currentMonth)
                 ? styles.current
-                : F.isSameDay(date, selectedDate)
-                ? styles.selected
-                : F.format(currentMonth, 'M') !== F.format(date, 'M')
-                ? styles.notValid
-                : styles.valid
+                : ''
             }
           >
             {formatDate}

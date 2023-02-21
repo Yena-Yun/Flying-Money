@@ -1,6 +1,6 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import * as F from 'date-fns';
-import { addModalDateState, transactionState } from 'recoil/atom';
+import { transactionState } from 'recoil/atom';
 import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
 import { DateCellType, TransactionType } from 'types/types';
 import styles from './DateCells.module.scss';
@@ -10,7 +10,6 @@ export const DateCells = ({
 }: Pick<DateCellType, 'currentMonth'>) => {
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
-  const addModalDate = useRecoilValue(addModalDateState);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TransactionType>(transactionState);
 
@@ -35,10 +34,12 @@ export const DateCells = ({
           key={date.toString()}
           onClick={() => {
             setSelectedDate(() => cloneDay);
+
             setExpenseTransaction({
               ...expenseTransaction,
               date: cloneDay,
             });
+
             setToggleCalendar('add');
           }}
         >
@@ -48,11 +49,7 @@ export const DateCells = ({
                 ? styles.disabled
                 : F.isSameDay(date, currentMonth)
                 ? styles.current
-                : F.isSameDay(date, addModalDate)
-                ? styles.selected
-                : F.format(currentMonth, 'M') !== F.format(date, 'M')
-                ? styles.notValid
-                : styles.valid
+                : ''
             }
           >
             {formatDate}
