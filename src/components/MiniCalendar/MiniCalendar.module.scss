@@ -4,58 +4,43 @@
   position: fixed;
   width: 21rem;
   height: 18rem;
-  background: rgba(0, 0, 0, 0.35);
   z-index: 250;
 }
 
 .container {
   position: fixed;
-  top: 29rem;
-  left: 9.2rem;
+  top: 29.5rem;
+  left: 9.5rem;
   transform: translate(-50%, -50%);
   z-index: 300;
 
   .innerContainer {
-    width: 12rem;
-    padding: 0 0.3rem;
+    width: 13rem;
+    padding: 1rem 0.4rem 0.6rem;
     background-color: var(--color-white);
+    border-radius: 0.8rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
     .header {
       @include flexbox-row;
-      padding: 0.8rem 0;
+      padding-bottom: 0.8rem;
 
       .title {
-        font-size: var(--text-size-sm);
+        padding: 0 2rem;
         font-weight: var(--font-weight-semibold);
       }
 
       .arrow {
-        width: 0.8rem;
-        height: 0.8rem;
+        font-size: 0.8rem;
         cursor: pointer;
-
-        &.prev {
-          margin-right: 1.5rem;
-        }
-
-        &.next {
-          margin-left: 1.5rem;
-        }
       }
     }
 
     .days {
-      @include flexbox-row;
-      width: 100%;
-      padding-bottom: 0.7rem;
-
-      .day {
-        @include flexbox-row;
-        width: 2rem;
-        font-size: var(--text-size-xs);
-        font-weight: var(--font-weight-semibold);
-      }
+      @include flexbox-row(space-between, center);
+      padding: 0 0.4rem 0.7rem;
+      font-size: var(--text-size-sm);
+      font-weight: var(--font-weight-semibold);
     }
   }
 }

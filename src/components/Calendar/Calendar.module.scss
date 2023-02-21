@@ -4,7 +4,6 @@
   position: fixed;
   width: 23rem;
   height: 30rem;
-  background: rgba(0, 0, 0, 0.35);
   z-index: 250;
 }
 
@@ -16,16 +15,19 @@
   z-index: 300;
 
   .innerContainer {
-    width: 240px;
-    padding: 0 0.4rem;
+    width: 15rem;
+    padding: 1rem 0.4rem 0.8rem;
     background-color: var(--color-white);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 0.8rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 
     .header {
       @include flexbox-row;
       padding: 1rem 0;
 
       .title {
+        padding: 0 2rem;
         font-size: var(--text-size-15);
         font-weight: var(--font-weight-semibold);
       }
@@ -34,28 +36,14 @@
         margin-top: 0.1rem;
         font-size: 0.9rem;
         cursor: pointer;
-
-        &.prev {
-          margin-right: 2rem;
-        }
-
-        &.next {
-          margin-left: 2rem;
-        }
       }
     }
 
     .days {
-      @include flexbox-row;
-      width: 100%;
-      padding-bottom: 0.7rem;
-
-      .day {
-        @include flexbox-row;
-        width: 2rem;
-        font-size: var(--text-size-sm);
-        font-weight: var(--font-weight-semibold);
-      }
+      @include flexbox-row(space-between, center);
+      padding: 0 0.6rem 0.7rem;
+      font-size: var(--text-size-sm);
+      font-weight: var(--font-weight-semibold);
     }
   }
 }
