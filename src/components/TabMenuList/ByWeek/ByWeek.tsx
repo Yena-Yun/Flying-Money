@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import styles from './ByWeek.module.scss';
 import { Header } from './Header/Header';
