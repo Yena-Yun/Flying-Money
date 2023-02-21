@@ -47,12 +47,12 @@ export const addModalDateState = atom({
   default: new Date(),
 });
 
-export const filterByDateSelectedDateState = atom({
+export const byDateSelectedDateState = atom({
   key: 'filterByDateSelectedDate',
   default: new Date(),
 });
 
-export const filterByWeekStartDateState = atom({
+export const byWeekStartDateState = atom({
   key: 'filterByWeekStartDate',
   default: new Date(),
 });

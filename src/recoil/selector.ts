@@ -94,9 +94,9 @@ export const selectedMiniDateSelector = selector({
       return newValue;
     } else {
       if (newValue.flag === 'byDate') {
-        set(A.filterByDateSelectedDateState, newValue.newDate);
+        set(A.byDateSelectedDateState, newValue.newDate);
       } else {
-        set(A.filterByWeekStartDateState, newValue.newDate);
+        set(A.byWeekStartDateState, newValue.newDate);
       }
     }
   },
