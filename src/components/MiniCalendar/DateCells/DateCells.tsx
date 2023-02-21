@@ -20,7 +20,7 @@ interface DateCellProps {
   currentMonth: Date;
 }
 
-export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
+export const DateCells = ({ currentMonth }: DateCellProps) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
   const startDate = startOfWeek(monthStart);
@@ -54,7 +54,7 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
               ...expenseTransaction,
               date: cloneDay,
             });
-            setToggleCalendar();
+            setToggleCalendar('byWeek');
           }}
         >
           <span

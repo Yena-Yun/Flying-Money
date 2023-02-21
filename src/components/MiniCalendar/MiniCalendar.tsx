@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
-import { RenderDateCells } from './WeekDateCells/WeekDateCells';
+import { DateCells } from './DateCells/DateCells';
 import { DAYS } from 'utils/constants/constants';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import styles from './WeekCalendar.module.scss';
+import { toggleCalendarSelector } from 'recoil/selector';
+import { useSetRecoilState } from 'recoil';
 
-export const WeekCalendar = () => {
+export const MiniCalendar = ({ tabName }: { tabName: string }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const changeMonth = (moveTo: string) => {
     if (moveTo === 'PREV') setCurrentMonth(subMonths(currentMonth, 1));
@@ -14,6 +18,12 @@ export const WeekCalendar = () => {
 
   return (
     <>
+      <div
+        className={styles.background}
+        onClick={() =>
+          setToggleCalendar(tabName === 'byDate' ? 'byDate' : 'byWeek')
+        }
+      ></div>
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <div className={styles.header}>
@@ -21,7 +31,7 @@ export const WeekCalendar = () => {
               className={`${styles.prev} ${styles.arrow}`}
               onClick={() => changeMonth('PREV')}
             >
-              <img src='svg/calendar/prev_arrow.svg' alt='previous-arrow' />
+              <BsChevronLeft />
             </div>
             <div className={styles.title}>
               {format(currentMonth, 'yyyy')}년 {format(currentMonth, 'M')}월
@@ -30,7 +40,7 @@ export const WeekCalendar = () => {
               className={`${styles.next} ${styles.arrow}`}
               onClick={() => changeMonth('NEXT')}
             >
-              <img src='svg/calendar/next_arrow.svg' alt='next-arrow' />
+              <BsChevronRight />
             </div>
           </div>
           <div className={styles.days}>
@@ -40,7 +50,7 @@ export const WeekCalendar = () => {
               </div>
             ))}
           </div>
-          <RenderDateCells currentMonth={currentMonth} />
+          <DateCells currentMonth={currentMonth} />
         </div>
       </div>
     </>
