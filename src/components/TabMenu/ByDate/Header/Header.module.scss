@@ -9,13 +9,13 @@
     position: relative;
     gap: 1rem;
 
-    .dateIcon {
-      margin-top: 0.2rem;
-      cursor: pointer;
-    }
-
     .selectedDate {
       font-size: var(--text-size-md);
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     &.totalExpense {
