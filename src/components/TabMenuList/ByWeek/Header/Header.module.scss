@@ -1,0 +1,25 @@
+@import 'styles/mixins';
+
+.background {
+  position: fixed;
+  width: 23rem;
+  height: 30rem;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 250;
+}
+
+.inputGroup {
+  @include flexbox;
+  position: relative;
+  gap: 1rem;
+  z-index: 300;
+
+  .dateIcon {
+    margin-top: 0.2rem;
+    cursor: pointer;
+  }
+
+  .selectedDate {
+    font-size: var(--text-size-md);
+  }
+}

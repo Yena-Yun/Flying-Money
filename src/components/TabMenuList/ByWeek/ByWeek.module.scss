@@ -6,19 +6,4 @@
   width: 100%;
   min-height: 12rem;
   padding-bottom: 1.5rem;
-
-  .inputGroup {
-    @include flexbox;
-    position: relative;
-    gap: 1rem;
-
-    .dateIcon {
-      margin-top: 0.2rem;
-      cursor: pointer;
-    }
-
-    .selectedDate {
-      font-size: var(--text-size-md);
-    }
-  }
 }
