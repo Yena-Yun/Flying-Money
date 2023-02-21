@@ -1,29 +1,19 @@
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { format, addMonths, subMonths } from 'date-fns';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { format } from 'date-fns';
+import { byDateSelectedDateState, byWeekStartDateState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import { DateCells } from './DateCells/DateCells';
+import { changeMonth } from 'utils/hooks/changeMonth';
 import { DAYS } from 'utils/constants/constants';
+import { DateCellType } from 'types/types';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import styles from './MiniCalendar.module.scss';
-import { byDateSelectedDateState, byWeekStartDateState } from 'recoil/atom';
 
-type MiniCalendarType = {
-  tabName: string;
-};
-
-export const MiniCalendar = ({ tabName }: MiniCalendarType) => {
+export const MiniCalendar = ({ tabName }: Pick<DateCellType, 'tabName'>) => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
     tabName === 'byDate' ? byDateSelectedDateState : byWeekStartDateState
   );
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-
-  const changeMonth = (moveTo: string) => {
-    if (moveTo === 'PREV') {
-      setCurrentMonth(subMonths(currentMonth, 1));
-    } else {
-      setCurrentMonth(addMonths(currentMonth, 1));
-    }
-  };
 
   return (
     <>
@@ -37,8 +27,10 @@ export const MiniCalendar = ({ tabName }: MiniCalendarType) => {
         <div className={styles.innerContainer}>
           <div className={styles.header}>
             <div
-              className={`${styles.prev} ${styles.arrow}`}
-              onClick={() => changeMonth('PREV')}
+              className={styles.arrow}
+              onClick={() =>
+                changeMonth('PREV', { currentMonth, setCurrentMonth })
+              }
             >
               <BsChevronLeft />
             </div>
@@ -46,17 +38,17 @@ export const MiniCalendar = ({ tabName }: MiniCalendarType) => {
               {format(currentMonth, 'yyyy')}년 {format(currentMonth, 'M')}월
             </div>
             <div
-              className={`${styles.next} ${styles.arrow}`}
-              onClick={() => changeMonth('NEXT')}
+              className={styles.arrow}
+              onClick={() =>
+                changeMonth('NEXT', { currentMonth, setCurrentMonth })
+              }
             >
               <BsChevronRight />
             </div>
           </div>
           <div className={styles.days}>
             {DAYS.map((day, id) => (
-              <div key={id} className={styles.day}>
-                {day}
-              </div>
+              <div key={id}>{day}</div>
             ))}
           </div>
           <DateCells currentMonth={currentMonth} tabName={tabName} />
