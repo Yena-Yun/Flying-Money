@@ -8,8 +8,8 @@ export const Main = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleHeader}>
-        <h1 className={styles.title}>What You Spend is Who You Are</h1>
-        <p className={styles.subTitle}>네가 돈을 쓰는 곳이 곧 너일지니</p>
+        <h1 className={styles.title}>Flying Money</h1>
+        <p className={styles.subTitle}>오늘의 지출</p>
       </div>
       <figure className={styles.mainImageContainer}>
         <img src={'/images/flying_money.png'} alt='main' />

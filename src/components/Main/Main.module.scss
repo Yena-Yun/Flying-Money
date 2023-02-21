@@ -9,18 +9,14 @@
     margin-bottom: 1.5rem;
 
     .title {
-      font-size: var(--text-size-lg);
+      font-size: var(--text-size-xl);
       font-weight: var(--font-weight-bold);
-    }
-
-    .subTitle {
-      font-size: var(--text-size-md);
     }
   }
 
   .mainImageContainer {
-    width: 6rem;
-    margin-bottom: 1rem;
+    width: 5.5rem;
+    margin-bottom: 0.8rem;
 
     img {
       width: 100%;
