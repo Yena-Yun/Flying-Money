@@ -1,25 +1,5 @@
 import { selector, DefaultValue } from 'recoil';
-import {
-  clickedTabNameState,
-  itemState,
-  isOpenCalendarState,
-  isOpenTagPopupState,
-  addModalSelectedDateState,
-  transactionListState,
-  transactionState,
-  clickedTagPopupIndexState,
-  isOpenDetailModalState,
-  clickedIndexState,
-  listState,
-  isOpenAddModalState,
-  isOpenToastState,
-  isOpenByDateDetailModalState,
-  clickedItemIndexState,
-  isOpenByDateCalendarState,
-  isOpenByWeekCalendarState,
-  filterByDateSelectedDateState,
-  filterByWeekStartDateState,
-} from './atom';
+import * as A from './atom';
 import uuid4 from 'uuid4';
 
 export const toggleModalSelector = selector({
@@ -28,22 +8,22 @@ export const toggleModalSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const isOpenModal = get(isOpenAddModalState);
-    const isOpenDetailModal = get(isOpenDetailModalState);
-    const isOpenByDateDetailModal = get(isOpenByDateDetailModalState);
+    const isOpenModal = get(A.isOpenAddModalState);
+    const isOpenDetailModal = get(A.isOpenDetailModalState);
+    const isOpenByDateDetailModal = get(A.isOpenByDateDetailModalState);
 
     if (flag === 'add' && isOpenModal) {
-      set(isOpenAddModalState, false);
+      set(A.isOpenAddModalState, false);
     } else if (flag === 'add' && !isOpenModal) {
-      set(isOpenAddModalState, true);
+      set(A.isOpenAddModalState, true);
     } else if (flag === 'detail' && isOpenDetailModal) {
-      set(isOpenDetailModalState, false);
+      set(A.isOpenDetailModalState, false);
     } else if (flag === 'detail' && !isOpenDetailModal) {
-      set(isOpenDetailModalState, true);
+      set(A.isOpenDetailModalState, true);
     } else if (flag === 'byDateDetail' && isOpenByDateDetailModal) {
-      set(isOpenByDateDetailModalState, false);
+      set(A.isOpenByDateDetailModalState, false);
     } else if (flag === 'byDateDetail' && !isOpenByDateDetailModal) {
-      set(isOpenByDateDetailModalState, true);
+      set(A.isOpenByDateDetailModalState, true);
     } else return;
   },
 });
@@ -52,12 +32,12 @@ export const toggleToastSelector = selector({
   key: 'toggleToast',
   get: () => {},
   set: ({ get, set }) => {
-    const isOpenToast = get(isOpenToastState);
+    const isOpenToast = get(A.isOpenToastState);
 
     if (isOpenToast) {
-      set(isOpenToastState, false);
+      set(A.isOpenToastState, false);
     } else {
-      set(isOpenToastState, true);
+      set(A.isOpenToastState, true);
     }
   },
 });
@@ -68,22 +48,22 @@ export const toggleCalendarSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const isOpenCalendar = get(isOpenCalendarState);
-    const isOpenByDateCalendar = get(isOpenByDateCalendarState);
-    const isOpenByWeekCalendar = get(isOpenByWeekCalendarState);
+    const isOpenCalendar = get(A.isOpenCalendarState);
+    const isOpenByDateCalendar = get(A.isOpenByDateCalendarState);
+    const isOpenByWeekCalendar = get(A.isOpenByWeekCalendarState);
 
     if (flag === 'add' && isOpenCalendar) {
-      set(isOpenCalendarState, false);
+      set(A.isOpenCalendarState, false);
     } else if (flag === 'add' && !isOpenCalendar) {
-      set(isOpenCalendarState, true);
+      set(A.isOpenCalendarState, true);
     } else if (flag === 'byDate' && isOpenByDateCalendar) {
-      set(isOpenByDateCalendarState, false);
+      set(A.isOpenByDateCalendarState, false);
     } else if (flag === 'byDate' && !isOpenByDateCalendar) {
-      set(isOpenByDateCalendarState, true);
+      set(A.isOpenByDateCalendarState, true);
     } else if (flag === 'byWeek' && isOpenByWeekCalendar) {
-      set(isOpenByWeekCalendarState, false);
+      set(A.isOpenByWeekCalendarState, false);
     } else if (flag === 'byWeek' && !isOpenByWeekCalendar) {
-      set(isOpenByWeekCalendarState, true);
+      set(A.isOpenByWeekCalendarState, true);
     } else return;
   },
 });
@@ -97,7 +77,7 @@ export const selectedDateSelector = selector({
     // DefaultValue 임포트
     if (newDate instanceof DefaultValue) {
       return newDate;
-    } else set(addModalSelectedDateState, newDate);
+    } else set(A.addModalDateState, newDate);
   },
 });
 
@@ -114,9 +94,9 @@ export const selectedMiniDateSelector = selector({
       return newValue;
     } else {
       if (newValue.flag === 'byDate') {
-        set(filterByDateSelectedDateState, newValue.newDate);
+        set(A.filterByDateSelectedDateState, newValue.newDate);
       } else {
-        set(filterByWeekStartDateState, newValue.newDate);
+        set(A.filterByWeekStartDateState, newValue.newDate);
       }
     }
   },
@@ -126,12 +106,12 @@ export const toggleTagPopupSelector = selector({
   key: 'toggleTagPopup',
   get: () => {},
   set: ({ get, set }) => {
-    const isOpenTagPopup = get(isOpenTagPopupState);
+    const isOpenTagPopup = get(A.isOpenTagPopupState);
 
     if (isOpenTagPopup) {
-      set(isOpenTagPopupState, false);
+      set(A.isOpenTagPopupState, false);
     } else {
-      set(isOpenTagPopupState, true);
+      set(A.isOpenTagPopupState, true);
     }
   },
 });
@@ -139,21 +119,35 @@ export const toggleTagPopupSelector = selector({
 export const tabClickSelector = selector({
   key: 'handleTabClick',
   get: ({ get }) => {
-    return get(clickedTabNameState);
+    return get(A.clickedTabNameState);
   },
   set: ({ set }, newTab) => {
-    set(clickedTabNameState, newTab);
+    set(A.clickedTabNameState, newTab);
   },
 });
 
-export const addListToTransactionSelector = selector({
-  key: 'addListToTransactionList',
+export const setItemToListSelector = selector({
+  key: 'setItemToList',
   get: () => {},
   set: ({ get, set }) => {
-    const list = get(listState);
-    const transaction = get(transactionState);
+    const item = get(A.itemState);
+    const list = get(A.listState);
 
-    set(transactionState, {
+    set(A.listState, {
+      ...list,
+      items: item,
+    });
+  },
+});
+
+export const setListToTransactionSelector = selector({
+  key: 'setListToTransactionList',
+  get: () => {},
+  set: ({ get, set }) => {
+    const list = get(A.listState);
+    const transaction = get(A.transactionState);
+
+    set(A.transactionState, {
       ...transaction, // id, date
       lists: [...transaction.lists, { ...list, id: uuid4() }],
     });
@@ -161,12 +155,12 @@ export const addListToTransactionSelector = selector({
 });
 
 /* 하나의 날짜(transaction)에 같은 날짜로 항목이 추가될 경우 하나의 transaction에 몰아넣음 */
-export const addTransactionListSelector = selector({
-  key: 'addTransactionToTransactionList',
+export const setTransactionListSelector = selector({
+  key: 'setTransactionToTransactionList',
   get: () => {},
   set: ({ get, set }) => {
-    const transaction = get(transactionState);
-    const transactionList = get(transactionListState);
+    const transaction = get(A.transactionState);
+    const transactionList = get(A.transactionListState);
 
     const selectedTransaction = transactionList.find(
       (transactionListItem) => transactionListItem.id === transaction.id
@@ -184,7 +178,7 @@ export const addTransactionListSelector = selector({
       (transactionListItem) => transactionListItem.id !== addedTransaction.id
     );
 
-    set(transactionListState, [...filteredTransaction, addedTransaction]);
+    set(A.transactionListState, [...filteredTransaction, addedTransaction]);
   },
 });
 
@@ -197,8 +191,8 @@ export const addTagToItemSelector = selector({
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      const expenseItemList = get(itemState);
-      const clickedTagPopupIndex = get(clickedTagPopupIndexState);
+      const expenseItemList = get(A.itemState);
+      const clickedTagPopupIndex = get(A.clickedTagPopupIndexState);
 
       const result = expenseItemList.map((item) => {
         return item.id === clickedTagPopupIndex
@@ -206,7 +200,7 @@ export const addTagToItemSelector = selector({
           : item;
       });
 
-      set(itemState, result);
+      set(A.itemState, result);
     }
   },
 });
@@ -215,12 +209,12 @@ export const deleteTransactionSelector = selector({
   key: 'deleteTransaction',
   get: () => {},
   set: ({ get, set }) => {
-    const transaction = get(transactionListState);
-    const index = get(clickedIndexState);
+    const transaction = get(A.transactionListState);
+    const index = get(A.clickedIndexState);
 
     const deletedList = transaction.filter(({ id }) => id !== index);
 
-    set(transactionListState, deletedList);
+    set(A.transactionListState, deletedList);
   },
 });
 
@@ -228,9 +222,9 @@ export const deleteItemSelector = selector({
   key: 'deleteItem',
   get: () => {},
   set: ({ get, set }) => {
-    const transactionList = get(transactionListState);
-    const index = get(clickedIndexState);
-    const itemIndex = get(clickedItemIndexState);
+    const transactionList = get(A.transactionListState);
+    const index = get(A.clickedIndexState);
+    const itemIndex = get(A.clickedItemIndexState);
 
     const deletedItem = transactionList
       .find(({ id }) => id === index)!
@@ -244,6 +238,6 @@ export const deleteItemSelector = selector({
       }
     });
 
-    set(transactionListState, deletedList);
+    set(A.transactionListState, deletedList);
   },
 });
