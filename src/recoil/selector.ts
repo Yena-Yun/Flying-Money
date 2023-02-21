@@ -15,6 +15,8 @@ import {
   isOpenToastState,
   isOpenByDateDetailModalState,
   clickedItemIndexState,
+  isOpenByDateCalendarState,
+  isOpenByWeekCalendarState,
 } from './atom';
 import uuid4 from 'uuid4';
 
@@ -60,15 +62,27 @@ export const toggleToastSelector = selector({
 
 export const toggleCalendarSelector = selector({
   key: 'toggleCalendar',
-  get: () => {},
-  set: ({ get, set }) => {
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }, flag) => {
     const isOpenCalendar = get(isOpenCalendarState);
+    const isOpenByDateCalendar = get(isOpenByDateCalendarState);
+    const isOpenByWeekCalendar = get(isOpenByWeekCalendarState);
 
-    if (isOpenCalendar) {
+    if (flag === 'add' && isOpenCalendar) {
       set(isOpenCalendarState, false);
-    } else {
+    } else if (flag === 'add' && !isOpenCalendar) {
       set(isOpenCalendarState, true);
-    }
+    } else if (flag === 'byDate' && isOpenByDateCalendar) {
+      set(isOpenByDateCalendarState, false);
+    } else if (flag === 'byDate' && !isOpenByDateCalendar) {
+      set(isOpenByDateCalendarState, true);
+    } else if (flag === 'byWeek' && isOpenByWeekCalendar) {
+      set(isOpenByWeekCalendarState, false);
+    } else if (flag === 'byWeek' && !isOpenByWeekCalendar) {
+      set(isOpenByWeekCalendarState, true);
+    } else return;
   },
 });
 

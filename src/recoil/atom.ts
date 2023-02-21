@@ -33,6 +33,16 @@ export const isOpenCalendarState = atom({
   default: false,
 });
 
+export const isOpenByDateCalendarState = atom({
+  key: 'isOpenByDateCalendar',
+  default: false,
+});
+
+export const isOpenByWeekCalendarState = atom({
+  key: 'isOpenByWeekCalendar',
+  default: false,
+});
+
 export const addModalSelectedDateState = atom({
   key: 'addModalSelectedDate',
   default: new Date(),
