@@ -1,6 +1,6 @@
 import { Home } from 'pages/Home/Home';
 import { RecoilRoot } from 'recoil';
-import { ToastContainer, toast, Flip } from 'react-toastify';
+import { RootToast } from 'components/RootToast/RootToast';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -9,16 +9,7 @@ function App() {
       <RecoilRoot>
         <Home />
       </RecoilRoot>
-      <ToastContainer
-        role='alert'
-        position={toast.POSITION.TOP_CENTER}
-        autoClose={1000}
-        hideProgressBar
-        transition={Flip}
-        limit={3}
-        pauseOnFocusLoss={false}
-        theme='light'
-      />
+      <RootToast />
     </>
   );
 }
