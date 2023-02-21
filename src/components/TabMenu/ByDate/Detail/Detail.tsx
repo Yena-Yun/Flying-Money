@@ -10,7 +10,7 @@ import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
 import styles from './Detail.module.scss';
 
-export const Detail = () => {
+export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(isOpenToastState);
   const setIsOpenToast = useSetRecoilState(toggleToastSelector);
   const setCloseModal = useSetRecoilState(toggleModalSelector);

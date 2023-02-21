@@ -6,7 +6,7 @@ import { ByWeek } from '../ByWeek/ByWeek';
 import { ByDate } from '../ByDate/ByDate';
 import { ByTag } from '../ByTag/ByTag';
 import { TAB_MENU } from 'utils/constants/constants';
-import styles from './TabMenu.module.scss';
+import styles from './TabMenuLayout.module.scss';
 
 export const TabMenu = () => {
   const [clickedTabName, setClickedTabName] =

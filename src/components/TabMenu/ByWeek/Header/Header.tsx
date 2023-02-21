@@ -3,19 +3,16 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { addDays } from 'date-fns';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
-import {
-  filterByWeekStartDateState,
-  isOpenByWeekCalendarState,
-} from 'recoil/atom';
+import { byWeekStartDateState, isOpenByWeekCalendarState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
-import { formatDateWeekday } from 'hooks/formatDate';
+import { formatDateWeekday } from 'utils/hooks/formatDate';
 import styles from './Header.module.scss';
 
 export const Header = () => {
   const isOpenCalender = useRecoilValue(isOpenByWeekCalendarState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const selectedDate = useRecoilValue(filterByWeekStartDateState);
+  const selectedDate = useRecoilValue(byWeekStartDateState);
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
 
   return (
