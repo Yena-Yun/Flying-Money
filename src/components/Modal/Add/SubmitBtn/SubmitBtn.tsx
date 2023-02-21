@@ -1,79 +1,59 @@
-import {
-  useRecoilValue,
-  useSetRecoilState,
-  useRecoilState,
-  useResetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { itemState, listState, transactionState } from 'recoil/atom';
 import {
-  addTransactionListSelector,
-  addListToTransactionSelector,
+  setTransactionListSelector,
+  setListToTransactionSelector,
   toggleModalSelector,
+  setItemToListSelector,
 } from 'recoil/selector';
-import { toast } from 'react-toastify';
+import { popupToast } from 'utils/hooks/popupToast';
+import { TOAST_ID } from 'utils/constants/constants';
 import { ItemType } from 'types/types';
-import {
-  ITEM_ID,
-  NAME_ID,
-  PRICE_ID,
-  TITLE_ID,
-} from 'utils/constants/constants';
 import styles from './SubmitBtn.module.scss';
 
 export const SubmitBtn = () => {
   const setCloseModal = useSetRecoilState(toggleModalSelector);
-  const resetItems = useResetRecoilState(itemState);
-
-  const [list, setList] = useRecoilState(listState);
+  const list = useRecoilValue(listState);
   const items = useRecoilValue<ItemType[]>(itemState);
-  const setListToTransactionList = useSetRecoilState(
-    addListToTransactionSelector
+
+  const setItemToList = useSetRecoilState(setItemToListSelector);
+  const setListToTransaction = useSetRecoilState(setListToTransactionSelector);
+  const setTransactionToTransactionList = useSetRecoilState(
+    setTransactionListSelector
   );
 
-  const setTransactionToTransactionList = useSetRecoilState(
-    addTransactionListSelector
-  );
+  const resetItems = useResetRecoilState(itemState);
+  const resetList = useResetRecoilState(listState);
   const resetTransaction = useResetRecoilState(transactionState);
 
   const validateList = () => {
     const noNameItem = items.map((item) => !item.name)[0];
     const noPriceItem = items.map((item) => !item.price)[0];
 
-    if (noNameItem && noPriceItem) {
-      toast.info('항목을 하나 이상 입력해주세요!', {
-        toastId: ITEM_ID,
-      });
+    if (!list.title) {
+      popupToast('제목을 입력해주세요!', TOAST_ID.TITLE);
+    } else if (noNameItem && noPriceItem) {
+      popupToast('항목을 하나 이상 입력해주세요!', TOAST_ID.ITEM);
     } else if (noNameItem) {
-      toast.info('항목명을 입력해주세요!', {
-        toastId: NAME_ID,
-      });
+      popupToast('항목명을 입력해주세요!', TOAST_ID.NAME);
     } else if (noPriceItem) {
-      toast.info('가격을 입력해주세요!', {
-        toastId: PRICE_ID,
-      });
+      popupToast('가격을 입력해주세요!', TOAST_ID.PRICE);
     } else if (!noNameItem && !noPriceItem) {
       return true;
     }
   };
 
   const submitTransaction = () => {
-    if (!list.title) {
-      toast.info('제목을 입력해주세요!', {
-        toastId: TITLE_ID,
-      });
-    } else {
-      if (validateList()) {
-        setList({
-          ...list,
-          items,
-        });
+    if (validateList()) {
+      setItemToList();
+      setListToTransaction();
+      setTransactionToTransactionList();
 
-        setListToTransactionList();
-        setTransactionToTransactionList();
-        resetItems();
-        resetTransaction();
-        setCloseModal('add');
-      }
+      resetItems();
+      resetList();
+      resetTransaction();
+
+      setCloseModal('add');
     }
   };
 
