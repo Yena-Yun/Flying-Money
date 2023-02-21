@@ -12,7 +12,7 @@ export const Date = () => {
   return (
     <div className={styles.inputGroup}>
       <h3 className={styles.subTitle}>날짜</h3>
-      <div className={styles.dateIcon} onClick={() => setToggleCalendar()}>
+      <div className={styles.dateIcon} onClick={() => setToggleCalendar('add')}>
         <CiCalendar />
       </div>
       <div className={styles.selectedDate}>{formatDate(selectedDate)}</div>

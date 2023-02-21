@@ -22,7 +22,7 @@ interface DateCellProps {
   currentMonth: Date;
 }
 
-export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
+export const DateCells = ({ currentMonth }: DateCellProps) => {
   const addModalSelectedDate = useRecoilValue(addModalSelectedDateState);
   const filterByDateSelectedDate = useRecoilValue(
     filterByDateSelectedDateState
@@ -58,7 +58,7 @@ export const RenderDateCells = ({ currentMonth }: DateCellProps) => {
               ...expenseTransaction,
               date: cloneDay,
             });
-            setToggleCalendar();
+            setToggleCalendar('add');
           }}
         >
           <span

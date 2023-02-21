@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { format, addMonths, subMonths } from 'date-fns';
 import { toggleCalendarSelector } from 'recoil/selector';
-import { RenderDateCells } from './DateCells/DateCells';
+import { DateCells } from './DateCells/DateCells';
 import { DAYS } from 'utils/constants/constants';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import styles from './Calendar.module.scss';
@@ -23,7 +23,7 @@ export const Calendar = () => {
     <>
       <div
         className={styles.background}
-        onClick={() => setToggleCalendar()}
+        onClick={() => setToggleCalendar('add')}
       ></div>
       <div className={styles.container}>
         <div className={styles.innerContainer}>
@@ -51,7 +51,7 @@ export const Calendar = () => {
               </div>
             ))}
           </div>
-          <RenderDateCells currentMonth={currentMonth} />
+          <DateCells currentMonth={currentMonth} />
         </div>
       </div>
     </>
