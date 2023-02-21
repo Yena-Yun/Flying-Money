@@ -3,25 +3,17 @@
 .inputGroup {
   @include flexbox-row(flex-start, center);
   position: relative;
+  gap: 1rem;
   width: 90%;
   margin-bottom: 1.2rem;
 
-  .subTitle {
-    font-size: var(--text-size-md);
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: 0.5rem;
-  }
-
-  .dateIcon {
-    margin-top: -0.2rem;
-    margin-left: 0.5rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-  }
-
   .selectedDate {
     margin-top: -0.4rem;
-    margin-left: 0.8rem;
     font-size: var(--text-size-md);
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
