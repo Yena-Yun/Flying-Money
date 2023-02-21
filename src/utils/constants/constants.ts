@@ -63,7 +63,9 @@ export const MONTHS = [
   '12월',
 ];
 
-export const ITEM_ID = 'toast_Item_Id';
-export const TITLE_ID = 'toast_Title_Id';
-export const NAME_ID = 'toast_Name_Id';
-export const PRICE_ID = 'toast_Price_Id';
+export const TOAST_ID = {
+  ITEM: 'Item_Id',
+  TITLE: 'Title_Id',
+  NAME: 'Name_Id',
+  PRICE: 'Price_Id',
+};
