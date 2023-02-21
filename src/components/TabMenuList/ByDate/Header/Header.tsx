@@ -3,8 +3,6 @@ import classnames from 'classnames';
 import {
   filterByDateSelectedDateState,
   isOpenByDateCalendarState,
-  isOpenByDateDetailModalState,
-  isOpenCalendarState,
   transactionListState,
 } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
