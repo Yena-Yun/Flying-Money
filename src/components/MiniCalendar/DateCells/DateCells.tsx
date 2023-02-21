@@ -1,46 +1,26 @@
-import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import * as F from 'date-fns';
 import {
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfMonth,
-  startOfWeek,
-  addDays,
-  endOfMonth,
-  endOfWeek,
-} from 'date-fns';
-import classnames from 'classnames';
-import {
-  addModalSelectedDateState,
-  filterByDateSelectedDateState,
-  filterByWeekStartDateState,
+  byDateSelectedDateState,
+  byWeekStartDateState,
   transactionState,
 } from 'recoil/atom';
 import {
-  selectedDateSelector,
   selectedMiniDateSelector,
   toggleCalendarSelector,
 } from 'recoil/selector';
-import { TransactionType } from 'types/types';
+import { DateCellType, TransactionType } from 'types/types';
 import styles from './DateCells.module.scss';
 
-type DateCellType = {
-  currentMonth: Date;
-  tabName: string;
-};
-
 export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
-  const monthStart = startOfMonth(currentMonth);
-  const monthEnd = endOfMonth(currentMonth);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
+  const monthStart = F.startOfMonth(currentMonth);
+  const monthEnd = F.endOfMonth(currentMonth);
+  const startDate = F.startOfWeek(monthStart);
+  const endDate = F.endOfWeek(monthEnd);
 
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const selectedDate = useRecoilValue(
-    tabName === 'byDate'
-      ? filterByDateSelectedDateState
-      : filterByWeekStartDateState
+    tabName === 'byDate' ? byDateSelectedDateState : byWeekStartDateState
   );
   const setSelectedDate = useSetRecoilState(selectedMiniDateSelector);
 
@@ -54,7 +34,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
 
   while (date <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formatDate = format(date, 'd');
+      formatDate = F.format(date, 'd');
       const cloneDay = date;
 
       dates.push(
@@ -65,6 +45,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
             setSelectedDate(() => {
               return { flag: tabName, newDate: cloneDay };
             });
+
             setExpenseTransaction({
               ...expenseTransaction,
               date: cloneDay,
@@ -79,13 +60,13 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
         >
           <span
             className={
-              !isSameMonth(date, monthStart)
+              !F.isSameMonth(date, monthStart)
                 ? styles.disabled
-                : isSameDay(date, currentMonth)
+                : F.isSameDay(date, currentMonth)
                 ? styles.current
-                : isSameDay(date, selectedDate)
+                : F.isSameDay(date, selectedDate)
                 ? styles.selected
-                : format(currentMonth, 'M') !== format(date, 'M')
+                : F.format(currentMonth, 'M') !== F.format(date, 'M')
                 ? styles.notValid
                 : styles.valid
             }
@@ -95,18 +76,11 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
         </div>
       );
 
-      date = addDays(date, 1);
+      date = F.addDays(date, 1);
     }
 
     rows.push(
-      <div
-        id={date.toString()}
-        key={date.toString()}
-        className={classnames(
-          styles.week
-          // selectedWeek === startOfWeek(date) && styles.selectedWeek
-        )}
-      >
+      <div id={date.toString()} key={date.toString()} className={styles.week}>
         {dates}
       </div>
     );

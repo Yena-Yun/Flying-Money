@@ -1,48 +1,32 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfMonth,
-  startOfWeek,
-  addDays,
-  endOfMonth,
-  endOfWeek,
-} from 'date-fns';
-import {
-  addModalSelectedDateState,
-  filterByDateSelectedDateState,
-  transactionState,
-} from 'recoil/atom';
+import * as F from 'date-fns';
+import { addModalDateState, transactionState } from 'recoil/atom';
 import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
-import { TransactionType } from 'types/types';
+import { DateCellType, TransactionType } from 'types/types';
 import styles from './DateCells.module.scss';
 
-interface DateCellProps {
-  currentMonth: Date;
-}
-
-export const DateCells = ({ currentMonth }: DateCellProps) => {
-  const addModalSelectedDate = useRecoilValue(addModalSelectedDateState);
+export const DateCells = ({
+  currentMonth,
+}: Pick<DateCellType, 'currentMonth'>) => {
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
+  const addModalDate = useRecoilValue(addModalDateState);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TransactionType>(transactionState);
 
-  const monthStart = startOfMonth(currentMonth);
-  const monthEnd = endOfMonth(currentMonth);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
+  const monthStart = F.startOfMonth(currentMonth);
+  const monthEnd = F.endOfMonth(currentMonth);
+  const startDate = F.startOfWeek(monthStart);
+  const endDate = F.endOfWeek(monthEnd);
 
   const rows: JSX.Element[] = [];
-
   let dates: JSX.Element[] = [];
   let date = startDate;
   let formatDate = '';
 
   while (date <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formatDate = format(date, 'd');
+      formatDate = F.format(date, 'd');
       const cloneDay = date;
 
       dates.push(
@@ -60,13 +44,13 @@ export const DateCells = ({ currentMonth }: DateCellProps) => {
         >
           <span
             className={
-              !isSameMonth(date, monthStart)
+              !F.isSameMonth(date, monthStart)
                 ? styles.disabled
-                : isSameDay(date, currentMonth)
+                : F.isSameDay(date, currentMonth)
                 ? styles.current
-                : isSameDay(date, addModalSelectedDate)
+                : F.isSameDay(date, addModalDate)
                 ? styles.selected
-                : format(currentMonth, 'M') !== format(date, 'M')
+                : F.format(currentMonth, 'M') !== F.format(date, 'M')
                 ? styles.notValid
                 : styles.valid
             }
@@ -76,7 +60,7 @@ export const DateCells = ({ currentMonth }: DateCellProps) => {
         </div>
       );
 
-      date = addDays(date, 1);
+      date = F.addDays(date, 1);
     }
 
     rows.push(
