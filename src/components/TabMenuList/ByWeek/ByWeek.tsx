@@ -3,14 +3,15 @@ import classnames from 'classnames';
 import { addDays } from 'date-fns';
 import { CiCalendar } from 'react-icons/ci';
 import { WeekCalendar } from 'components/WeekCalendar/WeekCalendar';
-import { addModalSelectedDateState, isOpenCalendarState } from 'recoil/atom';
+import { filterByWeekStartDateState, isOpenCalendarState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
+import { formatDateWeekday } from 'hooks/formatDate';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
   const isOpenCalender = useRecoilValue(isOpenCalendarState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const selectedDate = useRecoilValue(addModalSelectedDateState);
+  const selectedDate = useRecoilValue(filterByWeekStartDateState);
 
   return (
     <div className={styles.container}>
@@ -23,25 +24,13 @@ export const ByWeek = () => {
           <CiCalendar />
         </div>
         {isOpenCalender && <WeekCalendar />}
-        <div className={styles.selectedDate}>{`${selectedDate.toLocaleString(
-          'ko-KR',
-          {
-            year: '2-digit',
-            month: '2-digit',
-            day: '2-digit',
-            weekday: 'long',
-          }
-        )}`}</div>
+        <div className={styles.selectedDate}>
+          {formatDateWeekday(selectedDate)}
+        </div>
         -
-        <div className={styles.selectedDate}>{`${addDays(
-          selectedDate,
-          6
-        ).toLocaleString('ko-KR', {
-          year: '2-digit',
-          month: '2-digit',
-          day: '2-digit',
-          weekday: 'long',
-        })}`}</div>
+        <div className={styles.selectedDate}>
+          {formatDateWeekday(addDays(selectedDate, 6))}
+        </div>
       </div>
 
       <div className={classnames(styles.inputGroup, styles.totalExpense)}>
