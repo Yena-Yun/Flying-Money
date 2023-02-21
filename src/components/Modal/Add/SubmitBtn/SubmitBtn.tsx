@@ -28,19 +28,38 @@ export const SubmitBtn = () => {
   );
   const resetTransaction = useResetRecoilState(transactionState);
 
+  const validateList = () => {
+    const noNameItem = items.map((item) => !item.name)[0];
+    const noPriceItem = items.map((item) => !item.price)[0];
+
+    if (noNameItem && noPriceItem) {
+      alert('항목을 하나 이상 입력해주세요!');
+    } else if (noNameItem) {
+      alert('항목명을 입력해주세요!');
+    } else if (noPriceItem) {
+      alert('가격을 입력해주세요!');
+    } else if (!noNameItem && !noPriceItem) {
+      return true;
+    }
+  };
+
   const submitTransaction = () => {
-    setList({
-      ...list,
-      items,
-    });
+    if (!list.title) {
+      alert('제목을 입력해주세요!');
+    } else {
+      if (validateList()) {
+        setList({
+          ...list,
+          items,
+        });
 
-    setListToTransactionList();
-    setTransactionToTransactionList();
-
-    resetItems();
-    resetTransaction();
-
-    setCloseModal('add');
+        setListToTransactionList();
+        setTransactionToTransactionList();
+        resetItems();
+        resetTransaction();
+        setCloseModal('add');
+      }
+    }
   };
 
   return (
