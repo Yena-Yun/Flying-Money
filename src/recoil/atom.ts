@@ -77,14 +77,14 @@ export const transactionListState = atom<TransactionType[]>({
   default: [],
 });
 
-export const isOpenTagPopupState = atom({
-  key: 'isOpenTagPopup',
-  default: false,
-});
-
 export const savedTagGroupState = atom<TagType[]>({
   key: 'savedTagGroup',
   default: [],
+});
+
+export const isOpenTagPopupState = atom({
+  key: 'isOpenTagPopup',
+  default: false,
 });
 
 export const clickedIndexState = atom({
