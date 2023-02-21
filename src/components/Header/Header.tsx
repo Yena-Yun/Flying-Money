@@ -1,4 +1,4 @@
-import { formatRootHeaderDate } from 'hooks/formatDate';
+import { formatRootHeaderDate } from 'utils/hooks/formatDate';
 import { IoWifi, IoBatteryHalfOutline, IoCellular } from 'react-icons/io5';
 import styles from './Header.module.scss';
 

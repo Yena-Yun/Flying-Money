@@ -7,7 +7,7 @@ import {
 import { toggleModalSelector, toggleToastSelector } from 'recoil/selector';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Toast } from '../Toast/Toast';
-import { formatDate } from 'hooks/formatDate';
+import { formatDate } from 'utils/hooks/formatDate';
 import styles from './Detail.module.scss';
 
 export const Detail = () => {

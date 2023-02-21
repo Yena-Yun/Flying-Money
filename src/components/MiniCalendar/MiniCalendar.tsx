@@ -5,10 +5,7 @@ import { DateCells } from './DateCells/DateCells';
 import { DAYS } from 'utils/constants/constants';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import styles from './MiniCalendar.module.scss';
-import {
-  filterByDateSelectedDateState,
-  filterByWeekStartDateState,
-} from 'recoil/atom';
+import { byDateSelectedDateState, byWeekStartDateState } from 'recoil/atom';
 
 type MiniCalendarType = {
   tabName: string;
@@ -16,9 +13,7 @@ type MiniCalendarType = {
 
 export const MiniCalendar = ({ tabName }: MiniCalendarType) => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
-    tabName === 'byDate'
-      ? filterByDateSelectedDateState
-      : filterByWeekStartDateState
+    tabName === 'byDate' ? byDateSelectedDateState : byWeekStartDateState
   );
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
