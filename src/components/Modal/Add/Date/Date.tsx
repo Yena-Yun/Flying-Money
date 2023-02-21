@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { addModalDateState } from 'recoil/atom';
 import { toggleCalendarSelector } from 'recoil/selector';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
-import { formatDateWeekday } from 'utils/hooks/formatDate';
+import { formatDate } from 'utils/hooks/formatDate';
 import styles from './Date.module.scss';
 
 export const Date = () => {
@@ -16,7 +16,7 @@ export const Date = () => {
         className={styles.selectedDate}
         onClick={() => setToggleCalendar('add')}
       >
-        {formatDateWeekday(selectedDate)}
+        {formatDate(selectedDate)}
       </div>
     </div>
   );
