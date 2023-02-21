@@ -24,13 +24,10 @@ interface DateCellProps {
 
 export const DateCells = ({ currentMonth }: DateCellProps) => {
   const addModalSelectedDate = useRecoilValue(addModalSelectedDateState);
-  const filterByDateSelectedDate = useRecoilValue(
-    filterByDateSelectedDateState
-  );
+  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const setSelectedDate = useSetRecoilState(selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TransactionType>(transactionState);
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
