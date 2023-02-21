@@ -24,6 +24,7 @@ export const Header = () => {
         lists.flatMap(({ items }) => items.map(({ price }) => price))
       );
   };
+
   return (
     <div className={styles.header}>
       <div className={classnames(styles.inputGroup, styles.period)}>
