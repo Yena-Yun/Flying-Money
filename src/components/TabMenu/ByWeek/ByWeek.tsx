@@ -66,6 +66,7 @@ export const ByWeek = () => {
                 className={styles.textarea}
                 rows={8}
                 cols={32}
+                onChange={() => {}}
                 onBlur={() => setIsOpenTextarea(false)}
                 autoFocus
               >
