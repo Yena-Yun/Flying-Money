@@ -1,26 +1,30 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import classnames from 'classnames';
+import { isSameDay } from 'date-fns';
 import {
   byDateSelectedDateState,
   isOpenByDateCalendarState,
   transactionListState,
 } from 'recoil/atom';
-import { toggleCalendarSelector } from 'recoil/selector';
+import {
+  selectedMiniDateSelector,
+  toggleCalendarSelector,
+} from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
-import { formatDate } from 'utils/hooks/formatDate';
-import { CiCalendar } from 'react-icons/ci';
-import styles from './Header.module.scss';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
+import { formatDate } from 'utils/hooks/formatDate';
+import { formatMoney } from 'utils/hooks/formatMoney';
+import styles from './Header.module.scss';
 
 export const Header = () => {
   const isOpenCalender = useRecoilValue(isOpenByDateCalendarState);
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const selectedDate = useRecoilValue(byDateSelectedDateState);
+  const setSelectDate = useSetRecoilState(selectedMiniDateSelector);
   const transactionList = useRecoilValue(transactionListState);
 
-  const filterPriceOnDate = () => {
+  const filterPriceByDate = () => {
     return transactionList
-      .filter(({ date }) => selectedDate.toString().includes(date.toString()))
+      .filter(({ date }) => isSameDay(date, selectedDate))
       .flatMap(({ lists }) =>
         lists.flatMap(({ items }) => items.map(({ price }) => price))
       );
@@ -30,19 +34,21 @@ export const Header = () => {
     <div className={styles.header}>
       {isOpenCalender && <MiniCalendar tabName='byDate' />}
 
-      <div className={classnames(styles.inputGroup, styles.period)}>
+      <div className={styles.period}>
         <CalendarIcon />
         <div
           className={styles.selectedDate}
-          onClick={() => setToggleCalendar('byDate')}
+          onClick={() => {
+            setToggleCalendar('byDate');
+            setSelectDate({ flag: 'byDate', newDate: selectedDate });
+          }}
         >
           {formatDate(selectedDate)}
         </div>
       </div>
-      <div className={classnames(styles.inputGroup, styles.totalExpense)}>
-        <div className={styles.expense}>
-          총 {filterPriceOnDate().reduce((acc, cur) => acc + cur, 0)}원
-        </div>
+
+      <div className={styles.totalExpense}>
+        {formatMoney(filterPriceByDate().reduce((acc, cur) => acc + cur, 0))}
       </div>
     </div>
   );
