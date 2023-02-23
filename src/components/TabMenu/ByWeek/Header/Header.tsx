@@ -36,7 +36,7 @@ export const Header = () => {
       </div>
 
       {isSelectSomeDate && (
-        <p className={styles.guide}>시작 날짜를 선택하세요</p>
+        <p className={styles.guide}>주차를 선택하세요 (월요일만 선택 가능)</p>
       )}
     </div>
   );
