@@ -21,10 +21,6 @@ export const ByDateDetail = () => {
   const { lists } = transactionList.find(({ id }) => id === clickedIndex)!;
   const { title, items } = lists.find(({ id }) => id === clickedItemIndex)!;
 
-  const confirmTransaction = () => {
-    setCloseModal('byDateDetail');
-  };
-
   return (
     <>
       {isOpenToast && <Toast role='byDateDetail' />}
@@ -50,7 +46,12 @@ export const ByDateDetail = () => {
         </div>
 
         <div className={styles.actionButtonContainer}>
-          <button className={styles.confirmButton} onClick={confirmTransaction}>
+          <button
+            className={styles.confirmButton}
+            onClick={() => {
+              setCloseModal('byDateDetail');
+            }}
+          >
             확인
           </button>
           <button
