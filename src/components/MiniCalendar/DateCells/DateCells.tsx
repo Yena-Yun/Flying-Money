@@ -34,17 +34,21 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
           className={styles.date}
           key={date.toString()}
           onClick={() => {
-            setSelectedDate(() => ({ flag: tabName, newDate: cloneDay }));
-
-            setExpenseTransaction({
-              ...expenseTransaction,
-              date: cloneDay,
-            });
-
-            if (tabName === 'byDate') {
-              setToggleCalendar('byDate');
+            if (tabName === 'byWeek' && !F.isMonday(cloneDay)) {
+              return;
             } else {
-              setToggleCalendar('byWeek');
+              setSelectedDate(() => ({ flag: tabName, newDate: cloneDay }));
+
+              setExpenseTransaction({
+                ...expenseTransaction,
+                date: cloneDay,
+              });
+
+              if (tabName === 'byDate') {
+                setToggleCalendar('byDate');
+              } else {
+                setToggleCalendar('byWeek');
+              }
             }
           }}
         >
@@ -54,6 +58,8 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
                 ? styles.disabled
                 : F.isSameDay(date, currentMonth)
                 ? styles.current
+                : tabName === 'byWeek' && !F.isMonday(date)
+                ? styles.disabled
                 : ''
             }
           >
