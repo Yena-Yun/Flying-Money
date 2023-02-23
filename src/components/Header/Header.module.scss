@@ -4,12 +4,9 @@
   @include flexbox-row(space-between, center);
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  padding: 0.6rem 1rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--color-primary);
-  background-color: var(--color-white);
+  padding: 0.5rem 1rem 0.3rem;
+  border-bottom: 0.8px solid var(--color-gray-3);
   z-index: 10;
 
   .time {

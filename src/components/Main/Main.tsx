@@ -9,7 +9,6 @@ export const Main = () => {
     <div className={styles.container}>
       <div className={styles.titleHeader}>
         <h1 className={styles.title}>Flying Money</h1>
-        <p className={styles.subTitle}>오늘의 지출</p>
       </div>
       <figure className={styles.mainImageContainer}>
         <img src={'/images/flying_money.png'} alt='main' />

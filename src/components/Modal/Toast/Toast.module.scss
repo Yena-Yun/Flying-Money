@@ -18,10 +18,12 @@
 }
 
 .popup {
+  @include flexbox-column;
+
   position: relative;
-  width: 20rem;
+  width: 18rem;
   height: fit-content;
-  padding: 2rem 1.8rem;
+  padding: 2rem 1.8rem 1.5rem;
   background-color: var(--color-white);
   border-radius: 1rem;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
@@ -35,12 +37,11 @@
   }
 
   .deleteButton {
-    flex: 1;
-    width: 100%;
+    width: 90%;
     height: 3rem;
-    color: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
     border-radius: 6px;
-    background: var(--color-primary);
     cursor: pointer;
   }
 }

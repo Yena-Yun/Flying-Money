@@ -2,11 +2,11 @@
 
 .container {
   @include flexbox-column;
-  padding: 2.5rem 0 1.5rem;
+  padding: 2rem 0 1rem;
 
   .titleHeader {
     @include flexbox-column;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 
     .title {
       font-size: var(--text-size-xl);
@@ -15,8 +15,8 @@
   }
 
   .mainImageContainer {
-    width: 5.5rem;
-    margin-bottom: 0.8rem;
+    width: 5.2rem;
+    margin-bottom: 0.6rem;
 
     img {
       width: 100%;
@@ -25,5 +25,6 @@
 
   .randomPhrases {
     @include flexbox-column;
+    font-size: var(--text-size-md);
   }
 }
