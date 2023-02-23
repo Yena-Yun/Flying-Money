@@ -1,33 +1,27 @@
 @import 'styles/mixins';
 
-.inputGroup {
+.header {
   position: relative;
   gap: 1rem;
+  min-height: 2.5rem;
   z-index: 300;
-
-  .header {
-    min-height: 1rem;
-    font-size: 1.1rem;
-    color: var(--color-gray-4);
-
-    .guide {
-      padding-left: 1.5rem;
-    }
-  }
 
   .period {
     @include flexbox;
+    margin-bottom: -0.2rem;
+    font-size: var(--text-size-md);
     gap: 0.5rem;
 
-    .selectedDate {
-      font-size: var(--text-size-md);
-
-      &.startDate {
-        &:hover {
-          text-decoration: underline;
-          cursor: pointer;
-        }
+    .startDate {
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
+  }
+
+  .guide {
+    padding-left: 2rem;
+    color: var(--color-gray-4);
   }
 }
