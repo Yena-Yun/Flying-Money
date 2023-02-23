@@ -1,18 +1,48 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { toggleCalendarSelector } from 'recoil/selector';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { addDays, isWithinInterval, subDays } from 'date-fns';
+import {
+  byWeekEndDateState,
+  byWeekStartDateState,
+  transactionListState,
+} from 'recoil/atom';
+import {
+  selectedMiniDateSelector,
+  toggleCalendarSelector,
+} from 'recoil/selector';
 import { Header } from './Header/Header';
+import { formatMoney } from 'utils/hooks/formatMoney';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
   const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const [isOpenTextarea, setIsOpenTextarea] = useState(false);
+  const startDate = useRecoilValue(byWeekStartDateState);
+  const endDate = useRecoilValue(byWeekEndDateState);
+  const setSelectDate = useSetRecoilState(selectedMiniDateSelector);
+  const transactionList = useRecoilValue(transactionListState);
+
+  const filterPriceByWeek = () => {
+    return transactionList
+      .filter(({ date }) =>
+        isWithinInterval(date, {
+          start: subDays(startDate, 1),
+          end: addDays(endDate, 1),
+        })
+      )
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.map(({ price }) => price))
+      );
+  };
 
   return (
     <>
       <div
         className={styles.background}
-        onClick={() => setToggleCalendar('byWeek')}
+        onClick={() => {
+          setToggleCalendar('byWeek');
+          setSelectDate({ flag: 'byWeek', newDate: startDate });
+        }}
       ></div>
       <div className={styles.container}>
         <Header />
@@ -20,7 +50,11 @@ export const ByWeek = () => {
         <div className={styles.totalExpense}>
           <div className={styles.info}>
             <h3 className={styles.subTitle}>총 지출</h3>
-            <div className={styles.expense}>기간 내 지출 금액</div>
+            <div className={styles.expense}>
+              {formatMoney(
+                filterPriceByWeek().reduce((acc, cur) => acc + cur, 0)
+              )}
+            </div>
           </div>
           <button className={styles.detailButton}>상세</button>
         </div>
