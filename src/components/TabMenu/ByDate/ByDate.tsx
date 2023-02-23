@@ -7,6 +7,7 @@ import {
 } from 'recoil/atom';
 import { toggleModalSelector } from 'recoil/selector';
 import { Header } from './Header/Header';
+import { formatMoney } from 'utils/hooks/formatMoney';
 import styles from './ByDate.module.scss';
 
 export const ByDate = () => {
@@ -30,6 +31,7 @@ export const ByDate = () => {
   return (
     <div className={styles.container}>
       <Header />
+
       {lists.length > 0 && (
         <ul className={styles.filteredList}>
           {lists.map(({ id, title, items }) => (
@@ -44,7 +46,7 @@ export const ByDate = () => {
                   <div className={styles.name}>
                     {items[0].name !== '' && '•'} {name}
                   </div>
-                  <div className={styles.price}>{price}</div>
+                  <div className={styles.price}>{formatMoney(price)}</div>
                 </div>
               ))}
             </li>

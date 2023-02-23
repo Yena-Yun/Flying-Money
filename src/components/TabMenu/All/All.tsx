@@ -6,6 +6,7 @@ import {
 } from 'recoil/atom';
 import { toggleModalSelector } from 'recoil/selector';
 import { formatDate } from 'utils/hooks/formatDate';
+import { formatMoney } from 'utils/hooks/formatMoney';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import styles from './All.module.scss';
 
@@ -51,9 +52,11 @@ export const All = () => {
                   </div>
                 </div>
                 <div className={styles.price}>
-                  {items
-                    .map(({ price }) => price)
-                    .reduce((acc, cur) => acc + cur)}
+                  {formatMoney(
+                    items
+                      .map(({ price }) => price)
+                      .reduce((acc, cur) => acc + cur)
+                  )}
                 </div>
               </div>
             ))}
