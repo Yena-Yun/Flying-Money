@@ -35,9 +35,9 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className={styles.guide}>
-        {isSelectSomeDate && <p>시작 날짜를 선택하세요</p>}
-      </div>
+      {isSelectSomeDate && (
+        <p className={styles.guide}>시작 날짜를 선택하세요</p>
+      )}
     </div>
   );
 };
