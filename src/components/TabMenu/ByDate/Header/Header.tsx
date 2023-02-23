@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isSameDay } from 'date-fns';
 import {
@@ -21,6 +22,7 @@ export const Header = () => {
   const selectedDate = useRecoilValue(byDateSelectedDateState);
   const setSelectDate = useSetRecoilState(selectedMiniDateSelector);
   const transactionList = useRecoilValue(transactionListState);
+  const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
 
   const filterPriceByDate = () => {
     return transactionList
@@ -31,25 +33,31 @@ export const Header = () => {
   };
 
   return (
-    <div className={styles.header}>
-      {isOpenCalender && <MiniCalendar tabName='byDate' />}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        {isOpenCalender && <MiniCalendar tabName='byDate' />}
 
-      <div className={styles.period}>
-        <CalendarIcon />
-        <div
-          className={styles.selectedDate}
-          onClick={() => {
-            setToggleCalendar('byDate');
-            setSelectDate({ flag: 'byDate', newDate: selectedDate });
-          }}
-        >
-          {formatDate(selectedDate)}
+        <div className={styles.period}>
+          <CalendarIcon />
+          <div
+            className={styles.selectedDate}
+            onClick={() => {
+              setToggleCalendar('byDate');
+              setSelectDate({ flag: 'byDate', newDate: selectedDate });
+              setIsSelectSomeDate(false);
+            }}
+          >
+            {formatDate(selectedDate)}
+          </div>
+        </div>
+
+        <div className={styles.totalExpense}>
+          {formatMoney(filterPriceByDate().reduce((acc, cur) => acc + cur, 0))}
         </div>
       </div>
-
-      <div className={styles.totalExpense}>
-        {formatMoney(filterPriceByDate().reduce((acc, cur) => acc + cur, 0))}
-      </div>
+      {isSelectSomeDate && (
+        <p className={styles.guide}>확인할 날짜를 선택하세요</p>
+      )}
     </div>
   );
 };
