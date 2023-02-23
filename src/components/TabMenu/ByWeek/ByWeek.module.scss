@@ -6,4 +6,45 @@
   width: 100%;
   min-height: 12rem;
   padding-bottom: 1.5rem;
+
+  .subTitle {
+    margin-bottom: 0.4rem;
+  }
+
+  .totalExpense {
+    @include flexbox-row(space-between, center);
+    width: 100%;
+
+    .detailButton {
+      padding: 0.3rem 0.5rem;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+      border-radius: 0.4rem;
+    }
+  }
+
+  .weekDiary {
+    @include flexbox-row(space-between, flex-start);
+    width: 100%;
+
+    .textarea {
+      border: none;
+      outline: none;
+      resize: none;
+
+      &:focus {
+        box-shadow: 0 0 3px 1px var(--color-dark-pink);
+      }
+    }
+
+    .editButton {
+      margin-top: 1rem;
+      padding: 0.3rem 0.5rem;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-pink);
+      border: 2px solid var(--color-pink);
+      border-radius: 0.4rem;
+    }
+  }
 }
