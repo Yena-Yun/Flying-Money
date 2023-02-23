@@ -1,6 +1,7 @@
+import { addDays } from 'date-fns';
 import { selector, DefaultValue } from 'recoil';
-import * as A from './atom';
 import uuid4 from 'uuid4';
+import * as A from './atom';
 
 export const toggleModalSelector = selector({
   key: 'toggleModal',
@@ -71,13 +72,14 @@ export const toggleCalendarSelector = selector({
 export const selectedDateSelector = selector({
   key: 'handleSelectDate',
   get: () => {
-    return new Date(); // void 에러 피하기 -> get에 default값 입력
+    return new Date();
   },
   set: ({ set }, newDate) => {
-    // DefaultValue 임포트
     if (newDate instanceof DefaultValue) {
       return newDate;
-    } else set(A.addModalDateState, newDate);
+    } else {
+      set(A.addModalDateState, newDate);
+    }
   },
 });
 
@@ -97,7 +99,23 @@ export const selectedMiniDateSelector = selector({
         set(A.byDateSelectedDateState, newValue.newDate);
       } else {
         set(A.byWeekStartDateState, newValue.newDate);
+        set(A.byWeekEndDateState, addDays(newValue.newDate, 6));
       }
+    }
+  },
+});
+
+export const startDateSelector = selector({
+  key: 'handleStartDate',
+  get: () => {
+    return new Date();
+  },
+  set: ({ set }, newDate) => {
+    if (newDate instanceof DefaultValue) {
+      return newDate;
+    } else {
+      set(A.byWeekStartDateState, newDate);
+      set(A.byWeekEndDateState, addDays(newDate, 6));
     }
   },
 });
@@ -205,19 +223,6 @@ export const addTagToItemSelector = selector({
   },
 });
 
-export const deleteTransactionSelector = selector({
-  key: 'deleteTransaction',
-  get: () => {},
-  set: ({ get, set }) => {
-    const transaction = get(A.transactionListState);
-    const index = get(A.clickedIndexState);
-
-    const deletedList = transaction.filter(({ id }) => id !== index);
-
-    set(A.transactionListState, deletedList);
-  },
-});
-
 export const deleteItemSelector = selector({
   key: 'deleteItem',
   get: () => {},
@@ -237,6 +242,19 @@ export const deleteItemSelector = selector({
         return transaction;
       }
     });
+
+    set(A.transactionListState, deletedList);
+  },
+});
+
+export const deleteTransactionSelector = selector({
+  key: 'deleteTransaction',
+  get: () => {},
+  set: ({ get, set }) => {
+    const transaction = get(A.transactionListState);
+    const index = get(A.clickedIndexState);
+
+    const deletedList = transaction.filter(({ id }) => id !== index);
 
     set(A.transactionListState, deletedList);
   },
