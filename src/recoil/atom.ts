@@ -57,6 +57,11 @@ export const byWeekStartDateState = atom({
   default: new Date(),
 });
 
+export const byWeekEndDateState = atom({
+  key: 'filterByWeekEndDate',
+  default: new Date(),
+});
+
 export const itemState = atom<T.ItemType[]>({
   key: 'item',
   default: [{ id: uuid4(), name: '', price: 0, tag: '' }],
