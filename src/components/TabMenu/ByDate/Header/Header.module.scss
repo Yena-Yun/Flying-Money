@@ -1,28 +1,37 @@
 @import 'styles/mixins';
 
-.header {
-  @include flexbox-row(space-between, flex-start);
+.container {
   margin-bottom: 1rem;
 
-  .period {
-    @include flexbox;
-    position: relative;
-    gap: 1rem;
+  .header {
+    @include flexbox-row(space-between, flex-start);
 
-    .selectedDate {
-      font-size: var(--text-size-md);
-      cursor: pointer;
+    .period {
+      @include flexbox;
+      position: relative;
+      gap: 0.5rem;
 
-      &:hover {
-        text-decoration: underline;
+      .selectedDate {
+        font-size: var(--text-size-md);
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
+    }
+
+    .totalExpense {
+      margin-right: 1rem;
+      font-size: var(--text-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-blue);
     }
   }
 
-  .totalExpense {
-    margin-right: 1rem;
-    font-size: var(--text-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-blue);
+  .guide {
+    margin-top: -0.3rem;
+    padding-left: 1.8rem;
+    color: var(--color-gray-4);
   }
 }

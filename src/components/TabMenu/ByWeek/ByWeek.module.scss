@@ -34,6 +34,10 @@
     @include flexbox-row(space-between, flex-start);
     width: 100%;
 
+    p {
+      font-size: var(--text-size-md);
+    }
+
     .textarea {
       border: none;
       outline: none;
