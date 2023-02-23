@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { itemState, isOpenCalendarState } from 'recoil/atom';
 import { ModalLayout } from '../Layout/ModalLayout';
+import { Calendar } from 'components/Calendar/Calendar';
 import { Date } from './Date/Date';
 import { Title } from './Title/Title';
 import { List } from './List/List';
 import { SubmitBtn } from './SubmitBtn/SubmitBtn';
-import { Calendar } from 'components/Calendar/Calendar';
 import { ItemType } from 'types/types';
 import styles from './Add.module.scss';
 
