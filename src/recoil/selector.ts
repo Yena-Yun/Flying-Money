@@ -1,4 +1,4 @@
-import { addDays } from 'date-fns';
+import { addDays, isSameDay } from 'date-fns';
 import { selector, DefaultValue } from 'recoil';
 import uuid4 from 'uuid4';
 import * as A from './atom';
@@ -181,8 +181,8 @@ export const setTransactionListSelector = selector({
     const transaction = get(A.transactionState);
     const transactionList = get(A.transactionListState);
 
-    const selectedTransaction = transactionList.find(
-      (transactionListItem) => transactionListItem.id === transaction.id
+    const selectedTransaction = transactionList.find(({ date }) =>
+      isSameDay(date, transaction.date)
     );
 
     const addedTransaction = !selectedTransaction
