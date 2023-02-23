@@ -166,7 +166,8 @@ export const setListToTransactionSelector = selector({
     const transaction = get(A.transactionState);
 
     set(A.transactionState, {
-      ...transaction, // id, date
+      ...transaction, // date
+      id: uuid4(),
       lists: [...transaction.lists, { ...list, id: uuid4() }],
     });
   },
@@ -184,13 +185,12 @@ export const setTransactionListSelector = selector({
       (transactionListItem) => transactionListItem.id === transaction.id
     );
 
-    const addedTransaction =
-      selectedTransaction === undefined
-        ? transaction
-        : {
-            ...selectedTransaction,
-            lists: [...selectedTransaction.lists, ...transaction.lists],
-          };
+    const addedTransaction = !selectedTransaction
+      ? transaction
+      : {
+          ...selectedTransaction,
+          lists: [...selectedTransaction.lists, ...transaction.lists],
+        };
 
     const filteredTransaction = transactionList.filter(
       (transactionListItem) => transactionListItem.id !== addedTransaction.id
