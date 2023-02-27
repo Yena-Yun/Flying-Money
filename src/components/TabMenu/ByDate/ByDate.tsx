@@ -1,21 +1,16 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  transactionListState,
-  clickedIndexState,
-  clickedItemIndexState,
-  byDateSelectedDateState,
-} from 'recoil/atom';
-import { toggleModalSelector } from 'recoil/selector';
+import { Main, Date, Index } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
-import { formatMoney } from 'utils/hooks/formatMoney';
+import { Hook } from 'utils';
 import styles from './ByDate.module.scss';
 
 export const ByDate = () => {
-  const setOpenModal = useSetRecoilState(toggleModalSelector);
-  const selectedDate = useRecoilValue(byDateSelectedDateState);
-  const transactionList = useRecoilValue(transactionListState);
-  const setClickedIndex = useSetRecoilState(clickedIndexState);
-  const setClickedItemIndex = useSetRecoilState(clickedItemIndexState);
+  const transactionList = useRecoilValue(Main.transactionListState);
+  const selectedDate = useRecoilValue(Date.byDateSelectedDateState);
+  const setClickedIndex = useSetRecoilState(Index.clickedIndexState);
+  const setClickedItemIndex = useSetRecoilState(Index.clickedItemIndexState);
+  const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   const { id: index, lists } = transactionList.filter(
     ({ date }) =>
@@ -46,7 +41,7 @@ export const ByDate = () => {
                   <div className={styles.name}>
                     {items[0].name !== '' && '•'} {name}
                   </div>
-                  <div className={styles.price}>{formatMoney(price)}</div>
+                  <div className={styles.price}>{Hook.formatMoney(price)}</div>
                 </div>
               ))}
             </li>

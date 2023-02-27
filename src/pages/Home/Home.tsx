@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import * as A from 'recoil/atom';
+import { Open, Index } from 'recoil/atom';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
 import { Add } from 'components/Modal/Add/Add';
@@ -9,13 +9,13 @@ import { ByDateDetail } from 'components/TabMenu/ByDate/Detail/Detail';
 import styles from './Home.module.scss';
 
 export const Home = () => {
-  const isOpenAddModal = useRecoilValue(A.isOpenAddModalState);
-  const isOpenDetailModal = useRecoilValue(A.isOpenDetailModalState);
+  const isOpenAddModal = useRecoilValue(Open.isOpenAddModalState);
+  const isOpenDetailModal = useRecoilValue(Open.isOpenDetailModalState);
   const isOpenByDateDetailModal = useRecoilValue(
-    A.isOpenByDateDetailModalState
+    Open.isOpenByDateDetailModalState
   );
-  const clickedIndex = useRecoilValue(A.clickedIndexState);
-  const clickedItemIndex = useRecoilValue(A.clickedItemIndexState);
+  const clickedIndex = useRecoilValue(Index.clickedIndexState);
+  const clickedItemIndex = useRecoilValue(Index.clickedItemIndexState);
 
   return (
     <>

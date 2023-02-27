@@ -1,22 +1,22 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import * as F from 'date-fns';
-import { transactionState } from 'recoil/atom';
-import { selectedDateSelector, toggleCalendarSelector } from 'recoil/selector';
-import { DateCellType, TransactionType } from 'types/types';
+import { Main } from 'recoil/atom';
+import { SOpen, SDate } from 'recoil/selector';
+import { DateFn } from 'utils';
+import * as T from 'types';
 import styles from './DateCells.module.scss';
 
 export const DateCells = ({
   currentMonth,
-}: Pick<DateCellType, 'currentMonth'>) => {
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const setSelectedDate = useSetRecoilState(selectedDateSelector);
+}: Pick<T.DateCellType, 'currentMonth'>) => {
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
+  const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
-    useRecoilState<TransactionType>(transactionState);
+    useRecoilState<T.TransactionType>(Main.transactionState);
 
-  const monthStart = F.startOfMonth(currentMonth);
-  const monthEnd = F.endOfMonth(currentMonth);
-  const startDate = F.startOfWeek(monthStart);
-  const endDate = F.endOfWeek(monthEnd);
+  const monthStart = DateFn.startOfMonth(currentMonth);
+  const monthEnd = DateFn.endOfMonth(currentMonth);
+  const startDate = DateFn.startOfWeek(monthStart);
+  const endDate = DateFn.endOfWeek(monthEnd);
 
   const rows: JSX.Element[] = [];
   let dates: JSX.Element[] = [];
@@ -25,7 +25,7 @@ export const DateCells = ({
 
   while (date <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formatDate = F.format(date, 'd');
+      formatDate = DateFn.format(date, 'd');
       const cloneDay = date;
 
       dates.push(
@@ -45,9 +45,9 @@ export const DateCells = ({
         >
           <span
             className={
-              !F.isSameMonth(date, monthStart)
+              !DateFn.isSameMonth(date, monthStart)
                 ? styles.disabled
-                : F.isSameDay(date, currentMonth)
+                : DateFn.isSameDay(date, currentMonth)
                 ? styles.current
                 : ''
             }
@@ -57,7 +57,7 @@ export const DateCells = ({
         </div>
       );
 
-      date = F.addDays(date, 1);
+      date = DateFn.addDays(date, 1);
     }
 
     rows.push(

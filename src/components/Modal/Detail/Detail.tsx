@@ -1,22 +1,17 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  clickedIndexState,
-  isOpenToastState,
-  transactionListState,
-} from 'recoil/atom';
-import { toggleModalSelector, toggleToastSelector } from 'recoil/selector';
+import { Main, Open, Index } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Toast } from '../Toast/Toast';
-import { formatDate } from 'utils/hooks/formatDate';
+import { Hook } from 'utils';
 import styles from './Detail.module.scss';
-import { formatMoney } from 'utils/hooks/formatMoney';
 
 export const Detail = () => {
-  const isOpenToast = useRecoilValue(isOpenToastState);
-  const setIsOpenToast = useSetRecoilState(toggleToastSelector);
-  const setCloseModal = useSetRecoilState(toggleModalSelector);
-  const transactionList = useRecoilValue(transactionListState);
-  const clickedIndex = useRecoilValue(clickedIndexState);
+  const isOpenToast = useRecoilValue(Open.isOpenToastState);
+  const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
+  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
+  const transactionList = useRecoilValue(Main.transactionListState);
+  const clickedIndex = useRecoilValue(Index.clickedIndexState);
 
   const { date, lists } = transactionList.find(
     ({ id }) => id === clickedIndex
@@ -27,7 +22,7 @@ export const Detail = () => {
       {isOpenToast && <Toast role='detail' />}
       <ModalLayout role='detail'>
         <h2 className={styles.modalTitle}>상세</h2>
-        <div className={styles.date}>{formatDate(date)}</div>
+        <div className={styles.date}>{Hook.formatDate(date)}</div>
 
         <div className={styles.mainContainer}>
           {lists.map(({ id, title, items }) => (
@@ -42,14 +37,16 @@ export const Detail = () => {
                       </div>
                       {tag && <div className={styles.tag}>{tag}</div>}
                     </div>
-                    <div className={styles.price}>{formatMoney(price)}</div>
+                    <div className={styles.price}>
+                      {Hook.formatMoney(price)}
+                    </div>
                   </div>
                 ))}
               </div>
               <div className={styles.total}>
                 Total&nbsp;
                 <span>
-                  {formatMoney(
+                  {Hook.formatMoney(
                     items
                       .map(({ price }) => price)
                       .reduce((acc, cur) => acc + cur)

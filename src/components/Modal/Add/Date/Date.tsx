@@ -1,13 +1,13 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { addModalDateState } from 'recoil/atom';
-import { toggleCalendarSelector } from 'recoil/selector';
+import { Date } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
-import { formatDate } from 'utils/hooks/formatDate';
+import { Hook } from 'utils';
 import styles from './Date.module.scss';
 
-export const Date = () => {
-  const selectedDate = useRecoilValue(addModalDateState);
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+export const AddModalDate = () => {
+  const selectedDate = useRecoilValue(Date.addModalDateState);
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
   return (
     <div className={styles.inputGroup}>
@@ -16,7 +16,7 @@ export const Date = () => {
         className={styles.selectedDate}
         onClick={() => setToggleCalendar('add')}
       >
-        {formatDate(selectedDate)}
+        {Hook.formatDate(selectedDate)}
       </div>
     </div>
   );

@@ -1,43 +1,37 @@
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
-import { itemState, listState, transactionState } from 'recoil/atom';
-import {
-  setTransactionListSelector,
-  setListToTransactionSelector,
-  toggleModalSelector,
-  setItemToListSelector,
-} from 'recoil/selector';
-import { popupToast } from 'utils/hooks/popupToast';
-import { TOAST_ID } from 'utils/constants/constants';
-import { ItemType } from 'types/types';
+import { Main } from 'recoil/atom';
+import { SMain, SOpen } from 'recoil/selector';
+import { Hook, Const } from 'utils';
+import * as T from 'types';
 import styles from './SubmitBtn.module.scss';
 
 export const SubmitBtn = () => {
-  const setCloseModal = useSetRecoilState(toggleModalSelector);
-  const list = useRecoilValue(listState);
-  const items = useRecoilValue<ItemType[]>(itemState);
-
-  const setItemToList = useSetRecoilState(setItemToListSelector);
-  const setListToTransaction = useSetRecoilState(setListToTransactionSelector);
-  const setTransactionToTransactionList = useSetRecoilState(
-    setTransactionListSelector
+  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
+  const list = useRecoilValue(Main.listState);
+  const items = useRecoilValue<T.ItemType[]>(Main.itemState);
+  const resetItems = useResetRecoilState(Main.itemState);
+  const resetList = useResetRecoilState(Main.listState);
+  const resetTransaction = useResetRecoilState(Main.transactionState);
+  const setItemToList = useSetRecoilState(SMain.setItemToListSelector);
+  const setListToTransaction = useSetRecoilState(
+    SMain.setListToTransactionSelector
   );
-
-  const resetItems = useResetRecoilState(itemState);
-  const resetList = useResetRecoilState(listState);
-  const resetTransaction = useResetRecoilState(transactionState);
+  const setTransactionToTransactionList = useSetRecoilState(
+    SMain.setTransactionListSelector
+  );
 
   const validateList = () => {
     const noNameItem = items.map((item) => !item.name)[0];
     const noPriceItem = items.map((item) => !item.price)[0];
 
     if (!list.title) {
-      popupToast('제목을 입력해주세요!', TOAST_ID.TITLE);
+      Hook.popupToast('제목을 입력해주세요!', Const.TOAST_ID.TITLE);
     } else if (noNameItem && noPriceItem) {
-      popupToast('항목을 하나 이상 입력해주세요!', TOAST_ID.ITEM);
+      Hook.popupToast('항목을 하나 이상 입력해주세요!', Const.TOAST_ID.ITEM);
     } else if (noNameItem) {
-      popupToast('항목명을 입력해주세요!', TOAST_ID.NAME);
+      Hook.popupToast('항목명을 입력해주세요!', Const.TOAST_ID.NAME);
     } else if (noPriceItem) {
-      popupToast('가격을 입력해주세요!', TOAST_ID.PRICE);
+      Hook.popupToast('가격을 입력해주세요!', Const.TOAST_ID.PRICE);
     } else if (!noNameItem && !noPriceItem) {
       return true;
     }
@@ -48,11 +42,9 @@ export const SubmitBtn = () => {
       setItemToList();
       setListToTransaction();
       setTransactionToTransactionList();
-
       resetItems();
       resetList();
       resetTransaction();
-
       setCloseModal('add');
     }
   };

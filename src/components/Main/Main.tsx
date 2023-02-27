@@ -1,4 +1,4 @@
-import { RANDOM_PHRASES } from 'utils/constants/constants';
+import { RANDOM_PHRASES } from 'utils/constants';
 import styles from './Main.module.scss';
 
 export const Main = () => {

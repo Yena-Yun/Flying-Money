@@ -1,23 +1,20 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import * as F from 'date-fns';
-import { transactionState } from 'recoil/atom';
-import {
-  selectedMiniDateSelector,
-  toggleCalendarSelector,
-} from 'recoil/selector';
-import { DateCellType, TransactionType } from 'types/types';
+import { DateFn } from 'utils';
+import { Main } from 'recoil/atom';
+import { SDate, SOpen } from 'recoil/selector';
+import * as T from 'types';
 import styles from './DateCells.module.scss';
 
-export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const setSelectedDate = useSetRecoilState(selectedMiniDateSelector);
+export const DateCells = ({ currentMonth, tabName }: T.DateCellType) => {
   const [expenseTransaction, setExpenseTransaction] =
-    useRecoilState<TransactionType>(transactionState);
+    useRecoilState<T.TransactionType>(Main.transactionState);
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
+  const setSelectedDate = useSetRecoilState(SDate.selectedMiniDateSelector);
 
-  const monthStart = F.startOfMonth(currentMonth);
-  const monthEnd = F.endOfMonth(currentMonth);
-  const startDate = F.startOfWeek(monthStart);
-  const endDate = F.endOfWeek(monthEnd);
+  const monthStart = DateFn.startOfMonth(currentMonth);
+  const monthEnd = DateFn.endOfMonth(currentMonth);
+  const startDate = DateFn.startOfWeek(monthStart);
+  const endDate = DateFn.endOfWeek(monthEnd);
 
   const rows: JSX.Element[] = [];
   let dates: JSX.Element[] = [];
@@ -26,7 +23,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
 
   while (date <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formatDate = F.format(date, 'd');
+      formatDate = DateFn.format(date, 'd');
       const cloneDay = date;
 
       dates.push(
@@ -34,7 +31,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
           className={styles.date}
           key={date.toString()}
           onClick={() => {
-            if (tabName === 'byWeek' && !F.isMonday(cloneDay)) {
+            if (tabName === 'byWeek' && !DateFn.isMonday(cloneDay)) {
               return;
             } else {
               setSelectedDate(() => ({ flag: tabName, newDate: cloneDay }));
@@ -54,11 +51,11 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
         >
           <span
             className={
-              !F.isSameMonth(date, monthStart)
+              !DateFn.isSameMonth(date, monthStart)
                 ? styles.disabled
-                : F.isSameDay(date, currentMonth)
+                : DateFn.isSameDay(date, currentMonth)
                 ? styles.current
-                : tabName === 'byWeek' && !F.isMonday(date)
+                : tabName === 'byWeek' && !DateFn.isMonday(date)
                 ? styles.disabled
                 : ''
             }
@@ -68,7 +65,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
         </div>
       );
 
-      date = F.addDays(date, 1);
+      date = DateFn.addDays(date, 1);
     }
 
     rows.push(

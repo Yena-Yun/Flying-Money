@@ -1,18 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-import { itemState, isOpenCalendarState } from 'recoil/atom';
+import { Main, Open } from 'recoil/atom';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
-import { Date } from './Date/Date';
+import { AddModalDate } from './Date/Date';
 import { Title } from './Title/Title';
 import { List } from './List/List';
 import { SubmitBtn } from './SubmitBtn/SubmitBtn';
-import { ItemType } from 'types/types';
+import * as T from 'types';
 import styles from './Add.module.scss';
 
 export const Add = () => {
-  const isOpenCalender = useRecoilValue(isOpenCalendarState);
-  const items = useRecoilValue<ItemType[]>(itemState);
+  const items = useRecoilValue<T.ItemType[]>(Main.itemState);
+  const isOpenCalender = useRecoilValue(Open.isOpenCalendarState);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const Add = () => {
       <h2 className={styles.title}>항목 등록하기</h2>
 
       <div className={styles.mainContainer}>
-        <Date />
+        <AddModalDate />
         <Title />
         <List />
         <div ref={bottomRef} />

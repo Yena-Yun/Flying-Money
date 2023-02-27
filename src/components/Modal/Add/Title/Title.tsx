@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil';
-import { listState } from 'recoil/atom';
+import { Main } from 'recoil/atom';
 import styles from './Title.module.scss';
 
 export const Title = () => {
-  const [list, setList] = useRecoilState(listState);
+  const [list, setList] = useRecoilState(Main.listState);
 
   const handleAddTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setList({

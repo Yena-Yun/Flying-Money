@@ -1,27 +1,28 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
-import {
-  clickedTabNameState,
-  isOpenByDateCalendarState,
-  isOpenByWeekCalendarState,
-} from 'recoil/atom';
+import { Open, Index } from 'recoil/atom';
 import { All } from '../All/All';
 import { ByWeek } from '../ByWeek/ByWeek';
 import { ByDate } from '../ByDate/ByDate';
 import { ByTag } from '../ByTag/ByTag';
-import { TAB_MENU } from 'utils/constants/constants';
+import { Const } from 'utils';
 import styles from './TabMenuLayout.module.scss';
 
 export const TabMenu = () => {
-  const [clickedTabName, setClickedTabName] =
-    useRecoilState(clickedTabNameState);
-  const setCloseByDateCalendar = useSetRecoilState(isOpenByDateCalendarState);
-  const setCloseByWeekCalendar = useSetRecoilState(isOpenByWeekCalendarState);
+  const setCloseByDateCalendar = useSetRecoilState(
+    Open.isOpenByDateCalendarState
+  );
+  const setCloseByWeekCalendar = useSetRecoilState(
+    Open.isOpenByWeekCalendarState
+  );
+  const [clickedTabName, setClickedTabName] = useRecoilState(
+    Index.clickedTabNameState
+  );
 
   return (
     <section className={styles.showExpenseList}>
       <ul className={styles.filterTabList}>
-        {TAB_MENU.map(({ id, name }) => (
+        {Const.TAB_MENU.map(({ id, name }) => (
           <li
             key={id}
             className={classnames(

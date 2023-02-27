@@ -1,33 +1,25 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { addDays, isWithinInterval, subDays } from 'date-fns';
-import {
-  byWeekEndDateState,
-  byWeekStartDateState,
-  transactionListState,
-} from 'recoil/atom';
-import {
-  selectedMiniDateSelector,
-  toggleCalendarSelector,
-} from 'recoil/selector';
+import { Main, Date } from 'recoil/atom';
+import { SOpen, SDate } from 'recoil/selector';
 import { Header } from './Header/Header';
-import { formatMoney } from 'utils/hooks/formatMoney';
+import { DateFn, Hook } from 'utils';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
   const [isOpenTextarea, setIsOpenTextarea] = useState(false);
-  const startDate = useRecoilValue(byWeekStartDateState);
-  const endDate = useRecoilValue(byWeekEndDateState);
-  const setSelectDate = useSetRecoilState(selectedMiniDateSelector);
-  const transactionList = useRecoilValue(transactionListState);
+  const transactionList = useRecoilValue(Main.transactionListState);
+  const startDate = useRecoilValue(Date.byWeekStartDateState);
+  const endDate = useRecoilValue(Date.byWeekEndDateState);
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
+  const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
 
   const filterPriceByWeek = () => {
     return transactionList
       .filter(({ date }) =>
-        isWithinInterval(date, {
-          start: subDays(startDate, 1),
-          end: addDays(endDate, 1),
+        DateFn.isWithinInterval(date, {
+          start: DateFn.subDays(startDate, 1),
+          end: DateFn.addDays(endDate, 1),
         })
       )
       .flatMap(({ lists }) =>
@@ -51,7 +43,7 @@ export const ByWeek = () => {
           <div className={styles.info}>
             <h3 className={styles.subTitle}>총 지출</h3>
             <div className={styles.expense}>
-              {formatMoney(
+              {Hook.formatMoney(
                 filterPriceByWeek().reduce((acc, cur) => acc + cur, 0)
               )}
             </div>

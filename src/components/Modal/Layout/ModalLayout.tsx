@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import { toggleModalSelector, toggleTagPopupSelector } from 'recoil/selector';
+import { SOpen } from 'recoil/selector';
 import styles from './ModalLayout.module.scss';
 
 type ModalLayoutType = {
@@ -9,15 +9,17 @@ type ModalLayoutType = {
 };
 
 export const ModalLayout = ({ role, children }: ModalLayoutType) => {
-  const setCloseModal = useSetRecoilState(toggleModalSelector);
-  const resetOpenTagPopup = useResetRecoilState(toggleTagPopupSelector);
+  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
+  const resetOpenTagPopup = useResetRecoilState(SOpen.toggleTagPopupSelector);
 
   const handleClose = () => {
-    role === 'add'
-      ? setCloseModal('add')
-      : role === 'detail'
-      ? setCloseModal('detail')
-      : setCloseModal('byDateDetail');
+    if (role === 'add') {
+      setCloseModal('add');
+    } else if (role === 'detail') {
+      setCloseModal('detail');
+    } else {
+      setCloseModal('byDateDetail');
+    }
 
     resetOpenTagPopup();
   };

@@ -1,19 +1,19 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { format } from 'date-fns';
-import { byDateSelectedDateState, byWeekStartDateState } from 'recoil/atom';
-import { toggleCalendarSelector } from 'recoil/selector';
+import { Date } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { DateCells } from './DateCells/DateCells';
-import { changeMonth } from 'utils/hooks/changeMonth';
-import { DAYS } from 'utils/constants/constants';
-import { DateCellType } from 'types/types';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { DateFn, Const, Hook } from 'utils';
+import * as T from 'types';
 import styles from './MiniCalendar.module.scss';
 
-export const MiniCalendar = ({ tabName }: Pick<DateCellType, 'tabName'>) => {
+export const MiniCalendar = ({ tabName }: Pick<T.DateCellType, 'tabName'>) => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
-    tabName === 'byDate' ? byDateSelectedDateState : byWeekStartDateState
+    tabName === 'byDate'
+      ? Date.byDateSelectedDateState
+      : Date.byWeekStartDateState
   );
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
   return (
     <>
@@ -29,25 +29,26 @@ export const MiniCalendar = ({ tabName }: Pick<DateCellType, 'tabName'>) => {
             <div
               className={styles.arrow}
               onClick={() =>
-                changeMonth('PREV', { currentMonth, setCurrentMonth })
+                Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
               }
             >
               <BsChevronLeft />
             </div>
             <div className={styles.title}>
-              {format(currentMonth, 'yyyy')}년 {format(currentMonth, 'M')}월
+              {DateFn.format(currentMonth, 'yyyy')}년{' '}
+              {DateFn.format(currentMonth, 'M')}월
             </div>
             <div
               className={styles.arrow}
               onClick={() =>
-                changeMonth('NEXT', { currentMonth, setCurrentMonth })
+                Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
               }
             >
               <BsChevronRight />
             </div>
           </div>
           <div className={styles.days}>
-            {DAYS.map((day, id) => (
+            {Const.DAYS.map((day, id) => (
               <div key={id}>{day}</div>
             ))}
           </div>

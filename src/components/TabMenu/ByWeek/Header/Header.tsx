@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { addDays } from 'date-fns';
-import { byWeekStartDateState, isOpenByWeekCalendarState } from 'recoil/atom';
-import { toggleCalendarSelector } from 'recoil/selector';
+import { Open, Date } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
-import { formatDate } from 'utils/hooks/formatDate';
+import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
-  const isOpenCalender = useRecoilValue(isOpenByWeekCalendarState);
-  const setToggleCalendar = useSetRecoilState(toggleCalendarSelector);
-  const selectedDate = useRecoilValue(byWeekStartDateState);
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
+  const isOpenCalender = useRecoilValue(Open.isOpenByWeekCalendarState);
+  const selectedDate = useRecoilValue(Date.byWeekStartDateState);
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
   return (
     <div className={styles.header}>
@@ -27,11 +26,11 @@ export const Header = () => {
             setIsSelectSomeDate(false);
           }}
         >
-          {formatDate(selectedDate)}
+          {Hook.formatDate(selectedDate)}
         </div>
         -
         <div className={styles.endDate}>
-          {formatDate(addDays(selectedDate, 6))}
+          {Hook.formatDate(DateFn.addDays(selectedDate, 6))}
         </div>
       </div>
 

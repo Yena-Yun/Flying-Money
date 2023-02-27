@@ -1,21 +1,17 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import {
-  clickedIndexState,
-  transactionListState,
-  transactionState,
-} from 'recoil/atom';
-import { toggleModalSelector } from 'recoil/selector';
-import { formatDate } from 'utils/hooks/formatDate';
-import { formatMoney } from 'utils/hooks/formatMoney';
+import { Main, Index } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
+import { Hook } from 'utils';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import styles from './All.module.scss';
 
 export const All = () => {
-  const setOpenModal = useSetRecoilState(toggleModalSelector);
-  const transactionList = useRecoilValue(transactionListState);
-  const setClickedIndex = useSetRecoilState(clickedIndexState);
-  const resetTransactionToTransactionList =
-    useResetRecoilState(transactionState);
+  const transactionList = useRecoilValue(Main.transactionListState);
+  const resetTransactionToTransactionList = useResetRecoilState(
+    Main.transactionState
+  );
+  const setClickedIndex = useSetRecoilState(Index.clickedIndexState);
+  const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   const openAddModal = () => {
     setOpenModal('add');
@@ -36,7 +32,7 @@ export const All = () => {
             className={styles.expenseItem}
             onClick={() => openDetailModal(id)}
           >
-            <div className={styles.date}>{formatDate(date)}</div>
+            <div className={styles.date}>{Hook.formatDate(date)}</div>
             {lists.map(({ id, title, items }) => (
               <div key={id} className={styles.itemList}>
                 <div className={styles.info}>
@@ -52,7 +48,7 @@ export const All = () => {
                   </div>
                 </div>
                 <div className={styles.price}>
-                  {formatMoney(
+                  {Hook.formatMoney(
                     items
                       .map(({ price }) => price)
                       .reduce((acc, cur) => acc + cur)

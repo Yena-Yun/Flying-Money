@@ -1,22 +1,17 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  clickedIndexState,
-  clickedItemIndexState,
-  isOpenToastState,
-  transactionListState,
-} from 'recoil/atom';
-import { toggleModalSelector, toggleToastSelector } from 'recoil/selector';
+import { Main, Open, Index } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
 import styles from './Detail.module.scss';
 
 export const ByDateDetail = () => {
-  const isOpenToast = useRecoilValue(isOpenToastState);
-  const setIsOpenToast = useSetRecoilState(toggleToastSelector);
-  const setCloseModal = useSetRecoilState(toggleModalSelector);
-  const transactionList = useRecoilValue(transactionListState);
-  const clickedIndex = useRecoilValue(clickedIndexState);
-  const clickedItemIndex = useRecoilValue(clickedItemIndexState);
+  const isOpenToast = useRecoilValue(Open.isOpenToastState);
+  const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
+  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
+  const transactionList = useRecoilValue(Main.transactionListState);
+  const clickedIndex = useRecoilValue(Index.clickedIndexState);
+  const clickedItemIndex = useRecoilValue(Index.clickedItemIndexState);
 
   const { lists } = transactionList.find(({ id }) => id === clickedIndex)!;
   const { title, items } = lists.find(({ id }) => id === clickedItemIndex)!;

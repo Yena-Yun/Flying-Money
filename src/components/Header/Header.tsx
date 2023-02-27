@@ -1,11 +1,11 @@
-import { formatRootHeaderDate } from 'utils/hooks/formatDate';
 import { IoWifi, IoBatteryHalfOutline, IoCellular } from 'react-icons/io5';
+import { Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
   return (
     <div className={styles.header}>
-      <div className={styles.time}>{formatRootHeaderDate(new Date())}</div>
+      <div className={styles.time}>{Hook.formatRootHeaderDate(new Date())}</div>
       <div className={styles.status}>
         <div className={styles.wifi}>
           <IoWifi />
