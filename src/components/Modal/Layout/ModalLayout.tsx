@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { ReactNode } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { SOpen } from 'recoil/selector';
@@ -13,10 +14,10 @@ export const ModalLayout = ({ role, children }: ModalLayoutType) => {
   const resetOpenTagPopup = useResetRecoilState(SOpen.toggleTagPopupSelector);
 
   const handleClose = () => {
-    if (role === 'add') {
-      setCloseModal('add');
-    } else if (role === 'detail') {
-      setCloseModal('detail');
+    if (role === 'addModal') {
+      setCloseModal('addModal');
+    } else if (role === 'allDetail') {
+      setCloseModal('allDetail');
     } else {
       setCloseModal('byDateDetail');
     }
@@ -28,7 +29,20 @@ export const ModalLayout = ({ role, children }: ModalLayoutType) => {
     <>
       <div className={styles.popupBackground} onClick={handleClose}></div>
       <div className={styles.popupSection}>
-        <div className={styles.popup}>{children}</div>
+        <div
+          className={classNames(
+            styles.popup,
+            role === 'addModal'
+              ? styles.addModal
+              : role === 'allDetail'
+              ? styles.allDetail
+              : role === 'byDateDetail'
+              ? styles.byDateDetail
+              : ''
+          )}
+        >
+          {children}
+        </div>
       </div>
     </>
   );

@@ -20,9 +20,21 @@
 .popup {
   position: relative;
   width: 27rem;
-  height: fit-content;
-  padding: 2rem 2rem;
+  min-height: 20rem;
   background-color: var(--color-white);
   border-radius: 1rem;
   z-index: 300;
+
+  &.addModal {
+    height: 32rem;
+    padding: 2rem 2.2rem;
+  }
+
+  &.allDetail {
+    padding: 2rem 2.2rem 2.2rem;
+  }
+
+  &.byDateDetail {
+    padding: 2rem 2.2rem 2.2rem;
+  }
 }
