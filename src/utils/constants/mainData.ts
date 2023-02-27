@@ -1,4 +1,4 @@
-import * as T from 'types';
+import { TTab } from 'types';
 
 export const RANDOM_PHRASES = [
   {
@@ -31,7 +31,10 @@ export const RANDOM_PHRASES = [
   },
 ];
 
-export const TAB_MENU: { id: T.TabMenuIdType; name: T.TabMenuStringType }[] = [
+export const TAB_MENU: {
+  id: TTab.TabMenuIdType;
+  name: TTab.TabMenuStringType;
+}[] = [
   {
     id: 'all',
     name: '전체',

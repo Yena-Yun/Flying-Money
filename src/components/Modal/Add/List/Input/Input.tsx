@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Main, Open, Index } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { TagPopup } from 'components/Modal/TagPopup/TagPopup';
-import * as T from 'types';
+import { TMain } from 'types';
 import styles from './Input.module.scss';
 
 type InputType = {
@@ -12,7 +12,7 @@ type InputType = {
 };
 
 export const Input = ({ index, tag }: InputType) => {
-  const [items, setItems] = useRecoilState<T.ItemType[]>(Main.itemState);
+  const [items, setItems] = useRecoilState<TMain.ItemType[]>(Main.itemState);
   const isOpenTagPopup = useRecoilValue(Open.isOpenTagPopupState);
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
     Index.clickedTagPopupIndexState

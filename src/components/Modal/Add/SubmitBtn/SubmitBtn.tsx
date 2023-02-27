@@ -2,13 +2,13 @@ import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { Main } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { Hook, Const } from 'utils';
-import * as T from 'types';
+import { TMain } from 'types';
 import styles from './SubmitBtn.module.scss';
 
 export const SubmitBtn = () => {
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
   const list = useRecoilValue(Main.listState);
-  const items = useRecoilValue<T.ItemType[]>(Main.itemState);
+  const items = useRecoilValue<TMain.ItemType[]>(Main.itemState);
   const resetItems = useResetRecoilState(Main.itemState);
   const resetList = useResetRecoilState(Main.listState);
   const resetTransaction = useResetRecoilState(Main.transactionState);

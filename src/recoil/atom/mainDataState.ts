@@ -1,13 +1,13 @@
 import { atom } from 'recoil';
 import uuid4 from 'uuid4';
-import * as T from 'types';
+import { TMain } from 'types';
 
-export const itemState = atom<T.ItemType[]>({
+export const itemState = atom<TMain.ItemType[]>({
   key: 'item',
   default: [{ id: uuid4(), name: '', price: 0, tag: '' }],
 });
 
-export const listState = atom<T.ListType>({
+export const listState = atom<TMain.ListType>({
   key: 'list',
   default: {
     id: uuid4(),
@@ -17,7 +17,7 @@ export const listState = atom<T.ListType>({
   },
 });
 
-export const transactionState = atom<T.TransactionType>({
+export const transactionState = atom<TMain.TransactionType>({
   key: 'transaction',
   default: {
     id: uuid4(),
@@ -26,12 +26,12 @@ export const transactionState = atom<T.TransactionType>({
   },
 });
 
-export const transactionListState = atom<T.TransactionType[]>({
+export const transactionListState = atom<TMain.TransactionType[]>({
   key: 'transactionList',
   default: [],
 });
 
-export const savedTagGroupState = atom<T.TagType[]>({
+export const savedTagGroupState = atom<TMain.TagType[]>({
   key: 'savedTagGroup',
   default: [],
 });

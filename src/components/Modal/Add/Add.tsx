@@ -7,11 +7,11 @@ import { AddModalDate } from './Date/Date';
 import { Title } from './Title/Title';
 import { List } from './List/List';
 import { SubmitBtn } from './SubmitBtn/SubmitBtn';
-import * as T from 'types';
+import { TMain } from 'types';
 import styles from './Add.module.scss';
 
 export const Add = () => {
-  const items = useRecoilValue<T.ItemType[]>(Main.itemState);
+  const items = useRecoilValue<TMain.ItemType[]>(Main.itemState);
   const isOpenCalender = useRecoilValue(Open.isOpenCalendarState);
   const bottomRef = useRef<HTMLDivElement>(null);
 

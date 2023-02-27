@@ -2,12 +2,12 @@ import { useRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { Main } from 'recoil/atom';
 import { Input } from './Input/Input';
-import * as T from 'types';
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
+import { TMain } from 'types';
 import styles from './List.module.scss';
 
 export const List = () => {
-  const [items, setItems] = useRecoilState<T.ItemType[]>(Main.itemState);
+  const [items, setItems] = useRecoilState<TMain.ItemType[]>(Main.itemState);
 
   const handleAddItem = () => {
     setItems((prev) => [...prev, { id: uuid4(), name: '', price: 0, tag: '' }]);

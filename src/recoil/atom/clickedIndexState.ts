@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import * as T from 'types';
+import { TTab } from 'types';
 
 export const clickedIndexState = atom({
   key: 'clickedIndex',
@@ -16,7 +16,7 @@ export const clickedTagPopupIndexState = atom({
   default: '',
 });
 
-export const clickedTabNameState = atom<T.TabMenuIdType>({
+export const clickedTabNameState = atom<TTab.TabMenuIdType>({
   key: 'clickedTabName',
   default: 'all',
 });

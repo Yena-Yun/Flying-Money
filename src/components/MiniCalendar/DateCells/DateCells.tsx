@@ -2,12 +2,12 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { DateFn } from 'utils';
 import { Main } from 'recoil/atom';
 import { SDate, SOpen } from 'recoil/selector';
-import * as T from 'types';
+import { TMain, TDate } from 'types';
 import styles from './DateCells.module.scss';
 
-export const DateCells = ({ currentMonth, tabName }: T.DateCellType) => {
+export const DateCells = ({ currentMonth, tabName }: TDate.DateCellType) => {
   const [expenseTransaction, setExpenseTransaction] =
-    useRecoilState<T.TransactionType>(Main.transactionState);
+    useRecoilState<TMain.TransactionType>(Main.transactionState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectedDate = useSetRecoilState(SDate.selectedMiniDateSelector);
 

@@ -4,10 +4,12 @@ import { SOpen } from 'recoil/selector';
 import { DateCells } from './DateCells/DateCells';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Const, Hook } from 'utils';
-import * as T from 'types';
+import { TDate } from 'types';
 import styles from './MiniCalendar.module.scss';
 
-export const MiniCalendar = ({ tabName }: Pick<T.DateCellType, 'tabName'>) => {
+export const MiniCalendar = ({
+  tabName,
+}: Pick<TDate.DateCellType, 'tabName'>) => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
     tabName === 'byDate'
       ? Date.byDateSelectedDateState
