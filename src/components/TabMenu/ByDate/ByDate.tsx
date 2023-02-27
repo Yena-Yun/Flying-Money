@@ -36,14 +36,24 @@ export const ByDate = () => {
               onClick={() => openDetailModal(id)}
             >
               <div className={styles.title}>{title}</div>
-              {items.map(({ id, name, price }) => (
-                <div key={id} className={styles.item}>
+              <div className={styles.item}>
+                <div className={styles.nameTagGroup}>
                   <div className={styles.name}>
-                    {items[0].name !== '' && '•'} {name}
+                    {items[0].name !== '' && '•'} {items[0].name}
                   </div>
-                  <div className={styles.price}>{Hook.formatMoney(price)}</div>
+                  {items[0].tag && (
+                    <div className={styles.tag}>{items[0].tag}</div>
+                  )}
+                  {items.length > 1 && ` 외 +${items.length - 1}`}
                 </div>
-              ))}
+                <div className={styles.price}>
+                  {Hook.formatMoney(
+                    items
+                      .map(({ price }) => price)
+                      .reduce((acc, cur) => acc + cur)
+                  )}
+                </div>
+              </div>
             </li>
           ))}
         </ul>
