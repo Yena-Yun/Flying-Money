@@ -5,6 +5,11 @@ export const addModalDateState = atom({
   default: new Date(),
 });
 
+export const allSelectedDateState = atom({
+  key: 'showAllSelectedDate',
+  default: new Date(),
+});
+
 export const byDateSelectedDateState = atom({
   key: 'filterByDateSelectedDate',
   default: new Date(),

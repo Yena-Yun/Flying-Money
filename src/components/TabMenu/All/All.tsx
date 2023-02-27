@@ -1,11 +1,10 @@
+import { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { Main, Date, Index } from 'recoil/atom';
+import { Main, Index } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { Hook } from 'utils';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import styles from './All.module.scss';
-import { useEffect } from 'react';
-import { formatMoney } from 'utils/hooks';
 
 export const All = () => {
   const transactionList = useRecoilValue(Main.transactionListState);
@@ -14,12 +13,11 @@ export const All = () => {
   );
   const setClickedIndex = useSetRecoilState(Index.clickedIndexState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
-  const selectedDate = useRecoilValue(Date.byDateSelectedDateState);
-  const totalExpense = useRecoilValue(Main.totalPerDateState);
+  const totalExpense = useRecoilValue(Main.totalPerDateTabAllState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
 
   useEffect(() => {
-    setTotalExpense();
+    setTotalExpense('all');
   }, []);
 
   const openAddModal = () => {
@@ -53,7 +51,7 @@ export const All = () => {
                 <div className={styles.date}>{Hook.formatDate(date)}</div>
                 <div className={styles.totalExpense}>
                   <span>Total</span>&nbsp;
-                  {formatMoney(totalExpense)}
+                  {Hook.formatMoney(totalExpense)}
                 </div>
               </div>
               {lists.map(({ id, title, items }) => (

@@ -40,3 +40,8 @@ export const totalPerDateState = atom({
   key: 'totalPerDate',
   default: 0,
 });
+
+export const totalPerDateTabAllState = atom({
+  key: 'totalPerDateAtTabAll',
+  default: 0,
+});

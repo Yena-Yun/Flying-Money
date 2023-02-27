@@ -3,7 +3,6 @@ import { selector, DefaultValue } from 'recoil';
 import uuid4 from 'uuid4';
 import { Main, Date, Index } from '../atom';
 import { DateFn } from 'utils';
-import { totalPerDateState } from 'recoil/atom/mainDataState';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
@@ -27,7 +26,7 @@ export const setListToTransactionSelector = selector({
     const transaction = get(Main.transactionState);
 
     set(Main.transactionState, {
-      ...transaction, // date
+      ...transaction,
       id: uuid4(),
       lists: [...transaction.lists, { ...list, id: uuid4() }],
     });
@@ -86,21 +85,31 @@ export const addTagToItemSelector = selector({
 
 export const getTotalPerDateSelector = selector({
   key: 'getTotalPerDate',
-  get: () => {},
-  set: ({ get, set }) => {
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }, flag) => {
     const transactionList = get(Main.transactionListState);
-    const selectedDate = get(Date.byDateSelectedDateState);
+    const byDateSelectedDate = get(Date.byDateSelectedDateState);
+    const allSelectedDate = get(Date.allSelectedDateState);
 
     const total = transactionList
-      .filter(({ date }) => DateFn.isSameDay(date, selectedDate))
+      .filter(({ date }) =>
+        DateFn.isSameDay(
+          date,
+          flag === 'byDate' ? byDateSelectedDate : allSelectedDate
+        )
+      )
       .flatMap(({ lists }) =>
         lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    console.log(total);
-
-    set(totalPerDateState, total);
+    if (flag === 'byDate') {
+      set(Main.totalPerDateState, total);
+    } else {
+      set(Main.totalPerDateTabAllState, total);
+    }
   },
 });
 
