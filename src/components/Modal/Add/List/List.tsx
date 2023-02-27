@@ -25,8 +25,8 @@ export const List = () => {
         <div key={index} className={styles.inputItemGroup}>
           <Input index={index} tag={tag} />
 
-          {/* 인풋이 2개 이상일 때만 오른쪽에 삭제 버튼 */}
-          {parseInt(index) > 1 && (
+          {/* 인풋이 2개 이상일 때 오른쪽에 삭제 버튼 등장 */}
+          {items.length > 1 && (
             <div
               className={styles.removeItemButton}
               onClick={() => handleDeleteItem(index)}
