@@ -1,27 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Main, Open, Date } from 'recoil/atom';
-import { SOpen, SDate } from 'recoil/selector';
+import { SMain, SOpen, SDate } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
-import { DateFn, Hook } from 'utils';
+import { Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
   const isOpenCalender = useRecoilValue(Open.isOpenByDateCalendarState);
   const selectedDate = useRecoilValue(Date.byDateSelectedDateState);
-  const transactionList = useRecoilValue(Main.transactionListState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const totalExpense = useRecoilValue(Main.totalPerDateState);
 
-  const filterPriceByDate = () => {
-    return transactionList
-      .filter(({ date }) => DateFn.isSameDay(date, selectedDate))
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.map(({ price }) => price))
-      );
-  };
+  useEffect(() => {
+    setTotalExpense();
+  }, [selectedDate]);
 
   return (
     <div className={styles.container}>
@@ -35,6 +32,7 @@ export const Header = () => {
             onClick={() => {
               setToggleCalendar('byDate');
               setSelectDate({ flag: 'byDate', newDate: selectedDate });
+              setTotalExpense();
               setIsSelectSomeDate(false);
             }}
           >
@@ -44,9 +42,7 @@ export const Header = () => {
 
         <div className={styles.totalExpense}>
           <span>Total</span>&nbsp;
-          {Hook.formatMoney(
-            filterPriceByDate().reduce((acc, cur) => acc + cur, 0)
-          )}
+          {Hook.formatMoney(totalExpense)}
         </div>
       </div>
       {isSelectSomeDate && <p className={styles.guide}>날짜를 선택하세요</p>}
