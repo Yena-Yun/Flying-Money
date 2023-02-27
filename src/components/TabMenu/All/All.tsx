@@ -26,38 +26,47 @@ export const All = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.expenseItemList}>
-        {transactionList.map(({ id, date, lists }) => (
-          <li
-            key={id}
-            className={styles.expenseItem}
-            onClick={() => openDetailModal(id)}
-          >
-            <div className={styles.date}>{Hook.formatDate(date)}</div>
-            {lists.map(({ id, title, items }) => (
-              <div key={id} className={styles.itemList}>
-                <div className={styles.info}>
-                  <div className={styles.title}>{title}</div>
-                  <div className={styles.nameTagGroup}>
-                    <div className={styles.name}>
-                      {items[0].name !== '' && '•'} {items[0].name}
+        {transactionList.length < 1 ? (
+          <div className={styles.defaultContainer}>
+            <figure className={styles.defaultImageContainer}>
+              <img src={'/svgs/default.svg'} alt='default' />
+            </figure>
+            <p className={styles.defaultGuide}>새로운 항목을 등록해주세요</p>
+          </div>
+        ) : (
+          transactionList.map(({ id, date, lists }) => (
+            <li
+              key={id}
+              className={styles.expenseItem}
+              onClick={() => openDetailModal(id)}
+            >
+              <div className={styles.date}>{Hook.formatDate(date)}</div>
+              {lists.map(({ id, title, items }) => (
+                <div key={id} className={styles.itemList}>
+                  <div className={styles.info}>
+                    <div className={styles.title}>{title}</div>
+                    <div className={styles.nameTagGroup}>
+                      <div className={styles.name}>
+                        {items[0].name !== '' && '•'} {items[0].name}
+                      </div>
+                      {items[0].tag && (
+                        <div className={styles.tag}>{items[0].tag}</div>
+                      )}
+                      {items.length > 1 && ` 외 +${items.length - 1}`}
                     </div>
-                    {items[0].tag && (
-                      <div className={styles.tag}>{items[0].tag}</div>
+                  </div>
+                  <div className={styles.price}>
+                    {Hook.formatMoney(
+                      items
+                        .map(({ price }) => price)
+                        .reduce((acc, cur) => acc + cur)
                     )}
-                    {items.length > 1 && ` 외 +${items.length - 1}`}
                   </div>
                 </div>
-                <div className={styles.price}>
-                  {Hook.formatMoney(
-                    items
-                      .map(({ price }) => price)
-                      .reduce((acc, cur) => acc + cur)
-                  )}
-                </div>
-              </div>
-            ))}
-          </li>
-        ))}
+              ))}
+            </li>
+          ))
+        )}
       </ul>
       <button className={styles.addNewItemButton} onClick={openAddModal}>
         <div className={styles.addNewItemIcon}>

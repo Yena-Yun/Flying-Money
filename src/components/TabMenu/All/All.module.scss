@@ -12,6 +12,21 @@
     height: 15rem;
     overflow: auto;
 
+    .defaultContainer {
+      @include flexbox-column;
+      margin-top: 3rem;
+      opacity: 0.5;
+
+      .defaultImageContainer {
+        margin-bottom: 0.5rem;
+        opacity: 0.6;
+      }
+
+      .defaultGuide {
+        font-size: var(--text-size-md);
+      }
+    }
+
     .expenseItem {
       width: 97%;
       padding: 0.4rem 1rem;
