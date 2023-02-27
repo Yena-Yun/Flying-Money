@@ -9,7 +9,7 @@
   .expenseItemList {
     @include flexbox-column(flex-start, center);
     width: 100%;
-    height: 15rem;
+    height: 13.5rem;
     overflow: auto;
 
     .defaultContainer {
@@ -38,6 +38,7 @@
 
       .header {
         @include flexbox-row(space-between, center);
+        margin-bottom: 0.5rem;
 
         .date {
           margin-bottom: 0.2rem;

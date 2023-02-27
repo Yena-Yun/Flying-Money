@@ -49,6 +49,7 @@
   }
 
   .total {
+    @include flexbox-row(flex-end, center);
     font-size: var(--text-size-lg);
     font-weight: var(--font-weight-bold);
     color: var(--color-blue);
