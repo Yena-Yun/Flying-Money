@@ -21,13 +21,13 @@ export const All = () => {
   }, []);
 
   const openAddModal = () => {
-    setOpenModal('add');
+    setOpenModal('addModal');
     resetTransactionToTransactionList();
   };
 
   const openDetailModal = (id: string) => {
     setClickedIndex(id);
-    setOpenModal('detail');
+    setOpenModal('allDetail');
   };
 
   return (

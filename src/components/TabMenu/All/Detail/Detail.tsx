@@ -8,10 +8,11 @@ import styles from './Detail.module.scss';
 
 export const Detail = () => {
   const isOpenToast = useRecoilValue(Open.isOpenToastState);
-  const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
-  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
   const transactionList = useRecoilValue(Main.transactionListState);
   const clickedIndex = useRecoilValue(Index.clickedIndexState);
+  const totalExpense = useRecoilValue(Main.totalPerDateTabAllState);
+  const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
+  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   const { date, lists } = transactionList.find(
     ({ id }) => id === clickedIndex
@@ -20,7 +21,7 @@ export const Detail = () => {
   return (
     <>
       {isOpenToast && <Toast role='detail' />}
-      <ModalLayout role='detail'>
+      <ModalLayout role='allDetail'>
         <h2 className={styles.modalTitle}>상세</h2>
         <div className={styles.date}>{Hook.formatDate(date)}</div>
 
@@ -43,24 +44,19 @@ export const Detail = () => {
                   </div>
                 ))}
               </div>
-              <div className={styles.total}>
-                Total&nbsp;
-                <span>
-                  {Hook.formatMoney(
-                    items
-                      .map(({ price }) => price)
-                      .reduce((acc, cur) => acc + cur)
-                  )}
-                </span>
-              </div>
             </div>
           ))}
+        </div>
+
+        <div className={styles.totalExpense}>
+          <span>Total</span>&nbsp;
+          {Hook.formatMoney(totalExpense)}
         </div>
 
         <div className={styles.actionButtonContainer}>
           <button
             className={styles.confirmButton}
-            onClick={() => setCloseModal('detail')}
+            onClick={() => setCloseModal('allDetail')}
           >
             확인
           </button>

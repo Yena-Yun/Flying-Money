@@ -2,7 +2,7 @@ import { selector } from 'recoil';
 import * as A from '../atom/isOpenState';
 
 export const toggleModalSelector = selector({
-  key: 'toggleModal',
+  key: 'toggleModals',
   get: () => {
     return '';
   },
@@ -11,13 +11,13 @@ export const toggleModalSelector = selector({
     const isOpenDetailModal = get(A.isOpenDetailModalState);
     const isOpenByDateDetailModal = get(A.isOpenByDateDetailModalState);
 
-    if (flag === 'add' && isOpenModal) {
+    if (flag === 'addModal' && isOpenModal) {
       set(A.isOpenAddModalState, false);
-    } else if (flag === 'add' && !isOpenModal) {
+    } else if (flag === 'addModal' && !isOpenModal) {
       set(A.isOpenAddModalState, true);
-    } else if (flag === 'detail' && isOpenDetailModal) {
+    } else if (flag === 'allDetail' && isOpenDetailModal) {
       set(A.isOpenDetailModalState, false);
-    } else if (flag === 'detail' && !isOpenDetailModal) {
+    } else if (flag === 'allDetail' && !isOpenDetailModal) {
       set(A.isOpenDetailModalState, true);
     } else if (flag === 'byDateDetail' && isOpenByDateDetailModal) {
       set(A.isOpenByDateDetailModalState, false);

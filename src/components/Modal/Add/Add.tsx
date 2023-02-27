@@ -21,7 +21,7 @@ export const Add = () => {
   }, [items]);
 
   return (
-    <ModalLayout role='add'>
+    <ModalLayout role='addModal'>
       {isOpenCalender && <Calendar />}
       <h2 className={styles.title}>항목 등록하기</h2>
 

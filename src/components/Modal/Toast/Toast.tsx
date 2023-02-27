@@ -17,9 +17,9 @@ export const Toast = ({ role }: ToastType) => {
   const deleteTransaction = () => {
     setCloseToast();
 
-    if (role === 'detail') {
+    if (role === 'allDetail') {
       setDeleteTransaction();
-      setCloseModal('detail');
+      setCloseModal('allDetail');
     } else if (role === 'byDateDetail') {
       setDeleteItem();
       setCloseModal('byDateDetail');

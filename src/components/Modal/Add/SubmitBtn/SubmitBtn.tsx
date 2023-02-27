@@ -48,7 +48,7 @@ export const SubmitBtn = () => {
       resetItems();
       resetList();
       resetTransaction();
-      setCloseModal('add');
+      setCloseModal('addModal');
     }
   };
 
