@@ -6,7 +6,10 @@
 
   .filteredList {
     width: 100%;
+    height: 16rem;
+    padding-right: 0.5rem;
     margin-bottom: 1rem;
+    overflow-y: auto;
 
     .expenseItem {
       width: 100%;

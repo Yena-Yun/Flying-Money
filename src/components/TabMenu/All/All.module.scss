@@ -9,7 +9,7 @@
   .expenseItemList {
     @include flexbox-column(flex-start, center);
     width: 100%;
-    height: 13.5rem;
+    height: 14.5rem;
     overflow: auto;
 
     .defaultContainer {
@@ -29,16 +29,13 @@
 
     .expenseItem {
       width: 97%;
-      padding: 0.4rem 1rem;
-      margin-bottom: 0.4rem;
-      border: 1px solid var(--color-primary);
-      border-radius: 1rem;
+      margin-bottom: 1.2rem;
       background-color: var(--color-white);
-      cursor: pointer;
 
       .header {
         @include flexbox-row(space-between, center);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.3rem;
+        padding: 0 0.7rem 0 0.5rem;
 
         .date {
           margin-bottom: 0.2rem;
@@ -60,43 +57,50 @@
         }
       }
 
-      .itemList {
-        @include flexbox-row(space-between, center);
+      .itemWrap {
+        padding: 0.4rem 1rem;
+        border: 1px solid var(--color-primary);
+        border-radius: 1rem;
+        cursor: pointer;
 
-        .info {
-          @include flexbox-column(center, flex-start);
+        .itemList {
+          @include flexbox-row(space-between, center);
 
-          .title {
-            font-size: var(--text-size-md);
+          .info {
+            @include flexbox-column(center, flex-start);
+
+            .title {
+              font-size: var(--text-size-md);
+              font-weight: var(--font-weight-bold);
+            }
+
+            .nameTagGroup {
+              @include flexbox-row(flex-start, center);
+              flex-wrap: wrap;
+              gap: 0.3rem;
+              margin-bottom: 0.3rem;
+
+              .name {
+                color: var(--color-gray-4);
+              }
+
+              .tag {
+                width: fit-content;
+                min-width: 2rem;
+                padding: 0.1rem 0.5rem;
+                color: var(--color-dark-pink);
+                border: 1px solid var(--color-pink);
+                border-radius: 0.8rem;
+                text-align: center;
+              }
+            }
+          }
+
+          .price {
+            font-size: var(--text-size-lg);
             font-weight: var(--font-weight-bold);
+            color: var(--color-blue);
           }
-
-          .nameTagGroup {
-            @include flexbox-row(flex-start, center);
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-bottom: 0.3rem;
-
-            .name {
-              color: var(--color-gray-4);
-            }
-
-            .tag {
-              width: fit-content;
-              min-width: 2rem;
-              padding: 0.1rem 0.5rem;
-              color: var(--color-dark-pink);
-              border: 1px solid var(--color-pink);
-              border-radius: 0.8rem;
-              text-align: center;
-            }
-          }
-        }
-
-        .price {
-          font-size: var(--text-size-lg);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-blue);
         }
       }
     }
@@ -105,11 +109,9 @@
   .addNewItemButton {
     @include flexbox-column;
     position: fixed;
-    bottom: 2rem;
-
-    width: 85%;
-    min-height: 90px;
-    margin-top: 0.5rem;
+    bottom: 1.8rem;
+    width: 84%;
+    height: 5.5rem;
 
     font-family: 'Nanum Pen Script';
     font-size: var(--text-size-md);

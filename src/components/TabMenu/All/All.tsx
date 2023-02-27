@@ -42,11 +42,7 @@ export const All = () => {
           </div>
         ) : (
           transactionList.map(({ id, date, lists }) => (
-            <li
-              key={id}
-              className={styles.expenseItem}
-              onClick={() => openDetailModal(id)}
-            >
+            <li key={id} className={styles.expenseItem}>
               <div className={styles.header}>
                 <div className={styles.date}>{Hook.formatDate(date)}</div>
                 <div className={styles.totalExpense}>
@@ -54,29 +50,35 @@ export const All = () => {
                   {Hook.formatMoney(totalExpense)}
                 </div>
               </div>
-              {lists.map(({ id, title, items }) => (
-                <div key={id} className={styles.itemList}>
-                  <div className={styles.info}>
-                    <div className={styles.title}>{title}</div>
-                    <div className={styles.nameTagGroup}>
-                      <div className={styles.name}>
-                        {items[0].name !== '' && '•'} {items[0].name}
+
+              <div
+                className={styles.itemWrap}
+                onClick={() => openDetailModal(id)}
+              >
+                {lists.map(({ id, title, items }) => (
+                  <div key={id} className={styles.itemList}>
+                    <div className={styles.info}>
+                      <div className={styles.title}>{title}</div>
+                      <div className={styles.nameTagGroup}>
+                        <div className={styles.name}>
+                          {items[0].name !== '' && '•'} {items[0].name}
+                        </div>
+                        {items[0].tag && (
+                          <div className={styles.tag}>{items[0].tag}</div>
+                        )}
+                        {items.length > 1 && ` 외 +${items.length - 1}`}
                       </div>
-                      {items[0].tag && (
-                        <div className={styles.tag}>{items[0].tag}</div>
+                    </div>
+                    <div className={styles.price}>
+                      {Hook.formatMoney(
+                        items
+                          .map(({ price }) => price)
+                          .reduce((acc, cur) => acc + cur)
                       )}
-                      {items.length > 1 && ` 외 +${items.length - 1}`}
                     </div>
                   </div>
-                  <div className={styles.price}>
-                    {Hook.formatMoney(
-                      items
-                        .map(({ price }) => price)
-                        .reduce((acc, cur) => acc + cur)
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </li>
           ))
         )}

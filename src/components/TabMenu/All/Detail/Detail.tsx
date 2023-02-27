@@ -27,7 +27,7 @@ export const Detail = () => {
 
         <div className={styles.mainContainer}>
           {lists.map(({ id, title, items }) => (
-            <div key={id}>
+            <div key={id} className={styles.expenseWrap}>
               <div className={styles.title}>{title}</div>
               <div className={styles.expenseList}>
                 {items.map(({ id, name, tag, price }) => (
