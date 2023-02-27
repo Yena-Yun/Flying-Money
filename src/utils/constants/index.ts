@@ -1,6 +1,6 @@
-import { TabMenuIdType, TabMenuStringType } from 'types/types';
+import { TabMenuIdType, TabMenuStringType } from 'types';
 
-export const RANDOM_PHRASES = [
+const RANDOM_PHRASES = [
   {
     line1: 'Gone with the wind~',
     line2: '이번 주는 어디로 날아갔나요?',
@@ -31,7 +31,7 @@ export const RANDOM_PHRASES = [
   },
 ];
 
-export const TAB_MENU: { id: TabMenuIdType; name: TabMenuStringType }[] = [
+const TAB_MENU: { id: TabMenuIdType; name: TabMenuStringType }[] = [
   {
     id: 'all',
     name: '전체',
@@ -50,9 +50,9 @@ export const TAB_MENU: { id: TabMenuIdType; name: TabMenuStringType }[] = [
   },
 ];
 
-export const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-export const MONTHS = [
+const MONTHS = [
   '1월',
   '2월',
   '3월',
@@ -67,9 +67,11 @@ export const MONTHS = [
   '12월',
 ];
 
-export const TOAST_ID = {
+const TOAST_ID = {
   ITEM: 'Item_Id',
   TITLE: 'Title_Id',
   NAME: 'Name_Id',
   PRICE: 'Price_Id',
 };
+
+export { RANDOM_PHRASES, TAB_MENU, DAYS, MONTHS, TOAST_ID };
