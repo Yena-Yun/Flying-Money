@@ -43,6 +43,7 @@ export const Header = () => {
         </div>
 
         <div className={styles.totalExpense}>
+          <span>Total</span>&nbsp;
           {Hook.formatMoney(
             filterPriceByDate().reduce((acc, cur) => acc + cur, 0)
           )}
