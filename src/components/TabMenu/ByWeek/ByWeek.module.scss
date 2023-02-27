@@ -34,10 +34,6 @@
     @include flexbox-row(space-between, flex-start);
     width: 100%;
 
-    p {
-      font-size: var(--text-size-md);
-    }
-
     .textarea {
       border: none;
       outline: none;
@@ -46,6 +42,10 @@
       &:focus {
         box-shadow: 0 0 3px 1px var(--color-dark-pink);
       }
+    }
+
+    .editedText {
+      font-size: var(--text-size-md);
     }
 
     .editButton {
