@@ -35,3 +35,8 @@ export const savedTagGroupState = atom<TMain.TagType[]>({
   key: 'savedTagGroup',
   default: [],
 });
+
+export const totalPerDateState = atom({
+  key: 'totalPerDate',
+  default: 0,
+});
