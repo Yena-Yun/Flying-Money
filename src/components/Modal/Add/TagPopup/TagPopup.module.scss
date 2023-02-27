@@ -3,20 +3,19 @@
 .background {
   position: fixed;
   width: 23rem;
-  height: 30rem;
-  background: rgba(0, 0, 0, 0.35);
+  height: 27rem;
   z-index: 250;
 }
 
 .container {
   position: absolute;
   top: 3.2em;
-  left: 8.5rem;
+  left: 7.8rem;
   z-index: 300;
 
   .innerContainer {
     position: relative;
-    width: 13rem;
+    width: 12.2rem;
     padding: 0.7rem 0.8rem;
     border: 1px solid var(--color-gray-2);
     border-radius: 0.6rem;
@@ -29,7 +28,7 @@
       flex-wrap: wrap;
       gap: 0.3rem;
       width: 100%;
-      min-height: 2rem;
+      min-height: 2.2rem;
       margin-bottom: 0.7rem;
 
       .tagWrap {

@@ -26,15 +26,18 @@
   z-index: 300;
 
   &.addModal {
-    height: 32rem;
-    padding: 2rem 2.2rem;
+    width: 25rem;
+    height: 33rem;
+    padding: 2rem 2rem 2rem 2.2rem;
   }
 
   &.allDetail {
+    width: 25rem;
     padding: 2rem 2.2rem 2.2rem;
   }
 
   &.byDateDetail {
+    width: 25rem;
     padding: 2rem 2.2rem 2.2rem;
   }
 }

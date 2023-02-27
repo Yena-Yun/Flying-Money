@@ -10,7 +10,8 @@
 
 .mainContainer {
   width: 100%;
-  margin-bottom: 5rem;
+  min-height: 4rem;
+  margin-bottom: 3rem;
   overflow-y: auto;
 
   .title {
@@ -20,7 +21,7 @@
   }
 
   .info {
-    @include flexbox-row(flex-start, center);
+    @include flexbox-row(space-between, center);
 
     .nameTagGroup {
       @include flexbox-column(center, flex-start);
@@ -44,15 +45,24 @@
     }
 
     .price {
-      color: var(--color-gray-6);
+      font-size: var(--text-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-blue);
     }
   }
 
-  .total {
+  .totalExpense {
     @include flexbox-row(flex-end, center);
-    font-size: var(--text-size-lg);
+    margin-top: 1.5rem;
+    font-size: var(--text-size-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-blue);
+
+    span {
+      font-size: var(--text-size-lg);
+      color: var(--color-gray-5);
+      font-weight: var(--font-weight-regular);
+    }
   }
 }
 
