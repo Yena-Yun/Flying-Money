@@ -1,8 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Main, Open, Index } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
-import { ModalLayout } from '../Layout/ModalLayout';
-import { Toast } from '../Toast/Toast';
+import { ModalLayout } from '../../../Modal/Layout/ModalLayout';
+import { Toast } from '../../../Modal/Toast/Toast';
 import { Hook } from 'utils';
 import styles from './Detail.module.scss';
 

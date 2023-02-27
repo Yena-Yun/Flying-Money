@@ -3,7 +3,7 @@ import { Open, Index } from 'recoil/atom';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
 import { Add } from 'components/Modal/Add/Add';
-import { Detail } from 'components/Modal/Detail/Detail';
+import { Detail } from 'components/TabMenu/All/Detail/Detail';
 import { TabMenu } from 'components/TabMenu/Layout/TabMenuLayout';
 import { ByDateDetail } from 'components/TabMenu/ByDate/Detail/Detail';
 import styles from './Home.module.scss';

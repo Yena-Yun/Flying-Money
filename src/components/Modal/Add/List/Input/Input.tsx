@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { Main, Open, Index } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
-import { TagPopup } from 'components/Modal/TagPopup/TagPopup';
+import { TagPopup } from 'components/Modal/Add/TagPopup/TagPopup';
 import { TMain } from 'types';
 import styles from './Input.module.scss';
 
