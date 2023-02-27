@@ -1,6 +1,7 @@
-import classNames from 'classnames';
 import { ReactNode } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import classNames from 'classnames';
+import { Open } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import styles from './ModalLayout.module.scss';
 
@@ -11,7 +12,7 @@ type ModalLayoutType = {
 
 export const ModalLayout = ({ role, children }: ModalLayoutType) => {
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
-  const resetOpenTagPopup = useResetRecoilState(SOpen.toggleTagPopupSelector);
+  const resetOpenTagPopup = useResetRecoilState(Open.isOpenTagPopupState);
 
   const handleClose = () => {
     if (role === 'addModal') {
