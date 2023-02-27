@@ -4,6 +4,7 @@ import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
 import styles from './Detail.module.scss';
+import { Hook } from 'utils';
 
 export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(Open.isOpenToastState);
@@ -28,15 +29,18 @@ export const ByDateDetail = () => {
             <div key={id} className={styles.info}>
               <div className={styles.nameTagGroup}>
                 <div className={styles.name}>
-                  {name !== '' && '-'} &nbsp; {name}
+                  {name !== '' && '‣'} &nbsp; {name}
                 </div>
                 {tag && <div className={styles.tag}>{tag}</div>}
               </div>
-              <div className={styles.price}>{price}</div>
+              <div className={styles.price}>{Hook.formatMoney(price)}</div>
             </div>
           ))}
-          <div className={styles.total}>
-            {items.map(({ price }) => price).reduce((acc, cur) => acc + cur)}
+          <div className={styles.totalExpense}>
+            <span>Total</span>&nbsp;
+            {Hook.formatMoney(
+              items.map(({ price }) => price).reduce((acc, cur) => acc + cur, 0)
+            )}
           </div>
         </div>
 
