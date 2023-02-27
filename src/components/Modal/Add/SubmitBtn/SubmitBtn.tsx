@@ -19,6 +19,7 @@ export const SubmitBtn = () => {
   const setTransactionToTransactionList = useSetRecoilState(
     SMain.setTransactionListSelector
   );
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
 
   const validateList = () => {
     const noNameItem = items.map((item) => !item.name)[0];
@@ -42,6 +43,7 @@ export const SubmitBtn = () => {
       setItemToList();
       setListToTransaction();
       setTransactionToTransactionList();
+      setTotalExpense();
       resetItems();
       resetList();
       resetTransaction();
