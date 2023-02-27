@@ -40,8 +40,8 @@ export const ByWeek = () => {
         <Header />
 
         <div className={styles.totalExpense}>
-          <div className={styles.info}>
-            <h3 className={styles.subTitle}>총 지출</h3>
+          <div className={styles.totalArea}>
+            <h3 className={styles.subTitle}>Total</h3>
             <div className={styles.expense}>
               {Hook.formatMoney(
                 filterPriceByWeek().reduce((acc, cur) => acc + cur, 0)
@@ -50,6 +50,7 @@ export const ByWeek = () => {
           </div>
           <button className={styles.detailButton}>상세</button>
         </div>
+
         <div className={styles.weekDiary}>
           <div className={styles.inputArea}>
             <h3 className={styles.subTitle}>한 주 소감</h3>
@@ -65,7 +66,9 @@ export const ByWeek = () => {
                 이번 주는 무지출 데이가 많았다
               </textarea>
             ) : (
-              <p>이번 주는 무지출 데이가 많았다</p>
+              <p className={styles.editedText}>
+                이번 주는 무지출 데이가 많았다
+              </p>
             )}
           </div>
 
