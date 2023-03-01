@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { DateFn } from 'utils';
 
 export const addModalDateState = atom({
   key: 'addModalDate',
@@ -23,4 +24,9 @@ export const byWeekStartDateState = atom({
 export const byWeekEndDateState = atom({
   key: 'filterByWeekEndDate',
   default: new Date(),
+});
+
+export const weeksOfMonthState = atom({
+  key: 'weeksOfMonth',
+  default: DateFn.getWeeksInMonth(new Date()),
 });
