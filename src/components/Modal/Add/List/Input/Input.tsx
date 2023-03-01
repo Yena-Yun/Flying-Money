@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import classnames from 'classnames';
-import { Main, Open, Index } from 'recoil/atom';
+import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { TagPopup } from 'components/Modal/Add/TagPopup/TagPopup';
 import { TMain } from 'types';
@@ -12,10 +12,10 @@ type InputType = {
 };
 
 export const Input = ({ index, tag }: InputType) => {
-  const [items, setItems] = useRecoilState<TMain.ItemType[]>(Main.itemState);
-  const isOpenTagPopup = useRecoilValue(Open.isOpenTagPopupState);
+  const [items, setItems] = useRecoilState<TMain.ItemType[]>(AMain.itemState);
+  const isOpenTagPopup = useRecoilValue(AOpen.isOpenTagPopupState);
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(
-    Index.clickedTagPopupIndexState
+    AIndex.clickedTagPopupIndexState
   );
   const setOpenTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
 

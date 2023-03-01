@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Main, Open, Date } from 'recoil/atom';
+import { AMain, AOpen, ADate } from 'recoil/atom';
 import { SMain, SOpen, SDate } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
@@ -9,12 +9,12 @@ import styles from './Header.module.scss';
 
 export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
-  const isOpenCalender = useRecoilValue(Open.isOpenByDateCalendarState);
-  const selectedDate = useRecoilValue(Date.byDateSelectedDateState);
+  const isOpenCalender = useRecoilValue(AOpen.isOpenByDateCalendarState);
+  const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
-  const totalExpense = useRecoilValue(Main.totalPerDateState);
+  const totalExpense = useRecoilValue(AMain.totalPerDateState);
 
   useEffect(() => {
     setTotalExpense('byDate');

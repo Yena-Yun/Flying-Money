@@ -1,6 +1,6 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
-import { Open, Index } from 'recoil/atom';
+import { AOpen, AIndex } from 'recoil/atom';
 import { All } from '../All/All';
 import { ByWeek } from '../ByWeek/ByWeek';
 import { ByDate } from '../ByDate/ByDate';
@@ -10,13 +10,13 @@ import styles from './TabMenuLayout.module.scss';
 
 export const TabMenu = () => {
   const setCloseByDateCalendar = useSetRecoilState(
-    Open.isOpenByDateCalendarState
+    AOpen.isOpenByDateCalendarState
   );
   const setCloseByWeekCalendar = useSetRecoilState(
-    Open.isOpenByWeekCalendarState
+    AOpen.isOpenByWeekCalendarState
   );
   const [clickedTabName, setClickedTabName] = useRecoilState(
-    Index.clickedTabNameState
+    AIndex.clickedTabNameState
   );
 
   return (

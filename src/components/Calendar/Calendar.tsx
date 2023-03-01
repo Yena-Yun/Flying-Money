@@ -1,5 +1,5 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { Date } from 'recoil/atom';
+import { ADate } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { Hook, Const, DateFn } from 'utils';
 import { DateCells } from './DateCells/DateCells';
@@ -8,7 +8,7 @@ import styles from './Calendar.module.scss';
 
 export const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
-    Date.addModalDateState
+    ADate.addModalDateState
   );
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 

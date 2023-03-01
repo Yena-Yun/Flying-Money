@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Main, Open } from 'recoil/atom';
+import { AMain, AOpen } from 'recoil/atom';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
 import { AddModalDate } from './Date/Date';
@@ -11,8 +11,8 @@ import { TMain } from 'types';
 import styles from './Add.module.scss';
 
 export const Add = () => {
-  const items = useRecoilValue<TMain.ItemType[]>(Main.itemState);
-  const isOpenCalender = useRecoilValue(Open.isOpenCalendarState);
+  const items = useRecoilValue<TMain.ItemType[]>(AMain.itemState);
+  const isOpenCalender = useRecoilValue(AOpen.isOpenCalendarState);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

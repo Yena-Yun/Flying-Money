@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { Main, Index } from 'recoil/atom';
+import { AMain, AIndex } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import { Hook } from 'utils';
 import styles from './All.module.scss';
 
 export const All = () => {
-  const transactionList = useRecoilValue(Main.transactionListState);
+  const transactionList = useRecoilValue(AMain.transactionListState);
   const resetTransactionToTransactionList = useResetRecoilState(
-    Main.transactionState
+    AMain.transactionState
   );
-  const setClickedIndex = useSetRecoilState(Index.clickedIndexState);
+  const setClickedIndex = useSetRecoilState(AIndex.clickedIndexState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
-  const totalExpense = useRecoilValue(Main.totalPerDateTabAllState);
+  const totalExpense = useRecoilValue(AMain.totalPerDateTabAllState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
 
   useEffect(() => {

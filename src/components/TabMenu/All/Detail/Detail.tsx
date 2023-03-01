@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Main, Open, Index } from 'recoil/atom';
+import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
@@ -7,10 +7,10 @@ import { Hook } from 'utils';
 import styles from './Detail.module.scss';
 
 export const Detail = () => {
-  const isOpenToast = useRecoilValue(Open.isOpenToastState);
-  const transactionList = useRecoilValue(Main.transactionListState);
-  const clickedIndex = useRecoilValue(Index.clickedIndexState);
-  const totalExpense = useRecoilValue(Main.totalPerDateTabAllState);
+  const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
+  const transactionList = useRecoilValue(AMain.transactionListState);
+  const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
+  const totalExpense = useRecoilValue(AMain.totalPerDateTabAllState);
   const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
 

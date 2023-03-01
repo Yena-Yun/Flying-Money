@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
-import { Main } from 'recoil/atom';
+import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { IoIosClose } from 'react-icons/io';
 import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
   const [value, setValue] = useState('');
-  const setItems = useSetRecoilState(Main.itemState);
+  const setItems = useSetRecoilState(AMain.itemState);
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(
-    Main.savedTagGroupState
+    AMain.savedTagGroupState
   );
   const setAddTagToItem = useSetRecoilState(SMain.addTagToItemSelector);
   const setCloseTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
