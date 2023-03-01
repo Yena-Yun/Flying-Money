@@ -1,17 +1,26 @@
 import { isSameDay } from 'date-fns';
 import { selector, DefaultValue } from 'recoil';
 import uuid4 from 'uuid4';
-import { Main, Date, Index } from '../atom';
+import * as AMain from '../atom/mainDataState';
+import {
+  byDateSelectedDateState,
+  allSelectedDateState,
+} from '../atom/dateState';
+import {
+  clickedTagPopupIndexState,
+  clickedIndexState,
+  clickedItemIndexState,
+} from '../atom/clickedIndexState';
 import { DateFn } from 'utils';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
   get: () => {},
   set: ({ get, set }) => {
-    const item = get(Main.itemState);
-    const list = get(Main.listState);
+    const item = get(AMain.itemState);
+    const list = get(AMain.listState);
 
-    set(Main.listState, {
+    set(AMain.listState, {
       ...list,
       items: item,
     });
@@ -22,10 +31,10 @@ export const setListToTransactionSelector = selector({
   key: 'setListToTransactionList',
   get: () => {},
   set: ({ get, set }) => {
-    const list = get(Main.listState);
-    const transaction = get(Main.transactionState);
+    const list = get(AMain.listState);
+    const transaction = get(AMain.transactionState);
 
-    set(Main.transactionState, {
+    set(AMain.transactionState, {
       ...transaction,
       id: uuid4(),
       lists: [...transaction.lists, { ...list, id: uuid4() }],
@@ -38,8 +47,8 @@ export const setTransactionListSelector = selector({
   key: 'setTransactionToTransactionList',
   get: () => {},
   set: ({ get, set }) => {
-    const transaction = get(Main.transactionState);
-    const transactionList = get(Main.transactionListState);
+    const transaction = get(AMain.transactionState);
+    const transactionList = get(AMain.transactionListState);
 
     const selectedTransaction = transactionList.find(({ date }) =>
       isSameDay(date, transaction.date)
@@ -56,7 +65,7 @@ export const setTransactionListSelector = selector({
       (transactionListItem) => transactionListItem.id !== addedTransaction.id
     );
 
-    set(Main.transactionListState, [...filteredTransaction, addedTransaction]);
+    set(AMain.transactionListState, [...filteredTransaction, addedTransaction]);
   },
 });
 
@@ -69,8 +78,8 @@ export const addTagToItemSelector = selector({
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      const expenseItemList = get(Main.itemState);
-      const clickedTagPopupIndex = get(Index.clickedTagPopupIndexState);
+      const expenseItemList = get(AMain.itemState);
+      const clickedTagPopupIndex = get(clickedTagPopupIndexState);
 
       const result = expenseItemList.map((item) => {
         return item.id === clickedTagPopupIndex
@@ -78,7 +87,7 @@ export const addTagToItemSelector = selector({
           : item;
       });
 
-      set(Main.itemState, result);
+      set(AMain.itemState, result);
     }
   },
 });
@@ -89,9 +98,9 @@ export const getTotalPerDateSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const transactionList = get(Main.transactionListState);
-    const byDateSelectedDate = get(Date.byDateSelectedDateState);
-    const allSelectedDate = get(Date.allSelectedDateState);
+    const transactionList = get(AMain.transactionListState);
+    const byDateSelectedDate = get(byDateSelectedDateState);
+    const allSelectedDate = get(allSelectedDateState);
 
     const total = transactionList
       .filter(({ date }) =>
@@ -106,9 +115,9 @@ export const getTotalPerDateSelector = selector({
       .reduce((acc, cur) => acc + cur, 0);
 
     if (flag === 'byDate') {
-      set(Main.totalPerDateState, total);
+      set(AMain.totalPerDateState, total);
     } else {
-      set(Main.totalPerDateTabAllState, total);
+      set(AMain.totalPerDateTabAllState, total);
     }
   },
 });
@@ -117,9 +126,9 @@ export const deleteItemSelector = selector({
   key: 'deleteItem',
   get: () => {},
   set: ({ get, set }) => {
-    const transactionList = get(Main.transactionListState);
-    const index = get(Index.clickedIndexState);
-    const itemIndex = get(Index.clickedItemIndexState);
+    const transactionList = get(AMain.transactionListState);
+    const index = get(clickedIndexState);
+    const itemIndex = get(clickedItemIndexState);
 
     const deletedItem = transactionList
       .find(({ id }) => id === index)!
@@ -133,7 +142,7 @@ export const deleteItemSelector = selector({
       }
     });
 
-    set(Main.transactionListState, deletedList);
+    set(AMain.transactionListState, deletedList);
   },
 });
 
@@ -141,11 +150,11 @@ export const deleteTransactionSelector = selector({
   key: 'deleteTransaction',
   get: () => {},
   set: ({ get, set }) => {
-    const transaction = get(Main.transactionListState);
-    const index = get(Index.clickedIndexState);
+    const transaction = get(AMain.transactionListState);
+    const index = get(clickedIndexState);
 
     const deletedList = transaction.filter(({ id }) => id !== index);
 
-    set(Main.transactionListState, deletedList);
+    set(AMain.transactionListState, deletedList);
   },
 });

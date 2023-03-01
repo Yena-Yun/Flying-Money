@@ -1,12 +1,12 @@
 import { selector } from 'recoil';
-import * as I from '../atom/clickedIndexState';
+import { clickedTabNameState } from '../atom/clickedIndexState';
 
 export const tabClickSelector = selector({
   key: 'handleTabClick',
   get: ({ get }) => {
-    return get(I.clickedTabNameState);
+    return get(clickedTabNameState);
   },
   set: ({ set }, newTab) => {
-    set(I.clickedTabNameState, newTab);
+    set(clickedTabNameState, newTab);
   },
 });
