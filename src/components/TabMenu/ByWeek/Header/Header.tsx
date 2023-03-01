@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Open, Date } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
 
@@ -13,9 +14,37 @@ export const Header = () => {
   const selectedDate = useRecoilValue(Date.byWeekStartDateState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
+  const [currentMonth, setCurrentMonth] = useRecoilState(
+    Date.byWeekStartDateState
+  );
+
   return (
-    <div className={styles.header}>
-      {isOpenCalender && <MiniCalendar tabName='byWeek' />}
+    <div className={styles.container}>
+      {/* {isOpenCalender && <MiniCalendar tabName='byWeek' />}
+       */}
+
+      <div className={styles.header}>
+        <div
+          className={styles.arrow}
+          onClick={() =>
+            Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
+          }
+        >
+          <BsChevronLeft />
+        </div>
+        <div className={styles.title}>
+          {DateFn.format(currentMonth, 'yyyy')}년{' '}
+          {DateFn.format(currentMonth, 'M')}월
+        </div>
+        <div
+          className={styles.arrow}
+          onClick={() =>
+            Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
+          }
+        >
+          <BsChevronRight />
+        </div>
+      </div>
 
       <div className={styles.period}>
         <CalendarIcon />
