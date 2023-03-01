@@ -9,7 +9,7 @@ import addDays from 'date-fns/addDays';
 import isMonday from 'date-fns/isMonday';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import subDays from 'date-fns/subDays';
-import getWeekOfMonth from 'date-fns/getWeekOfMonth';
+import getWeeksInMonth from 'date-fns/getWeeksInMonth';
 
 export {
   format,
@@ -23,5 +23,5 @@ export {
   isMonday,
   isWithinInterval,
   subDays,
-  getWeekOfMonth,
+  getWeeksInMonth,
 };
