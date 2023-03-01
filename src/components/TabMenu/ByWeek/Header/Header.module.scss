@@ -26,21 +26,16 @@
     }
   }
 
-  .period {
+  .weeksButtonWrap {
     @include flexbox;
-    font-size: var(--text-size-md);
     gap: 0.5rem;
+    margin-bottom: 0.8rem;
 
-    .startDate {
-      &:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
+    .weekButton {
+      padding: 0.3rem 0.6rem;
+      border: 1.5px solid var(--color-yellow);
+      border-radius: 1rem;
+      cursor: pointer;
     }
-  }
-
-  .guide {
-    padding-left: 1.8rem;
-    color: var(--color-gray-4);
   }
 }

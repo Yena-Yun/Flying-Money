@@ -1,28 +1,35 @@
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { Open, Date } from 'recoil/atom';
+import { AOpen, ADate } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
 import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
+import { weeksOfMonthState } from 'recoil/atom/dateState';
 
 export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
-  const isOpenCalender = useRecoilValue(Open.isOpenByWeekCalendarState);
-  const selectedDate = useRecoilValue(Date.byWeekStartDateState);
+  const isOpenCalender = useRecoilValue(AOpen.isOpenByWeekCalendarState);
+  const selectedDate = useRecoilValue(ADate.byWeekStartDateState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
   const [currentMonth, setCurrentMonth] = useRecoilState(
-    Date.byWeekStartDateState
+    ADate.byWeekStartDateState
   );
+
+  const [weeksOfMonth, setWeeksOfMonth] = useRecoilState(weeksOfMonthState);
+
+  const getWeeks = () => {
+    const weeksNum = DateFn.getWeeksInMonth(new Date());
+    const weeksArray = [...Array(weeksNum).keys()];
+
+    return weeksArray.map((weekNum) => weekNum + 1);
+  };
 
   return (
     <div className={styles.container}>
-      {/* {isOpenCalender && <MiniCalendar tabName='byWeek' />}
-       */}
-
       <div className={styles.header}>
         <div
           className={styles.arrow}
@@ -46,26 +53,11 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className={styles.period}>
-        <CalendarIcon />
-        <div
-          className={styles.startDate}
-          onClick={() => {
-            setToggleCalendar('byWeek');
-            setIsSelectSomeDate(false);
-          }}
-        >
-          {Hook.formatDate(selectedDate)}
-        </div>
-        -
-        <div className={styles.endDate}>
-          {Hook.formatDate(DateFn.addDays(selectedDate, 6))}
-        </div>
+      <div className={styles.weeksButtonWrap}>
+        {getWeeks().map((week) => (
+          <li className={styles.weekButton}>{week}주차</li>
+        ))}
       </div>
-
-      {isSelectSomeDate && (
-        <p className={styles.guide}>주차를 선택하세요 (월요일만 선택 가능)</p>
-      )}
     </div>
   );
 };
