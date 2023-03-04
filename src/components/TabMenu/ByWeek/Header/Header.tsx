@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { ADate } from 'recoil/atom';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
+import classNames from 'classnames';
 
 export const Header = () => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
+  const [isClickedButtonIndex, setIsClickedButtonIndex] = useState(0);
 
   /* 주차별 total 보여주기 (전역으로 관리) */
   const [weeksOfMonth, setWeeksOfMonth] = useRecoilState(
@@ -47,7 +50,17 @@ export const Header = () => {
 
       <div className={styles.weeksButtonWrap}>
         {getWeeks().map((week, id) => (
-          <li key={id} className={styles.weekButton}>
+          <li
+            key={id}
+            id={String(id)}
+            className={classNames(
+              styles.weekButton,
+              isClickedButtonIndex === id && styles.clicked
+            )}
+            onClick={(e) => {
+              setIsClickedButtonIndex(Number(e.currentTarget.id));
+            }}
+          >
             {week}주차
           </li>
         ))}

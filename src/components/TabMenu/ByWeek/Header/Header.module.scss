@@ -36,6 +36,11 @@
       border: 1.5px solid var(--color-yellow);
       border-radius: 1rem;
       cursor: pointer;
+
+      &.clicked {
+        color: var(--color-white);
+        background-color: var(--color-yellow);
+      }
     }
   }
 }
