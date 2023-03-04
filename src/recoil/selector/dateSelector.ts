@@ -3,7 +3,7 @@ import { selector, DefaultValue } from 'recoil';
 import * as A from '../atom/dateState';
 
 export const selectedDateSelector = selector({
-  key: 'handleSelectDate',
+  key: 'handleDateSelection',
   get: () => {
     return new Date();
   },
