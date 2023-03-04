@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
-import { AMain, ADate } from 'recoil/atom';
-import { SDate, SMain } from 'recoil/selector';
+import { AMain, ADate, AIndex } from 'recoil/atom';
+import { SDate, SIndex, SMain } from 'recoil/selector';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
-  const [isClickedButtonIndex, setIsClickedButtonIndex] = useState(0);
+  const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
+    AIndex.weekButtonIndexState
+  );
+  const setWeekTotal = useSetRecoilState(SMain.getTotalPerWeekSelector);
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
   const monthTotal = useRecoilValue(AMain.totalPerMonthState);
-  const setTotalExpense = useSetRecoilState(
-    SMain.getTotalPerMonthOrWeekSelector
-  );
-  const setStartEndDate = useSetRecoilState(SDate.selectStartEndDateSelector);
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerMonthSelector);
+  const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
   useEffect(() => {
     setStartEndDate(currentMonth);
@@ -35,10 +36,9 @@ export const Header = () => {
         <div className={styles.date}>
           <div
             className={styles.arrow}
-            onClick={() => {
-              Hook.changeMonth('PREV', { currentMonth, setCurrentMonth });
-              // setStartEndDate(currentMonth);
-            }}
+            onClick={() =>
+              Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
+            }
           >
             <BsChevronLeft />
           </div>
@@ -48,10 +48,9 @@ export const Header = () => {
           </div>
           <div
             className={styles.arrow}
-            onClick={() => {
-              Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth });
-              // setStartEndDate(currentMonth);
-            }}
+            onClick={() =>
+              Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
+            }
           >
             <BsChevronRight />
           </div>
@@ -63,19 +62,20 @@ export const Header = () => {
       </div>
 
       <div className={styles.weeksButtonWrap}>
-        {getWeeks().map((week, id) => (
+        {getWeeks().map((weekNum, id) => (
           <li
             key={id}
             id={String(id)}
             className={classNames(
               styles.weekButton,
-              isClickedButtonIndex === id && styles.clicked
+              clickedButtonIndex === id && styles.clicked
             )}
             onClick={(e) => {
-              setIsClickedButtonIndex(Number(e.currentTarget.id));
+              setClickedButtonIndex(Number(e.currentTarget.id));
+              setWeekTotal();
             }}
           >
-            {week}주차
+            {weekNum}주차
           </li>
         ))}
       </div>

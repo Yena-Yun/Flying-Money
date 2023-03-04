@@ -20,3 +20,8 @@ export const clickedTabNameState = atom<TTab.TabMenuIdType>({
   key: 'clickedTabName',
   default: 'all',
 });
+
+export const weekButtonIndexState = atom({
+  key: 'weekButtonIndex',
+  default: 0,
+});
