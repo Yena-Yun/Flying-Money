@@ -12,7 +12,7 @@ import {
   clickedItemIndexState,
 } from '../atom/clickedIndexState';
 import { DateFn } from 'utils';
-import { ADate } from 'recoil/atom';
+import { ADate, AIndex } from 'recoil/atom';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
@@ -143,26 +143,25 @@ export const getTotalPerDateAllSelector = selector({
   },
 });
 
-export const getTotalPerMonthOrWeekSelector = selector({
-  key: 'getTotalPerMonthOrWeek',
+export const getTotalPerWeekSelector = selector({
+  key: 'getTotalPerWeek',
   get: () => {},
   set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
     const startDate = get(ADate.byWeekStartDateState);
     const endDate = get(ADate.byWeekEndDateState);
 
-    console.log(startDate);
-    console.log(endDate);
+    const currentMonth = get(ADate.byWeekStartDateState);
+    const clickedButtonIndex = get(AIndex.weekButtonIndexState);
+
+    console.log(clickedButtonIndex);
+
+    // console.log(startDate);
+    // console.log(endDate);
 
     const selectedMonth = transactionList.filter(({ date }) =>
       DateFn.isSameMonth(date, startDate)
     );
-
-    const monthTotal = selectedMonth
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
-      )
-      .reduce((acc, cur) => acc + cur, 0);
 
     const weekTotal = selectedMonth
       .filter(({ date }) =>
@@ -178,8 +177,28 @@ export const getTotalPerMonthOrWeekSelector = selector({
 
     console.log(weekTotal);
 
-    set(AMain.totalPerMonthState, monthTotal);
     set(AMain.totalPerWeekState, weekTotal);
+  },
+});
+
+export const getTotalPerMonthSelector = selector({
+  key: 'getTotalPerMonth',
+  get: () => {},
+  set: ({ get, set }) => {
+    const transactionList = get(AMain.transactionListState);
+    const startDate = get(ADate.byWeekStartDateState);
+
+    const selectedMonth = transactionList.filter(({ date }) =>
+      DateFn.isSameMonth(date, startDate)
+    );
+
+    const monthTotal = selectedMonth
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
+      )
+      .reduce((acc, cur) => acc + cur, 0);
+
+    set(AMain.totalPerMonthState, monthTotal);
   },
 });
 
