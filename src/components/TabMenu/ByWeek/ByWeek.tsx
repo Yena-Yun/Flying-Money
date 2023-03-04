@@ -14,8 +14,17 @@ export const ByWeek = () => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
 
+  const filterPriceByMonth = () => {
+    return transactionList
+      .filter(({ date }) => DateFn.isSameMonth(date, startDate))
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.map(({ price }) => price))
+      );
+  };
+
   const filterPriceByWeek = () => {
     return transactionList
+      .filter(({ date }) => DateFn.isSameMonth(date, startDate))
       .filter(({ date }) =>
         DateFn.isWithinInterval(date, {
           start: DateFn.subDays(startDate, 1),

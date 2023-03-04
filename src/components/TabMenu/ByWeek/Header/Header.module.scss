@@ -7,22 +7,26 @@
   gap: 1rem;
   z-index: 300;
 
-  .header {
-    @include flexbox-row;
+  .dateTotalGroup {
+    @include flexbox-row(space-between, center);
     width: 100%;
     padding: 0.4rem 0 1rem;
 
-    .title {
-      padding: 0 2rem;
-      font-size: 1.2rem;
-      font-weight: var(--font-weight-semibold);
-    }
-
-    .arrow {
+    .date {
       @include flexbox-row;
-      font-size: 1.2rem;
-      color: var(--color-gray-5);
-      cursor: pointer;
+
+      .title {
+        padding: 0 2rem;
+        font-size: 1.2rem;
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .arrow {
+        @include flexbox-row;
+        font-size: 1.2rem;
+        color: var(--color-gray-5);
+        cursor: pointer;
+      }
     }
   }
 

@@ -1,16 +1,22 @@
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { ADate } from 'recoil/atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import classNames from 'classnames';
+import { AMain, ADate } from 'recoil/atom';
+import { SMain } from 'recoil/selector';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
-import classNames from 'classnames';
 
 export const Header = () => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
   const [isClickedButtonIndex, setIsClickedButtonIndex] = useState(0);
+
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerMonthSelector);
+  const totalExpense = useRecoilValue(AMain.totalPerMonthState);
+  const startDate = useRecoilValue(ADate.byWeekStartDateState);
+  const transactionList = useRecoilValue(AMain.transactionListState);
 
   /* 주차별 total 보여주기 (전역으로 관리) */
   const [weeksOfMonth, setWeeksOfMonth] = useRecoilState(
@@ -23,28 +29,42 @@ export const Header = () => {
     return weeksArray.map((weekNum) => weekNum + 1);
   };
 
+  const filterPriceByMonth = () => {
+    return transactionList
+      .filter(({ date }) => DateFn.isSameMonth(date, startDate))
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.map(({ price }) => price))
+      );
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <div
-          className={styles.arrow}
-          onClick={() =>
-            Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
-          }
-        >
-          <BsChevronLeft />
+      <div className={styles.dateTotalGroup}>
+        <div className={styles.date}>
+          <div
+            className={styles.arrow}
+            onClick={() =>
+              Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
+            }
+          >
+            <BsChevronLeft />
+          </div>
+          <div className={styles.title}>
+            {DateFn.format(currentMonth, 'yyyy')}년{' '}
+            {DateFn.format(currentMonth, 'M')}월
+          </div>
+          <div
+            className={styles.arrow}
+            onClick={() =>
+              Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
+            }
+          >
+            <BsChevronRight />
+          </div>
         </div>
-        <div className={styles.title}>
-          {DateFn.format(currentMonth, 'yyyy')}년{' '}
-          {DateFn.format(currentMonth, 'M')}월
-        </div>
-        <div
-          className={styles.arrow}
-          onClick={() =>
-            Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
-          }
-        >
-          <BsChevronRight />
+        <div className={styles.monthTotal}>
+          Total:{' '}
+          <span>{filterPriceByMonth().reduce((acc, cur) => acc + cur, 0)}</span>
         </div>
       </div>
 

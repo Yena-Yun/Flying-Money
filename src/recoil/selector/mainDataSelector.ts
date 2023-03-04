@@ -12,6 +12,7 @@ import {
   clickedItemIndexState,
 } from '../atom/clickedIndexState';
 import { DateFn } from 'utils';
+import { ADate } from 'recoil/atom';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
@@ -119,6 +120,26 @@ export const getTotalPerDateSelector = selector({
     } else {
       set(AMain.totalPerDateTabAllState, total);
     }
+  },
+});
+
+export const getTotalPerMonthSelector = selector({
+  key: 'getTotalPerMonth',
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }) => {
+    const transactionList = get(AMain.transactionListState);
+    const byWeekSelectedMonth = get(ADate.byWeekStartDateState);
+
+    const total = transactionList
+      .filter(({ date }) => DateFn.isSameMonth(date, byWeekSelectedMonth))
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
+      )
+      .reduce((acc, cur) => acc + cur, 0);
+
+    set(AMain.totalPerMonthState, total);
   },
 });
 
