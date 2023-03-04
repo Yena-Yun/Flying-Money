@@ -2,12 +2,14 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, ADate } from 'recoil/atom';
 import { SOpen, SDate } from 'recoil/selector';
 import { DateFn } from 'utils';
-import { TMain, TDate } from 'types';
+import { TMain } from 'types';
 import styles from './DateCells.module.scss';
 
-export const DateCells = ({
-  currentMonth,
-}: Pick<TDate.DateCellType, 'currentMonth'>) => {
+type DateCellType = {
+  currentMonth: Date;
+};
+
+export const DateCells = ({ currentMonth }: DateCellType) => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const selectedDate = useRecoilValue(ADate.addModalDateState);
   const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);

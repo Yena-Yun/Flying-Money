@@ -19,21 +19,13 @@ export const selectedDateSelector = selector({
 export const selectedMiniDateSelector = selector({
   key: 'handleMiniSelectDate',
   get: () => {
-    return {
-      flag: '',
-      newDate: new Date(),
-    };
+    return new Date();
   },
-  set: ({ set }, newValue) => {
-    if (newValue instanceof DefaultValue) {
-      return newValue;
+  set: ({ set }, newDate) => {
+    if (newDate instanceof DefaultValue) {
+      return newDate;
     } else {
-      if (newValue.flag === 'byDate') {
-        set(A.byDateSelectedDateState, newValue.newDate);
-      } else {
-        set(A.byWeekStartDateState, newValue.newDate);
-        set(A.byWeekEndDateState, addDays(newValue.newDate, 6));
-      }
+      set(A.byDateSelectedDateState, newDate);
     }
   },
 });

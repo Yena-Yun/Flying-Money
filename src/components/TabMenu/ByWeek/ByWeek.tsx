@@ -19,7 +19,7 @@ export const ByWeek = () => {
         className={styles.background}
         onClick={() => {
           setToggleCalendar('byWeek');
-          setSelectDate({ flag: 'byWeek', newDate: startDate });
+          // setSelectDate({ flag: 'byWeek', newDate: startDate });
         }}
       ></div>
       <div className={styles.container}>

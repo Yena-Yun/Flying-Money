@@ -10,11 +10,13 @@ import styles from './Header.module.scss';
 export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
   const isOpenCalender = useRecoilValue(AOpen.isOpenByDateCalendarState);
-  const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
+
+  const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+
   const totalExpense = useRecoilValue(AMain.totalPerDateState);
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
 
   useEffect(() => {
     setTotalExpense('byDate');
@@ -23,7 +25,7 @@ export const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {isOpenCalender && <MiniCalendar tabName='byDate' />}
+        {isOpenCalender && <MiniCalendar />}
 
         <div className={styles.period}>
           <CalendarIcon />
@@ -31,7 +33,7 @@ export const Header = () => {
             className={styles.selectedDate}
             onClick={() => {
               setToggleCalendar('byDate');
-              setSelectDate({ flag: 'byDate', newDate: selectedDate });
+              setSelectDate(selectedDate);
               setTotalExpense('byDate');
               setIsSelectSomeDate(false);
             }}

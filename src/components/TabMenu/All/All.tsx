@@ -17,7 +17,7 @@ export const All = () => {
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
 
   useEffect(() => {
-    setTotalExpense('all');
+    setTotalExpense('byDate');
   }, []);
 
   const openAddModal = () => {
@@ -47,6 +47,7 @@ export const All = () => {
                 <div className={styles.date}>{Hook.formatDate(date)}</div>
                 <div className={styles.totalExpense}>
                   <span>Total</span>&nbsp;
+                  {/* {Hook.formatMoney(totalExpense)} */}
                   {Hook.formatMoney(totalExpense)}
                 </div>
               </div>

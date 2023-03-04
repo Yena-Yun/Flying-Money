@@ -2,10 +2,14 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { DateFn } from 'utils';
 import { AMain } from 'recoil/atom';
 import { SDate, SOpen } from 'recoil/selector';
-import { TMain, TDate } from 'types';
+import { TMain } from 'types';
 import styles from './DateCells.module.scss';
 
-export const DateCells = ({ currentMonth, tabName }: TDate.DateCellType) => {
+type DateCellType = {
+  currentMonth: Date;
+};
+
+export const DateCells = ({ currentMonth }: DateCellType) => {
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
@@ -31,22 +35,14 @@ export const DateCells = ({ currentMonth, tabName }: TDate.DateCellType) => {
           className={styles.date}
           key={date.toString()}
           onClick={() => {
-            if (tabName === 'byWeek' && !DateFn.isMonday(cloneDay)) {
-              return;
-            } else {
-              setSelectedDate(() => ({ flag: tabName, newDate: cloneDay }));
+            setSelectedDate(() => cloneDay);
 
-              setExpenseTransaction({
-                ...expenseTransaction,
-                date: cloneDay,
-              });
+            setExpenseTransaction({
+              ...expenseTransaction,
+              date: cloneDay,
+            });
 
-              if (tabName === 'byDate') {
-                setToggleCalendar('byDate');
-              } else {
-                setToggleCalendar('byWeek');
-              }
-            }
+            setToggleCalendar('byDate');
           }}
         >
           <span
@@ -55,8 +51,6 @@ export const DateCells = ({ currentMonth, tabName }: TDate.DateCellType) => {
                 ? styles.disabled
                 : DateFn.isSameDay(date, currentMonth)
                 ? styles.current
-                : tabName === 'byWeek' && !DateFn.isMonday(date)
-                ? styles.disabled
                 : ''
             }
           >

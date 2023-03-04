@@ -4,16 +4,11 @@ import { SOpen } from 'recoil/selector';
 import { DateCells } from './DateCells/DateCells';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Const, Hook } from 'utils';
-import { TDate } from 'types';
 import styles from './MiniCalendar.module.scss';
 
-export const MiniCalendar = ({
-  tabName,
-}: Pick<TDate.DateCellType, 'tabName'>) => {
+export const MiniCalendar = () => {
   const [currentMonth, setCurrentMonth] = useRecoilState(
-    tabName === 'byDate'
-      ? ADate.byDateSelectedDateState
-      : ADate.byWeekStartDateState
+    ADate.byDateSelectedDateState
   );
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
@@ -21,9 +16,7 @@ export const MiniCalendar = ({
     <>
       <div
         className={styles.background}
-        onClick={() =>
-          setToggleCalendar(tabName === 'byDate' ? 'byDate' : 'byWeek')
-        }
+        onClick={() => setToggleCalendar('byDate')}
       ></div>
       <div className={styles.container}>
         <div className={styles.innerContainer}>
@@ -54,7 +47,7 @@ export const MiniCalendar = ({
               <div key={id}>{day}</div>
             ))}
           </div>
-          <DateCells currentMonth={currentMonth} tabName={tabName} />
+          <DateCells currentMonth={currentMonth} />
         </div>
       </div>
     </>
