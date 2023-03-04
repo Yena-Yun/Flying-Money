@@ -115,11 +115,31 @@ export const getTotalPerDateSelector = selector({
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    if (flag === 'byDate') {
-      set(AMain.totalPerDateState, total);
+    if (flag === 'all') {
+      set(AMain.totalPerDateAllState, total);
     } else {
-      set(AMain.totalPerDateTabAllState, total);
+      set(AMain.totalPerDateState, total);
     }
+  },
+});
+
+export const getTotalPerDateAllSelector = selector({
+  key: 'getTotalPerDateAll',
+  get: () => {},
+  set: ({ get, set }) => {
+    const transactionList = get(AMain.transactionListState);
+    const byDateSelectedDate = get(byDateSelectedDateState);
+
+    const total = transactionList
+      .filter(({ lists }) => lists.length > 0)
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
+      )
+      .reduce((acc, cur) => acc + cur, 0);
+
+    // console.log(total);
+
+    set(AMain.totalPerDateAllState, total);
   },
 });
 

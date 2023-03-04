@@ -10,7 +10,7 @@ export const Detail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
-  const totalExpense = useRecoilValue(AMain.totalPerDateTabAllState);
+  const totalExpense = useRecoilValue(AMain.totalPerDateAllState);
   const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
 

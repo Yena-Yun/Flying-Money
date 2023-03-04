@@ -49,6 +49,8 @@ export const DateCells = ({ currentMonth }: DateCellType) => {
             className={
               !DateFn.isSameMonth(date, monthStart)
                 ? styles.disabled
+                : DateFn.isSameDay(date, new Date())
+                ? styles.today
                 : DateFn.isSameDay(date, currentMonth)
                 ? styles.current
                 : ''

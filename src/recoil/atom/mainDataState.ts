@@ -41,6 +41,11 @@ export const totalPerDateState = atom({
   default: 0,
 });
 
+export const totalPerDateAllState = atom({
+  key: 'totalPerDateAll',
+  default: 0,
+});
+
 export const totalPerWeekState = atom({
   key: 'totalPerWeek',
   default: 0,

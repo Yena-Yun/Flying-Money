@@ -26,6 +26,13 @@
           background-color: var(--color-black);
         }
 
+        &.today {
+          @include flexbox-row;
+          border-radius: 50%;
+          color: var(--color-white);
+          background-color: var(--color-gray-3);
+        }
+
         &.disabled {
           color: var(--color-gray-2);
           cursor: default;
