@@ -17,7 +17,7 @@ export const selectedDateSelector = selector({
 });
 
 export const selectedMiniDateSelector = selector({
-  key: 'handleMiniSelectDate',
+  key: 'handleMiniDateSelection',
   get: () => {
     return new Date();
   },
@@ -30,8 +30,8 @@ export const selectedMiniDateSelector = selector({
   },
 });
 
-export const selectStartEndDateSelector = selector({
-  key: 'selectStartEndDate',
+export const selectedStartEndDateSelector = selector({
+  key: 'handleStartDateAndEndDateSelection',
   get: () => {
     return new Date();
   },

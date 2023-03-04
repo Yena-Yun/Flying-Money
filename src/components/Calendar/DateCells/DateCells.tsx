@@ -14,7 +14,7 @@ export const DateCells = ({ currentMonth }: DateCellType) => {
   const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);
-  const setStartEndDate = useSetRecoilState(SDate.selectStartEndDateSelector);
+  const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
   const monthStart = DateFn.startOfMonth(currentMonth);
   const monthEnd = DateFn.endOfMonth(currentMonth);
