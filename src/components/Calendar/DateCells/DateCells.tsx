@@ -1,5 +1,5 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { AMain } from 'recoil/atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { AMain, ADate } from 'recoil/atom';
 import { SOpen, SDate } from 'recoil/selector';
 import { DateFn } from 'utils';
 import { TMain, TDate } from 'types';
@@ -9,6 +9,7 @@ export const DateCells = ({
   currentMonth,
 }: Pick<TDate.DateCellType, 'currentMonth'>) => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
+  const selectedDate = useRecoilValue(ADate.addModalDateState);
   const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);
@@ -47,7 +48,9 @@ export const DateCells = ({
             className={
               !DateFn.isSameMonth(date, monthStart)
                 ? styles.disabled
-                : DateFn.isSameDay(date, currentMonth)
+                : DateFn.isSameDay(date, new Date())
+                ? styles.today
+                : DateFn.isSameDay(date, selectedDate)
                 ? styles.current
                 : ''
             }
