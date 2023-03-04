@@ -1,26 +1,21 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AMain, ADate } from 'recoil/atom';
-import { SOpen, SDate } from 'recoil/selector';
+import { AMain } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
 import { Hook } from 'utils';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
   const [isOpenTextarea, setIsOpenTextarea] = useState(false);
-  const startDate = useRecoilValue(ADate.byWeekStartDateState);
   const weekTotal = useRecoilValue(AMain.totalPerWeekState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
-  const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
 
   return (
     <>
       <div
         className={styles.background}
-        onClick={() => {
-          setToggleCalendar('byWeek');
-          // setSelectDate({ flag: 'byWeek', newDate: startDate });
-        }}
+        onClick={() => setToggleCalendar('byWeek')}
       ></div>
       <div className={styles.container}>
         <Header />

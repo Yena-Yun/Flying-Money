@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { AMain, AIndex, ADate } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
@@ -8,27 +7,23 @@ import styles from './All.module.scss';
 
 export const All = () => {
   const transactionList = useRecoilValue(AMain.transactionListState);
+  const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
+  const setClickedIndex = useSetRecoilState(AIndex.clickedIndexState);
+  const setSelectedDate = useSetRecoilState(ADate.allSelectedDateState);
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
   const resetTransactionToTransactionList = useResetRecoilState(
     AMain.transactionState
   );
-  const setClickedIndex = useSetRecoilState(AIndex.clickedIndexState);
-  const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
-  // const totalExpense = useRecoilValue(AMain.totalPerDateAllState);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
-  // const [totalExpense, setTotalExpense] = useState([]);
-  const setSelectedDate = useSetRecoilState(ADate.allSelectedDateState);
-
-  // useEffect(() => {
-  //   setTotalExpense();
-  // }, []);
 
   const openAddModal = () => {
     setOpenModal('addModal');
     resetTransactionToTransactionList();
   };
 
-  const openDetailModal = (id: string) => {
+  const openDetailModal = (id: string, date: Date) => {
     setClickedIndex(id);
+    setSelectedDate(date);
+    setTotalExpense('all');
     setOpenModal('allDetail');
   };
 
@@ -44,21 +39,14 @@ export const All = () => {
           </div>
         ) : (
           transactionList.map(({ id, date, lists }) => (
-            <li
-              key={id}
-              className={styles.expenseItem}
-              onClick={() => {
-                setSelectedDate(date);
-                setTotalExpense('all');
-              }}
-            >
+            <li key={id} className={styles.expenseItem}>
               <div className={styles.header}>
                 <div className={styles.date}>{Hook.formatDate(date)}</div>
               </div>
 
               <div
                 className={styles.itemWrap}
-                onClick={() => openDetailModal(id)}
+                onClick={() => openDetailModal(id, date)}
               >
                 {lists.map(({ id, title, items }) => (
                   <div key={id} className={styles.itemList}>

@@ -17,15 +17,15 @@ export const Header = () => {
     SMain.getTotalPerMonthOrWeekSelector
   );
 
+  useEffect(() => {
+    setTotalExpense();
+  }, [currentMonth]);
+
   const getWeeks = () => {
     const weekNumber = DateFn.getWeeksInMonth(currentMonth);
     const weeksArray = [...Array(weekNumber).keys()];
     return weeksArray.map((weekNum) => weekNum + 1);
   };
-
-  useEffect(() => {
-    setTotalExpense();
-  }, [currentMonth]);
 
   return (
     <div className={styles.container}>
@@ -52,8 +52,9 @@ export const Header = () => {
             <BsChevronRight />
           </div>
         </div>
-        <div className={styles.monthTotal}>
-          Total: <span>{Hook.formatMoney(monthTotal)}</span>
+        <div className={styles.totalExpense}>
+          <span>Total</span>&nbsp;
+          {Hook.formatMoney(monthTotal)}
         </div>
       </div>
 

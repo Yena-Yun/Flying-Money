@@ -3,8 +3,8 @@ import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
-import styles from './Detail.module.scss';
 import { Hook } from 'utils';
+import styles from './Detail.module.scss';
 
 export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);

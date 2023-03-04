@@ -47,6 +47,7 @@ export const MiniCalendar = () => {
               <div key={id}>{day}</div>
             ))}
           </div>
+
           <DateCells currentMonth={currentMonth} />
         </div>
       </div>

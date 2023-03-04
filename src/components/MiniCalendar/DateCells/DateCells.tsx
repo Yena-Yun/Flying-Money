@@ -36,12 +36,10 @@ export const DateCells = ({ currentMonth }: DateCellType) => {
           key={date.toString()}
           onClick={() => {
             setSelectedDate(() => cloneDay);
-
             setExpenseTransaction({
               ...expenseTransaction,
               date: cloneDay,
             });
-
             setToggleCalendar('byDate');
           }}
         >

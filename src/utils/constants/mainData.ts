@@ -41,7 +41,7 @@ export const TAB_MENU: {
   },
   {
     id: 'byWeek',
-    name: '주별',
+    name: '월별/주별',
   },
   {
     id: 'byDate',
