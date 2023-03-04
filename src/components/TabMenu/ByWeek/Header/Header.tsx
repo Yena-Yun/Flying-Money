@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate } from 'recoil/atom';
@@ -8,19 +8,13 @@ import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
+  const [isClickedButtonIndex, setIsClickedButtonIndex] = useState(0);
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
-  const [isClickedButtonIndex, setIsClickedButtonIndex] = useState(0);
-
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerMonthSelector);
-  const totalExpense = useRecoilValue(AMain.totalPerMonthState);
-  const startDate = useRecoilValue(ADate.byWeekStartDateState);
-  const transactionList = useRecoilValue(AMain.transactionListState);
-
-  /* 주차별 total 보여주기 (전역으로 관리) */
-  const [weeksOfMonth, setWeeksOfMonth] = useRecoilState(
-    ADate.weeksOfMonthState
+  const monthTotal = useRecoilValue(AMain.totalPerMonthState);
+  const setTotalExpense = useSetRecoilState(
+    SMain.getTotalPerMonthOrWeekSelector
   );
 
   const getWeeks = () => {
@@ -29,13 +23,9 @@ export const Header = () => {
     return weeksArray.map((weekNum) => weekNum + 1);
   };
 
-  const filterPriceByMonth = () => {
-    return transactionList
-      .filter(({ date }) => DateFn.isSameMonth(date, startDate))
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.map(({ price }) => price))
-      );
-  };
+  useEffect(() => {
+    setTotalExpense();
+  }, [currentMonth]);
 
   return (
     <div className={styles.container}>
@@ -63,8 +53,7 @@ export const Header = () => {
           </div>
         </div>
         <div className={styles.monthTotal}>
-          Total:{' '}
-          <span>{filterPriceByMonth().reduce((acc, cur) => acc + cur, 0)}</span>
+          Total: <span>{Hook.formatMoney(monthTotal)}</span>
         </div>
       </div>
 

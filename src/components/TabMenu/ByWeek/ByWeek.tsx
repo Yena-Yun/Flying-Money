@@ -3,38 +3,15 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, ADate } from 'recoil/atom';
 import { SOpen, SDate } from 'recoil/selector';
 import { Header } from './Header/Header';
-import { DateFn, Hook } from 'utils';
+import { Hook } from 'utils';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
   const [isOpenTextarea, setIsOpenTextarea] = useState(false);
-  const transactionList = useRecoilValue(AMain.transactionListState);
   const startDate = useRecoilValue(ADate.byWeekStartDateState);
-  const endDate = useRecoilValue(ADate.byWeekEndDateState);
+  const weekTotal = useRecoilValue(AMain.totalPerWeekState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
-
-  const filterPriceByMonth = () => {
-    return transactionList
-      .filter(({ date }) => DateFn.isSameMonth(date, startDate))
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.map(({ price }) => price))
-      );
-  };
-
-  const filterPriceByWeek = () => {
-    return transactionList
-      .filter(({ date }) => DateFn.isSameMonth(date, startDate))
-      .filter(({ date }) =>
-        DateFn.isWithinInterval(date, {
-          start: DateFn.subDays(startDate, 1),
-          end: DateFn.addDays(endDate, 1),
-        })
-      )
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.map(({ price }) => price))
-      );
-  };
 
   return (
     <>
@@ -51,11 +28,7 @@ export const ByWeek = () => {
         <div className={styles.totalExpense}>
           <div className={styles.totalArea}>
             <h3 className={styles.subTitle}>Total</h3>
-            <div className={styles.expense}>
-              {Hook.formatMoney(
-                filterPriceByWeek().reduce((acc, cur) => acc + cur, 0)
-              )}
-            </div>
+            <div className={styles.expense}>{Hook.formatMoney(weekTotal)}</div>
           </div>
           <button className={styles.detailButton}>상세</button>
         </div>

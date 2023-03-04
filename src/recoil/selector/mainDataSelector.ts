@@ -123,23 +123,38 @@ export const getTotalPerDateSelector = selector({
   },
 });
 
-export const getTotalPerMonthSelector = selector({
-  key: 'getTotalPerMonth',
-  get: () => {
-    return '';
-  },
+export const getTotalPerMonthOrWeekSelector = selector({
+  key: 'getTotalPerMonthOrWeek',
+  get: () => {},
   set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
-    const byWeekSelectedMonth = get(ADate.byWeekStartDateState);
+    const startDate = get(ADate.byWeekStartDateState);
+    const endDate = get(ADate.byWeekEndDateState);
 
-    const total = transactionList
-      .filter(({ date }) => DateFn.isSameMonth(date, byWeekSelectedMonth))
+    const selectedMonth = transactionList.filter(({ date }) =>
+      DateFn.isSameMonth(date, startDate)
+    );
+
+    const monthTotal = selectedMonth
       .flatMap(({ lists }) =>
         lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    set(AMain.totalPerMonthState, total);
+    const weekTotal = selectedMonth
+      .filter(({ date }) =>
+        DateFn.isWithinInterval(date, {
+          start: DateFn.subDays(startDate, 1),
+          end: DateFn.addDays(endDate, 1),
+        })
+      )
+      .flatMap(({ lists }) =>
+        lists.flatMap(({ items }) => items.map(({ price }) => price))
+      )
+      .reduce((acc, cur) => acc + cur, 0);
+
+    set(AMain.totalPerMonthState, monthTotal);
+    set(AMain.totalPerWeekState, weekTotal);
   },
 });
 
