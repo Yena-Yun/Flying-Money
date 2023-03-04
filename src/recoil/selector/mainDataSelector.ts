@@ -151,6 +151,9 @@ export const getTotalPerMonthOrWeekSelector = selector({
     const startDate = get(ADate.byWeekStartDateState);
     const endDate = get(ADate.byWeekEndDateState);
 
+    console.log(startDate);
+    console.log(endDate);
+
     const selectedMonth = transactionList.filter(({ date }) =>
       DateFn.isSameMonth(date, startDate)
     );
@@ -172,6 +175,8 @@ export const getTotalPerMonthOrWeekSelector = selector({
         lists.flatMap(({ items }) => items.map(({ price }) => price))
       )
       .reduce((acc, cur) => acc + cur, 0);
+
+    console.log(weekTotal);
 
     set(AMain.totalPerMonthState, monthTotal);
     set(AMain.totalPerWeekState, weekTotal);

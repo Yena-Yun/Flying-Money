@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate } from 'recoil/atom';
-import { SMain } from 'recoil/selector';
+import { SDate, SMain } from 'recoil/selector';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
@@ -16,8 +16,10 @@ export const Header = () => {
   const setTotalExpense = useSetRecoilState(
     SMain.getTotalPerMonthOrWeekSelector
   );
+  const setStartEndDate = useSetRecoilState(SDate.selectStartEndDateSelector);
 
   useEffect(() => {
+    setStartEndDate(currentMonth);
     setTotalExpense();
   }, [currentMonth]);
 
@@ -33,9 +35,10 @@ export const Header = () => {
         <div className={styles.date}>
           <div
             className={styles.arrow}
-            onClick={() =>
-              Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
-            }
+            onClick={() => {
+              Hook.changeMonth('PREV', { currentMonth, setCurrentMonth });
+              // setStartEndDate(currentMonth);
+            }}
           >
             <BsChevronLeft />
           </div>
@@ -45,9 +48,10 @@ export const Header = () => {
           </div>
           <div
             className={styles.arrow}
-            onClick={() =>
-              Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
-            }
+            onClick={() => {
+              Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth });
+              // setStartEndDate(currentMonth);
+            }}
           >
             <BsChevronRight />
           </div>

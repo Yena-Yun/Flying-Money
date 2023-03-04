@@ -14,6 +14,7 @@ export const DateCells = ({ currentMonth }: DateCellType) => {
   const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);
+  const setStartEndDate = useSetRecoilState(SDate.selectStartEndDateSelector);
 
   const monthStart = DateFn.startOfMonth(currentMonth);
   const monthEnd = DateFn.endOfMonth(currentMonth);
@@ -36,6 +37,7 @@ export const DateCells = ({ currentMonth }: DateCellType) => {
           key={date.toString()}
           onClick={() => {
             setSelectedDate(() => cloneDay);
+            setStartEndDate(() => cloneDay);
             setExpenseTransaction({
               ...expenseTransaction,
               date: cloneDay,
