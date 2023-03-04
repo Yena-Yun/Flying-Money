@@ -10,7 +10,7 @@
   .dateTotalGroup {
     @include flexbox-row(space-between, center);
     width: 100%;
-    padding: 0.4rem 0 1rem;
+    padding-bottom: 1rem;
 
     .date {
       @include flexbox-row;
@@ -26,6 +26,20 @@
         font-size: 1.2rem;
         color: var(--color-gray-5);
         cursor: pointer;
+      }
+    }
+
+    .totalExpense {
+      @include flexbox-row;
+      margin-right: 1rem;
+      font-size: var(--text-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-blue);
+
+      span {
+        font-size: var(--text-size-md);
+        color: var(--color-gray-4);
+        font-weight: var(--font-weight-regular);
       }
     }
   }
