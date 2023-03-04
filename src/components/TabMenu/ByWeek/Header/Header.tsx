@@ -1,30 +1,22 @@
-import { useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { AOpen, ADate } from 'recoil/atom';
-import { SOpen } from 'recoil/selector';
-import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
-import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
+import { useRecoilState } from 'recoil';
+import { ADate } from 'recoil/atom';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
-import { weeksOfMonthState } from 'recoil/atom/dateState';
 
 export const Header = () => {
-  const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
-  const isOpenCalender = useRecoilValue(AOpen.isOpenByWeekCalendarState);
-  const selectedDate = useRecoilValue(ADate.byWeekStartDateState);
-  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
-
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
 
-  const [weeksOfMonth, setWeeksOfMonth] = useRecoilState(weeksOfMonthState);
+  /* 주차별 total 보여주기 (전역으로 관리) */
+  const [weeksOfMonth, setWeeksOfMonth] = useRecoilState(
+    ADate.weeksOfMonthState
+  );
 
   const getWeeks = () => {
-    const weeksNum = DateFn.getWeeksInMonth(new Date());
-    const weeksArray = [...Array(weeksNum).keys()];
-
+    const weekNumber = DateFn.getWeeksInMonth(currentMonth);
+    const weeksArray = [...Array(weekNumber).keys()];
     return weeksArray.map((weekNum) => weekNum + 1);
   };
 
@@ -54,8 +46,10 @@ export const Header = () => {
       </div>
 
       <div className={styles.weeksButtonWrap}>
-        {getWeeks().map((week) => (
-          <li className={styles.weekButton}>{week}주차</li>
+        {getWeeks().map((week, id) => (
+          <li key={id} className={styles.weekButton}>
+            {week}주차
+          </li>
         ))}
       </div>
     </div>
