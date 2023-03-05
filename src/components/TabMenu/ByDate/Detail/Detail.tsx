@@ -1,16 +1,18 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import classNames from 'classnames';
 import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
+import { ItemList } from 'components/Detail/ItemList/ItemList';
 import { Toast } from 'components/Modal/Toast/Toast';
 import { Hook } from 'utils';
 import styles from './Detail.module.scss';
-import classNames from 'classnames';
 
 export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
+
   const transactionList = useRecoilValue(AMain.transactionListState);
   const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
   const clickedItemIndex = useRecoilValue(AIndex.clickedItemIndexState);
@@ -25,18 +27,9 @@ export const ByDateDetail = () => {
         <h2 className={styles.modalTitle}>{title}</h2>
 
         <div className={styles.mainContainer}>
-          {items.map(({ id, name, tag, price }) => (
-            <div key={id} className={styles.info}>
-              <div className={styles.nameTagGroup}>
-                <div className={styles.name}>
-                  {name !== '' && '‣'} &nbsp; {name}
-                </div>
-                {tag && <div className={styles.tag}>{tag}</div>}
-              </div>
-              <div className={styles.price}>{Hook.formatMoney(price)}</div>
-            </div>
-          ))}
+          <ItemList items={items} />
         </div>
+
         <div className={styles.totalExpense}>
           <span>Total</span>&nbsp;
           {Hook.formatMoney(
