@@ -137,8 +137,6 @@ export const getTotalPerDateAllSelector = selector({
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    // console.log(total);
-
     set(AMain.totalPerDateAllState, total);
   },
 });
@@ -154,30 +152,25 @@ export const getTotalPerWeekSelector = selector({
     const currentMonth = get(ADate.byWeekStartDateState);
     const clickedButtonIndex = get(AIndex.weekButtonIndexState);
 
-    console.log(clickedButtonIndex);
-
-    // console.log(startDate);
-    // console.log(endDate);
-
     const selectedMonth = transactionList.filter(({ date }) =>
       DateFn.isSameMonth(date, startDate)
     );
 
-    const weekTotal = selectedMonth
-      .filter(({ date }) =>
-        DateFn.isWithinInterval(date, {
-          start: DateFn.subDays(startDate, 1),
-          end: DateFn.addDays(endDate, 1),
-        })
-      )
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.map(({ price }) => price))
-      )
-      .reduce((acc, cur) => acc + cur, 0);
+    // const weekTotal = selectedMonth
+    //   .filter(({ date }) =>
+    //     DateFn.isWithinInterval(date, {
+    //       start: DateFn.subDays(startDate, 1),
+    //       end: DateFn.addDays(endDate, 1),
+    //     })
+    //   )
+    //   .flatMap(({ lists }) =>
+    //     lists.flatMap(({ items }) => items.map(({ price }) => price))
+    //   )
+    //   .reduce((acc, cur) => acc + cur, 0);
 
-    console.log(weekTotal);
+    // console.log(weekTotal);
 
-    set(AMain.totalPerWeekState, weekTotal);
+    // set(AMain.totalPerWeekState, weekTotal);
   },
 });
 

@@ -20,8 +20,8 @@ export const isOpenToastState = atom({
   default: false,
 });
 
-export const isOpenCalendarState = atom({
-  key: 'isOpenCalendar',
+export const isOpenAddCalendarState = atom({
+  key: 'isOpenAddCalendar',
   default: false,
 });
 

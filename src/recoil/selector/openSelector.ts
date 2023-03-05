@@ -47,14 +47,14 @@ export const toggleCalendarSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const isOpenCalendar = get(A.isOpenCalendarState);
+    const isOpenAddCalendar = get(A.isOpenAddCalendarState);
     const isOpenByDateCalendar = get(A.isOpenByDateCalendarState);
     const isOpenByWeekCalendar = get(A.isOpenByWeekCalendarState);
 
-    if (flag === 'add' && isOpenCalendar) {
-      set(A.isOpenCalendarState, false);
-    } else if (flag === 'add' && !isOpenCalendar) {
-      set(A.isOpenCalendarState, true);
+    if (flag === 'add' && isOpenAddCalendar) {
+      set(A.isOpenAddCalendarState, false);
+    } else if (flag === 'add' && !isOpenAddCalendar) {
+      set(A.isOpenAddCalendarState, true);
     } else if (flag === 'byDate' && isOpenByDateCalendar) {
       set(A.isOpenByDateCalendarState, false);
     } else if (flag === 'byDate' && !isOpenByDateCalendar) {
