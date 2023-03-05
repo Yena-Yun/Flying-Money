@@ -9,7 +9,7 @@ import {
 import {
   clickedTagPopupIndexState,
   clickedIndexState,
-  clickedItemIndexState,
+  clickedListIndexState,
 } from '../atom/indexState';
 import { DateFn } from 'utils';
 import { ADate, AIndex } from 'recoil/atom';
@@ -116,10 +116,28 @@ export const getTotalPerDateSelector = selector({
       .reduce((acc, cur) => acc + cur, 0);
 
     if (flag === 'all') {
-      set(AMain.totalPerDateAllState, total);
-    } else {
       set(AMain.totalPerDateState, total);
+    } else {
+      set(AMain.totalPerListState, total);
     }
+  },
+});
+
+export const getTotalPerListSelector = selector({
+  key: 'getTotalPerList',
+  get: () => {},
+  set: ({ get, set }) => {
+    const transactionList = get(AMain.transactionListState);
+    const byDateSelectedDate = get(byDateSelectedDateState);
+    const clickedListIndex = get(AIndex.clickedListIndexState);
+
+    const total = transactionList
+      .filter(({ date }) => DateFn.isSameDay(date, byDateSelectedDate))
+      .flatMap(({ lists }) => lists.filter(({ id }) => id === clickedListIndex))
+      .flatMap(({ items }) => items.flatMap(({ price }) => price))
+      .reduce((acc, cur) => acc + cur, 0);
+
+    set(AMain.totalPerListState, total);
   },
 });
 
@@ -137,7 +155,7 @@ export const getTotalPerDateAllSelector = selector({
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    set(AMain.totalPerDateAllState, total);
+    set(AMain.totalPerDateState, total);
   },
 });
 
@@ -201,7 +219,7 @@ export const deleteItemSelector = selector({
   set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
     const index = get(clickedIndexState);
-    const itemIndex = get(clickedItemIndexState);
+    const itemIndex = get(clickedListIndexState);
 
     const deletedItem = transactionList
       .find(({ id }) => id === index)!

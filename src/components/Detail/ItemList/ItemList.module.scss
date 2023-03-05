@@ -1,8 +1,7 @@
 @import 'styles/mixins';
 
-.info {
+.item {
   @include flexbox-row(space-between, center);
-  margin-bottom: 1.5rem;
 
   .nameTagGroup {
     @include flexbox-row(flex-start, center);

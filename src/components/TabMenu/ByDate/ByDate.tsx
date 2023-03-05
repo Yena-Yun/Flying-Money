@@ -9,7 +9,7 @@ export const ByDate = () => {
   const transactionList = useRecoilValue(AMain.transactionListState);
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setClickedIndex = useSetRecoilState(AIndex.clickedIndexState);
-  const setClickedItemIndex = useSetRecoilState(AIndex.clickedItemIndexState);
+  const setClickedListIndex = useSetRecoilState(AIndex.clickedListIndexState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   const { id: index, lists } = transactionList.filter(
@@ -18,8 +18,9 @@ export const ByDate = () => {
   )[0] || { id: '', lists: [] };
 
   const openDetailModal = (id: string) => {
+    console.log(id);
     setClickedIndex(index);
-    setClickedItemIndex(id);
+    setClickedListIndex(id);
     setOpenModal('byDateDetail');
   };
 
@@ -36,24 +37,18 @@ export const ByDate = () => {
               onClick={() => openDetailModal(id)}
             >
               <div className={styles.title}>{title}</div>
-              <div className={styles.item}>
-                <div className={styles.nameTagGroup}>
-                  <div className={styles.name}>
-                    {items[0].name !== '' && '•'} {items[0].name}
+
+              {items.map(({ id, name, tag, price }) => (
+                <div key={id} className={styles.item}>
+                  <div className={styles.nameTagGroup}>
+                    <div className={styles.name}>
+                      {name !== '' && '‣'} &nbsp; {name}&nbsp;
+                    </div>
+                    {tag && <div className={styles.tag}>{tag}</div>}
                   </div>
-                  {items[0].tag && (
-                    <div className={styles.tag}>{items[0].tag}</div>
-                  )}
-                  {items.length > 1 && ` 외 +${items.length - 1}`}
+                  <div className={styles.price}>{Hook.formatMoney(price)}</div>
                 </div>
-                <div className={styles.price}>
-                  {Hook.formatMoney(
-                    items
-                      .map(({ price }) => price)
-                      .reduce((acc, cur) => acc + cur)
-                  )}
-                </div>
-              </div>
+              ))}
             </li>
           ))}
         </ul>

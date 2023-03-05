@@ -16,10 +16,10 @@ export const Header = () => {
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
 
   const totalExpense = useRecoilValue(AMain.totalPerDateState);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const setTotalExpense = useSetRecoilState(SMain.getTotalPerListSelector);
 
   useEffect(() => {
-    setTotalExpense('byDate');
+    setTotalExpense();
   }, [selectedDate]);
 
   return (
@@ -34,7 +34,7 @@ export const Header = () => {
             onClick={() => {
               setToggleCalendar('byDate');
               setSelectDate(selectedDate);
-              setTotalExpense('byDate');
+              setTotalExpense();
               setIsSelectSomeDate(false);
             }}
           >

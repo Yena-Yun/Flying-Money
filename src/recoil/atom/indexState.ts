@@ -6,7 +6,7 @@ export const clickedIndexState = atom({
   default: '',
 });
 
-export const clickedItemIndexState = atom({
+export const clickedListIndexState = atom({
   key: 'clickedItemIndex',
   default: '',
 });

@@ -9,7 +9,7 @@ import styles from './AllDetail.module.scss';
 export const AllDetailModal = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
-  const totalExpense = useRecoilValue(AMain.totalPerDateAllState);
+  const totalExpense = useRecoilValue(AMain.totalPerDateState);
   const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
 
   const { date, lists } = transactionList.find(

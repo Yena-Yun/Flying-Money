@@ -50,7 +50,7 @@ export const All = () => {
               >
                 {lists.map(({ id, title, items }) => (
                   <div key={id} className={styles.itemList}>
-                    <div className={styles.info}>
+                    <div className={styles.item}>
                       <div className={styles.title}>{title}</div>
                       <div className={styles.nameTagGroup}>
                         <div className={styles.name}>

@@ -12,7 +12,7 @@ export const Home = () => {
     AOpen.isOpenByDateDetailModalState
   );
   const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
-  const clickedItemIndex = useRecoilValue(AIndex.clickedItemIndexState);
+  const clickedItemIndex = useRecoilValue(AIndex.clickedListIndexState);
 
   return (
     <>

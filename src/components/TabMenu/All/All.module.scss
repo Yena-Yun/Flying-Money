@@ -66,7 +66,7 @@
         .itemList {
           @include flexbox-row(space-between, center);
 
-          .info {
+          .item {
             @include flexbox-column(center, flex-start);
 
             .title {

@@ -10,7 +10,7 @@ export const ItemList = ({ items }: ItemListType) => {
   return (
     <>
       {items.map(({ id, name, tag, price }) => (
-        <div key={id} className={styles.info}>
+        <div key={id} className={styles.item}>
           <div className={styles.nameTagGroup}>
             <div className={styles.name}>
               {name !== '' && '‣'} &nbsp; {name}&nbsp;
