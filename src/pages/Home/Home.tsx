@@ -2,10 +2,8 @@ import { useRecoilValue } from 'recoil';
 import { AOpen, AIndex } from 'recoil/atom';
 import { Header } from 'components/Header/Header';
 import { Main } from 'components/Main/Main';
+import { AllDetail, ByDateDetail, TabMenu } from 'components/TabMenu';
 import { Add } from 'components/Modal/Add/Add';
-import { Detail } from 'components/TabMenu/All/Detail/Detail';
-import { TabMenu } from 'components/TabMenu/Layout/TabMenuLayout';
-import { ByDateDetail } from 'components/TabMenu/ByDate/Detail/Detail';
 import styles from './Home.module.scss';
 
 export const Home = () => {
@@ -20,7 +18,7 @@ export const Home = () => {
   return (
     <>
       {isOpenAddModal && <Add />}
-      {clickedIndex && isOpenDetailModal && <Detail />}
+      {clickedIndex && isOpenDetailModal && <AllDetail />}
       {clickedItemIndex && isOpenByDateDetailModal && <ByDateDetail />}
 
       <div className={styles.container}>

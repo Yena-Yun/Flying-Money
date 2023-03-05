@@ -1,10 +1,7 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { AOpen, AIndex } from 'recoil/atom';
-import { All } from '../All/All';
-import { ByWeek } from '../ByWeek/ByWeek';
-import { ByDate } from '../ByDate/ByDate';
-import { ByTag } from '../ByTag/ByTag';
+import { All, ByDate, ByTag, ByWeek } from 'components/TabMenu';
 import { Const } from 'utils';
 import styles from './TabMenuLayout.module.scss';
 
