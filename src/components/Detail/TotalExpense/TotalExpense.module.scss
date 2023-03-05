@@ -1,0 +1,14 @@
+@import 'styles/mixins';
+
+.totalExpense {
+  @include flexbox-row(flex-end, center);
+  margin-bottom: 1.5rem;
+  font-size: var(--text-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-blue);
+
+  span {
+    font-size: var(--text-size-lg);
+    color: var(--color-gray-5);
+  }
+}
