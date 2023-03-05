@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { clickedTabNameState } from '../atom/clickedIndexState';
+import { clickedTabNameState } from '../atom/indexState';
 
 export const tabClickSelector = selector({
   key: 'handleTabClick',

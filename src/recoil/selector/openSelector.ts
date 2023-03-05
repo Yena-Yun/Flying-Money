@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import * as A from '../atom/isOpenState';
+import * as A from '../atom/openState';
 
 export const toggleModalSelector = selector({
   key: 'toggleModals',

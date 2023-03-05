@@ -1,4 +1,4 @@
-export * as SMain from './mainDataSelector';
-export * as SOpen from './isOpenSelector';
+export * as SMain from './mainSelector';
+export * as SOpen from './openSelector';
 export * as SDate from './dateSelector';
-export * as SIndex from './clickedIndexSelector';
+export * as SIndex from './indexSelector';

@@ -1,4 +1,4 @@
-export * as AMain from './mainDataState';
-export * as AOpen from './isOpenState';
+export * as AMain from './mainState';
+export * as AOpen from './openState';
 export * as ADate from './dateState';
-export * as AIndex from './clickedIndexState';
+export * as AIndex from './indexState';

@@ -1,7 +1,7 @@
 import { isSameDay } from 'date-fns';
 import { selector, DefaultValue } from 'recoil';
 import uuid4 from 'uuid4';
-import * as AMain from '../atom/mainDataState';
+import * as AMain from '../atom/mainState';
 import {
   byDateSelectedDateState,
   allSelectedDateState,
@@ -10,7 +10,7 @@ import {
   clickedTagPopupIndexState,
   clickedIndexState,
   clickedItemIndexState,
-} from '../atom/clickedIndexState';
+} from '../atom/indexState';
 import { DateFn } from 'utils';
 import { ADate, AIndex } from 'recoil/atom';
 
