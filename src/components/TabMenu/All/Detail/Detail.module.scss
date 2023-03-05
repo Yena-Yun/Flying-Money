@@ -12,54 +12,48 @@
   margin-bottom: 1.8rem;
   overflow-y: auto;
 
-  .expenseWrap {
-    .title {
-      margin-bottom: 0.5rem;
-      font-size: var(--text-size-md);
-      font-weight: var(--font-weight-bold);
+  .title {
+    margin-bottom: 0.5rem;
+    font-size: var(--text-size-md);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .info {
+    @include flexbox-row(space-between, center);
+    margin-bottom: 1.5rem;
+
+    .nameTagGroup {
+      @include flexbox-row(flex-start, center);
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.3rem;
+
+      .name {
+        color: var(--color-gray-4);
+      }
+
+      .tag {
+        width: fit-content;
+        min-width: 2rem;
+        padding: 0.1rem 0.5rem;
+        color: var(--color-dark-pink);
+        border: 1px solid var(--color-pink);
+        border-radius: 0.8rem;
+        text-align: center;
+      }
     }
 
-    .expenseList {
-      margin-bottom: 1rem;
-
-      .expenseItem {
-        @include flexbox-row(space-between, center);
-        width: 95%;
-
-        .nameTagGroup {
-          @include flexbox-row(flex-start, center);
-          flex-wrap: wrap;
-          gap: 0.3rem;
-          margin-bottom: 0.3rem;
-
-          .name {
-            color: var(--color-gray-4);
-          }
-
-          .tag {
-            width: fit-content;
-            min-width: 2rem;
-            padding: 0.1rem 0.5rem;
-            color: var(--color-dark-pink);
-            border: 1px solid var(--color-pink);
-            border-radius: 0.8rem;
-            text-align: center;
-          }
-        }
-
-        .price {
-          font-size: var(--text-size-lg);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-blue);
-        }
-      }
+    .price {
+      font-size: var(--text-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-blue);
     }
   }
 }
 
 .totalExpense {
   @include flexbox-row(flex-end, center);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   font-size: var(--text-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-blue);
@@ -75,23 +69,21 @@
   margin-top: auto;
   gap: 0.7rem;
 
-  .confirmButton {
-    @include flexbox-row;
+  .actionButton {
     flex: 1;
     height: 3rem;
-    color: var(--color-white);
-    border-radius: 6px;
-    background: var(--color-primary);
-    cursor: pointer;
-  }
-
-  .deleteButton {
-    flex: 1;
-    height: 3rem;
-    color: var(--color-primary);
     border: 1px solid var(--color-primary);
-    border-radius: 6px;
-    background: var(--color-white);
+    border-radius: 0.4rem;
     cursor: pointer;
+
+    &.confirmButton {
+      color: var(--color-white);
+      background: var(--color-primary);
+    }
+
+    &.deleteButton {
+      color: var(--color-primary);
+      background: var(--color-white);
+    }
   }
 }

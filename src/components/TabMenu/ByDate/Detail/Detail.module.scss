@@ -10,7 +10,7 @@
 .mainContainer {
   width: 100%;
   max-height: 18rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   overflow-y: auto;
 
   .info {
@@ -44,17 +44,18 @@
       color: var(--color-blue);
     }
   }
+}
 
-  .totalExpense {
-    @include flexbox-row(flex-end, center);
-    font-size: var(--text-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-blue);
+.totalExpense {
+  @include flexbox-row(flex-end, center);
+  margin-bottom: 1.5rem;
+  font-size: var(--text-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-blue);
 
-    span {
-      font-size: var(--text-size-lg);
-      color: var(--color-gray-5);
-    }
+  span {
+    font-size: var(--text-size-lg);
+    color: var(--color-gray-5);
   }
 }
 
@@ -63,23 +64,21 @@
   margin-top: auto;
   gap: 0.7rem;
 
-  .confirmButton {
-    @include flexbox-row;
+  .actionButton {
     flex: 1;
     height: 3rem;
-    color: var(--color-white);
-    border-radius: 6px;
-    background: var(--color-primary);
-    cursor: pointer;
-  }
-
-  .deleteButton {
-    flex: 1;
-    height: 3rem;
-    color: var(--color-primary);
     border: 1px solid var(--color-primary);
-    border-radius: 6px;
-    background: var(--color-white);
+    border-radius: 0.4rem;
     cursor: pointer;
+
+    &.confirmButton {
+      color: var(--color-white);
+      background: var(--color-primary);
+    }
+
+    &.deleteButton {
+      color: var(--color-primary);
+      background: var(--color-white);
+    }
   }
 }

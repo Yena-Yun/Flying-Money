@@ -5,6 +5,7 @@ import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
 import { Hook } from 'utils';
 import styles from './Detail.module.scss';
+import classNames from 'classnames';
 
 export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
@@ -35,17 +36,17 @@ export const ByDateDetail = () => {
               <div className={styles.price}>{Hook.formatMoney(price)}</div>
             </div>
           ))}
-          <div className={styles.totalExpense}>
-            <span>Total</span>&nbsp;
-            {Hook.formatMoney(
-              items.map(({ price }) => price).reduce((acc, cur) => acc + cur, 0)
-            )}
-          </div>
+        </div>
+        <div className={styles.totalExpense}>
+          <span>Total</span>&nbsp;
+          {Hook.formatMoney(
+            items.map(({ price }) => price).reduce((acc, cur) => acc + cur, 0)
+          )}
         </div>
 
         <div className={styles.actionButtonContainer}>
           <button
-            className={styles.confirmButton}
+            className={classNames(styles.actionButton, styles.confirmButton)}
             onClick={() => {
               setCloseModal('byDateDetail');
             }}
@@ -53,7 +54,7 @@ export const ByDateDetail = () => {
             확인
           </button>
           <button
-            className={styles.deleteButton}
+            className={classNames(styles.actionButton, styles.deleteButton)}
             onClick={() => setIsOpenToast()}
           >
             삭제

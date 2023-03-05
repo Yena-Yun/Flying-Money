@@ -5,6 +5,7 @@ import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { Toast } from 'components/Modal/Toast/Toast';
 import { Hook } from 'utils';
 import styles from './Detail.module.scss';
+import classNames from 'classnames';
 
 export const Detail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
@@ -26,23 +27,19 @@ export const Detail = () => {
 
         <div className={styles.mainContainer}>
           {lists.map(({ id, title, items }) => (
-            <div key={id} className={styles.expenseWrap}>
+            <div key={id}>
               <div className={styles.title}>{title}</div>
-              <div className={styles.expenseList}>
-                {items.map(({ id, name, tag, price }) => (
-                  <div key={id} className={styles.expenseItem}>
-                    <div className={styles.nameTagGroup}>
-                      <div className={styles.name}>
-                        {name !== '' && '‣'} &nbsp; {name}&nbsp;
-                      </div>
-                      {tag && <div className={styles.tag}>{tag}</div>}
+              {items.map(({ id, name, tag, price }) => (
+                <div key={id} className={styles.info}>
+                  <div className={styles.nameTagGroup}>
+                    <div className={styles.name}>
+                      {name !== '' && '‣'} &nbsp; {name}&nbsp;
                     </div>
-                    <div className={styles.price}>
-                      {Hook.formatMoney(price)}
-                    </div>
+                    {tag && <div className={styles.tag}>{tag}</div>}
                   </div>
-                ))}
-              </div>
+                  <div className={styles.price}>{Hook.formatMoney(price)}</div>
+                </div>
+              ))}
             </div>
           ))}
         </div>
@@ -54,13 +51,13 @@ export const Detail = () => {
 
         <div className={styles.actionButtonContainer}>
           <button
-            className={styles.confirmButton}
+            className={classNames(styles.actionButton, styles.confirmButton)}
             onClick={() => setCloseModal('allDetail')}
           >
             확인
           </button>
           <button
-            className={styles.deleteButton}
+            className={classNames(styles.actionButton, styles.deleteButton)}
             onClick={() => setIsOpenToast()}
           >
             삭제
