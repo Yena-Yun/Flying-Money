@@ -5,7 +5,7 @@ import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
 import { Hook } from 'utils';
 import styles from './Date.module.scss';
 
-export const AddModalDate = () => {
+export const Date = () => {
   const selectedDate = useRecoilValue(ADate.addModalDateState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 

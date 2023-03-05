@@ -3,9 +3,9 @@ import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { ItemList, TotalExpense, ActionButton } from 'components/Detail';
 import { Toast } from 'components/Modal/Toast/Toast';
-import styles from './Detail.module.scss';
+import styles from './ByDateDetail.module.scss';
 
-export const ByDateDetail = () => {
+export const ByDateDetailModal = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const totalExpense = useRecoilValue(AMain.totalPerDateState);

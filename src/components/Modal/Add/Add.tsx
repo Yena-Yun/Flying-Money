@@ -3,14 +3,11 @@ import { useRecoilValue } from 'recoil';
 import { AMain, AOpen } from 'recoil/atom';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
-import { AddModalDate } from './Date/Date';
-import { Title } from './Title/Title';
-import { List } from './List/List';
-import { SubmitBtn } from './SubmitBtn/SubmitBtn';
+import { Date, Title, List, SubmitBtn } from './ModalComponent';
 import { TMain } from 'types';
 import styles from './Add.module.scss';
 
-export const Add = () => {
+export const AddModal = () => {
   const items = useRecoilValue<TMain.ItemType[]>(AMain.itemState);
   const isOpenCalender = useRecoilValue(AOpen.isOpenCalendarState);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -26,7 +23,7 @@ export const Add = () => {
       <h2 className={styles.title}>항목 등록하기</h2>
 
       <div className={styles.mainContainer}>
-        <AddModalDate />
+        <Date />
         <Title />
         <List />
         <div ref={bottomRef} />

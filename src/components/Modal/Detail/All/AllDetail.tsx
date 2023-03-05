@@ -4,9 +4,9 @@ import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { ItemList, TotalExpense, ActionButton } from 'components/Detail';
 import { Toast } from 'components/Modal/Toast/Toast';
 import { Hook } from 'utils';
-import styles from './Detail.module.scss';
+import styles from './AllDetail.module.scss';
 
-export const AllDetail = () => {
+export const AllDetailModal = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const totalExpense = useRecoilValue(AMain.totalPerDateAllState);
