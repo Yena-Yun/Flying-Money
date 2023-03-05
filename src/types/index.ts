@@ -1,2 +1,2 @@
-export * as TMain from './mainData';
-export * as TTab from './tabMenu';
+export * as TMain from './mainType';
+export * as TTab from './tabMenuType';
