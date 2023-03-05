@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ADate } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
-import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
+import { CalendarIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './Date.module.scss';
 

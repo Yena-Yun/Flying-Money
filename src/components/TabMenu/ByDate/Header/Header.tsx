@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, AOpen, ADate } from 'recoil/atom';
 import { SMain, SOpen, SDate } from 'recoil/selector';
 import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
-import { CalendarIcon } from 'components/Icons/Calendar/Calendar';
+import { CalendarIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './Header.module.scss';
 

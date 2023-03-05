@@ -1,7 +1,7 @@
 import { RANDOM_PHRASES } from 'utils/constants';
-import styles from './Main.module.scss';
+import styles from './Banner.module.scss';
 
-export const Main = () => {
+export const Banner = () => {
   const { line1, line2 } =
     RANDOM_PHRASES[Math.floor(Math.random() * RANDOM_PHRASES.length)];
 
