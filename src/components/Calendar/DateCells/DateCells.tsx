@@ -7,13 +7,17 @@ import styles from './DateCells.module.scss';
 
 type DateCellType = {
   currentMonth: Date;
+  tabName: string;
 };
 
-export const DateCells = ({ currentMonth }: DateCellType) => {
+export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);
+  const setMiniSelectedDate = useSetRecoilState(SDate.selectedMiniDateSelector);
+
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);
+
   const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
   const monthStart = DateFn.startOfMonth(currentMonth);
@@ -36,13 +40,18 @@ export const DateCells = ({ currentMonth }: DateCellType) => {
           className={styles.date}
           key={date.toString()}
           onClick={() => {
-            setSelectedDate(() => cloneDay);
-            setStartEndDate(() => cloneDay);
+            tabName === 'byDate'
+              ? setMiniSelectedDate(() => cloneDay)
+              : setSelectedDate(() => cloneDay);
+
+            tabName === 'byWeek' && setStartEndDate(() => cloneDay);
+
             setExpenseTransaction({
               ...expenseTransaction,
               date: cloneDay,
             });
-            setToggleCalendar('add');
+
+            setToggleCalendar(tabName);
           }}
         >
           <span

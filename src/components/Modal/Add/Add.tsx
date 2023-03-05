@@ -9,7 +9,7 @@ import styles from './Add.module.scss';
 
 export const AddModal = () => {
   const items = useRecoilValue<TMain.ItemType[]>(AMain.itemState);
-  const isOpenCalender = useRecoilValue(AOpen.isOpenCalendarState);
+  const isOpenCalender = useRecoilValue(AOpen.isOpenAddCalendarState);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const AddModal = () => {
 
   return (
     <ModalLayout role='addModal'>
-      {isOpenCalender && <Calendar />}
+      {isOpenCalender && <Calendar tabName='add' />}
       <h2 className={styles.title}>항목 등록하기</h2>
 
       <div className={styles.mainContainer}>

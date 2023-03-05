@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, AOpen, ADate } from 'recoil/atom';
 import { SMain, SOpen, SDate } from 'recoil/selector';
-import { MiniCalendar } from 'components/MiniCalendar/MiniCalendar';
+import { Calendar } from 'components/Calendar/Calendar';
 import { CalendarIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './Header.module.scss';
@@ -25,7 +25,7 @@ export const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {isOpenCalender && <MiniCalendar />}
+        {isOpenCalender && <Calendar tabName='byDate' mini />}
 
         <div className={styles.period}>
           <CalendarIcon />
