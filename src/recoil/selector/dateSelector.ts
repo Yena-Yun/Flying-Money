@@ -1,5 +1,5 @@
-import { addDays } from 'date-fns';
 import { selector, DefaultValue } from 'recoil';
+import { DateFn } from 'utils';
 import * as A from '../atom/dateState';
 
 export const selectedDateSelector = selector({
@@ -39,8 +39,8 @@ export const selectedStartEndDateSelector = selector({
     if (newDate instanceof DefaultValue) {
       return newDate;
     } else {
-      set(A.byWeekStartDateState, newDate);
-      set(A.byWeekEndDateState, addDays(newDate, 6));
+      set(A.byWeekStartDateState, DateFn.startOfWeek(newDate));
+      set(A.byWeekEndDateState, DateFn.endOfWeek(newDate));
     }
   },
 });
