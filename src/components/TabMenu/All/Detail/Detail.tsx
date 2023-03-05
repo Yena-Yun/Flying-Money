@@ -6,7 +6,7 @@ import { Toast } from 'components/Modal/Toast/Toast';
 import { Hook } from 'utils';
 import styles from './Detail.module.scss';
 
-export const Detail = () => {
+export const AllDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const totalExpense = useRecoilValue(AMain.totalPerDateAllState);

@@ -1,5 +1,4 @@
 import { atom } from 'recoil';
-import { DateFn } from 'utils';
 
 export const addModalDateState = atom({
   key: 'addModalDate',

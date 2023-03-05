@@ -8,16 +8,14 @@ type ActionButtonType = {
 };
 
 export const ActionButton = ({ role }: ActionButtonType) => {
-  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
   const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
+  const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   return (
     <div className={styles.actionButtonContainer}>
       <button
         className={classNames(styles.actionButton, styles.confirmButton)}
-        onClick={() => {
-          setCloseModal(role);
-        }}
+        onClick={() => setCloseModal(role)}
       >
         확인
       </button>
