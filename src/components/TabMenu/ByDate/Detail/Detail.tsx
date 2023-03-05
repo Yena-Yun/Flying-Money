@@ -1,9 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
-import { ItemList } from 'components/Detail/ItemList/ItemList';
-import { TotalExpense } from 'components/Detail/TotalExpense/TotalExpense';
-import { ActionButton } from 'components/Detail/ActionButton/ActionButton';
+import { ItemList, TotalExpense, ActionButton } from 'components/Detail';
 import { Toast } from 'components/Modal/Toast/Toast';
 import styles from './Detail.module.scss';
 
