@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate, AIndex } from 'recoil/atom';
-import { SDate, SIndex, SMain } from 'recoil/selector';
+import { SDate, SMain } from 'recoil/selector';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
