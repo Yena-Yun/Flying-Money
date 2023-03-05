@@ -34,7 +34,11 @@ export const Toast = ({ role }: ToastType) => {
       ></div>
       <div className={styles.popupSection}>
         <div className={styles.popup}>
-          <p className={styles.deleteGuide}>지출 내역을 정말 삭제하시겠어요?</p>
+          <p className={styles.deleteGuide}>
+            지출 내역을
+            <br />
+            정말 삭제하시겠어요?
+          </p>
           <button className={styles.deleteButton} onClick={deleteTransaction}>
             삭제
           </button>
