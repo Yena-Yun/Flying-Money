@@ -20,14 +20,6 @@
       font-weight: var(--font-weight-bold);
       color: var(--color-blue);
     }
-
-    .detailButton {
-      padding: 0.3rem 0.5rem;
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-primary);
-      border: 2px solid var(--color-primary);
-      border-radius: 0.4rem;
-    }
   }
 
   .weekDiary {
@@ -47,14 +39,17 @@
     .editedText {
       font-size: var(--text-size-md);
     }
+  }
 
-    .editButton {
+  .actionButton {
+    padding: 0.3rem 0.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: 0.4rem;
+
+    &.editButton {
       margin-top: 1rem;
-      padding: 0.3rem 0.5rem;
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-pink);
-      border: 2px solid var(--color-pink);
-      border-radius: 0.4rem;
     }
   }
 }

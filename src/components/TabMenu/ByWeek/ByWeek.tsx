@@ -5,6 +5,7 @@ import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
 import { Hook } from 'utils';
 import styles from './ByWeek.module.scss';
+import classNames from 'classnames';
 
 export const ByWeek = () => {
   const [isOpenTextarea, setIsOpenTextarea] = useState(false);
@@ -25,7 +26,7 @@ export const ByWeek = () => {
             <h3 className={styles.subTitle}>Total</h3>
             <div className={styles.expense}>{Hook.formatMoney(weekTotal)}</div>
           </div>
-          <button className={styles.detailButton}>상세</button>
+          <button className={styles.actionButton}>상세</button>
         </div>
 
         <div className={styles.weekDiary}>
@@ -51,7 +52,7 @@ export const ByWeek = () => {
 
           {!isOpenTextarea && (
             <button
-              className={styles.editButton}
+              className={classNames(styles.actionButton, styles.editButton)}
               onClick={() => setIsOpenTextarea(true)}
             >
               수정
