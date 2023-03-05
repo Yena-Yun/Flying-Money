@@ -22,7 +22,6 @@ export const Detail = () => {
     <>
       {isOpenToast && <Toast role='detail' />}
       <ModalLayout role='allDetail'>
-        <h2 className={styles.modalTitle}>상세</h2>
         <div className={styles.date}>{Hook.formatDate(date)}</div>
 
         <div className={styles.mainContainer}>

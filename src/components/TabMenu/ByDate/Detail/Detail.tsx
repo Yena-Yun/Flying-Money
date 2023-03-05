@@ -21,10 +21,9 @@ export const ByDateDetail = () => {
     <>
       {isOpenToast && <Toast role='byDateDetail' />}
       <ModalLayout role='byDateDetail'>
-        <h2 className={styles.modalTitle}>상세</h2>
+        <h2 className={styles.modalTitle}>{title}</h2>
 
         <div className={styles.mainContainer}>
-          <div className={styles.title}>{title}</div>
           {items.map(({ id, name, tag, price }) => (
             <div key={id} className={styles.info}>
               <div className={styles.nameTagGroup}>

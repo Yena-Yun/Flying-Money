@@ -1,28 +1,18 @@
 @import 'styles/mixins';
 
-.modalTitle {
-  font-size: var(--text-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-black);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
 .date {
-  margin-bottom: 1rem;
-  font-size: var(--text-size-md);
+  margin-bottom: 1.8rem;
+  font-size: var(--text-size-lg);
   color: var(--color-gray-4);
 }
 
 .mainContainer {
   width: 100%;
-  height: 9rem;
-  margin-bottom: 1.5rem;
+  max-height: 18rem;
+  margin-bottom: 1.8rem;
   overflow-y: auto;
 
   .expenseWrap {
-    padding-right: 0.5rem;
-
     .title {
       margin-bottom: 0.5rem;
       font-size: var(--text-size-md);
@@ -34,6 +24,7 @@
 
       .expenseItem {
         @include flexbox-row(space-between, center);
+        width: 95%;
 
         .nameTagGroup {
           @include flexbox-row(flex-start, center);
@@ -68,6 +59,7 @@
 
 .totalExpense {
   @include flexbox-row(flex-end, center);
+  margin-bottom: 1.2rem;
   font-size: var(--text-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-blue);
@@ -80,10 +72,8 @@
 
 .actionButtonContainer {
   @include flexbox-row;
-  position: absolute;
-  bottom: 1.5rem;
+  margin-top: auto;
   gap: 0.7rem;
-  width: 84%;
 
   .confirmButton {
     @include flexbox-row;
