@@ -10,7 +10,7 @@ export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const totalExpense = useRecoilValue(AMain.totalPerListState);
-  const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
+  const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedListIndex = useRecoilValue(AIndex.clickedListIndexState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerListSelector);
 

@@ -24,8 +24,3 @@ export const byWeekEndDateState = atom({
   key: 'filterByWeekEndDate',
   default: new Date(),
 });
-
-export const byWeekSelectedWeekState = atom({
-  key: 'filterByWeekSelectedWeek',
-  default: 0,
-});

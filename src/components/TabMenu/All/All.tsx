@@ -1,14 +1,16 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { AMain, AIndex, ADate } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
-import { HiOutlinePlusCircle } from 'react-icons/hi2';
+import { PlusItem as PlusIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './All.module.scss';
 
 export const All = () => {
   const transactionList = useRecoilValue(AMain.transactionListState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
-  const setClickedIndex = useSetRecoilState(AIndex.clickedIndexState);
+  const setClickedIndex = useSetRecoilState(
+    AIndex.clickedTransactionIndexState
+  );
   const setSelectedDate = useSetRecoilState(ADate.allSelectedDateState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
   const resetTransactionToTransactionList = useResetRecoilState(
@@ -23,7 +25,7 @@ export const All = () => {
   const openDetailModal = (id: string, date: Date) => {
     setClickedIndex(id);
     setSelectedDate(date);
-    setTotalExpense('all');
+    setTotalExpense();
     setOpenModal('allDetail');
   };
 
@@ -77,9 +79,7 @@ export const All = () => {
         )}
       </ul>
       <button className={styles.addNewItemButton} onClick={openAddModal}>
-        <div className={styles.addNewItemIcon}>
-          <HiOutlinePlusCircle />
-        </div>
+        <PlusIcon size='lg' />
         <p>새 항목 등록하기</p>
       </button>
     </div>

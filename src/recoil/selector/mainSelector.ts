@@ -8,7 +8,7 @@ import {
 } from '../atom/dateState';
 import {
   clickedTagPopupIndexState,
-  clickedIndexState,
+  clickedTransactionIndexState,
   clickedListIndexState,
 } from '../atom/indexState';
 import { DateFn } from 'utils';
@@ -95,31 +95,19 @@ export const addTagToItemSelector = selector({
 
 export const getTotalPerDateSelector = selector({
   key: 'getTotalPerDate',
-  get: () => {
-    return '';
-  },
-  set: ({ get, set }, flag) => {
+  get: () => {},
+  set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
-    const byDateSelectedDate = get(byDateSelectedDateState);
     const allSelectedDate = get(allSelectedDateState);
 
     const total = transactionList
-      .filter(({ date }) =>
-        DateFn.isSameDay(
-          date,
-          flag === 'byDate' ? byDateSelectedDate : allSelectedDate
-        )
-      )
+      .filter(({ date }) => DateFn.isSameDay(date, allSelectedDate))
       .flatMap(({ lists }) =>
         lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    if (flag === 'all') {
-      set(AMain.totalPerDateState, total);
-    } else {
-      set(AMain.totalPerListState, total);
-    }
+    set(AMain.totalPerDateState, total);
   },
 });
 
@@ -138,24 +126,6 @@ export const getTotalPerListSelector = selector({
       .reduce((acc, cur) => acc + cur, 0);
 
     set(AMain.totalPerListState, total);
-  },
-});
-
-export const getTotalPerDateAllSelector = selector({
-  key: 'getTotalPerDateAll',
-  get: () => {},
-  set: ({ get, set }) => {
-    const transactionList = get(AMain.transactionListState);
-    const byDateSelectedDate = get(byDateSelectedDateState);
-
-    const total = transactionList
-      .filter(({ lists }) => lists.length > 0)
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
-      )
-      .reduce((acc, cur) => acc + cur, 0);
-
-    set(AMain.totalPerDateState, total);
   },
 });
 
@@ -218,7 +188,7 @@ export const deleteItemSelector = selector({
   get: () => {},
   set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
-    const index = get(clickedIndexState);
+    const index = get(clickedTransactionIndexState);
     const itemIndex = get(clickedListIndexState);
 
     const deletedItem = transactionList
@@ -242,7 +212,7 @@ export const deleteTransactionSelector = selector({
   get: () => {},
   set: ({ get, set }) => {
     const transaction = get(AMain.transactionListState);
-    const index = get(clickedIndexState);
+    const index = get(clickedTransactionIndexState);
 
     const deletedList = transaction.filter(({ id }) => id !== index);
 

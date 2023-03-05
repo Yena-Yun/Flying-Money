@@ -1,5 +1,5 @@
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { SetterOrUpdater } from 'recoil';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { Hook } from 'utils';
 import styles from './CalendarArrow.module.scss';
 

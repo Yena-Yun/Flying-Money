@@ -7,11 +7,11 @@ import styles from './Home.module.scss';
 
 export const Home = () => {
   const isOpenAddModal = useRecoilValue(AOpen.isOpenAddModalState);
-  const isOpenDetailModal = useRecoilValue(AOpen.isOpenDetailModalState);
+  const isOpenDetailModal = useRecoilValue(AOpen.isOpenAllDetailModalState);
   const isOpenByDateDetailModal = useRecoilValue(
     AOpen.isOpenByDateDetailModalState
   );
-  const clickedIndex = useRecoilValue(AIndex.clickedIndexState);
+  const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedItemIndex = useRecoilValue(AIndex.clickedListIndexState);
 
   return (

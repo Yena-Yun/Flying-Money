@@ -9,9 +9,6 @@ export const TabMenu = () => {
   const setCloseByDateCalendar = useSetRecoilState(
     AOpen.isOpenByDateCalendarState
   );
-  const setCloseByWeekCalendar = useSetRecoilState(
-    AOpen.isOpenByWeekCalendarState
-  );
   const [clickedTabName, setClickedTabName] = useRecoilState(
     AIndex.clickedTabNameState
   );
@@ -29,7 +26,6 @@ export const TabMenu = () => {
             onClick={() => {
               setClickedTabName(id);
               setCloseByDateCalendar(false);
-              setCloseByWeekCalendar(false);
             }}
           >
             {name}

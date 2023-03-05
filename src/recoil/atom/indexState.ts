@@ -1,13 +1,13 @@
 import { atom } from 'recoil';
 import { TTab } from 'types';
 
-export const clickedIndexState = atom({
-  key: 'clickedIndex',
+export const clickedTransactionIndexState = atom({
+  key: 'clickedTransactionIndex',
   default: '',
 });
 
 export const clickedListIndexState = atom({
-  key: 'clickedItemIndex',
+  key: 'clickedListIndex',
   default: '',
 });
 

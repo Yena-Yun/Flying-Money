@@ -8,7 +8,9 @@ import styles from './ByDate.module.scss';
 export const ByDate = () => {
   const transactionList = useRecoilValue(AMain.transactionListState);
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
-  const setClickedIndex = useSetRecoilState(AIndex.clickedIndexState);
+  const setClickedIndex = useSetRecoilState(
+    AIndex.clickedTransactionIndexState
+  );
   const setClickedListIndex = useSetRecoilState(AIndex.clickedListIndexState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
@@ -18,7 +20,6 @@ export const ByDate = () => {
   )[0] || { id: '', lists: [] };
 
   const openDetailModal = (id: string) => {
-    console.log(id);
     setClickedIndex(index);
     setClickedListIndex(id);
     setOpenModal('byDateDetail');

@@ -2,7 +2,8 @@ import { useRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { AMain } from 'recoil/atom';
 import { Input } from './Input/Input';
-import { HiOutlinePlusCircle, HiOutlineMinusCircle } from 'react-icons/hi2';
+import { PlusItem as PlusIcon } from 'components/Icons';
+import { HiOutlineMinusCircle as MinusIcon } from 'react-icons/hi2';
 import { TMain } from 'types';
 import styles from './List.module.scss';
 
@@ -31,16 +32,14 @@ export const List = () => {
               className={styles.removeItemButton}
               onClick={() => handleDeleteItem(index)}
             >
-              <HiOutlineMinusCircle />
+              <MinusIcon />
             </div>
           )}
         </div>
       ))}
 
       <div className={styles.addItemButton} onClick={handleAddItem}>
-        <div className={styles.addIcon}>
-          <HiOutlinePlusCircle />
-        </div>
+        <PlusIcon />
         <div className={styles.addItemText}>항목 추가</div>
       </div>
     </div>

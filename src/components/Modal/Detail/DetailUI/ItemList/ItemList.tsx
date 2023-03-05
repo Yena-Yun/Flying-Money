@@ -1,5 +1,5 @@
-import { ItemType } from 'types/mainType';
 import { Hook } from 'utils';
+import { ItemType } from 'types/mainType';
 import styles from './ItemList.module.scss';
 
 type ItemListType = {

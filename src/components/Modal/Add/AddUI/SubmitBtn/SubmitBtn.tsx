@@ -43,8 +43,7 @@ export const SubmitBtn = () => {
       setItemToList();
       setListToTransaction();
       setTransactionToTransactionList();
-      setTotalExpense('all');
-      setTotalExpense('byDate');
+      setTotalExpense();
       resetItems();
       resetList();
       resetTransaction();

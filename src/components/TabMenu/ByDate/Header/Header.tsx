@@ -11,10 +11,8 @@ export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
   const isOpenCalender = useRecoilValue(AOpen.isOpenByDateCalendarState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
-
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
-
   const totalExpense = useRecoilValue(AMain.totalPerDateState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerListSelector);
 

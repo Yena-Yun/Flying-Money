@@ -1,0 +1,9 @@
+@import 'styles/mixins';
+
+.addItem {
+  font-size: var(--text-size-md);
+
+  &.large {
+    font-size: var(--text-size-lg);
+  }
+}

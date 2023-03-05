@@ -8,7 +8,7 @@ export const toggleModalSelector = selector({
   },
   set: ({ get, set }, flag) => {
     const isOpenModal = get(A.isOpenAddModalState);
-    const isOpenDetailModal = get(A.isOpenDetailModalState);
+    const isOpenDetailModal = get(A.isOpenAllDetailModalState);
     const isOpenByDateDetailModal = get(A.isOpenByDateDetailModalState);
 
     if (flag === 'addModal' && isOpenModal) {
@@ -16,28 +16,14 @@ export const toggleModalSelector = selector({
     } else if (flag === 'addModal' && !isOpenModal) {
       set(A.isOpenAddModalState, true);
     } else if (flag === 'allDetail' && isOpenDetailModal) {
-      set(A.isOpenDetailModalState, false);
+      set(A.isOpenAllDetailModalState, false);
     } else if (flag === 'allDetail' && !isOpenDetailModal) {
-      set(A.isOpenDetailModalState, true);
+      set(A.isOpenAllDetailModalState, true);
     } else if (flag === 'byDateDetail' && isOpenByDateDetailModal) {
       set(A.isOpenByDateDetailModalState, false);
     } else if (flag === 'byDateDetail' && !isOpenByDateDetailModal) {
       set(A.isOpenByDateDetailModalState, true);
     } else return;
-  },
-});
-
-export const toggleToastSelector = selector({
-  key: 'toggleToast',
-  get: () => {},
-  set: ({ get, set }) => {
-    const isOpenToast = get(A.isOpenToastState);
-
-    if (isOpenToast) {
-      set(A.isOpenToastState, false);
-    } else {
-      set(A.isOpenToastState, true);
-    }
   },
 });
 
@@ -49,7 +35,6 @@ export const toggleCalendarSelector = selector({
   set: ({ get, set }, flag) => {
     const isOpenAddCalendar = get(A.isOpenAddCalendarState);
     const isOpenByDateCalendar = get(A.isOpenByDateCalendarState);
-    const isOpenByWeekCalendar = get(A.isOpenByWeekCalendarState);
 
     if (flag === 'add' && isOpenAddCalendar) {
       set(A.isOpenAddCalendarState, false);
@@ -59,10 +44,6 @@ export const toggleCalendarSelector = selector({
       set(A.isOpenByDateCalendarState, false);
     } else if (flag === 'byDate' && !isOpenByDateCalendar) {
       set(A.isOpenByDateCalendarState, true);
-    } else if (flag === 'byWeek' && isOpenByWeekCalendar) {
-      set(A.isOpenByWeekCalendarState, false);
-    } else if (flag === 'byWeek' && !isOpenByWeekCalendar) {
-      set(A.isOpenByWeekCalendarState, true);
     } else return;
   },
 });
@@ -77,6 +58,20 @@ export const toggleTagPopupSelector = selector({
       set(A.isOpenTagPopupState, false);
     } else {
       set(A.isOpenTagPopupState, true);
+    }
+  },
+});
+
+export const toggleToastSelector = selector({
+  key: 'toggleToast',
+  get: () => {},
+  set: ({ get, set }) => {
+    const isOpenToast = get(A.isOpenToastState);
+
+    if (isOpenToast) {
+      set(A.isOpenToastState, false);
+    } else {
+      set(A.isOpenToastState, true);
     }
   },
 });
