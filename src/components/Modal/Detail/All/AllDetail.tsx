@@ -1,12 +1,12 @@
 import { useRecoilValue } from 'recoil';
 import { AMain, AOpen, AIndex } from 'recoil/atom';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
-import { ItemList, TotalExpense, ActionButton } from 'components/Detail';
+import { ItemList, TotalExpense, ActionButton } from '../DetailUI';
 import { Toast } from 'components/Modal/Toast/Toast';
 import { Hook } from 'utils';
 import styles from './AllDetail.module.scss';
 
-export const AllDetailModal = () => {
+export const AllDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const totalExpense = useRecoilValue(AMain.totalPerDateState);

@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { AMain, AOpen } from 'recoil/atom';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
-import { Date, Title, List, SubmitBtn } from './ModalComponent';
+import { Date, Title, List, SubmitBtn } from './AddUI';
 import { TMain } from 'types';
 import styles from './Add.module.scss';
 

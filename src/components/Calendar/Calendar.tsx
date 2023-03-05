@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ADate } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { DateCells } from './DateCells/DateCells';
-import { CalendarArrow } from 'components/Icons';
+import { CalendarArrow } from '../Icons';
 import { Const, DateFn } from 'utils';
 import styles from './Calendar.module.scss';
 
