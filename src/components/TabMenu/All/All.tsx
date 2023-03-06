@@ -12,7 +12,7 @@ export const All = () => {
     AIndex.clickedTransactionIndexState
   );
   const setSelectedDate = useSetRecoilState(ADate.allSelectedDateState);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const setAllTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
   const resetTransactionToTransactionList = useResetRecoilState(
     AMain.transactionState
   );
@@ -25,7 +25,7 @@ export const All = () => {
   const openDetailModal = (id: string, date: Date) => {
     setClickedIndex(id);
     setSelectedDate(date);
-    setTotalExpense();
+    setAllTotalExpense('all');
     setOpenModal('allDetail');
   };
 

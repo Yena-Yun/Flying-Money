@@ -11,14 +11,17 @@ export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
   const isOpenCalender = useRecoilValue(AOpen.isOpenByDateCalendarState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
+
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
-  const setSelectDate = useSetRecoilState(SDate.selectedMiniDateSelector);
-  const totalExpense = useRecoilValue(AMain.totalPerDateState);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerListSelector);
+  const setSelectDate = useSetRecoilState(SDate.selectedByDateDateSelector);
+  const transactionList = useRecoilValue(AMain.transactionListState);
+
+  const dateTotalExpense = useRecoilValue(AMain.totalPerDateByDateState);
+  const setDateTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
 
   useEffect(() => {
-    setTotalExpense();
-  }, [selectedDate]);
+    setDateTotalExpense('byDate');
+  }, [selectedDate, transactionList]);
 
   return (
     <div className={styles.container}>
@@ -32,7 +35,7 @@ export const Header = () => {
             onClick={() => {
               setToggleCalendar('byDate');
               setSelectDate(selectedDate);
-              setTotalExpense();
+              setDateTotalExpense('byDate');
               setIsSelectSomeDate(false);
             }}
           >
@@ -42,7 +45,7 @@ export const Header = () => {
 
         <div className={styles.totalExpense}>
           <span>Total</span>&nbsp;
-          {Hook.formatMoney(totalExpense)}
+          {Hook.formatMoney(dateTotalExpense)}
         </div>
       </div>
       {isSelectSomeDate && <p className={styles.guide}>날짜를 선택하세요</p>}

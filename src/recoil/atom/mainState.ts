@@ -41,8 +41,13 @@ export const totalPerListState = atom({
   default: 0,
 });
 
-export const totalPerDateState = atom({
+export const totalPerDateAllState = atom({
   key: 'totalPerDateAll',
+  default: 0,
+});
+
+export const totalPerDateByDateState = atom({
+  key: 'totalPerDateByDate',
   default: 0,
 });
 

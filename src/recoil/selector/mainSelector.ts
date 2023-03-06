@@ -95,19 +95,31 @@ export const addTagToItemSelector = selector({
 
 export const getTotalPerDateSelector = selector({
   key: 'getTotalPerDate',
-  get: () => {},
-  set: ({ get, set }) => {
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }, flag) => {
     const transactionList = get(AMain.transactionListState);
     const allSelectedDate = get(allSelectedDateState);
+    const byDateSelectedDate = get(byDateSelectedDateState);
 
     const total = transactionList
-      .filter(({ date }) => DateFn.isSameDay(date, allSelectedDate))
+      .filter(({ date }) =>
+        DateFn.isSameDay(
+          date,
+          flag === 'all' ? allSelectedDate : byDateSelectedDate
+        )
+      )
       .flatMap(({ lists }) =>
         lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    set(AMain.totalPerDateState, total);
+    if (flag === 'all') {
+      set(AMain.totalPerDateAllState, total);
+    } else {
+      set(AMain.totalPerDateByDateState, total);
+    }
   },
 });
 

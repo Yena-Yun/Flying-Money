@@ -12,8 +12,10 @@ type DateCellType = {
 
 export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
-  const setSelectedDate = useSetRecoilState(SDate.selectedDateSelector);
-  const setMiniSelectedDate = useSetRecoilState(SDate.selectedMiniDateSelector);
+  const setSelectedDate = useSetRecoilState(SDate.selectedAddModalDateSelector);
+  const setMiniSelectedDate = useSetRecoilState(
+    SDate.selectedByDateDateSelector
+  );
 
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);

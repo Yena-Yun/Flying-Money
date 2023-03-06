@@ -8,7 +8,7 @@ import styles from './AllDetail.module.scss';
 export const AllDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
-  const totalExpense = useRecoilValue(AMain.totalPerDateState);
+  const totalExpense = useRecoilValue(AMain.totalPerDateAllState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
 
   const { date, lists } = transactionList.find(

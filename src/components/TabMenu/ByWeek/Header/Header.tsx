@@ -15,13 +15,15 @@ export const Header = () => {
     ADate.byWeekStartDateState
   );
   const monthTotal = useRecoilValue(AMain.totalPerMonthState);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerMonthSelector);
+  const setMonthTotalExpense = useSetRecoilState(
+    SMain.getTotalPerMonthSelector
+  );
   // const setWeekTotal = useSetRecoilState(SMain.getTotalPerWeekSelector);
   // const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
   useEffect(() => {
     //   setStartEndDate(currentMonth);
-    setTotalExpense();
+    setMonthTotalExpense();
   }, [currentMonth]);
 
   const getWeeks = () => {

@@ -2,7 +2,7 @@ import { selector, DefaultValue } from 'recoil';
 import { DateFn } from 'utils';
 import * as A from '../atom/dateState';
 
-export const selectedDateSelector = selector({
+export const selectedAddModalDateSelector = selector({
   key: 'handleDateSelection',
   get: () => {
     return new Date();
@@ -16,8 +16,8 @@ export const selectedDateSelector = selector({
   },
 });
 
-export const selectedMiniDateSelector = selector({
-  key: 'handleMiniDateSelection',
+export const selectedByDateDateSelector = selector({
+  key: 'handleByDateDateSelection',
   get: () => {
     return new Date();
   },
