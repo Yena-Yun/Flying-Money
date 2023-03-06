@@ -7,7 +7,7 @@ type ToastType = {
 };
 
 export const Toast = ({ role }: ToastType) => {
-  const setDeleteItem = useSetRecoilState(SMain.deleteItemSelector);
+  const setDeleteList = useSetRecoilState(SMain.deleteListSelector);
   const setDeleteTransaction = useSetRecoilState(
     SMain.deleteTransactionSelector
   );
@@ -21,7 +21,7 @@ export const Toast = ({ role }: ToastType) => {
       setDeleteTransaction();
       setCloseModal('allDetail');
     } else if (role === 'byDateDetail') {
-      setDeleteItem();
+      setDeleteList();
       setCloseModal('byDateDetail');
     } else return;
   };

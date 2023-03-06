@@ -183,27 +183,35 @@ export const getTotalPerMonthSelector = selector({
   },
 });
 
-export const deleteItemSelector = selector({
-  key: 'deleteItem',
+export const deleteListSelector = selector({
+  key: 'deleteList',
   get: () => {},
   set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
     const index = get(clickedTransactionIndexState);
-    const itemIndex = get(clickedListIndexState);
+    const listIndex = get(clickedListIndexState);
 
-    const deletedItem = transactionList
+    const deletedList = transactionList
       .find(({ id }) => id === index)!
-      .lists.filter(({ id }) => id === itemIndex)!;
+      .lists.filter(({ id }) => id !== listIndex)!;
 
-    const deletedList = transactionList.map((transaction) => {
-      if (transaction.id === index) {
-        return { ...transaction, lists: deletedItem };
-      } else {
-        return transaction;
-      }
-    });
+    if (deletedList.length > 0) {
+      const deletedTransaction = transactionList.map((transaction) => {
+        if (transaction.id === index) {
+          return { ...transaction, lists: deletedList };
+        } else {
+          return transaction;
+        }
+      });
 
-    set(AMain.transactionListState, deletedList);
+      set(AMain.transactionListState, deletedTransaction);
+    } else {
+      const deletedTransaction = transactionList.filter(
+        ({ id }) => id !== index
+      );
+
+      set(AMain.transactionListState, deletedTransaction);
+    }
   },
 });
 
@@ -211,10 +219,10 @@ export const deleteTransactionSelector = selector({
   key: 'deleteTransaction',
   get: () => {},
   set: ({ get, set }) => {
-    const transaction = get(AMain.transactionListState);
+    const transactionList = get(AMain.transactionListState);
     const index = get(clickedTransactionIndexState);
 
-    const deletedList = transaction.filter(({ id }) => id !== index);
+    const deletedList = transactionList.filter(({ id }) => id !== index);
 
     set(AMain.transactionListState, deletedList);
   },

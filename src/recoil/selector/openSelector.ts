@@ -68,8 +68,6 @@ export const toggleToastSelector = selector({
   set: ({ get, set }) => {
     const isOpenToast = get(A.isOpenToastState);
 
-    console.log(isOpenToast);
-
     if (isOpenToast) {
       set(A.isOpenToastState, false);
     } else {
