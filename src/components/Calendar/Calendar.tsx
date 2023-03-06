@@ -2,9 +2,9 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { ADate } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
+import { CalendarHeader } from './Header/CalendarHeader';
 import { DateCells } from './DateCells/DateCells';
-import { CalendarArrow } from '../Icons';
-import { Const, DateFn } from 'utils';
+import { Const } from 'utils';
 import styles from './Calendar.module.scss';
 
 type CalendarType = {
@@ -29,22 +29,10 @@ export const Calendar = ({ mini, tabName }: CalendarType) => {
 
       <div className={classNames(styles.container, mini && styles.mini)}>
         <div className={classNames(styles.innerContainer, mini && styles.mini)}>
-          <div className={classNames(styles.header, mini && styles.mini)}>
-            <CalendarArrow
-              direction='left'
-              month={{ currentMonth, setCurrentMonth }}
-            />
-
-            <div className={classNames(styles.title, mini && styles.mini)}>
-              {DateFn.format(currentMonth, 'yyyy')}년{' '}
-              {DateFn.format(currentMonth, 'M')}월
-            </div>
-
-            <CalendarArrow
-              direction='right'
-              month={{ currentMonth, setCurrentMonth }}
-            />
-          </div>
+          <CalendarHeader
+            month={{ currentMonth, setCurrentMonth }}
+            mini={mini}
+          />
 
           <div className={classNames(styles.days, mini && styles.mini)}>
             {Const.DAYS.map((day, id) => (

@@ -7,27 +7,10 @@
   gap: 1rem;
   z-index: 300;
 
-  .dateTotalGroup {
+  .header {
     @include flexbox-row(space-between, center);
     width: 100%;
     padding-bottom: 1rem;
-
-    .date {
-      @include flexbox-row;
-
-      .title {
-        padding: 0 2rem;
-        font-size: 1.2rem;
-        font-weight: var(--font-weight-semibold);
-      }
-
-      .arrow {
-        @include flexbox-row;
-        font-size: 1.2rem;
-        color: var(--color-gray-5);
-        cursor: pointer;
-      }
-    }
 
     .totalExpense {
       @include flexbox-row;

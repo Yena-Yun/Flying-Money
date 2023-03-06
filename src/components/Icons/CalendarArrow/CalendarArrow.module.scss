@@ -4,4 +4,10 @@
   margin-top: 0.1rem;
   font-size: 0.9rem;
   cursor: pointer;
+
+  &.separate {
+    @include flexbox-row;
+    font-size: 1.2rem;
+    color: var(--color-gray-5);
+  }
 }

@@ -38,24 +38,6 @@
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 
-    .header {
-      @include flexbox-row;
-      padding: 1.2rem 0 1rem;
-
-      &.mini {
-        padding: 1rem 0 0.8rem;
-      }
-
-      .title {
-        padding: 0 2rem;
-        font-weight: var(--font-weight-semibold);
-
-        &.mini {
-          font-size: var(--text-size-sm);
-        }
-      }
-    }
-
     .days {
       @include flexbox-row(space-between, center);
       padding: 0 0.6rem 0.7rem;

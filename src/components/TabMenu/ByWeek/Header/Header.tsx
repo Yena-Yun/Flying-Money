@@ -2,21 +2,21 @@ import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate, AIndex } from 'recoil/atom';
-import { SDate, SMain } from 'recoil/selector';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { SMain } from 'recoil/selector';
+import { CalendarHeader } from 'components/Calendar/Header/CalendarHeader';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
-  const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
-    AIndex.weekButtonIndexState
-  );
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
   const monthTotal = useRecoilValue(AMain.totalPerMonthState);
   const setMonthTotalExpense = useSetRecoilState(
     SMain.getTotalPerMonthSelector
+  );
+  const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
+    AIndex.weekButtonIndexState
   );
   // const setWeekTotal = useSetRecoilState(SMain.getTotalPerWeekSelector);
   // const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
@@ -34,29 +34,8 @@ export const Header = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.dateTotalGroup}>
-        <div className={styles.date}>
-          <div
-            className={styles.arrow}
-            onClick={() =>
-              Hook.changeMonth('PREV', { currentMonth, setCurrentMonth })
-            }
-          >
-            <BsChevronLeft />
-          </div>
-          <div className={styles.title}>
-            {DateFn.format(currentMonth, 'yyyy')}년{' '}
-            {DateFn.format(currentMonth, 'M')}월
-          </div>
-          <div
-            className={styles.arrow}
-            onClick={() =>
-              Hook.changeMonth('NEXT', { currentMonth, setCurrentMonth })
-            }
-          >
-            <BsChevronRight />
-          </div>
-        </div>
+      <div className={styles.header}>
+        <CalendarHeader month={{ currentMonth, setCurrentMonth }} separate />
         <div className={styles.totalExpense}>
           <span>Total</span>&nbsp;
           {Hook.formatMoney(monthTotal)}
