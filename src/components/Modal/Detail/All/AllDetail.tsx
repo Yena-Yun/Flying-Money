@@ -17,7 +17,7 @@ export const AllDetail = () => {
 
   return (
     <>
-      {isOpenToast && <Toast role='detail' />}
+      {isOpenToast && <Toast role='allDetail' />}
       <ModalLayout role='allDetail'>
         <div className={styles.date}>{Hook.formatDate(date)}</div>
         <div className={styles.mainContainer}>
