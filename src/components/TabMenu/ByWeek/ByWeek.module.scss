@@ -47,9 +47,16 @@
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
     border-radius: 0.4rem;
+    transition: background-color 0.3s ease-in-out;
 
     &.editButton {
       margin-top: 1rem;
+    }
+
+    &:hover,
+    &:active {
+      color: var(--color-white);
+      background-color: var(--color-primary);
     }
   }
 }

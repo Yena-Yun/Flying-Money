@@ -20,8 +20,8 @@
   z-index: 300;
 
   &.mini {
-    top: 27rem;
-    left: 9rem;
+    top: 28rem;
+    left: 9.5rem;
   }
 
   .innerContainer {
@@ -34,7 +34,7 @@
 
     &.mini {
       width: 13rem;
-      padding: 1rem 0.4rem 0.6rem;
+      padding: 0 0.3rem 0.4rem;
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 
@@ -43,7 +43,7 @@
       padding: 1.2rem 0 1rem;
 
       &.mini {
-        padding-bottom: 0.8rem;
+        padding: 1rem 0 0.8rem;
       }
 
       .title {
@@ -63,7 +63,7 @@
       font-weight: var(--font-weight-semibold);
 
       &.mini {
-        padding: 0 0.4rem 0.7rem;
+        padding: 0 0.4rem 0.5rem;
       }
     }
   }
