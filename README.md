@@ -2,7 +2,7 @@
 
 수기로 쓰는 가계부를 웹으로 만들어보는 토이 프로젝트
 
-<img src="https://user-images.githubusercontent.com/68722179/223064450-6ebde80c-3b4a-40f7-9943-8026a5ffc8e4.png" width='350' />
+<img src="https://user-images.githubusercontent.com/68722179/223064450-6ebde80c-3b4a-40f7-9943-8026a5ffc8e4.png" width='400' />
 
 
 ## 📬 구현 예정 기간
