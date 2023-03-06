@@ -11,18 +11,18 @@ export const Header = () => {
   const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
     AIndex.weekButtonIndexState
   );
-  // const setWeekTotal = useSetRecoilState(SMain.getTotalPerWeekSelector);
   const [currentMonth, setCurrentMonth] = useRecoilState(
     ADate.byWeekStartDateState
   );
   const monthTotal = useRecoilValue(AMain.totalPerMonthState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerMonthSelector);
+  // const setWeekTotal = useSetRecoilState(SMain.getTotalPerWeekSelector);
   // const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
-  // useEffect(() => {
-  //   setStartEndDate(currentMonth);
-  //   setTotalExpense();
-  // }, [currentMonth]);
+  useEffect(() => {
+    //   setStartEndDate(currentMonth);
+    setTotalExpense();
+  }, [currentMonth]);
 
   const getWeeks = () => {
     const weekNumber = DateFn.getWeeksInMonth(currentMonth);
