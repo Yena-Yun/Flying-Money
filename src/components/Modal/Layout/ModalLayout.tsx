@@ -15,13 +15,11 @@ export const ModalLayout = ({ role, children }: ModalLayoutType) => {
   const resetOpenTagPopup = useResetRecoilState(AOpen.isOpenTagPopupState);
 
   const handleClose = () => {
-    if (role === 'addModal') {
-      setCloseModal('addModal');
-    } else if (role === 'allDetail') {
-      setCloseModal('allDetail');
-    } else {
-      setCloseModal('byDateDetail');
-    }
+    role === 'addModal'
+      ? setCloseModal('addModal')
+      : role === 'allDetail'
+      ? setCloseModal('allDetail')
+      : setCloseModal('byDateDetail');
 
     resetOpenTagPopup();
   };

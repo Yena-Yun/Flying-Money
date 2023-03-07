@@ -54,11 +54,9 @@ export const toggleTagPopupSelector = selector({
   set: ({ get, set }) => {
     const isOpenTagPopup = get(A.isOpenTagPopupState);
 
-    if (isOpenTagPopup) {
-      set(A.isOpenTagPopupState, false);
-    } else {
-      set(A.isOpenTagPopupState, true);
-    }
+    isOpenTagPopup
+      ? set(A.isOpenTagPopupState, false)
+      : set(A.isOpenTagPopupState, true);
   },
 });
 
@@ -68,10 +66,8 @@ export const toggleToastSelector = selector({
   set: ({ get, set }) => {
     const isOpenToast = get(A.isOpenToastState);
 
-    if (isOpenToast) {
-      set(A.isOpenToastState, false);
-    } else {
-      set(A.isOpenToastState, true);
-    }
+    isOpenToast
+      ? set(A.isOpenToastState, false)
+      : set(A.isOpenToastState, true);
   },
 });

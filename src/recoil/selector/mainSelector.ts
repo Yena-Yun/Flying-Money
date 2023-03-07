@@ -115,11 +115,9 @@ export const getTotalPerDateSelector = selector({
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    if (flag === 'all') {
-      set(AMain.totalPerDateAllState, total);
-    } else {
-      set(AMain.totalPerDateByDateState, total);
-    }
+    flag === 'all'
+      ? set(AMain.totalPerDateAllState, total)
+      : set(AMain.totalPerDateByDateState, total);
   },
 });
 
