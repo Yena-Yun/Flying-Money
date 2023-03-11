@@ -69,3 +69,32 @@ const ItemType = {
 1. 각 탭: 날짜별 정렬
 2. 태그별 탭: 그래프나 차트로 시각적 확인
 
+
+## 🛍 모듈화
+
+
+1. recoil 관련 import문
+[ 수정 전 ]
+* 라이브러리 패키지 recoil과 로컬 recoil 폴더가 잘 구분되지 않음 (2번째 줄부터는 로컬 recoil 폴더)
+* recoil 폴더에서 atom이나 selector를 가져올 때마다 **매번 import 라인이 추가됨**
+* 구체적인 이름을 위해 **긴 변수명**을 사용하는 과정에서 **각 atom과 selector가 어떤 역할인지 잘 인지되지 않음**
+
+```
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { addModalDateState } from 'recoil';
+import { toggleCalendarSelector } from 'recoil';
+```
+
+[ 이후 ]
+* 로컬 recoil 폴더에서 atom과 selector 폴더로 한번 더 나눔 -> **import한 것의 출처가 atom인지 selector인지 분명해짐**
+* **패키지 recoil과 로컬 recoil 폴더가 확실히 구분됨**
+* atom과 selector들을 **용도에 맞는 이름**으로 한번 더 나눠서 export -> **import한 파일 내에서 용도가 직관적으로 식별됨** <br/>
+예: atom의 ADate(날짜 관련 atom), AOpen(모달/팝업 여닫기 관련 atom)<br/>
+예: selector의 SMain(transaction 등 주요 데이터를 변경하는 selector)
+```
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ADate, AOpen } from 'recoil/atom';
+import { SMain } from 'recoil/selector';
+```
+
+## 🗂 폴더 구조
