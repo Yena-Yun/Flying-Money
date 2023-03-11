@@ -98,3 +98,151 @@ import { SMain } from 'recoil/selector';
 ```
 
 ## 🗂 폴더 구조
+
+```
+📦src
+ ┣ 📂components
+ ┃ ┣ 📂Calendar
+ ┃ ┃ ┣ 📂DateCells
+ ┃ ┃ ┃ ┣ 📜DateCells.module.scss
+ ┃ ┃ ┃ ┗ 📜DateCells.tsx
+ ┃ ┃ ┣ 📂Header
+ ┃ ┃ ┃ ┣ 📜CalendarHeader.module.scss
+ ┃ ┃ ┃ ┗ 📜CalendarHeader.tsx
+ ┃ ┃ ┣ 📜Calendar.module.scss
+ ┃ ┃ ┗ 📜Calendar.tsx
+ ┃ ┣ 📂Icons
+ ┃ ┃ ┣ 📂Calendar
+ ┃ ┃ ┃ ┣ 📜Calendar.module.scss
+ ┃ ┃ ┃ ┗ 📜Calendar.tsx
+ ┃ ┃ ┣ 📂CalendarArrow
+ ┃ ┃ ┃ ┣ 📜CalendarArrow.module.scss
+ ┃ ┃ ┃ ┗ 📜CalendarArrow.tsx
+ ┃ ┃ ┣ 📂PlusItem
+ ┃ ┃ ┃ ┣ 📜PlusItem.module.scss
+ ┃ ┃ ┃ ┗ 📜PlusItem.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂Main
+ ┃ ┃ ┣ 📂Banner
+ ┃ ┃ ┃ ┣ 📜Banner.module.scss
+ ┃ ┃ ┃ ┗ 📜Banner.tsx
+ ┃ ┃ ┣ 📂Header
+ ┃ ┃ ┃ ┣ 📜Header.module.scss
+ ┃ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂Modal
+ ┃ ┃ ┣ 📂Add
+ ┃ ┃ ┃ ┣ 📂AddUI
+ ┃ ┃ ┃ ┃ ┣ 📂Date
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Date.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜Date.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂List
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂Input
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Input.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Input.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜List.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜List.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂SubmitBtn
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜SubmitBtn.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜SubmitBtn.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂TagPopup
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜TagPopup.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜TagPopup.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂Title
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Title.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜Title.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜index.ts
+ ┃ ┃ ┃ ┣ 📜Add.module.scss
+ ┃ ┃ ┃ ┗ 📜Add.tsx
+ ┃ ┃ ┣ 📂Detail
+ ┃ ┃ ┃ ┣ 📂All
+ ┃ ┃ ┃ ┃ ┣ 📜AllDetail.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜AllDetail.tsx
+ ┃ ┃ ┃ ┣ 📂ByDate
+ ┃ ┃ ┃ ┃ ┣ 📜ByDateDetail.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜ByDateDetail.tsx
+ ┃ ┃ ┃ ┗ 📂DetailUI
+ ┃ ┃ ┃ ┃ ┣ 📂ActionButton
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ActionButton.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜ActionButton.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂ItemList
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ItemList.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜ItemList.tsx
+ ┃ ┃ ┃ ┃ ┣ 📂TotalExpense
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜TotalExpense.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜TotalExpense.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜index.ts
+ ┃ ┃ ┣ 📂Layout
+ ┃ ┃ ┃ ┣ 📜ModalLayout.module.scss
+ ┃ ┃ ┃ ┗ 📜ModalLayout.tsx
+ ┃ ┃ ┣ 📂Toast
+ ┃ ┃ ┃ ┣ 📜Toast.module.scss
+ ┃ ┃ ┃ ┗ 📜Toast.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂RootToast
+ ┃ ┃ ┗ 📜RootToast.tsx
+ ┃ ┗ 📂TabMenu
+ ┃ ┃ ┣ 📂All
+ ┃ ┃ ┃ ┣ 📜All.module.scss
+ ┃ ┃ ┃ ┗ 📜All.tsx
+ ┃ ┃ ┣ 📂ByDate
+ ┃ ┃ ┃ ┣ 📂Header
+ ┃ ┃ ┃ ┃ ┣ 📜Header.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┃ ┃ ┣ 📜ByDate.module.scss
+ ┃ ┃ ┃ ┗ 📜ByDate.tsx
+ ┃ ┃ ┣ 📂ByTag
+ ┃ ┃ ┃ ┣ 📜ByTag.module.scss
+ ┃ ┃ ┃ ┗ 📜ByTag.tsx
+ ┃ ┃ ┣ 📂ByWeek
+ ┃ ┃ ┃ ┣ 📂Header
+ ┃ ┃ ┃ ┃ ┣ 📜Header.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┃ ┃ ┣ 📜ByWeek.module.scss
+ ┃ ┃ ┃ ┗ 📜ByWeek.tsx
+ ┃ ┃ ┣ 📂Layout
+ ┃ ┃ ┃ ┣ 📜TabMenuLayout.module.scss
+ ┃ ┃ ┃ ┗ 📜TabMenuLayout.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┣ 📂pages
+ ┃ ┗ 📂Home
+ ┃ ┃ ┣ 📜Home.module.scss
+ ┃ ┃ ┗ 📜Home.tsx
+ ┣ 📂recoil
+ ┃ ┣ 📂atom
+ ┃ ┃ ┣ 📜dateState.ts
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜indexState.ts
+ ┃ ┃ ┣ 📜mainState.ts
+ ┃ ┃ ┗ 📜openState.ts
+ ┃ ┗ 📂selector
+ ┃ ┃ ┣ 📜dateSelector.ts
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜mainSelector.ts
+ ┃ ┃ ┗ 📜openSelector.ts
+ ┣ 📂styles
+ ┃ ┣ 📜globals.scss
+ ┃ ┗ 📜mixins.scss
+ ┣ 📂types
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜mainType.ts
+ ┃ ┗ 📜tabMenuType.ts
+ ┣ 📂utils
+ ┃ ┣ 📂constants
+ ┃ ┃ ┣ 📜clickedIndex.ts
+ ┃ ┃ ┣ 📜date.ts
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┗ 📜mainData.ts
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜changeMonth.ts
+ ┃ ┃ ┣ 📜formatDate.ts
+ ┃ ┃ ┣ 📜formatMoney.ts
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┗ 📜popupToast.ts
+ ┃ ┣ 📂libraries
+ ┃ ┃ ┣ 📜dateFns.ts
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📜App.tsx
+ ┗ 📜index.tsx
+```
