@@ -70,6 +70,22 @@ export const setTransactionListSelector = selector({
   },
 });
 
+export const setCurrentDateToAddModalSelector = selector({
+  key: 'setCurrentDateToAddModal',
+  get: () => {},
+  set: ({ get, set }) => {
+    const selectedDate = get(ADate.addModalDateState);
+    const transaction = get(AMain.transactionState);
+
+    const transactionWithCurrentDate = {
+      ...transaction,
+      date: selectedDate,
+    };
+
+    set(AMain.transactionState, transactionWithCurrentDate);
+  },
+});
+
 export const addTagToItemSelector = selector({
   key: 'addTagToItem',
   get: () => {

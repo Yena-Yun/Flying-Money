@@ -20,6 +20,9 @@ export const SubmitBtn = () => {
     SMain.setTransactionListSelector
   );
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const setCurrentDateToAddModal = useSetRecoilState(
+    SMain.setCurrentDateToAddModalSelector
+  );
 
   const validateList = () => {
     const noNameItem = items.map((item) => !item.name)[0];
@@ -48,6 +51,7 @@ export const SubmitBtn = () => {
       resetItems();
       resetList();
       resetTransaction();
+      setCurrentDateToAddModal();
       setCloseModal('addModal');
     }
   };

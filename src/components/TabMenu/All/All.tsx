@@ -1,4 +1,4 @@
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, AIndex, ADate } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { PlusItem as PlusIcon } from 'components/Icons';
@@ -13,13 +13,9 @@ export const All = () => {
   );
   const setSelectedDate = useSetRecoilState(ADate.allSelectedDateState);
   const setAllTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
-  const resetTransactionToTransactionList = useResetRecoilState(
-    AMain.transactionState
-  );
 
   const openAddModal = () => {
     setOpenModal('addModal');
-    resetTransactionToTransactionList();
   };
 
   const openDetailModal = (id: string, date: Date) => {
