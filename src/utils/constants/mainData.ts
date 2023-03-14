@@ -47,8 +47,4 @@ export const TAB_MENU: {
     id: 'byDate',
     name: '날짜별',
   },
-  {
-    id: 'byTag',
-    name: '태그별',
-  },
 ];
