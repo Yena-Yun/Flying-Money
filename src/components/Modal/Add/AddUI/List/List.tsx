@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { AMain } from 'recoil/atom';
 import { Input } from './Input/Input';
-import { PlusItem as PlusIcon } from 'components/Icons';
+import { PlusButton as PlusIcon } from 'components/Icons';
 import { HiOutlineMinusCircle as MinusIcon } from 'react-icons/hi2';
 import { TMain } from 'types';
 import styles from './List.module.scss';

@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, AIndex, ADate } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
-import { PlusItem as PlusIcon } from 'components/Icons';
+import { PlusButton as PlusIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './All.module.scss';
 

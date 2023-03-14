@@ -1,3 +1,3 @@
 export { CalendarIcon } from './Calendar/Calendar';
 export { CalendarArrow } from './CalendarArrow/CalendarArrow';
-export { PlusItem } from './PlusItem/PlusItem';
+export { PlusButton } from './PlusButton/PlusButton';
