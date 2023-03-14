@@ -25,13 +25,16 @@ export const SubmitBtn = () => {
   );
 
   const validateList = () => {
-    const noNameItem = items.map((item) => !item.name)[0];
-    const noPriceItem = items.map((item) => !item.price)[0];
+    const noNameItem = items.some((item) => !item.name);
+    const noPriceItem = items.some((item) => !item.price);
 
     if (!list.title) {
       Hook.popupToast('제목을 입력해주세요!', Const.TOAST_ID.TITLE);
     } else if (noNameItem && noPriceItem) {
-      Hook.popupToast('항목을 하나 이상 입력해주세요!', Const.TOAST_ID.ITEM);
+      Hook.popupToast(
+        '항목명과 가격을 하나 이상 입력해주세요!',
+        Const.TOAST_ID.ITEM
+      );
     } else if (noNameItem) {
       Hook.popupToast('항목명을 입력해주세요!', Const.TOAST_ID.NAME);
     } else if (noPriceItem) {
@@ -41,7 +44,9 @@ export const SubmitBtn = () => {
     }
   };
 
-  const submitTransaction = () => {
+  const submitTransaction = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (validateList()) {
       setItemToList();
       setListToTransaction();
@@ -57,10 +62,8 @@ export const SubmitBtn = () => {
   };
 
   return (
-    <div className={styles.submitButtonWrap}>
-      <button className={styles.submitButton} onClick={submitTransaction}>
-        등록
-      </button>
-    </div>
+    <form className={styles.submitButtonWrap} onSubmit={submitTransaction}>
+      <button className={styles.submitButton}>등록</button>
+    </form>
   );
 };
