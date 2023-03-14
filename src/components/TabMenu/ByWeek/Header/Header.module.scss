@@ -34,23 +34,22 @@
 
     .weekButton {
       padding: 0.3rem 0.6rem;
-      color: var(--color-white);
+      color: var(--color-pink);
       border: 1.5px solid var(--color-pink);
       border-radius: 1rem;
-      background-color: var(--color-pink);
       opacity: 0.8;
-      transition: background-color 0.3s ease-in-out;
+      transition: background-color 0.2s ease-in;
       cursor: pointer;
 
       &.clicked {
         color: var(--color-white);
-        background-color: var(--color-dark-pink);
+        background-color: var(--color-pink);
         opacity: 1;
       }
 
       &:hover {
         color: var(--color-white);
-        background-color: var(--color-dark-pink);
+        background-color: var(--color-pink);
       }
     }
   }
