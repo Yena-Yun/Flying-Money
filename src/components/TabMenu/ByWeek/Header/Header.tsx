@@ -18,11 +18,8 @@ export const Header = () => {
   const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
     AIndex.weekButtonIndexState
   );
-  // const setWeekTotal = useSetRecoilState(SMain.getTotalPerWeekSelector);
-  // const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
   useEffect(() => {
-    //   setStartEndDate(currentMonth);
     setMonthTotalExpense();
   }, [currentMonth]);
 
@@ -51,10 +48,7 @@ export const Header = () => {
               styles.weekButton,
               clickedButtonIndex === id && styles.clicked
             )}
-            onClick={(e) => {
-              setClickedButtonIndex(Number(e.currentTarget.id));
-              // setWeekTotal();
-            }}
+            onClick={(e) => setClickedButtonIndex(Number(e.currentTarget.id))}
           >
             {weekNum}주차
           </li>
