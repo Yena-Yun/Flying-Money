@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, FormEvent } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { AMain } from 'recoil/atom';
@@ -7,11 +7,11 @@ import { IoIosClose } from 'react-icons/io';
 import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
-  const [value, setValue] = useState('');
-  const setItems = useSetRecoilState(AMain.itemState);
+  const tagFormRef = useRef<HTMLFormElement>(null);
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(
     AMain.savedTagGroupState
   );
+  const setItems = useSetRecoilState(AMain.itemState);
   const setAddTagToItem = useSetRecoilState(SMain.addTagToItemSelector);
   const setCloseTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
 
@@ -29,12 +29,20 @@ export const TagPopup = () => {
     );
   };
 
-  const handleSubmitTag = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitTag = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (value.length < 1) return;
 
-    setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: value }]);
-    setValue('');
+    const formData = new FormData(e.currentTarget);
+
+    const tag = formData.get('tag') as string;
+
+    if (tag.length < 1) return;
+
+    setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: tag }]);
+
+    if (tagFormRef.current) {
+      tagFormRef.current.reset();
+    }
   };
 
   return (
@@ -65,13 +73,12 @@ export const TagPopup = () => {
               );
             })}
           </div>
-          <form onSubmit={handleSubmitTag} className={styles.inputForm}>
-            <input
-              value={value}
-              placeholder='태그'
-              autoFocus
-              onChange={(e) => setValue(e.target.value)}
-            />
+          <form
+            className={styles.inputForm}
+            ref={tagFormRef}
+            onSubmit={handleSubmitTag}
+          >
+            <input name='tag' placeholder='태그' autoFocus />
           </form>
         </div>
       </div>
