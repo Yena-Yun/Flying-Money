@@ -63,13 +63,10 @@ export const Input = ({ index, tag }: InputType) => {
           data-id={index}
           onClick={handleSetTag}
         >
-          {tag ? (
-            <div className={styles.tag}>{tag}</div>
-          ) : (
-            <div className={styles.tag}>태그 등록하기</div>
-          )}
+          <div className={styles.tag}>{tag ? tag : '태그 등록하기'}</div>
         </div>
       </div>
+
       {clickedTagPopupIndex === index && isOpenTagPopup && <TagPopup />}
     </div>
   );
