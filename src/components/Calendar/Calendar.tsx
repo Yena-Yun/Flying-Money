@@ -13,12 +13,12 @@ type CalendarType = {
 };
 
 export const Calendar = ({ mini, tabName }: CalendarType) => {
+  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const [currentMonth, setCurrentMonth] = useRecoilState(
     tabName === 'byDate'
       ? ADate.byDateSelectedDateState
       : ADate.addModalDateState
   );
-  const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
   return (
     <>

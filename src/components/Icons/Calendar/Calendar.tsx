@@ -3,7 +3,7 @@ import styles from './Calendar.module.scss';
 
 export const CalendarIcon = () => {
   return (
-    <div className={styles.icon}>
+    <div className={styles.calendar}>
       <CiCalendar />
     </div>
   );
