@@ -36,12 +36,15 @@
         position: relative;
         width: fit-content;
         padding: 0.2rem 0.2rem 0.2rem 0.6rem;
+        color: var(--color-dark-pink);
         border: 1px solid var(--color-pink);
         border-radius: 0.8rem;
+        transition: all 0.2s ease-out;
         cursor: pointer;
 
-        .tag {
-          color: var(--color-dark-pink);
+        &:hover {
+          color: var(--color-white);
+          background-color: var(--color-pink);
         }
 
         .deleteTagIcon {
