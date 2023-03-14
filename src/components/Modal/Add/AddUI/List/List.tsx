@@ -11,7 +11,8 @@ export const List = () => {
   const [items, setItems] = useRecoilState<TMain.ItemType[]>(AMain.itemState);
 
   const handleAddItem = () => {
-    setItems((prev) => [...prev, { id: uuid4(), name: '', price: 0, tag: '' }]);
+    const defaultItem = { id: uuid4(), name: '', price: 0, tag: '' };
+    setItems((prev) => [...prev, defaultItem]);
   };
 
   const handleDeleteItem = (index: string) => {
