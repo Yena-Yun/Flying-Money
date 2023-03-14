@@ -18,15 +18,17 @@ export const CalendarArrow = ({
   month: { currentMonth, setCurrentMonth },
   separate,
 }: CalendarArrowType) => {
+  const arrowHandler = () => {
+    Hook.changeMonth(direction === 'left' ? 'PREV' : 'NEXT', {
+      currentMonth,
+      setCurrentMonth,
+    });
+  };
+
   return (
     <div
       className={classNames(styles.arrow, separate && styles.separate)}
-      onClick={() =>
-        Hook.changeMonth(direction === 'left' ? 'PREV' : 'NEXT', {
-          currentMonth,
-          setCurrentMonth,
-        })
-      }
+      onClick={arrowHandler}
     >
       {direction === 'left' ? <BsChevronLeft /> : <BsChevronRight />}
     </div>

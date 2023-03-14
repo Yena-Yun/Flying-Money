@@ -16,10 +16,8 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
   const setMiniSelectedDate = useSetRecoilState(
     SDate.selectedByDateDateSelector
   );
-
   const [expenseTransaction, setExpenseTransaction] =
     useRecoilState<TMain.TransactionType>(AMain.transactionState);
-
   const setStartEndDate = useSetRecoilState(SDate.selectedStartEndDateSelector);
 
   const monthStart = DateFn.startOfMonth(currentMonth);
@@ -32,6 +30,21 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
   let date = startDate;
   let formatDate = '';
 
+  const dateSelectHandler = (selectedDate: Date) => {
+    tabName === 'byDate'
+      ? setMiniSelectedDate(() => selectedDate)
+      : setSelectedDate(() => selectedDate);
+
+    tabName === 'byWeek' && setStartEndDate(() => selectedDate);
+
+    setExpenseTransaction({
+      ...expenseTransaction,
+      date: selectedDate,
+    });
+
+    setToggleCalendar(tabName);
+  };
+
   while (date <= endDate) {
     for (let i = 0; i < 7; i++) {
       formatDate = DateFn.format(date, 'd');
@@ -41,20 +54,7 @@ export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
         <div
           className={styles.date}
           key={date.toString()}
-          onClick={() => {
-            tabName === 'byDate'
-              ? setMiniSelectedDate(() => cloneDay)
-              : setSelectedDate(() => cloneDay);
-
-            tabName === 'byWeek' && setStartEndDate(() => cloneDay);
-
-            setExpenseTransaction({
-              ...expenseTransaction,
-              date: cloneDay,
-            });
-
-            setToggleCalendar(tabName);
-          }}
+          onClick={() => dateSelectHandler(cloneDay)}
         >
           <span
             className={
