@@ -8,7 +8,6 @@ import styles from './AllDetail.module.scss';
 export const AllDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
-  const totalExpense = useRecoilValue(AMain.totalPerDateAllState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
 
   const { date, lists } = transactionList.find(
@@ -24,11 +23,11 @@ export const AllDetail = () => {
           {lists.map(({ id, title, items }) => (
             <div key={id}>
               <div className={styles.title}>{title}</div>
-              <ItemList items={items} />
+              <ItemList deliveredItemList={items} />
             </div>
           ))}
         </div>
-        <TotalExpense total={totalExpense} />
+        <TotalExpense where='all' />
         <ActionButton role='allDetail' />
       </ModalLayout>
     </>

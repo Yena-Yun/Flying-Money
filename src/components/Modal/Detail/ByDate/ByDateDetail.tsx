@@ -9,7 +9,6 @@ import styles from './ByDateDetail.module.scss';
 export const ByDateDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
-  const totalExpense = useRecoilValue(AMain.totalPerListState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedListIndex = useRecoilValue(AIndex.clickedListIndexState);
   const setTotalExpense = useSetRecoilState(SMain.getTotalPerListSelector);
@@ -27,9 +26,9 @@ export const ByDateDetail = () => {
       <ModalLayout role='byDateDetail'>
         <h2 className={styles.modalTitle}>{title}</h2>
         <div className={styles.mainContainer}>
-          <ItemList items={items} />
+          <ItemList deliveredItemList={items} />
         </div>
-        <TotalExpense total={totalExpense} />
+        <TotalExpense where='byDate' />
         <ActionButton role='byDateDetail' />
       </ModalLayout>
     </>

@@ -2,14 +2,14 @@ import { Hook } from 'utils';
 import { ItemType } from 'types/mainType';
 import styles from './ItemList.module.scss';
 
-type ItemListType = {
-  items: ItemType[];
-};
+interface ItemListProp {
+  deliveredItemList: ItemType[];
+}
 
-export const ItemList = ({ items }: ItemListType) => {
+export const ItemList = ({ deliveredItemList }: ItemListProp) => {
   return (
     <>
-      {items.map(({ id, name, tag, price }) => (
+      {deliveredItemList.map(({ id, name, tag, price }) => (
         <div key={id} className={styles.item}>
           <div className={styles.nameTagGroup}>
             <div className={styles.name}>
