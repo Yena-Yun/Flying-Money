@@ -2,12 +2,12 @@
 
 수기로 쓰는 가계부를 웹으로 만들어보는 토이 프로젝트
 
+<img src="https://user-images.githubusercontent.com/68722179/223064450-6ebde80c-3b4a-40f7-9943-8026a5ffc8e4.png" width='400' />
+
 ## 🧨 실행 방법
 ```
 git clone -> yarn install -> yarn start
 ```
-
-<img src="https://user-images.githubusercontent.com/68722179/223064450-6ebde80c-3b4a-40f7-9943-8026a5ffc8e4.png" width='400' />
 
 ## 🪀 기술 스택
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -97,7 +97,9 @@ import { ADate, AOpen } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
 ```
 
-## 🗂 폴더 구조
+## 🌊 [Velog 구현 상세 기록 (클릭!)](https://velog.io/@yena1025/Flying-Money-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%ED%98%84-%EA%B8%B0%EB%A1%9D)
+
+## 📚 폴더 구조
 
 ```
 📦src
