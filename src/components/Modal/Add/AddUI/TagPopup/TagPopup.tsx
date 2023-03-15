@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
-import { IoIosClose } from 'react-icons/io';
+import { IoIosClose as DeleteTagIcon } from 'react-icons/io';
 import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
@@ -11,19 +11,10 @@ export const TagPopup = () => {
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(
     AMain.savedTagGroupState
   );
-  const setItems = useSetRecoilState(AMain.itemState);
   const setAddTagToItem = useSetRecoilState(SMain.addTagToItemSelector);
   const setCloseTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
 
-  const handleSetTag = (name: string) => {
-    setAddTagToItem(name);
-    setCloseTagPopup();
-  };
-
-  const handleDeleteTag = (id: string, name: string) => {
-    setItems((items) =>
-      items.filter(({ name: itemName }) => itemName !== name)
-    );
+  const handleDeleteTag = (id: string, tagName: string) => {
     setSavedTagGroup((savedTagGroup) =>
       savedTagGroup.filter(({ id: index }) => index !== id)
     );
@@ -58,7 +49,10 @@ export const TagPopup = () => {
                 <div key={id} className={styles.tagWrap}>
                   <div
                     className={styles.tag}
-                    onClick={() => handleSetTag(name)}
+                    onClick={() => {
+                      setAddTagToItem(name);
+                      setCloseTagPopup();
+                    }}
                   >
                     {name}
                   </div>
@@ -66,7 +60,7 @@ export const TagPopup = () => {
                     className={styles.deleteTagIcon}
                     onClick={() => handleDeleteTag(id, name)}
                   >
-                    <IoIosClose />
+                    <DeleteTagIcon />
                   </div>
                 </div>
               );
