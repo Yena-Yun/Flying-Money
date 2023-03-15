@@ -86,21 +86,53 @@ export const setCurrentDateToAddModalSelector = selector({
   },
 });
 
+export const addNameOrPriceToItemSelector = selector({
+  key: 'addNameOrPriceToItem',
+  get: () => {
+    return {
+      newInput: '',
+      id: '',
+      flag: '',
+    };
+  },
+  set: ({ get, set }, newValue) => {
+    const items = get(AMain.itemState);
+
+    if (newValue instanceof DefaultValue) {
+      return newValue;
+    } else {
+      const { newInput, id, flag } = newValue;
+
+      const result = items.map((item) => {
+        if (item.id === id) {
+          return flag === 'name'
+            ? { ...item, name: newInput }
+            : { ...item, price: parseInt(newInput) };
+        }
+
+        return item;
+      });
+
+      set(AMain.itemState, result);
+    }
+  },
+});
+
 export const addTagToItemSelector = selector({
   key: 'addTagToItem',
   get: () => {
     return '';
   },
-  set: ({ get, set }, newValue) => {
-    if (newValue instanceof DefaultValue) {
-      return newValue;
+  set: ({ get, set }, newTag) => {
+    if (newTag instanceof DefaultValue) {
+      return newTag;
     } else {
       const expenseItemList = get(AMain.itemState);
       const clickedTagPopupIndex = get(clickedTagPopupIndexState);
 
       const result = expenseItemList.map((item) => {
         return item.id === clickedTagPopupIndex
-          ? { ...item, tag: newValue }
+          ? { ...item, tag: newTag }
           : item;
       });
 
@@ -137,8 +169,8 @@ export const getTotalPerDateSelector = selector({
   },
 });
 
-export const getTotalPerListSelector = selector({
-  key: 'getTotalPerList',
+export const getTotalPerListInByDateSelector = selector({
+  key: 'getTotalPerListInByDate',
   get: () => {},
   set: ({ get, set }) => {
     const transactionList = get(AMain.transactionListState);
@@ -152,39 +184,6 @@ export const getTotalPerListSelector = selector({
       .reduce((acc, cur) => acc + cur, 0);
 
     set(AMain.totalPerListState, total);
-  },
-});
-
-export const getTotalPerWeekSelector = selector({
-  key: 'getTotalPerWeek',
-  get: () => {},
-  set: ({ get, set }) => {
-    const transactionList = get(AMain.transactionListState);
-    const startDate = get(ADate.byWeekStartDateState);
-    const endDate = get(ADate.byWeekEndDateState);
-
-    const currentMonth = get(ADate.byWeekStartDateState);
-    const clickedButtonIndex = get(AIndex.weekButtonIndexState);
-
-    const selectedMonth = transactionList.filter(({ date }) =>
-      DateFn.isSameMonth(date, startDate)
-    );
-
-    // const weekTotal = selectedMonth
-    //   .filter(({ date }) =>
-    //     DateFn.isWithinInterval(date, {
-    //       start: DateFn.subDays(startDate, 1),
-    //       end: DateFn.addDays(endDate, 1),
-    //     })
-    //   )
-    //   .flatMap(({ lists }) =>
-    //     lists.flatMap(({ items }) => items.map(({ price }) => price))
-    //   )
-    //   .reduce((acc, cur) => acc + cur, 0);
-
-    // console.log(weekTotal);
-
-    // set(AMain.totalPerWeekState, weekTotal);
   },
 });
 

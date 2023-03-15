@@ -11,7 +11,9 @@ export const ByDateDetail = () => {
   const transactionList = useRecoilValue(AMain.transactionListState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedListIndex = useRecoilValue(AIndex.clickedListIndexState);
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerListSelector);
+  const setTotalExpense = useSetRecoilState(
+    SMain.getTotalPerListInByDateSelector
+  );
 
   useEffect(() => {
     setTotalExpense();
