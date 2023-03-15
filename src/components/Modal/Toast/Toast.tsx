@@ -2,11 +2,11 @@ import { useSetRecoilState } from 'recoil';
 import { SMain, SOpen } from 'recoil/selector';
 import styles from './Toast.module.scss';
 
-type ToastType = {
+interface ToastProp {
   role: string;
-};
+}
 
-export const Toast = ({ role }: ToastType) => {
+export const Toast = ({ role }: ToastProp) => {
   const setDeleteList = useSetRecoilState(SMain.deleteListSelector);
   const setDeleteTransaction = useSetRecoilState(
     SMain.deleteTransactionSelector
@@ -19,11 +19,11 @@ export const Toast = ({ role }: ToastType) => {
 
     if (role === 'allDetail') {
       setDeleteTransaction();
-      setCloseModal('allDetail');
     } else if (role === 'byDateDetail') {
       setDeleteList();
-      setCloseModal('byDateDetail');
     } else return;
+
+    setCloseModal(role);
   };
 
   return (

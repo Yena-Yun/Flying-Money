@@ -5,22 +5,17 @@ import { AOpen } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import styles from './ModalLayout.module.scss';
 
-type ModalLayoutType = {
+interface ModalLayoutProp {
   role: string;
   children: ReactNode | ReactNode[];
-};
+}
 
-export const ModalLayout = ({ role, children }: ModalLayoutType) => {
+export const ModalLayout = ({ role, children }: ModalLayoutProp) => {
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
   const resetOpenTagPopup = useResetRecoilState(AOpen.isOpenTagPopupState);
 
   const handleClose = () => {
-    role === 'addModal'
-      ? setCloseModal('addModal')
-      : role === 'allDetail'
-      ? setCloseModal('allDetail')
-      : setCloseModal('byDateDetail');
-
+    setCloseModal(role);
     resetOpenTagPopup();
   };
 
