@@ -3,11 +3,11 @@ import { useSetRecoilState } from 'recoil';
 import { SOpen } from 'recoil/selector';
 import styles from './ActionButton.module.scss';
 
-type ActionButtonType = {
+interface ActionButtonProp {
   role: string;
-};
+}
 
-export const ActionButton = ({ role }: ActionButtonType) => {
+export const ActionButton = ({ role }: ActionButtonProp) => {
   const setIsOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
 

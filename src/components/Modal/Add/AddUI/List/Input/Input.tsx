@@ -6,12 +6,12 @@ import { TagPopup } from '../../TagPopup/TagPopup';
 import { TMain } from 'types';
 import styles from './Input.module.scss';
 
-type InputType = {
+interface InputProp {
   index: string;
   tag: string;
-};
+}
 
-export const Input = ({ index, tag }: InputType) => {
+export const Input = ({ index, tag }: InputProp) => {
   const [items, setItems] = useRecoilState<TMain.ItemType[]>(AMain.itemState);
   const isOpenTagPopup = useRecoilValue(AOpen.isOpenTagPopupState);
   const [clickedTagPopupIndex, setClickedTagPopupIndex] = useRecoilState(

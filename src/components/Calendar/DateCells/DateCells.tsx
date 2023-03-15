@@ -5,12 +5,12 @@ import { DateFn } from 'utils';
 import { TMain } from 'types';
 import styles from './DateCells.module.scss';
 
-type DateCellType = {
+interface DateCellProp {
   currentMonth: Date;
   tabName: string;
-};
+}
 
-export const DateCells = ({ currentMonth, tabName }: DateCellType) => {
+export const DateCells = ({ currentMonth, tabName }: DateCellProp) => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const setSelectedDate = useSetRecoilState(SDate.selectedAddModalDateSelector);
   const setMiniSelectedDate = useSetRecoilState(

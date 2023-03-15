@@ -4,20 +4,20 @@ import { CalendarArrow } from 'components/Icons';
 import { DateFn } from 'utils';
 import styles from './CalendarHeader.module.scss';
 
-type CalendarHeaderType = {
+interface CalendarHeaderProp {
   month: {
     currentMonth: Date;
     setCurrentMonth: SetterOrUpdater<Date>;
   };
   mini?: boolean;
   separate?: boolean;
-};
+}
 
 export const CalendarHeader = ({
   month: { currentMonth, setCurrentMonth },
   mini,
   separate,
-}: CalendarHeaderType) => {
+}: CalendarHeaderProp) => {
   return (
     <div
       className={classNames(

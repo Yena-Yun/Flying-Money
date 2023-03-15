@@ -7,12 +7,12 @@ import { DateCells } from './DateCells/DateCells';
 import { Const } from 'utils';
 import styles from './Calendar.module.scss';
 
-type CalendarType = {
+interface CalendarProp {
   mini?: boolean;
   tabName: string;
-};
+}
 
-export const Calendar = ({ mini, tabName }: CalendarType) => {
+export const Calendar = ({ mini, tabName }: CalendarProp) => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
   const [currentMonth, setCurrentMonth] = useRecoilState(
     tabName === 'byDate'

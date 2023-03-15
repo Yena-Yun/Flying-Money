@@ -4,20 +4,20 @@ import { Hook } from 'utils';
 import styles from './CalendarArrow.module.scss';
 import classNames from 'classnames';
 
-type CalendarArrowType = {
+interface CalendarArrowProp {
   direction: string;
   month: {
     currentMonth: Date;
     setCurrentMonth: SetterOrUpdater<Date>;
   };
   separate?: boolean;
-};
+}
 
 export const CalendarArrow = ({
   direction,
   month: { currentMonth, setCurrentMonth },
   separate,
-}: CalendarArrowType) => {
+}: CalendarArrowProp) => {
   const arrowHandler = () => {
     Hook.changeMonth(direction === 'left' ? 'PREV' : 'NEXT', {
       currentMonth,
