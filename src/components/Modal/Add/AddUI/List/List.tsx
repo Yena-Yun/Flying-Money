@@ -1,6 +1,6 @@
-import { useRecoilState } from 'recoil';
-import uuid4 from 'uuid4';
-import { AMain } from 'recoil/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { itemState } from 'recoil/atom/mainState';
+import { addOrDeleteItemInAddModalSelector } from 'recoil/selector/mainSelector';
 import { Input } from './Input/Input';
 import { PlusButton as PlusIcon } from 'components/Icons';
 import { HiOutlineMinusCircle as MinusIcon } from 'react-icons/hi2';
@@ -8,16 +8,10 @@ import { TMain } from 'types';
 import styles from './List.module.scss';
 
 export const List = () => {
-  const [items, setItems] = useRecoilState<TMain.ItemType[]>(AMain.itemState);
-
-  const handleAddItem = () => {
-    const defaultItem = { id: uuid4(), name: '', price: 0, tag: '' };
-    setItems((prev) => [...prev, defaultItem]);
-  };
-
-  const handleDeleteItem = (index: string) => {
-    setItems(items.filter(({ id }) => id !== index));
-  };
+  const setAddOrDeleteItem = useSetRecoilState(
+    addOrDeleteItemInAddModalSelector
+  );
+  const items = useRecoilValue<TMain.ItemType[]>(itemState);
 
   return (
     <div className={styles.inputGroupWrap}>
@@ -31,7 +25,12 @@ export const List = () => {
           {items.length > 1 && (
             <div
               className={styles.removeItemButton}
-              onClick={() => handleDeleteItem(index)}
+              onClick={() =>
+                setAddOrDeleteItem({
+                  flag: 'deleteItem',
+                  index,
+                })
+              }
             >
               <MinusIcon />
             </div>
@@ -39,7 +38,15 @@ export const List = () => {
         </div>
       ))}
 
-      <div className={styles.addItemButton} onClick={handleAddItem}>
+      <div
+        className={styles.addItemButton}
+        onClick={() =>
+          setAddOrDeleteItem({
+            flag: 'addItem',
+            index: '',
+          })
+        }
+      >
         <PlusIcon />
         <div className={styles.addItemText}>항목 추가</div>
       </div>

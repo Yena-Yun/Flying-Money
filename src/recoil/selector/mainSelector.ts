@@ -208,6 +208,35 @@ export const getTotalPerMonthSelector = selector({
   },
 });
 
+export const addOrDeleteItemInAddModalSelector = selector({
+  key: 'addOrDeleteItemInAddModal',
+  get: () => {
+    return {
+      flag: '',
+      index: '',
+    };
+  },
+  set: ({ get, set }, newValue) => {
+    const items = get(AMain.itemState);
+
+    if (newValue instanceof DefaultValue) {
+      return newValue;
+    } else {
+      const { flag, index } = newValue;
+
+      if (flag === 'addItem') {
+        const defaultItem = { id: uuid4(), name: '', price: 0, tag: '' };
+
+        set(AMain.itemState, [...items, defaultItem]);
+      } else {
+        const deletedItemList = items.filter(({ id }) => id !== index);
+
+        set(AMain.itemState, deletedItemList);
+      }
+    }
+  },
+});
+
 export const deleteListSelector = selector({
   key: 'deleteList',
   get: () => {},
