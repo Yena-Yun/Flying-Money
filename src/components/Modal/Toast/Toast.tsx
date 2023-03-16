@@ -56,11 +56,9 @@ export const Toast = ({ role }: ToastProp) => {
               ? TOAST_PHRASES.deleteExpense.line1
               : ''}
             <br />
-            {role === 'deleteTag'
-              ? TOAST_PHRASES.deleteTag.line2
-              : role.includes('deleteExpense')
-              ? TOAST_PHRASES.deleteExpense.line2
-              : ''}
+            <span>{role === 'deleteTag' && TOAST_PHRASES.deleteTag.line2}</span>
+            {role.includes('deleteExpense') &&
+              TOAST_PHRASES.deleteExpense.line2}
           </p>
           <button className={styles.deleteButton} onClick={toastButtonHandler}>
             삭제

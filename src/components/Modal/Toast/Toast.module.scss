@@ -37,6 +37,11 @@
     margin-bottom: 2rem;
     font-size: var(--text-size-md);
     text-align: center;
+
+    span {
+      font-size: var(--text-size-base);
+      color: var(--color-gray-4);
+    }
   }
 
   .deleteButton {
