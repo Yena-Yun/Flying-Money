@@ -10,7 +10,7 @@
   .header {
     @include flexbox-row(space-between, center);
     width: 100%;
-    padding-bottom: 1rem;
+    padding-bottom: 0.8rem;
 
     .totalExpense {
       @include flexbox-row;
