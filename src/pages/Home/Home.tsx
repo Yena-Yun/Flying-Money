@@ -4,6 +4,7 @@ import { Banner, Header } from 'components/Main';
 import { TabMenu } from 'components/TabMenu';
 import { AddModal, AllDetail, ByDateDetail } from 'components/Modal';
 import styles from './Home.module.scss';
+import { TagPopup } from 'components/Modal/Add/AddUI';
 
 export const Home = () => {
   const isOpenAddModal = useRecoilValue(AOpen.isOpenAddModalState);
@@ -13,12 +14,14 @@ export const Home = () => {
   );
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedItemIndex = useRecoilValue(AIndex.clickedListIndexState);
+  const isOpenTagPopup = useRecoilValue(AOpen.isOpenTagPopupState);
 
   return (
     <>
       {isOpenAddModal && <AddModal />}
       {clickedIndex && isOpenDetailModal && <AllDetail />}
       {clickedItemIndex && isOpenByDateDetailModal && <ByDateDetail />}
+      {isOpenTagPopup && <TagPopup />}
 
       <div className={styles.container}>
         <Header />

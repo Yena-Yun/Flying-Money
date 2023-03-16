@@ -1,23 +1,19 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { AOpen, AIndex } from 'recoil/atom';
+import { SOpen } from 'recoil/selector';
 import { All, ByDate, ByWeek } from 'components/TabMenu';
 import { Const } from 'utils';
 import styles from './TabMenuLayout.module.scss';
-import { TabMenuIdType } from 'types/tabMenuType';
 
 export const TabMenu = () => {
   const setCloseByDateCalendar = useSetRecoilState(
     AOpen.isOpenByDateCalendarState
   );
+  const setOpenTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
   const [clickedTabName, setClickedTabName] = useRecoilState(
     AIndex.clickedTabNameState
   );
-
-  const tabMenuHandler = (id: TabMenuIdType) => {
-    setClickedTabName(id);
-    setCloseByDateCalendar(false);
-  };
 
   return (
     <section className={styles.showExpenseList}>
@@ -29,11 +25,20 @@ export const TabMenu = () => {
               styles.filterTabItem,
               clickedTabName === id && styles.selected
             )}
-            onClick={() => tabMenuHandler(id)}
+            onClick={() => {
+              setClickedTabName(id);
+              setCloseByDateCalendar(false);
+            }}
           >
             {name}
           </li>
         ))}
+        <button
+          className={styles.manageTagButton}
+          onClick={() => setOpenTagPopup()}
+        >
+          태그 관리
+        </button>
       </ul>
 
       {clickedTabName === 'all' ? (

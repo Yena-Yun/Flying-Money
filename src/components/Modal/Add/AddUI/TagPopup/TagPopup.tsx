@@ -5,6 +5,7 @@ import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { IoIosClose as DeleteTagIcon } from 'react-icons/io';
 import styles from './TagPopup.module.scss';
+import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 
 export const TagPopup = () => {
   const tagFormRef = useRef<HTMLFormElement>(null);
@@ -37,44 +38,44 @@ export const TagPopup = () => {
 
   return (
     <>
-      <div
+      {/* <div
         className={styles.background}
         onClick={() => setCloseTagPopup()}
-      ></div>
-      <div className={styles.container}>
-        <div className={styles.innerContainer}>
-          <div className={styles.tagGroup}>
-            {savedTagGroup.map(({ id, name }) => {
-              return (
-                <div key={id} className={styles.tagWrap}>
-                  <div
-                    className={styles.tag}
-                    onClick={() => {
-                      setAddTagToItem(name);
-                      setCloseTagPopup();
-                    }}
-                  >
-                    {name}
-                  </div>
-                  <div
-                    className={styles.deleteTagIcon}
-                    onClick={() => handleDeleteTag(id, name)}
-                  >
-                    <DeleteTagIcon />
-                  </div>
+      ></div> */}
+      <ModalLayout role='tagModal'>
+        {/* <div className={styles.innerContainer}> */}
+        <div className={styles.tagGroup}>
+          {savedTagGroup.map(({ id, name }) => {
+            return (
+              <div key={id} className={styles.tagWrap}>
+                <div
+                  className={styles.tag}
+                  onClick={() => {
+                    setAddTagToItem(name);
+                    setCloseTagPopup();
+                  }}
+                >
+                  {name}
                 </div>
-              );
-            })}
-          </div>
-          <form
-            className={styles.inputForm}
-            ref={tagFormRef}
-            onSubmit={handleSubmitTag}
-          >
-            <input name='tag' placeholder='태그' autoFocus />
-          </form>
+                <div
+                  className={styles.deleteTagIcon}
+                  onClick={() => handleDeleteTag(id, name)}
+                >
+                  <DeleteTagIcon />
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
+        <form
+          className={styles.inputForm}
+          ref={tagFormRef}
+          onSubmit={handleSubmitTag}
+        >
+          <input name='tag' placeholder='태그' autoFocus />
+        </form>
+        {/* </div> */}
+      </ModalLayout>
     </>
   );
 };

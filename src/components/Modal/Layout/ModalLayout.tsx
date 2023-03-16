@@ -32,6 +32,8 @@ export const ModalLayout = ({ role, children }: ModalLayoutProp) => {
               ? styles.allDetail
               : role === 'byDateDetail'
               ? styles.byDateDetail
+              : role === 'tagModal'
+              ? styles.tagModal
               : ''
           )}
         >
