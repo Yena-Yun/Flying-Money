@@ -15,6 +15,11 @@ export const isOpenByDateDetailModalState = atom({
   default: false,
 });
 
+export const isOpenTagModalState = atom({
+  key: 'isOpenTagModal',
+  default: false,
+});
+
 export const isOpenToastState = atom({
   key: 'isOpenToast',
   default: false,

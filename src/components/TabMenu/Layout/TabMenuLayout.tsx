@@ -10,7 +10,7 @@ export const TabMenu = () => {
   const setCloseByDateCalendar = useSetRecoilState(
     AOpen.isOpenByDateCalendarState
   );
-  const setOpenTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
+  const setOpenTagModal = useSetRecoilState(SOpen.toggleModalSelector);
   const [clickedTabName, setClickedTabName] = useRecoilState(
     AIndex.clickedTabNameState
   );
@@ -35,7 +35,7 @@ export const TabMenu = () => {
         ))}
         <button
           className={styles.manageTagButton}
-          onClick={() => setOpenTagPopup()}
+          onClick={() => setOpenTagModal('tagModal')}
         >
           태그 관리
         </button>

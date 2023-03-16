@@ -7,6 +7,10 @@
   background: rgba(0, 0, 0, 0.35);
   z-index: 200;
   cursor: pointer;
+
+  &.tagPopup {
+    z-index: 300;
+  }
 }
 
 .popupSection {
@@ -15,6 +19,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 250;
+
+  &.tagPopup {
+    z-index: 350;
+  }
 }
 
 .popup {
@@ -31,5 +39,11 @@
 
   &.tagModal {
     min-height: 10rem;
+  }
+
+  &.tagPopup {
+    width: 20rem;
+    padding: 2rem 2rem 2.2rem;
+    z-index: 400;
   }
 }

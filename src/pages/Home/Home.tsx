@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { AOpen, AIndex } from 'recoil/atom';
 import { Banner, Header } from 'components/Main';
-import { TabMenu } from 'components/TabMenu';
+import { ManageTag, TabMenu } from 'components/TabMenu';
 import { AddModal, AllDetail, ByDateDetail } from 'components/Modal';
 import styles from './Home.module.scss';
 import { TagPopup } from 'components/Modal/Add/AddUI';
@@ -12,6 +12,7 @@ export const Home = () => {
   const isOpenByDateDetailModal = useRecoilValue(
     AOpen.isOpenByDateDetailModalState
   );
+  const isOpenTagModal = useRecoilValue(AOpen.isOpenTagModalState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedItemIndex = useRecoilValue(AIndex.clickedListIndexState);
   const isOpenTagPopup = useRecoilValue(AOpen.isOpenTagPopupState);
@@ -21,6 +22,7 @@ export const Home = () => {
       {isOpenAddModal && <AddModal />}
       {clickedIndex && isOpenDetailModal && <AllDetail />}
       {clickedItemIndex && isOpenByDateDetailModal && <ByDateDetail />}
+      {isOpenTagModal && <ManageTag />}
       {isOpenTagPopup && <TagPopup />}
 
       <div className={styles.container}>
