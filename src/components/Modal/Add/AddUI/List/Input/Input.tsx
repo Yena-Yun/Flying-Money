@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { AIndex } from 'recoil/atom';
@@ -18,9 +18,12 @@ export const Input = ({ index, tag }: InputProp) => {
     AIndex.clickedTagPopupIndexState
   );
   const setOpenTagPopup = useSetRecoilState(SOpen.toggleModalSelector);
+  const isOpenNewModal = useRef(false);
 
   useEffect(() => {
-    tag = '';
+    if (!isOpenNewModal.current) {
+      isOpenNewModal.current = true;
+    }
   }, []);
 
   return (
@@ -61,9 +64,12 @@ export const Input = ({ index, tag }: InputProp) => {
           onClick={(e) => {
             setOpenTagPopup('tagPopup');
             setClickedTagPopupIndex(String(e.currentTarget.dataset.id));
+            isOpenNewModal.current = true;
           }}
         >
-          <div className={styles.tag}>{tag ? tag : '태그 등록'}</div>
+          <div className={styles.tag}>
+            {!isOpenNewModal.current ? '태그 등록' : tag}
+          </div>
         </div>
       </div>
     </div>
