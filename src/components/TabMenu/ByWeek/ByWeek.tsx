@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { AMain } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
-import { Hook } from 'utils';
+import { formatMoney } from 'utils/hooks';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {
@@ -24,7 +24,7 @@ export const ByWeek = () => {
         <div className={styles.totalExpense}>
           <div className={styles.totalArea}>
             <h3 className={styles.subTitle}>Total</h3>
-            <div className={styles.expense}>{Hook.formatMoney(weekTotal)}</div>
+            <div className={styles.expense}>{formatMoney(weekTotal)}</div>
           </div>
           <button className={styles.actionButton}>상세</button>
         </div>

@@ -44,9 +44,9 @@
   .actionButton {
     width: 3rem;
     padding: 0.3rem 0.5rem;
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-size-md);
     color: var(--color-primary);
-    border: 2px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     border-radius: 0.4rem;
     transition: background-color 0.2s ease-in;
 
