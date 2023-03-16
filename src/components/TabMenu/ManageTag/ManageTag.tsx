@@ -12,7 +12,6 @@ export const ManageTag = () => {
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(
     AMain.savedTagGroupState
   );
-  const setCloseTagPopup = useSetRecoilState(SOpen.toggleModalSelector);
   const setOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
   const setDeleteTagIndex = useSetRecoilState(AIndex.deleteTagIndexState);
 
@@ -44,16 +43,10 @@ export const ManageTag = () => {
           {savedTagGroup.map(({ id, name }) => {
             return (
               <div key={id} className={styles.tagWrap}>
-                <div
-                  className={styles.tag}
-                  onClick={() => setCloseTagPopup('tagPopup')}
-                >
+                <div className={styles.tag} onClick={() => handleDeleteTag(id)}>
                   {name}
                 </div>
-                <div
-                  className={styles.deleteTagIcon}
-                  onClick={() => handleDeleteTag(id)}
-                >
+                <div className={styles.deleteTagIcon}>
                   <DeleteTagIcon />
                 </div>
               </div>

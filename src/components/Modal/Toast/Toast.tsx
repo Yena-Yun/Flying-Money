@@ -21,7 +21,6 @@ export const Toast = ({ role }: ToastProp) => {
   const deleteTagIndex = useRecoilValue(AIndex.deleteTagIndexState);
 
   const toastButtonHandler = () => {
-    console.log(role);
     setCloseToast(role);
 
     if (role === 'deleteExpenseAll') {
