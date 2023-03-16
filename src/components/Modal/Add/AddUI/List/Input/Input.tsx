@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
 import { AIndex } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
+import { blockInvalidInput } from 'utils/hooks';
 import styles from './Input.module.scss';
 
 interface InputProp {
@@ -46,6 +47,7 @@ export const Input = ({ index, tag }: InputProp) => {
           <input
             type='number'
             placeholder='가격'
+            onKeyDown={blockInvalidInput}
             onChange={(e) => {
               if (isNaN(e.target.valueAsNumber)) return;
 

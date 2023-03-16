@@ -8,10 +8,10 @@ import { TMain } from 'types';
 import styles from './List.module.scss';
 
 export const List = () => {
+  const items = useRecoilValue<TMain.ItemType[]>(itemState);
   const setAddOrDeleteItem = useSetRecoilState(
     addOrDeleteItemInAddModalSelector
   );
-  const items = useRecoilValue<TMain.ItemType[]>(itemState);
 
   return (
     <div className={styles.inputGroupWrap}>
