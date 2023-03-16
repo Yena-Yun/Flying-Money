@@ -20,8 +20,13 @@ export const isOpenTagModalState = atom({
   default: false,
 });
 
-export const isOpenToastState = atom({
-  key: 'isOpenToast',
+export const isOpenDeleteExpenseToastState = atom({
+  key: 'isOpenDeleteExpenseToast',
+  default: false,
+});
+
+export const isOpenDeleteTagToastState = atom({
+  key: 'isOpenDeleteTagToast',
   default: false,
 });
 
