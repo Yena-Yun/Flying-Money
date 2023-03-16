@@ -14,7 +14,7 @@
 
     .defaultContainer {
       @include flexbox-column;
-      margin-top: 3.5rem;
+      margin-top: 3rem;
       opacity: 0.5;
 
       .defaultImageContainer {
@@ -24,6 +24,7 @@
 
       .defaultGuide {
         font-size: var(--text-size-md);
+        text-align: center;
       }
     }
 

@@ -33,7 +33,10 @@ export const All = () => {
             <figure className={styles.defaultImageContainer}>
               <img src={'/svgs/default.svg'} alt='default' />
             </figure>
-            <p className={styles.defaultGuide}>새로운 항목을 등록해주세요</p>
+            <p className={styles.defaultGuide}>
+              새 항목을 등록하기 전 <br />
+              태그 관리에서 사용하실 태그를 등록해주세요!
+            </p>
           </div>
         ) : (
           transactionList.map(({ id, date, lists }) => (
