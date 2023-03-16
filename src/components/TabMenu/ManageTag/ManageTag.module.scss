@@ -1,5 +1,10 @@
 @import 'styles/mixins';
 
+.title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .tagGroup {
   @include flexbox;
   flex-wrap: wrap;

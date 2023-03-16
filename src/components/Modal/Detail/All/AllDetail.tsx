@@ -6,7 +6,7 @@ import { Hook } from 'utils';
 import styles from './AllDetail.module.scss';
 
 export const AllDetail = () => {
-  const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
+  const isOpenToast = useRecoilValue(AOpen.isOpenDeleteExpenseToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
 
@@ -16,7 +16,7 @@ export const AllDetail = () => {
 
   return (
     <>
-      {isOpenToast && <Toast role='allDetail' />}
+      {isOpenToast && <Toast role='deleteExpenseAll' />}
       <ModalLayout role='allDetail'>
         <div className={styles.date}>{Hook.formatDate(date)}</div>
         <div className={styles.mainContainer}>

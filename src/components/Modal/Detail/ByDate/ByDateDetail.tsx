@@ -7,7 +7,7 @@ import { ItemList, TotalExpense, ActionButton } from '../DetailUI';
 import styles from './ByDateDetail.module.scss';
 
 export const ByDateDetail = () => {
-  const isOpenToast = useRecoilValue(AOpen.isOpenToastState);
+  const isOpenToast = useRecoilValue(AOpen.isOpenDeleteExpenseToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedListIndex = useRecoilValue(AIndex.clickedListIndexState);
@@ -24,7 +24,7 @@ export const ByDateDetail = () => {
 
   return (
     <>
-      {isOpenToast && <Toast role='byDateDetail' />}
+      {isOpenToast && <Toast role='deleteExpenseByDate' />}
       <ModalLayout role='byDateDetail'>
         <h2 className={styles.modalTitle}>{title}</h2>
         <div className={styles.mainContainer}>

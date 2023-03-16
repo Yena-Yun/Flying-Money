@@ -1,7 +1,7 @@
 import { useRef, FormEvent } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
-import { AMain } from 'recoil/atom';
+import { AMain, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { IoIosClose as DeleteTagIcon } from 'react-icons/io';
@@ -13,11 +13,12 @@ export const ManageTag = () => {
     AMain.savedTagGroupState
   );
   const setCloseTagPopup = useSetRecoilState(SOpen.toggleModalSelector);
+  const setOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
+  const setDeleteTagIndex = useSetRecoilState(AIndex.deleteTagIndexState);
 
   const handleDeleteTag = (id: string) => {
-    setSavedTagGroup((savedTagGroup) =>
-      savedTagGroup.filter(({ id: index }) => index !== id)
-    );
+    setOpenToast('deleteTag');
+    setDeleteTagIndex(id);
   };
 
   const handleSubmitTag = (e: FormEvent<HTMLFormElement>) => {
@@ -38,6 +39,7 @@ export const ManageTag = () => {
   return (
     <>
       <ModalLayout role='tagModal'>
+        <h2 className={styles.title}>태그 관리</h2>
         <div className={styles.tagGroup}>
           {savedTagGroup.map(({ id, name }) => {
             return (

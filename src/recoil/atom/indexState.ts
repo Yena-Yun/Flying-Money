@@ -16,6 +16,11 @@ export const clickedTagPopupIndexState = atom({
   default: '',
 });
 
+export const deleteTagIndexState = atom({
+  key: 'deleteTagIndex',
+  default: '',
+});
+
 export const clickedTabNameState = atom<TTab.TabMenuIdType>({
   key: 'clickedTabName',
   default: 'all',
