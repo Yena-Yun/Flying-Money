@@ -4,7 +4,13 @@
   font-size: var(--text-size-lg);
   font-weight: var(--font-weight-bold);
   color: var(--color-black);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.noTagGuide {
+  color: var(--color-gray-4);
+  margin-bottom: 1.2rem;
   text-align: center;
 }
 
