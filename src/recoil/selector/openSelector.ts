@@ -60,12 +60,25 @@ export const toggleCalendarSelector = selector({
 
 export const toggleToastSelector = selector({
   key: 'toggleToast',
-  get: () => {},
-  set: ({ get, set }) => {
-    const isOpenToast = get(A.isOpenToastState);
+  get: () => {
+    return '';
+  },
+  set: ({ get, set }, flag) => {
+    const isOpenDeleteExpenseToast = get(A.isOpenDeleteExpenseToastState);
+    const isOpenDeleteTagToast = get(A.isOpenDeleteTagToastState);
 
-    isOpenToast
-      ? set(A.isOpenToastState, false)
-      : set(A.isOpenToastState, true);
+    if (flag === 'deleteExpense') {
+      if (isOpenDeleteExpenseToast) {
+        set(A.isOpenDeleteExpenseToastState, false);
+      } else if (!isOpenDeleteExpenseToast) {
+        set(A.isOpenDeleteExpenseToastState, true);
+      }
+    } else if (flag === 'deleteTag') {
+      if (isOpenDeleteTagToast) {
+        set(A.isOpenDeleteTagToastState, false);
+      } else if (!isOpenDeleteTagToast) {
+        set(A.isOpenDeleteTagToastState, true);
+      }
+    }
   },
 });
