@@ -10,6 +10,8 @@ export const toggleModalSelector = selector({
     const isOpenModal = get(A.isOpenAddModalState);
     const isOpenDetailModal = get(A.isOpenAllDetailModalState);
     const isOpenByDateDetailModal = get(A.isOpenByDateDetailModalState);
+    const isOpenTagModalState = get(A.isOpenTagModalState);
+    const isOpenTagPopup = get(A.isOpenTagPopupState);
 
     if (flag === 'addModal' && isOpenModal) {
       set(A.isOpenAddModalState, false);
@@ -23,6 +25,14 @@ export const toggleModalSelector = selector({
       set(A.isOpenByDateDetailModalState, false);
     } else if (flag === 'byDateDetail' && !isOpenByDateDetailModal) {
       set(A.isOpenByDateDetailModalState, true);
+    } else if (flag === 'tagModal' && isOpenTagModalState) {
+      set(A.isOpenTagModalState, false);
+    } else if (flag === 'tagModal' && !isOpenTagModalState) {
+      set(A.isOpenTagModalState, true);
+    } else if (flag === 'tagPopup' && isOpenTagPopup) {
+      set(A.isOpenTagPopupState, false);
+    } else if (flag === 'tagPopup' && !isOpenTagPopup) {
+      set(A.isOpenTagPopupState, true);
     } else return;
   },
 });
@@ -45,18 +55,6 @@ export const toggleCalendarSelector = selector({
     } else if (flag === 'byDate' && !isOpenByDateCalendar) {
       set(A.isOpenByDateCalendarState, true);
     } else return;
-  },
-});
-
-export const toggleTagPopupSelector = selector({
-  key: 'toggleTagPopup',
-  get: () => {},
-  set: ({ get, set }) => {
-    const isOpenTagPopup = get(A.isOpenTagPopupState);
-
-    isOpenTagPopup
-      ? set(A.isOpenTagPopupState, false)
-      : set(A.isOpenTagPopupState, true);
   },
 });
 
