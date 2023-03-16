@@ -1,49 +1,17 @@
-import { useRef, FormEvent } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import uuid4 from 'uuid4';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
-import { IoIosClose as DeleteTagIcon } from 'react-icons/io';
-import styles from './TagPopup.module.scss';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
+import styles from './TagPopup.module.scss';
 
 export const TagPopup = () => {
-  const tagFormRef = useRef<HTMLFormElement>(null);
-  const [savedTagGroup, setSavedTagGroup] = useRecoilState(
-    AMain.savedTagGroupState
-  );
+  const savedTagGroup = useRecoilValue(AMain.savedTagGroupState);
   const setAddTagToItem = useSetRecoilState(SMain.addTagToItemSelector);
-  const setCloseTagPopup = useSetRecoilState(SOpen.toggleTagPopupSelector);
-
-  const handleDeleteTag = (id: string, tagName: string) => {
-    setSavedTagGroup((savedTagGroup) =>
-      savedTagGroup.filter(({ id: index }) => index !== id)
-    );
-  };
-
-  const handleSubmitTag = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const tag = formData.get('tag') as string;
-
-    if (tag.length < 1) return;
-
-    setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: tag }]);
-
-    if (tagFormRef.current) {
-      tagFormRef.current.reset();
-    }
-  };
+  const setCloseTagPopup = useSetRecoilState(SOpen.toggleModalSelector);
 
   return (
     <>
-      {/* <div
-        className={styles.background}
-        onClick={() => setCloseTagPopup()}
-      ></div> */}
-      <ModalLayout role='tagModal'>
-        {/* <div className={styles.innerContainer}> */}
+      <ModalLayout role='tagPopup'>
         <div className={styles.tagGroup}>
           {savedTagGroup.map(({ id, name }) => {
             return (
@@ -52,29 +20,15 @@ export const TagPopup = () => {
                   className={styles.tag}
                   onClick={() => {
                     setAddTagToItem(name);
-                    setCloseTagPopup();
+                    setCloseTagPopup('tagPopup');
                   }}
                 >
                   {name}
-                </div>
-                <div
-                  className={styles.deleteTagIcon}
-                  onClick={() => handleDeleteTag(id, name)}
-                >
-                  <DeleteTagIcon />
                 </div>
               </div>
             );
           })}
         </div>
-        <form
-          className={styles.inputForm}
-          ref={tagFormRef}
-          onSubmit={handleSubmitTag}
-        >
-          <input name='tag' placeholder='태그' autoFocus />
-        </form>
-        {/* </div> */}
       </ModalLayout>
     </>
   );
