@@ -22,11 +22,18 @@
     }
 
     .manageTagButton {
-      font-size: var(--text-size-sm);
-      padding: 0.2rem 0.6rem;
-      border-radius: 0.4rem;
-      border: 1px solid var(--color-gray-4);
       margin-left: 4.5rem;
+      padding: 0.3rem 0.6rem;
+      font-size: var(--text-size-sm);
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+      border-radius: 0.4rem;
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        color: var(--color-white);
+        background-color: var(--color-primary);
+      }
     }
   }
 }
