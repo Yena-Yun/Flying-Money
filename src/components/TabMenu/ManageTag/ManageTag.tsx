@@ -12,13 +12,13 @@ export const ManageTag = () => {
   const [savedTagGroup, setSavedTagGroup] = useRecoilState(
     AMain.savedTagGroupState
   );
-  const setOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
-  const setDeleteTagIndex = useSetRecoilState(AIndex.deleteTagIndexState);
+  // const setOpenToast = useSetRecoilState(SOpen.toggleToastSelector);
+  // const setDeleteTagIndex = useSetRecoilState(AIndex.deleteTagIndexState);
 
-  const handleDeleteTag = (id: string) => {
-    setOpenToast('deleteTag');
-    setDeleteTagIndex(id);
-  };
+  // const handleDeleteTag = (id: string) => {
+  //   setOpenToast('deleteTag');
+  //   setDeleteTagIndex(id);
+  // };
 
   const handleSubmitTag = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,25 +40,33 @@ export const ManageTag = () => {
       <ModalLayout role='tagModal'>
         <h2 className={styles.title}>태그 관리</h2>
         <div className={styles.tagGroup}>
-          {savedTagGroup.map(({ id, name }) => {
-            return (
-              <div key={id} className={styles.tagWrap}>
-                <div className={styles.tag} onClick={() => handleDeleteTag(id)}>
-                  {name}
-                </div>
-                <div className={styles.deleteTagIcon}>
+          {savedTagGroup.length > 0 ? (
+            <>
+              {savedTagGroup.map(({ id, name }) => {
+                return (
+                  <div key={id} className={styles.tagWrap}>
+                    {/* <div className={styles.tag} onClick={() => handleDeleteTag(id)}> */}
+                    <div className={styles.tag}>{name}</div>
+                    {/* <div className={styles.deleteTagIcon}>
                   <DeleteTagIcon />
-                </div>
-              </div>
-            );
-          })}
+                </div> */}
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <p className={styles.addNewTagGuide}>새로운 태그를 등록해주세요.</p>
+          )}
         </div>
+        {/* {savedTagGroup.length > 0 && (
+          <p className={styles.tagDeleteGuide}>태그를 삭제하려면 클릭하세요.</p>
+        )} */}
         <form
           className={styles.inputForm}
           ref={tagFormRef}
           onSubmit={handleSubmitTag}
         >
-          <input name='tag' placeholder='태그' autoFocus />
+          <input name='tag' placeholder='새 태그 등록' autoFocus />
         </form>
       </ModalLayout>
     </>

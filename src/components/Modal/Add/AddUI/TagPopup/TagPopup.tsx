@@ -12,7 +12,7 @@ export const TagPopup = () => {
   return (
     <>
       <ModalLayout role='tagPopup'>
-        <h2 className={styles.title}>태그 등록</h2>
+        <h2 className={styles.title}>태그 추가</h2>
         {savedTagGroup.length < 1 && (
           <p className={styles.noTagGuide}>
             등록된 태그가 없어요! <br />

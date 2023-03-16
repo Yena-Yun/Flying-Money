@@ -68,7 +68,7 @@ export const Input = ({ index, tag }: InputProp) => {
           }}
         >
           <div className={styles.tag}>
-            {!isOpenNewModal.current ? '태그 등록' : tag}
+            {!isOpenNewModal.current || !tag ? '태그 추가' : tag}
           </div>
         </div>
       </div>

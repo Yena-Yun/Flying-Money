@@ -30,7 +30,7 @@
   z-index: 400;
 
   &.deleteTag {
-    width: 20rem;
+    width: 19rem;
   }
 
   .deleteGuide {
@@ -39,6 +39,8 @@
     text-align: center;
 
     span {
+      display: block;
+      margin-top: 0.5rem;
       font-size: var(--text-size-base);
       color: var(--color-gray-4);
     }
