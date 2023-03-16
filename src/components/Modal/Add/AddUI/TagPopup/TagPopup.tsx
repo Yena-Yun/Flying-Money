@@ -12,6 +12,7 @@ export const TagPopup = () => {
   return (
     <>
       <ModalLayout role='tagPopup'>
+        <h2 className={styles.title}>태그 등록</h2>
         <div className={styles.tagGroup}>
           {savedTagGroup.map(({ id, name }) => {
             return (
