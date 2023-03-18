@@ -1,12 +1,16 @@
+import { Suspense, useTransition } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
+import PulseLoader from 'react-spinners/PulseLoader';
 import { AOpen, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { All, ByDate, ByWeek } from 'components/TabMenu';
 import { Const } from 'utils';
+import { TabMenuIdType } from 'types/tabMenuType';
 import styles from './TabMenuLayout.module.scss';
 
 export const TabMenu = () => {
+  const [isPending, startTransition] = useTransition();
   const setCloseByDateCalendar = useSetRecoilState(
     AOpen.isOpenByDateCalendarState
   );
@@ -14,6 +18,14 @@ export const TabMenu = () => {
   const [clickedTabName, setClickedTabName] = useRecoilState(
     AIndex.clickedTabNameState
   );
+
+  const tabClickHandler = (id: TabMenuIdType) => {
+    startTransition(() => {
+      setClickedTabName(id);
+    });
+
+    setCloseByDateCalendar(false);
+  };
 
   return (
     <section className={styles.showExpenseList}>
@@ -23,12 +35,10 @@ export const TabMenu = () => {
             key={id}
             className={classnames(
               styles.filterTabItem,
-              clickedTabName === id && styles.selected
+              clickedTabName === id && styles.selected,
+              isPending && styles.blur
             )}
-            onClick={() => {
-              setClickedTabName(id);
-              setCloseByDateCalendar(false);
-            }}
+            onClick={() => tabClickHandler(id)}
           >
             {name}
           </li>
@@ -41,13 +51,24 @@ export const TabMenu = () => {
         </button>
       </ul>
 
-      {clickedTabName === 'all' ? (
-        <All />
-      ) : clickedTabName === 'byWeek' ? (
-        <ByWeek />
-      ) : clickedTabName === 'byDate' ? (
-        <ByDate />
-      ) : null}
+      <Suspense
+        /* API 로딩이 있다고 가정 */
+        fallback={
+          <PulseLoader
+            color='#83c7d5'
+            // loading={isLoading}
+            aria-label='loading-spinner'
+          />
+        }
+      >
+        {clickedTabName === 'all' ? (
+          <All />
+        ) : clickedTabName === 'byWeek' ? (
+          <ByWeek />
+        ) : clickedTabName === 'byDate' ? (
+          <ByDate />
+        ) : null}
+      </Suspense>
     </section>
   );
 };

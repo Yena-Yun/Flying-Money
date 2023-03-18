@@ -14,10 +14,15 @@
     .filterTabItem {
       padding: 0.5rem;
       font-size: var(--text-size-md);
+      opacity: 1;
       cursor: pointer;
 
       &.selected {
         font-weight: var(--font-weight-bold);
+      }
+
+      &.blur {
+        opacity: 0.8;
       }
     }
 
