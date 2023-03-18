@@ -13,18 +13,14 @@ export const Title = () => {
   };
 
   return (
-    <div className={styles.inputGroup}>
-      <label htmlFor='title' className={styles.subTitle}>
-        제목
-      </label>
-      <div className={styles.inputItem}>
-        <input
-          id='title'
-          placeholder='제목을 입력해주세요.'
-          autoFocus
-          onChange={handleAddTitle}
-        />
-      </div>
+    <div className={styles.titleWrap}>
+      <h3 className={styles.subTitle}>제목</h3>
+      <input
+        className={styles.inputItem}
+        placeholder='제목을 입력해주세요.'
+        autoFocus
+        onChange={handleAddTitle}
+      />
     </div>
   );
 };
