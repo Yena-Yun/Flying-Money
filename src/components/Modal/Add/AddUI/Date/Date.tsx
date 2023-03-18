@@ -10,7 +10,7 @@ export const Date = () => {
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
   return (
-    <div className={styles.inputGroup}>
+    <div className={styles.dateWrap}>
       <CalendarIcon />
       <div
         className={styles.selectedDate}
