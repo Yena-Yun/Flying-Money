@@ -28,13 +28,13 @@
 .popup {
   position: relative;
   width: 25rem;
-  padding: 3rem 2rem 2.2rem;
+  padding: 2.5rem 2rem 2.2rem;
   background-color: var(--color-white);
   border-radius: 1rem;
   z-index: 300;
 
   &.addModal {
-    height: 31.5rem;
+    height: 32rem;
   }
 
   &.tagModal {

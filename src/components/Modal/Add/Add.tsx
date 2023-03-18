@@ -20,9 +20,9 @@ export const AddModal = () => {
   return (
     <ModalLayout role='addModal'>
       {isOpenCalender && <Calendar tabName='add' />}
-      <h2 className={styles.title}>항목 등록하기</h2>
+      <h2 className={styles.modalTitle}>항목 등록하기</h2>
 
-      <div className={styles.mainContainer}>
+      <div className={styles.inputContainer}>
         <Date />
         <Title />
         <List />
