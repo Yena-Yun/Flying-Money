@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { Hook, Const } from 'utils';
@@ -44,7 +46,7 @@ export const SubmitBtn = () => {
     }
   };
 
-  const submitTransaction = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitTransaction = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (validateList()) {
@@ -65,8 +67,19 @@ export const SubmitBtn = () => {
   };
 
   return (
-    <form className={styles.submitButtonWrap} onSubmit={submitTransaction}>
-      <button className={styles.submitButton}>등록</button>
-    </form>
+    <button className={styles.submitButton} onClick={submitTransaction}>
+      <Suspense
+        /* API 로딩이 있다고 가정 */
+        fallback={
+          <ClipLoader
+            color='#83c7d5'
+            // loading={isLoading}
+            aria-label='loading-spinner'
+          />
+        }
+      >
+        등록
+      </Suspense>
+    </button>
   );
 };
