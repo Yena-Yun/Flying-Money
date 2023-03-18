@@ -1,0 +1,15 @@
+@import 'styles/mixins';
+
+.addItemButton {
+  @include flexbox-row(flex-start, center);
+  width: fit-content;
+  padding: 0.5rem 0.8rem 0.5rem 0;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+
+  .addItemText {
+    margin-top: -0.3rem;
+    margin-left: 0.4rem;
+  }
+}
