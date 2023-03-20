@@ -35,7 +35,7 @@ export const All = () => {
             </figure>
             <p className={styles.defaultGuide}>
               새 항목을 등록하기 전 <br />
-              태그 관리에서 사용하실 태그를 등록해주세요!
+              사용할 태그를 먼저 등록해주세요!
             </p>
           </div>
         ) : (

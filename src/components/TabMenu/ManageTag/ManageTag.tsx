@@ -55,7 +55,9 @@ export const ManageTag = () => {
               })}
             </>
           ) : (
-            <p className={styles.addNewTagGuide}>새로운 태그를 등록해주세요.</p>
+            <p className={styles.addNewTagGuide}>
+              등록하신 태그는 새 항목 등록 시 사용할 수 있어요!
+            </p>
           )}
         </div>
         {/* {savedTagGroup.length > 0 && (

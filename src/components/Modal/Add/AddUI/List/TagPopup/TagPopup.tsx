@@ -16,7 +16,7 @@ export const TagPopup = () => {
         {savedTagGroup.length < 1 && (
           <p className={styles.noTagGuide}>
             등록된 태그가 없어요! <br />
-            <span>홈의 '태그 관리' 메뉴에서 새로운 태그를 등록해주세요.</span>
+            <span>홈의 '태그 관리'에서 새로운 태그를 등록해주세요.</span>
           </p>
         )}
         {savedTagGroup.length > 0 && (
