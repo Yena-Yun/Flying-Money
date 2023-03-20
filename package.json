@@ -3,28 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
     "recoil": "^0.7.6",
-    "sass": "^1.57.1",
     "typescript": "^4.4.2",
     "uuid4": "^2.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -46,8 +39,13 @@
   },
   "devDependencies": {
     "@types/uuid4": "^2.0.0",
+    "@vitejs/plugin-react": "^3.1.0",
     "date-fns": "^2.29.3",
     "react-icons": "^4.7.1",
-    "react-toastify": "^9.1.1"
+    "react-toastify": "^9.1.1",
+    "sass": "^1.59.3",
+    "vite": "^4.2.0",
+    "vite-plugin-svgr": "^2.4.0",
+    "vite-tsconfig-paths": "^4.0.7"
   }
 }
