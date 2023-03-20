@@ -4,21 +4,11 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { Hook, Const } from 'utils';
-import { TMain } from 'types';
 import styles from './SubmitBtn.module.scss';
-import { setItemToListSelector } from '~/recoil/selector/mainSelector';
-// import { validateInputState } from '~/recoil/atom/mainState';
-// import { validateInputSelector } from '~/recoil/selector/validateSelector';
 
 export const SubmitBtn = () => {
   const title = useRecoilValue(AMain.addModalTitleState);
   const list = useRecoilValue(AMain.addModalListState);
-
-  // const list = useRecoilValue(AMain.listState);
-  // const items = useRecoilValue<TMain.ItemType[]>(AMain.itemState);
-  // const validateInput = useSetRecoilState(validateInputSelector);
-
-  // const isValidate = useRecoilValue(validateInputState);
 
   const setItemToList = useSetRecoilState(SMain.setItemToListSelector);
   const setListToTransaction = useSetRecoilState(
