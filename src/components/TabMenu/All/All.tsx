@@ -6,7 +6,7 @@ import { Hook } from 'utils';
 import styles from './All.module.scss';
 
 export const All = () => {
-  const transactionList = Hook.getFromLocalStorage('expenseList'); // 로컬스토리지에서 렌더링할 데이터를 받아옴
+  const transactionList = Hook.getFromLocalStorage('expenseList'); // 로컬스토리지에 저장된 데이터 렌더링
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
   const setClickedIndex = useSetRecoilState(
     AIndex.clickedTransactionIndexState

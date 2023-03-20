@@ -1,12 +1,12 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AMain, ADate, AIndex } from 'recoil/atom';
+import { ADate, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
 import { Hook } from 'utils';
 import styles from './ByDate.module.scss';
 
 export const ByDate = () => {
-  const transactionList = useRecoilValue(AMain.transactionListState);
+  const transactionList = Hook.getFromLocalStorage('expenseList'); // 로컬스토리지에 저장된 데이터 렌더링
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setClickedIndex = useSetRecoilState(
     AIndex.clickedTransactionIndexState
@@ -15,8 +15,7 @@ export const ByDate = () => {
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   const { id: index, lists } = transactionList.filter(
-    ({ date }) =>
-      selectedDate.toString().slice(0, 15) === date.toString().slice(0, 15)
+    ({ date }) => Hook.formatDate(selectedDate) === Hook.formatDate(date)
   )[0] || { id: '', lists: [] };
 
   const openDetailModal = (id: string) => {
