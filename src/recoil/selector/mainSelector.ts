@@ -11,19 +11,21 @@ import {
   clickedTransactionIndexState,
   clickedListIndexState,
 } from '../atom/indexState';
-import { DateFn } from 'utils';
+import { DateFn, Hook, Const } from 'utils';
 import { ADate, AIndex } from 'recoil/atom';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
   get: () => {},
   set: ({ get, set }) => {
-    const item = get(AMain.itemState);
     const list = get(AMain.listState);
+    const modalTitle = get(AMain.addModalTitleState);
+    const modalList = get(AMain.addModalListState);
 
     set(AMain.listState, {
       ...list,
-      items: item,
+      title: modalTitle,
+      items: modalList,
     });
   },
 });
@@ -86,34 +88,48 @@ export const setCurrentDateToAddModalSelector = selector({
   },
 });
 
-export const addNameOrPriceToItemSelector = selector({
-  key: 'addNameOrPriceToItem',
+export const addModalTitleSelector = selector({
+  key: 'setModalTitle',
+  get: () => {
+    return '';
+  },
+  set: ({ set }, newValue) => {
+    if (newValue instanceof DefaultValue) {
+      return newValue;
+    } else {
+      set(AMain.addModalTitleState, newValue);
+    }
+  },
+});
+
+export const addModalListSelector = selector({
+  key: 'setModalList',
   get: () => {
     return {
-      newInput: '',
       id: '',
       flag: '',
+      input: '',
     };
   },
   set: ({ get, set }, newValue) => {
-    const items = get(AMain.itemState);
+    const addModalList = get(AMain.addModalListState);
 
     if (newValue instanceof DefaultValue) {
       return newValue;
     } else {
-      const { newInput, id, flag } = newValue;
+      const { id, flag, input } = newValue;
 
-      const result = items.map((item) => {
+      const result = addModalList.map((item) => {
         if (item.id === id) {
           return flag === 'name'
-            ? { ...item, name: newInput }
-            : { ...item, price: parseInt(newInput) };
+            ? { ...item, name: input }
+            : { ...item, price: parseInt(input) };
         }
 
         return item;
       });
 
-      set(AMain.itemState, result);
+      set(AMain.addModalListState, result);
     }
   },
 });
@@ -217,7 +233,7 @@ export const addOrDeleteItemInAddModalSelector = selector({
     };
   },
   set: ({ get, set }, newValue) => {
-    const items = get(AMain.itemState);
+    const addModalList = get(AMain.addModalListState);
 
     if (newValue instanceof DefaultValue) {
       return newValue;
@@ -227,11 +243,11 @@ export const addOrDeleteItemInAddModalSelector = selector({
       if (flag === 'addItem') {
         const defaultItem = { id: uuid4(), name: '', price: 0, tag: '' };
 
-        set(AMain.itemState, [...items, defaultItem]);
+        set(AMain.addModalListState, [...addModalList, defaultItem]);
       } else {
-        const deletedItemList = items.filter(({ id }) => id !== index);
+        const deletedItemList = addModalList.filter(({ id }) => id !== index);
 
-        set(AMain.itemState, deletedItemList);
+        set(AMain.addModalListState, deletedItemList);
       }
     }
   },
