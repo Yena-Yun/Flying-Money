@@ -1,0 +1,9 @@
+@import 'src/styles/mixins';
+
+.removeItemButton {
+  position: absolute;
+  top: 1rem;
+  right: -1.8rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
