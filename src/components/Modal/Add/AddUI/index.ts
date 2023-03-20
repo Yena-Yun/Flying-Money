@@ -1,5 +1,3 @@
-export { Date } from './Date/Date';
-export { Title } from './Title/Title';
-export { List } from './List/List';
-export { SubmitBtn } from './SubmitBtn/SubmitBtn';
-export { TagPopup } from './List/TagPopup/TagPopup';
+export { Input } from './Input/Input';
+export { AddItem } from './AddOrRemoveButton/AddItem/AddItem';
+export { RemoveItem } from './AddOrRemoveButton/RemoveItem/RemoveItem';

@@ -20,4 +20,57 @@
   height: 21rem;
   margin-bottom: 1.2rem;
   overflow-y: auto;
+
+  .inputGroupWrap {
+    width: 90%;
+    margin-bottom: 1rem;
+
+    .subTitle {
+      display: block;
+      font-size: var(--text-size-md);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--color-gray-2);
+      border-radius: 0.5rem;
+    }
+
+    .inputItemGroup {
+      @include flexbox;
+      position: relative;
+
+      .inputGroup {
+        width: 100%;
+
+        .priceTagGroup {
+          @include flexbox;
+          gap: 0.5rem;
+
+          .priceInput {
+            flex: 1;
+          }
+
+          .tagOpenButton {
+            flex: 1.2;
+            margin-bottom: 0.5rem;
+            padding: 0.75rem 0.9rem;
+            color: var(--color-gray-3);
+            border: 1px solid var(--color-gray-2);
+            border-radius: 0.2rem;
+            cursor: pointer;
+
+            &:hover {
+              color: var(--color-gray-5);
+              background-color: var(--color-gray-2);
+            }
+          }
+        }
+      }
+    }
+  }
 }
