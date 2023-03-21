@@ -4,7 +4,7 @@ import * as A from '../atom/openState';
 export const toggleModalSelector = selector({
   key: 'toggleModals',
   get: () => {
-    return '';
+    return 'addModal' || 'byAll' || 'byDate' || 'tagModal' || 'tagPopup';
   },
   set: ({ get, set }, flag) => {
     const isOpenModal = get(A.isOpenAddModalState);
@@ -30,7 +30,7 @@ export const toggleModalSelector = selector({
 export const toggleCalendarSelector = selector({
   key: 'toggleCalendar',
   get: () => {
-    return '';
+    return 'add' || 'byDate';
   },
   set: ({ get, set }, flag) => {
     const isOpenAddCalendar = get(A.isOpenAddCalendarState);
@@ -47,7 +47,7 @@ export const toggleCalendarSelector = selector({
 export const toggleToastSelector = selector({
   key: 'toggleToast',
   get: () => {
-    return '';
+    return 'byAll' || 'byDate' || 'tag';
   },
   set: ({ get, set }, flag) => {
     const isOpenDeleteByAllToast = get(A.isOpenDeleteByAllToastState);
@@ -58,7 +58,7 @@ export const toggleToastSelector = selector({
       set(A.isOpenDeleteByAllToastState, !isOpenDeleteByAllToast);
     } else if (flag === 'byDate') {
       set(A.isOpenDeleteByDateToastState, !isOpenDeleteByDateToast);
-    } else if (flag === 'deleteTag') {
+    } else if (flag === 'tag') {
       set(A.isOpenDeleteTagToastState, !isOpenDeleteTagToast);
     } else return;
   },
