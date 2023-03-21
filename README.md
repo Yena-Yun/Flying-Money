@@ -97,7 +97,7 @@ import { ADate, AOpen } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
 ```
 
-## 🌊 [Velog 구현 상세 기록 (클릭!)](https://velog.io/@yena1025/Flying-Money-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%ED%98%84-%EA%B8%B0%EB%A1%9D)
+## 🌊 [Velog 구현 상세 기록](https://velog.io/@yena1025/Flying-Money-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%ED%98%84-%EA%B8%B0%EB%A1%9D)
 
 ## 📚 폴더 구조
 
@@ -120,9 +120,9 @@ import { SMain } from 'recoil/selector';
  ┃ ┃ ┣ 📂CalendarArrow
  ┃ ┃ ┃ ┣ 📜CalendarArrow.module.scss
  ┃ ┃ ┃ ┗ 📜CalendarArrow.tsx
- ┃ ┃ ┣ 📂PlusItem
- ┃ ┃ ┃ ┣ 📜PlusItem.module.scss
- ┃ ┃ ┃ ┗ 📜PlusItem.tsx
+ ┃ ┃ ┣ 📂PlusButton
+ ┃ ┃ ┃ ┣ 📜PlusButton.module.scss
+ ┃ ┃ ┃ ┗ 📜PlusButton.tsx
  ┃ ┃ ┗ 📜index.ts
  ┃ ┣ 📂Main
  ┃ ┃ ┣ 📂Banner
@@ -134,26 +134,22 @@ import { SMain } from 'recoil/selector';
  ┃ ┃ ┗ 📜index.ts
  ┃ ┣ 📂Modal
  ┃ ┃ ┣ 📂Add
- ┃ ┃ ┃ ┣ 📂AddUI
- ┃ ┃ ┃ ┃ ┣ 📂Date
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Date.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜Date.tsx
- ┃ ┃ ┃ ┃ ┣ 📂List
- ┃ ┃ ┃ ┃ ┃ ┣ 📂Input
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Input.module.scss
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Input.tsx
- ┃ ┃ ┃ ┃ ┃ ┣ 📜List.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜List.tsx
- ┃ ┃ ┃ ┃ ┣ 📂SubmitBtn
- ┃ ┃ ┃ ┃ ┃ ┣ 📜SubmitBtn.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜SubmitBtn.tsx
- ┃ ┃ ┃ ┃ ┣ 📂TagPopup
- ┃ ┃ ┃ ┃ ┃ ┣ 📜TagPopup.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜TagPopup.tsx
- ┃ ┃ ┃ ┃ ┣ 📂Title
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Title.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜Title.tsx
- ┃ ┃ ┃ ┃ ┗ 📜index.ts
+ ┃ ┃ ┃ ┣ 📂ActionButton
+ ┃ ┃ ┃ ┃ ┣ 📂AddItem
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜AddItem.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜AddItem.tsx
+ ┃ ┃ ┃ ┃ ┗ 📂RemoveItem
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜RemoveItem.module.scss
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜RemoveItem.tsx
+ ┃ ┃ ┃ ┣ 📂Date
+ ┃ ┃ ┃ ┃ ┣ 📜Date.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜Date.tsx
+ ┃ ┃ ┃ ┣ 📂SubmitBtn
+ ┃ ┃ ┃ ┃ ┣ 📜SubmitBtn.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜SubmitBtn.tsx
+ ┃ ┃ ┃ ┣ 📂TagPopup
+ ┃ ┃ ┃ ┃ ┣ 📜TagPopup.module.scss
+ ┃ ┃ ┃ ┃ ┗ 📜TagPopup.tsx
  ┃ ┃ ┃ ┣ 📜Add.module.scss
  ┃ ┃ ┃ ┗ 📜Add.tsx
  ┃ ┃ ┣ 📂Detail
@@ -183,6 +179,9 @@ import { SMain } from 'recoil/selector';
  ┃ ┃ ┗ 📜index.ts
  ┃ ┣ 📂RootToast
  ┃ ┃ ┗ 📜RootToast.tsx
+ ┃ ┣ 📂Shared
+ ┃ ┃ ┗ 📂Input
+ ┃ ┃ ┃ ┗ 📜Input.tsx
  ┃ ┗ 📂TabMenu
  ┃ ┃ ┣ 📂All
  ┃ ┃ ┃ ┣ 📜All.module.scss
@@ -193,9 +192,6 @@ import { SMain } from 'recoil/selector';
  ┃ ┃ ┃ ┃ ┗ 📜Header.tsx
  ┃ ┃ ┃ ┣ 📜ByDate.module.scss
  ┃ ┃ ┃ ┗ 📜ByDate.tsx
- ┃ ┃ ┣ 📂ByTag
- ┃ ┃ ┃ ┣ 📜ByTag.module.scss
- ┃ ┃ ┃ ┗ 📜ByTag.tsx
  ┃ ┃ ┣ 📂ByWeek
  ┃ ┃ ┃ ┣ 📂Header
  ┃ ┃ ┃ ┃ ┣ 📜Header.module.scss
@@ -205,7 +201,18 @@ import { SMain } from 'recoil/selector';
  ┃ ┃ ┣ 📂Layout
  ┃ ┃ ┃ ┣ 📜TabMenuLayout.module.scss
  ┃ ┃ ┃ ┗ 📜TabMenuLayout.tsx
+ ┃ ┃ ┣ 📂ManageTag
+ ┃ ┃ ┃ ┣ 📜ManageTag.module.scss
+ ┃ ┃ ┃ ┗ 📜ManageTag.tsx
  ┃ ┃ ┗ 📜index.ts
+ ┣ 📂hooks
+ ┃ ┣ 📜blockInvalidInput.ts
+ ┃ ┣ 📜changeMonth.ts
+ ┃ ┣ 📜formatDate.ts
+ ┃ ┣ 📜formatMoney.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜localStorage.ts
+ ┃ ┗ 📜popupToast.ts
  ┣ 📂pages
  ┃ ┗ 📂Home
  ┃ ┃ ┣ 📜Home.module.scss
@@ -216,35 +223,35 @@ import { SMain } from 'recoil/selector';
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜indexState.ts
  ┃ ┃ ┣ 📜mainState.ts
- ┃ ┃ ┗ 📜openState.ts
+ ┃ ┃ ┣ 📜openState.ts
+ ┃ ┃ ┗ 📜utilState.ts
  ┃ ┗ 📂selector
  ┃ ┃ ┣ 📜dateSelector.ts
  ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┣ 📜mainSelector.ts
- ┃ ┃ ┗ 📜openSelector.ts
+ ┃ ┃ ┣ 📜modalSelector.ts
+ ┃ ┃ ┣ 📜openSelector.ts
+ ┃ ┃ ┗ 📜totalSelector.ts
  ┣ 📂styles
  ┃ ┣ 📜globals.scss
  ┃ ┗ 📜mixins.scss
  ┣ 📂types
+ ┃ ┣ 📜flagType.ts
  ┃ ┣ 📜index.ts
  ┃ ┣ 📜mainType.ts
  ┃ ┗ 📜tabMenuType.ts
  ┣ 📂utils
  ┃ ┣ 📂constants
+ ┃ ┃ ┣ 📜banner.ts
  ┃ ┃ ┣ 📜clickedIndex.ts
  ┃ ┃ ┣ 📜date.ts
  ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┗ 📜mainData.ts
- ┃ ┣ 📂hooks
- ┃ ┃ ┣ 📜changeMonth.ts
- ┃ ┃ ┣ 📜formatDate.ts
- ┃ ┃ ┣ 📜formatMoney.ts
- ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┗ 📜popupToast.ts
+ ┃ ┃ ┣ 📜tabMenu.ts
+ ┃ ┃ ┗ 📜toast.ts
  ┃ ┣ 📂libraries
  ┃ ┃ ┣ 📜dateFns.ts
  ┃ ┃ ┗ 📜index.ts
  ┃ ┗ 📜index.ts
  ┣ 📜App.tsx
- ┗ 📜index.tsx
+ ┗ 📜main.tsx
 ```
