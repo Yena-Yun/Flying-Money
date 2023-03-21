@@ -13,26 +13,16 @@ export const toggleModalSelector = selector({
     const isOpenTagModalState = get(A.isOpenTagModalState);
     const isOpenTagPopup = get(A.isOpenTagPopupState);
 
-    if (flag === 'addModal' && isOpenModal) {
-      set(A.isOpenAddModalState, false);
-    } else if (flag === 'addModal' && !isOpenModal) {
-      set(A.isOpenAddModalState, true);
-    } else if (flag === 'allDetail' && isOpenDetailModal) {
-      set(A.isOpenAllDetailModalState, false);
-    } else if (flag === 'allDetail' && !isOpenDetailModal) {
-      set(A.isOpenAllDetailModalState, true);
-    } else if (flag === 'byDateDetail' && isOpenByDateDetailModal) {
-      set(A.isOpenByDateDetailModalState, false);
-    } else if (flag === 'byDateDetail' && !isOpenByDateDetailModal) {
-      set(A.isOpenByDateDetailModalState, true);
-    } else if (flag === 'tagModal' && isOpenTagModalState) {
-      set(A.isOpenTagModalState, false);
-    } else if (flag === 'tagModal' && !isOpenTagModalState) {
-      set(A.isOpenTagModalState, true);
-    } else if (flag === 'tagPopup' && isOpenTagPopup) {
-      set(A.isOpenTagPopupState, false);
-    } else if (flag === 'tagPopup' && !isOpenTagPopup) {
-      set(A.isOpenTagPopupState, true);
+    if (flag === 'addModal') {
+      set(A.isOpenAddModalState, !isOpenModal);
+    } else if (flag === 'byAll') {
+      set(A.isOpenAllDetailModalState, !isOpenDetailModal);
+    } else if (flag === 'byDate') {
+      set(A.isOpenByDateDetailModalState, !isOpenByDateDetailModal);
+    } else if (flag === 'tagModal') {
+      set(A.isOpenTagModalState, !isOpenTagModalState);
+    } else if (flag === 'tagPopup') {
+      set(A.isOpenTagPopupState, !isOpenTagPopup);
     } else return;
   },
 });
@@ -46,14 +36,10 @@ export const toggleCalendarSelector = selector({
     const isOpenAddCalendar = get(A.isOpenAddCalendarState);
     const isOpenByDateCalendar = get(A.isOpenByDateCalendarState);
 
-    if (flag === 'add' && isOpenAddCalendar) {
-      set(A.isOpenAddCalendarState, false);
-    } else if (flag === 'add' && !isOpenAddCalendar) {
-      set(A.isOpenAddCalendarState, true);
-    } else if (flag === 'byDate' && isOpenByDateCalendar) {
-      set(A.isOpenByDateCalendarState, false);
-    } else if (flag === 'byDate' && !isOpenByDateCalendar) {
-      set(A.isOpenByDateCalendarState, true);
+    if (flag === 'add') {
+      set(A.isOpenAddCalendarState, !isOpenAddCalendar);
+    } else if (flag === 'byDate') {
+      set(A.isOpenByDateCalendarState, !isOpenByDateCalendar);
     } else return;
   },
 });
@@ -64,21 +50,16 @@ export const toggleToastSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const isOpenDeleteExpenseToast = get(A.isOpenDeleteExpenseToastState);
+    const isOpenDeleteByAllToast = get(A.isOpenDeleteByAllToastState);
+    const isOpenDeleteByDateToast = get(A.isOpenDeleteByDateToastState);
     const isOpenDeleteTagToast = get(A.isOpenDeleteTagToastState);
 
-    if (flag === 'deleteExpense') {
-      if (isOpenDeleteExpenseToast) {
-        set(A.isOpenDeleteExpenseToastState, false);
-      } else if (!isOpenDeleteExpenseToast) {
-        set(A.isOpenDeleteExpenseToastState, true);
-      }
+    if (flag === 'byAll') {
+      set(A.isOpenDeleteByAllToastState, !isOpenDeleteByAllToast);
+    } else if (flag === 'byDate') {
+      set(A.isOpenDeleteByDateToastState, !isOpenDeleteByDateToast);
     } else if (flag === 'deleteTag') {
-      if (isOpenDeleteTagToast) {
-        set(A.isOpenDeleteTagToastState, false);
-      } else if (!isOpenDeleteTagToast) {
-        set(A.isOpenDeleteTagToastState, true);
-      }
-    }
+      set(A.isOpenDeleteTagToastState, !isOpenDeleteTagToast);
+    } else return;
   },
 });
