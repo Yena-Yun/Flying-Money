@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate, AIndex } from 'recoil/atom';
-import { SMain } from 'recoil/selector';
+import { STotal } from 'recoil/selector';
 import { CalendarHeader } from 'components/Calendar/Header/CalendarHeader';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
@@ -13,7 +13,7 @@ export const Header = () => {
   );
   const monthTotal = useRecoilValue(AMain.totalPerMonthState);
   const setMonthTotalExpense = useSetRecoilState(
-    SMain.getTotalPerMonthSelector
+    STotal.getTotalPerMonthSelector
   );
   const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
     AIndex.weekButtonIndexState
