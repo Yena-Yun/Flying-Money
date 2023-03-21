@@ -1,6 +1,18 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 import uuid4 from 'uuid4';
 import { TMain } from 'types';
+
+const { persistAtom } = recoilPersist({
+  key: 'defaultTransactionLocal',
+  storage: localStorage,
+});
+
+export const defaultTransactionListState = atom<TMain.TransactionType[]>({
+  key: 'defaultTransactionList',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
 
 export const isValidateState = atom({
   key: '',
