@@ -1,4 +1,4 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent, useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import uuid4 from 'uuid4';
 import { AMain, AIndex } from 'recoil/atom';
@@ -6,6 +6,7 @@ import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { IoIosClose as DeleteTagIcon } from 'react-icons/io';
 import styles from './ManageTag.module.scss';
+import { saveToLocalStorage } from '~/utils/hooks/localStorage';
 
 export const ManageTag = () => {
   const tagFormRef = useRef<HTMLFormElement>(null);
@@ -26,7 +27,7 @@ export const ManageTag = () => {
     const formData = new FormData(e.currentTarget);
     const tag = formData.get('tag') as string;
 
-    if (tag.length < 1) return;
+    if (!tag) return;
 
     setSavedTagGroup([...savedTagGroup, { id: uuid4(), name: tag }]);
 
@@ -34,6 +35,10 @@ export const ManageTag = () => {
       tagFormRef.current.reset();
     }
   };
+
+  useEffect(() => {
+    saveToLocalStorage('savedTagGroup', savedTagGroup);
+  }, [savedTagGroup]);
 
   return (
     <>
