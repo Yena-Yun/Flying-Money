@@ -1,12 +1,12 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { ADate, AIndex } from 'recoil/atom';
+import { ADate, AIndex, AMain } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
 import { Hook } from 'utils';
 import styles from './ByDate.module.scss';
 
 export const ByDate = () => {
-  const transactionList = Hook.getFromLocalStorage('expenseList'); // 로컬스토리지에 저장된 데이터 렌더링
+  const transactionList = useRecoilValue(AMain.defaultTransactionListState);
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setClickedIndex = useSetRecoilState(
     AIndex.clickedTransactionIndexState
