@@ -18,7 +18,7 @@ export const AllDetail = () => {
     <>
       {isOpenToast && <Toast role='deleteExpenseAll' />}
       <ModalLayout role='allDetail'>
-        <div className={styles.date}>{Hook.formatDate(date)}</div>
+        <div className={styles.date}>{date}</div>
         <div className={styles.mainContainer}>
           {lists.map(({ id, title, items }) => (
             <div key={id}>

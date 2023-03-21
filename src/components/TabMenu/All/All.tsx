@@ -18,7 +18,7 @@ export const All = () => {
     setOpenModal('addModal');
   };
 
-  const openDetailModal = (id: string, date: Date) => {
+  const openDetailModal = (id: string, date: string) => {
     setClickedIndex(id);
     setSelectedDate(date);
     setAllTotalExpense('all');
@@ -42,7 +42,7 @@ export const All = () => {
           transactionList?.map(({ id, date, lists }) => (
             <li key={id} className={styles.expenseItem}>
               <div className={styles.header}>
-                <div className={styles.date}>{Hook.formatDate(date)}</div>
+                <div className={styles.date}>{date}</div>
               </div>
 
               <div

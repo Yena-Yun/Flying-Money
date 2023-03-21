@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { Hook } from '~/utils';
 
 export const addModalDateState = atom({
   key: 'addModalDate',
@@ -7,12 +8,12 @@ export const addModalDateState = atom({
 
 export const allSelectedDateState = atom({
   key: 'showAllSelectedDate',
-  default: new Date(),
+  default: Hook.formatDate(new Date()),
 });
 
 export const byDateSelectedDateState = atom({
   key: 'filterByDateSelectedDate',
-  default: new Date(),
+  default: Hook.formatDate(new Date()),
 });
 
 export const byWeekStartDateState = atom({
