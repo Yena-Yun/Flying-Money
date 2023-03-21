@@ -7,6 +7,8 @@ import { CalendarIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './Header.module.scss';
 
+const ROLE = 'byDate';
+
 export const Header = () => {
   const [isSelectSomeDate, setIsSelectSomeDate] = useState(true);
   const isOpenCalender = useRecoilValue(AOpen.isOpenByDateCalendarState);
@@ -20,22 +22,22 @@ export const Header = () => {
   const setDateTotalExpense = useSetRecoilState(STotal.getTotalPerDateSelector);
 
   useEffect(() => {
-    setDateTotalExpense('byDate');
+    setDateTotalExpense(ROLE);
   }, [selectedDate, transactionList]);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {isOpenCalender && <Calendar tabName='byDate' mini />}
+        {isOpenCalender && <Calendar tabName={ROLE} mini />}
 
         <div className={styles.period}>
           <CalendarIcon />
           <div
             className={styles.selectedDate}
             onClick={() => {
-              setToggleCalendar('byDate');
+              setToggleCalendar(ROLE);
               setSelectDate(selectedDate);
-              setDateTotalExpense('byDate');
+              setDateTotalExpense(ROLE);
               setIsSelectSomeDate(false);
             }}
           >
