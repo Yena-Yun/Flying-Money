@@ -3,7 +3,6 @@ import { selector, DefaultValue } from 'recoil';
 import uuid4 from 'uuid4';
 import { AMain, ADate, AIndex } from 'recoil/atom';
 import { DateFn, Hook } from 'utils';
-import { saveToLocalStorage } from '~/utils/hooks/localStorage';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
@@ -65,9 +64,6 @@ export const setTransactionListSelector = selector({
       ...transaction,
       date: Hook.formatDate(transaction.date),
     }));
-
-    /* 최종 데이터를 로컬스토리지에 저장 */
-    saveToLocalStorage('expenseList', formatDateTransaction);
 
     set(AMain.transactionListState, finalTransaction);
   },
@@ -144,16 +140,16 @@ export const addTagToItemSelector = selector({
     if (newTag instanceof DefaultValue) {
       return newTag;
     } else {
-      const expenseItemList = get(AMain.itemState);
+      const addModalList = get(AMain.addModalListState);
       const clickedTagPopupIndex = get(AIndex.clickedTagPopupIndexState);
 
-      const result = expenseItemList.map((item) => {
+      const result = addModalList.map((item) => {
         return item.id === clickedTagPopupIndex
           ? { ...item, tag: newTag }
           : item;
       });
 
-      set(AMain.itemState, result);
+      set(AMain.addModalListState, result);
     }
   },
 });

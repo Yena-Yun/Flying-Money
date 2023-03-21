@@ -23,16 +23,15 @@ export const TagPopup = () => {
           <div className={styles.tagGroup}>
             {savedTagGroup.map(({ id, name }) => {
               return (
-                <div key={id} className={styles.tagWrap}>
-                  <div
-                    className={styles.tag}
-                    onClick={() => {
-                      setAddTagToItem(name);
-                      setCloseTagPopup('tagPopup');
-                    }}
-                  >
-                    {name}
-                  </div>
+                <div
+                  key={id}
+                  className={styles.tagWrap}
+                  onClick={() => {
+                    setAddTagToItem(name);
+                    setCloseTagPopup('tagPopup');
+                  }}
+                >
+                  {name}
                 </div>
               );
             })}
