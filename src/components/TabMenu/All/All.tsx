@@ -1,12 +1,12 @@
-import { useSetRecoilState } from 'recoil';
-import { AIndex, ADate } from 'recoil/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { AIndex, ADate, AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { PlusButton as PlusIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './All.module.scss';
 
 export const All = () => {
-  const transactionList = Hook.getFromLocalStorage('expenseList'); // 로컬스토리지에 저장된 데이터 렌더링
+  const transactionList = useRecoilValue(AMain.defaultTransactionListState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
   const setClickedIndex = useSetRecoilState(
     AIndex.clickedTransactionIndexState
@@ -18,7 +18,7 @@ export const All = () => {
     setOpenModal('addModal');
   };
 
-  const openDetailModal = (id: string, date: Date) => {
+  const openDetailModal = (id: string, date: string) => {
     setClickedIndex(id);
     setSelectedDate(date);
     setAllTotalExpense('all');
@@ -42,7 +42,7 @@ export const All = () => {
           transactionList?.map(({ id, date, lists }) => (
             <li key={id} className={styles.expenseItem}>
               <div className={styles.header}>
-                <div className={styles.date}>{Hook.formatDate(date)}</div>
+                <div className={styles.date}>{date}</div>
               </div>
 
               <div

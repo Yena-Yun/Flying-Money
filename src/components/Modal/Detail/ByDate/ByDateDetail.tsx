@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AMain, AOpen, AIndex } from 'recoil/atom';
+import { AOpen, AIndex, AMain } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
 import { ModalLayout, Toast } from 'components/Modal';
 import { ItemList, TotalExpense, ActionButton } from '../DetailUI';
+import { Hook } from '~/utils';
 import styles from './ByDateDetail.module.scss';
 
 export const ByDateDetail = () => {
-  const isOpenToast = useRecoilValue(AOpen.isOpenDeleteExpenseToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
+  const isOpenToast = useRecoilValue(AOpen.isOpenDeleteExpenseToastState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
   const clickedListIndex = useRecoilValue(AIndex.clickedListIndexState);
   const setTotalExpense = useSetRecoilState(
@@ -19,8 +20,14 @@ export const ByDateDetail = () => {
     setTotalExpense();
   }, [clickedListIndex]);
 
-  const { lists } = transactionList.find(({ id }) => id === clickedIndex)!;
-  const { title, items } = lists.find(({ id }) => id === clickedListIndex)!;
+  const filteredList =
+    transactionList.find(({ id }) => id === clickedIndex) || null;
+
+  const filteredResult = filteredList
+    ? filteredList.lists.find(({ id }) => id === clickedListIndex)
+    : null;
+
+  const { title, items } = filteredResult || { title: '', items: [] };
 
   return (
     <>

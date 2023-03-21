@@ -8,11 +8,13 @@ const { persistAtom } = recoilPersist({
   storage: localStorage,
 });
 
-export const defaultTransactionListState = atom<TMain.TransactionType[]>({
-  key: 'defaultTransactionList',
-  default: [],
-  effects_UNSTABLE: [persistAtom],
-});
+export const defaultTransactionListState = atom<TMain.DefaultTransactionType[]>(
+  {
+    key: 'defaultTransactionList',
+    default: [],
+    effects_UNSTABLE: [persistAtom],
+  }
+);
 
 export const isValidateState = atom({
   key: '',

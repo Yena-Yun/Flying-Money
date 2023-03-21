@@ -59,17 +59,35 @@ export const setTransactionListSelector = selector({
       (transactionListItem) => transactionListItem.id !== addedTransaction.id
     );
 
+    /* 최종 데이터를 로컬스토리지에 저장 (이후 total 등의 연산에 쓰임) */
     const finalTransaction = [...filteredTransaction, addedTransaction];
 
+    saveToLocalStorage('transactionList', finalTransaction);
+    set(AMain.transactionListState, finalTransaction);
+
+    /* 날짜 형태를 변경한 데이터는 따로 저장 (for 렌더링) */
     const formatDateTransaction = finalTransaction.map((transaction) => ({
       ...transaction,
       date: Hook.formatDate(transaction.date),
     }));
 
-    /* 최종 데이터를 로컬스토리지에 저장 */
-    saveToLocalStorage('expenseList', formatDateTransaction);
+    saveToLocalStorage('formatDateList', formatDateTransaction);
 
     set(AMain.transactionListState, finalTransaction);
+  },
+});
+
+export const getDefaultTransactionSelector = selector({
+  key: 'getDefaultTransactionFromLocalStorage',
+  get: () => {},
+  set: ({ set }) => {
+    const transactionList = Hook.getFromLocalStorage('transactionList');
+    const formatDateList = Hook.getFromLocalStorage('formatDateList');
+
+    transactionList ? set(AMain.transactionListState, transactionList) : [];
+    formatDateList
+      ? set(AMain.defaultTransactionListState, formatDateList)
+      : [];
   },
 });
 
@@ -164,21 +182,22 @@ export const getTotalPerDateSelector = selector({
     return '';
   },
   set: ({ get, set }, flag) => {
-    const transactionList = get(AMain.transactionListState);
+    const transactionList = get(AMain.defaultTransactionListState);
     const allSelectedDate = get(ADate.allSelectedDateState);
     const byDateSelectedDate = get(ADate.byDateSelectedDateState);
 
-    const total = transactionList
-      .filter(({ date }) =>
-        DateFn.isSameDay(
-          date,
-          flag === 'all' ? allSelectedDate : byDateSelectedDate
-        )
-      )
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
-      )
-      .reduce((acc, cur) => acc + cur, 0);
+    const filteredList = transactionList.filter(({ date }) =>
+      flag === 'all' ? date === allSelectedDate : date === byDateSelectedDate
+    );
+
+    const total =
+      filteredList.length > 0
+        ? filteredList
+            .flatMap(({ lists }) =>
+              lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
+            )
+            .reduce((acc, cur) => acc + cur, 0)
+        : 0;
 
     flag === 'all'
       ? set(AMain.totalPerDateAllState, total)
@@ -190,15 +209,23 @@ export const getTotalPerListInByDateSelector = selector({
   key: 'getTotalPerListInByDate',
   get: () => {},
   set: ({ get, set }) => {
-    const transactionList = get(AMain.transactionListState);
+    const transactionList = get(AMain.defaultTransactionListState);
     const byDateSelectedDate = get(ADate.byDateSelectedDateState);
     const clickedListIndex = get(AIndex.clickedListIndexState);
 
-    const total = transactionList
-      .filter(({ date }) => DateFn.isSameDay(date, byDateSelectedDate))
-      .flatMap(({ lists }) => lists.filter(({ id }) => id === clickedListIndex))
-      .flatMap(({ items }) => items.flatMap(({ price }) => price))
-      .reduce((acc, cur) => acc + cur, 0);
+    const filteredList = transactionList.filter(
+      ({ date }) => date === byDateSelectedDate
+    );
+
+    const total =
+      filteredList.length > 0
+        ? filteredList
+            .flatMap(({ lists }) =>
+              lists.filter(({ id }) => id === clickedListIndex)
+            )
+            .flatMap(({ items }) => items.flatMap(({ price }) => price))
+            .reduce((acc, cur) => acc + cur, 0)
+        : 0;
 
     set(AMain.totalPerListState, total);
   },
@@ -211,15 +238,18 @@ export const getTotalPerMonthSelector = selector({
     const transactionList = get(AMain.transactionListState);
     const startDate = get(ADate.byWeekStartDateState);
 
-    const selectedMonth = transactionList.filter(({ date }) =>
+    const filteredList = transactionList.filter(({ date }) =>
       DateFn.isSameMonth(date, startDate)
     );
 
-    const monthTotal = selectedMonth
-      .flatMap(({ lists }) =>
-        lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
-      )
-      .reduce((acc, cur) => acc + cur, 0);
+    const monthTotal =
+      filteredList.length > 0
+        ? filteredList
+            .flatMap(({ lists }) =>
+              lists.flatMap(({ items }) => items.flatMap(({ price }) => price))
+            )
+            .reduce((acc, cur) => acc + cur, 0)
+        : 0;
 
     set(AMain.totalPerMonthState, monthTotal);
   },
@@ -262,9 +292,11 @@ export const deleteListSelector = selector({
     const index = get(AIndex.clickedTransactionIndexState);
     const listIndex = get(AIndex.clickedListIndexState);
 
-    const deletedList = transactionList
-      .find(({ id }) => id === index)!
-      .lists.filter(({ id }) => id !== listIndex)!;
+    const filteredList = transactionList.find(({ id }) => id === index) || null;
+
+    const deletedList = filteredList
+      ? filteredList.lists.filter(({ id }) => id !== listIndex)
+      : [];
 
     if (deletedList.length > 0) {
       const deletedTransaction = transactionList.map((transaction) => {
@@ -293,7 +325,7 @@ export const deleteTransactionSelector = selector({
     const transactionList = get(AMain.transactionListState);
     const index = get(AIndex.clickedTransactionIndexState);
 
-    const deletedList = transactionList.filter(({ id }) => id !== index);
+    const deletedList = transactionList?.filter(({ id }) => id !== index);
 
     set(AMain.transactionListState, deletedList);
   },
