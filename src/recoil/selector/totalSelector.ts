@@ -13,7 +13,9 @@ export const getTotalPerDateSelector = selector({
     const byDateSelectedDate = get(ADate.byDateSelectedDateState);
 
     const filteredList = transactionList.filter(({ date }) =>
-      flag === 'all' ? date === allSelectedDate : date === byDateSelectedDate
+      flag === 'byAll'
+        ? DateFn.isSameDay(date, allSelectedDate)
+        : DateFn.isSameDay(date, byDateSelectedDate)
     );
 
     const total =

@@ -14,8 +14,8 @@ export const ByDate = () => {
   const setClickedListIndex = useSetRecoilState(AIndex.clickedListIndexState);
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
-  const { id: index, lists } = transactionList.filter(
-    ({ date }) => selectedDate === date
+  const { id: index, lists } = transactionList.filter(({ date }) =>
+    DateFn.isSameDay(selectedDate, date)
   )[0] || { id: '', lists: [] };
 
   const openDetailModal = (id: string) => {
