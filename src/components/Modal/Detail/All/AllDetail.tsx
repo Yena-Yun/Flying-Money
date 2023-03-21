@@ -5,6 +5,9 @@ import { ItemList, TotalExpense, ActionButton } from '../DetailUI';
 import { Hook } from 'utils';
 import styles from './AllDetail.module.scss';
 
+/* 하위 컴포넌트에 전달할 'role' prop 상수 */
+const ROLE = 'byAll';
+
 export const AllDetail = () => {
   const isOpenToast = useRecoilValue(AOpen.isOpenDeleteByAllToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
@@ -16,8 +19,8 @@ export const AllDetail = () => {
 
   return (
     <>
-      {isOpenToast && <Toast role='byAll' />}
-      <ModalLayout role='byAll'>
+      {isOpenToast && <Toast role={ROLE} />}
+      <ModalLayout role={ROLE}>
         <div className={styles.date}>{Hook.formatDate(date)}</div>
         <div className={styles.mainContainer}>
           {lists.map(({ id, title, items }) => (
@@ -27,8 +30,8 @@ export const AllDetail = () => {
             </div>
           ))}
         </div>
-        <TotalExpense where='byAll' />
-        <ActionButton role='byAll' />
+        <TotalExpense role={ROLE} />
+        <ActionButton role={ROLE} />
       </ModalLayout>
     </>
   );
