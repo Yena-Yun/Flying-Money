@@ -23,60 +23,124 @@ git clone -> yarn install -> yarn start
 * 각 지출별로 여러 개의 항목 등록 가능
 * Main 화면에 지출에 대한 경각심을 일깨우는 랜덤 문구 등장
 
-## 📘 데이터 설계
+## 📘 주요 상태 데이터
 ```
 const TransactionType = {
   id: string;
   date: Date;
-  lists: ListType[]; // 해당 날짜의 지출 내역 리스트
+  lists: ListType[]; // 해당 날짜의 지출 리스트
 };
 
+// 해당 날짜의 지출 리스트
 const ListType = {
   id: string;
-  title: string; // 지출 내역의 제목
-  items: ItemType[]; // 지출한 상품과 서비스 항목 (배열)
-  diaries?: string[]; // 그날 있었던 일 간단 기록 (문자열 배열, optional)
+  title: string; // 지출 제목
+  items: ItemType[]; // 세부 지출 항목 리스트
+  diaries?: string[]; // 그날 있었던 일 간단 기록 (optional, 구현 예정)
 };
 
+ // 세부 지출 항목 리스트
 const ItemType = {
   id: string;
-  name: string; // 항목의 상품/서비스명
-  price: number; // 항목의 금액
+  name: string; // 세부 항목명
+  price: number; // 세부 항목의 지출액
   tag: string; // 항목 분류 태그: 까페, 밥, 화장품, 옷 등 (작성자가 직접 태그 등록)
-  description?: string; // 항목별 간단 기록 (소감, 알게 된 점 등)
+  description?: string; // 항목별 소감 및 기록 (optional, 구현 예정)
 };
 ```
 
-## 👠 구현 기능
-### 1차 MVP 
-1. 지출 등록
-2. 지출 조회 (전체, 주별, 일별, 태그별)
-3. 지출별 상세 확인 (Detail)
-4. 지출 수정 및 삭제
-5. 데이터 중 required 속성 우선 구현
+## 🍬 구현 기능
+* 데이터 depth: 총 3단계
+<img src="https://user-images.githubusercontent.com/68722179/226562127-84ae5106-3e9b-4409-b11c-78af04657fed.png" width='500'/>
+
+1. **새 지출항목 등록**
+<img src="https://user-images.githubusercontent.com/68722179/226583033-f2585e2c-ea79-4ace-bd74-26b618dd1c09.png" width='450'/>
+
+2. **탭별 조회** (전체 보기, 날짜별 보기)
+<img src="https://user-images.githubusercontent.com/68722179/226578461-78b72872-4ec3-4aeb-929e-43545dd5833f.png" width='450'/>
+
+3. **지출항목 상세 확인 모달**
+<img src="https://user-images.githubusercontent.com/68722179/226584845-ceafc8be-f517-408c-a6e7-60f988af6897.png" width='450'/>
+
+4. **커스텀 태그 등록**
+
+<img src="https://user-images.githubusercontent.com/68722179/226578099-028d3c6c-40cf-45aa-a198-af8dac4fa8c7.png" width='450'/>)
+
+5. **상세 모달에서 확인 및 삭제**
+<img src="https://user-images.githubusercontent.com/68722179/226578903-65887a45-52f4-4822-ad7e-0f3fdc9278cd.png" width='450'/>
+
+6.**캘린더 기능**<br/>
+* 총 2군데서 사용, 컴포넌트 모듈화하고 스타일은 prop으로 분기<br/>
+
+<img src="https://user-images.githubusercontent.com/68722179/226582636-f1a422dc-902e-47f4-a309-a7852c4aaff2.png" width='400'/>
 
 
-### 2차 MVP 
-1. optional 데이터 추가 구현 (diaries, description)
-2. 검색 엔진 최적화 (SEO)
+### 세부 기능
+* 같은 날짜로 추가할 경우 기존에 있던 날짜 항목 밑으로 들어감
+<img src="https://user-images.githubusercontent.com/68722179/226579850-32906b40-9807-4224-afd2-15caab3531ca.png" width='400'/>
+
+* 주별 탭에서 달 이동 시 해당 달의 week 수에 맞는 주차별 버튼 렌더링 <br/>
+예: 2023년 3월 (총 5주차) <br/>
+<img src="https://user-images.githubusercontent.com/68722179/226581022-bf8a0388-6637-4f88-9a36-b0f1559feadb.png" width='400'/>
+예: 2023년 4월 (총 6주차) <br/>
+<img src="https://user-images.githubusercontent.com/68722179/226581086-8def2194-847c-43b3-8061-31820eba5cbc.png" width='400'/>
 
 
-### for UX
-1. 새로고침 및 브라우저 종료 시에도 유지
-2. 알림 Toast (react-toastify)
+## 🧙‍♀️ UX를 위한 장치
+1. 등록된 커스텀 태그는 시간이 지나도 유지 (localStorage)
+2. debounce로 인풋 입력 최적화 (use-debounce)
+```
+// 선언
+const debounced = useDebouncedCallback(({ id, flag, value }) => {
+    setList({
+      id,
+      flag,
+      input: value,
+    });
+  }, 400);
+  
+// 사용
+  <Input
+     ...
+     onChange={(e) =>
+     debounced({
+       id,
+       flag: 'name',
+       value: e.target.value,
+    })
+   }
+ />
+```
+3. 제출 시 비어있는 입력란이 있으면 화면 상단 토스트 알림 (react-toastify)
+<img src="https://user-images.githubusercontent.com/68722179/226586966-0bab7157-5a5f-49c1-906c-8d8a9ed5e637.png" width='400'/>
 
-### 추가 예정
-1. 각 탭: 날짜별 정렬
-2. 태그별 탭: 그래프나 차트로 시각적 확인
+4. 원활한 앱 사용을 위한 가이드 문구 <br/>
+
+<img src="https://user-images.githubusercontent.com/68722179/226577742-e451654f-49de-499b-8431-686330105914.png" width='400'/> <br/>
+<img src="https://user-images.githubusercontent.com/68722179/226592909-621bf8d9-a37d-4636-8a41-488aa2f2fd81.png" width='400'/>
 
 
-## 🛍 모듈화
+5. 새 등록 모달에서 항목 추가 시 아래로 자동 스크롤 + 항목이 2개 이상일 때만 오른쪽에 '-' 버튼 렌더링
+<img src="https://user-images.githubusercontent.com/68722179/226580631-f1ed00cc-d158-4623-a17a-463d5ec94667.png" width='400'/>
+
+```
+  useEffect(() => {
+    if (list.length < 2) return;
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [list]);
+```
 
 
-1. recoil 관련 import문
-[ 수정 전 ]
-* 라이브러리 패키지 recoil과 로컬 recoil 폴더가 잘 구분되지 않음 (2번째 줄부터는 로컬 recoil 폴더)
-* recoil 폴더에서 atom이나 selector를 가져올 때마다 **매번 import 라인이 추가됨**
+## 🛍 파일/폴더 모듈화
+* 수많은 atom과 selector를 각각의 역할에 따라 파일 분리
+<img src="https://user-images.githubusercontent.com/68722179/226563795-c8566a16-592a-4242-9752-0bd8473309a4.png" width='200' />
+
+* 내보내기 예시
+<img src="https://user-images.githubusercontent.com/68722179/226566405-2d2d13d8-8465-4e7b-9298-9af12cedeee5.png" width='400' />
+
+[ 위와 같이 수정하기 전 ]
+* **라이브러리 recoil과 로컬 recoil 폴더가 잘 구분되지 않음**
+* recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
 * 구체적인 이름을 위해 **긴 변수명**을 사용하는 과정에서 **각 atom과 selector가 어떤 역할인지 잘 인지되지 않음**
 
 ```
@@ -85,19 +149,15 @@ import { addModalDateState } from 'recoil';
 import { toggleCalendarSelector } from 'recoil';
 ```
 
-[ 이후 ]
-* 로컬 recoil 폴더에서 atom과 selector 폴더로 한번 더 나눔 -> **import한 것의 출처가 atom인지 selector인지 분명해짐**
-* **패키지 recoil과 로컬 recoil 폴더가 확실히 구분됨**
-* atom과 selector들을 **용도에 맞는 이름**으로 한번 더 나눠서 export -> **import한 파일 내에서 용도가 직관적으로 식별됨** <br/>
-예: atom의 ADate(날짜 관련 atom), AOpen(모달/팝업 여닫기 관련 atom)<br/>
-예: selector의 SMain(transaction 등 주요 데이터를 변경하는 selector)
+[ 수정 후 ]
+* **역할과 관련된 이름**으로 내보내서 **컴포넌트 파일에서 역할이 잘 인지됨**
+* 라이브러리 recoil과 로컬 recoil 폴더가 확실히 구분됨
+* 해당 이름이 이미 import 되어 있을 경우 import 라인이 매번 추가되지 않음
 ```
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ADate, AOpen } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
 ```
-
-## 🌊 [Velog 구현 상세 기록](https://velog.io/@yena1025/Flying-Money-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%ED%98%84-%EA%B8%B0%EB%A1%9D)
 
 ## 📚 폴더 구조
 
