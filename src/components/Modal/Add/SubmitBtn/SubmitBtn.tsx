@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { AMain } from 'recoil/atom';
-import { SMain, SOpen } from 'recoil/selector';
+import { SDate, SMain, SOpen, STotal } from 'recoil/selector';
 import { Hook, Const } from 'utils';
 import styles from './SubmitBtn.module.scss';
 
@@ -17,14 +17,14 @@ export const SubmitBtn = () => {
   const setTransactionToTransactionList = useSetRecoilState(
     SMain.setTransactionListSelector
   );
-  const setTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const setTotalExpense = useSetRecoilState(STotal.getTotalPerDateSelector);
 
   const resetItems = useResetRecoilState(AMain.itemState);
   const resetList = useResetRecoilState(AMain.listState);
   const resetTransaction = useResetRecoilState(AMain.transactionState);
 
   const setCurrentDateToAddModal = useSetRecoilState(
-    SMain.setCurrentDateToAddModalSelector
+    SDate.setCurrentDateToAddModalSelector
   );
   const setCloseModal = useSetRecoilState(SOpen.toggleModalSelector);
 

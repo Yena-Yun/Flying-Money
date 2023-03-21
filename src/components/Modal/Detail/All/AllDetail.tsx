@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { AMain, AOpen, AIndex } from 'recoil/atom';
+import { AOpen, AIndex, AMain } from 'recoil/atom';
 import { ModalLayout, Toast } from 'components/Modal';
 import { ItemList, TotalExpense, ActionButton } from '../DetailUI';
 import { Hook } from 'utils';

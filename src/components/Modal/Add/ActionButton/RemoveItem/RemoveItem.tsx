@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, AUtil } from '~/recoil/atom';
-import { addOrDeleteItemInAddModalSelector } from 'recoil/selector/mainSelector';
+import { SModal } from '~/recoil/selector';
 import { HiOutlineMinusCircle as MinusIcon } from 'react-icons/hi2';
 import styles from './RemoveItem.module.scss';
 
@@ -12,7 +12,7 @@ export const RemoveItem = ({ index }: RemoveItemProp) => {
   const setAddedCount = useSetRecoilState(AUtil.addedInputGroupCountState);
   const list = useRecoilValue(AMain.addModalListState);
   const setAddOrDeleteItem = useSetRecoilState(
-    addOrDeleteItemInAddModalSelector
+    SModal.addOrDeleteItemInAddModalSelector
   );
 
   const removeItemHandler = () => {

@@ -1,8 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AMain, ADate, AIndex } from 'recoil/atom';
+import { ADate, AIndex, AMain } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
-import { Hook } from 'utils';
+import { DateFn, Hook } from 'utils';
 import styles from './ByDate.module.scss';
 
 export const ByDate = () => {
@@ -15,8 +15,7 @@ export const ByDate = () => {
   const setOpenModal = useSetRecoilState(SOpen.toggleModalSelector);
 
   const { id: index, lists } = transactionList.filter(
-    ({ date }) =>
-      selectedDate.toString().slice(0, 15) === date.toString().slice(0, 15)
+    ({ date }) => selectedDate === date
   )[0] || { id: '', lists: [] };
 
   const openDetailModal = (id: string) => {

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useDebouncedCallback } from 'use-debounce';
 import { AIndex, AMain, AOpen, AUtil } from 'recoil/atom';
-import { SMain, SOpen } from '~/recoil/selector';
+import { SMain, SModal, SOpen } from '~/recoil/selector';
 import { Date } from './Date/Date';
 import { SubmitBtn } from './SubmitBtn/SubmitBtn';
 import { Input } from '~/components/Shared/Input/Input';
@@ -19,9 +19,9 @@ export const AddModal = () => {
   const isOpenCalender = useRecoilValue(AOpen.isOpenAddCalendarState);
   const addedCount = useRecoilValue(AUtil.addedInputGroupCountState);
 
-  const setTitle = useSetRecoilState(SMain.addModalTitleSelector);
+  const setTitle = useSetRecoilState(SModal.addModalTitleSelector);
   const list = useRecoilValue(AMain.addModalListState);
-  const setList = useSetRecoilState(SMain.addModalListSelector);
+  const setList = useSetRecoilState(SModal.addModalListSelector);
   const saveTagGroup: TagType[] = getFromLocalStorage('savedTagGroup') || [];
 
   const setClickedTagPopupIndex = useSetRecoilState(

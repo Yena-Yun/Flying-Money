@@ -1,13 +1,13 @@
 import { useSetRecoilState } from 'recoil';
 import { AUtil } from '~/recoil/atom';
-import { addOrDeleteItemInAddModalSelector } from 'recoil/selector/mainSelector';
+import { SModal } from '~/recoil/selector';
 import { PlusButton as PlusIcon } from 'components/Icons';
 import styles from './AddItem.module.scss';
 
 export const AddItem = () => {
   const setAddedCount = useSetRecoilState(AUtil.addedInputGroupCountState);
   const setAddOrDeleteItem = useSetRecoilState(
-    addOrDeleteItemInAddModalSelector
+    SModal.addOrDeleteItemInAddModalSelector
   );
 
   const addItemHandler = () => {

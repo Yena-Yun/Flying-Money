@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AMain, AIndex, ADate } from 'recoil/atom';
-import { SMain, SOpen } from 'recoil/selector';
+import { AIndex, ADate, AMain } from 'recoil/atom';
+import { SOpen, STotal } from 'recoil/selector';
 import { PlusButton as PlusIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './All.module.scss';
@@ -12,7 +12,7 @@ export const All = () => {
     AIndex.clickedTransactionIndexState
   );
   const setSelectedDate = useSetRecoilState(ADate.allSelectedDateState);
-  const setAllTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const setAllTotalExpense = useSetRecoilState(STotal.getTotalPerDateSelector);
 
   const openAddModal = () => {
     setOpenModal('addModal');
@@ -28,7 +28,7 @@ export const All = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.expenseItemList}>
-        {transactionList.length < 1 ? (
+        {!transactionList ? (
           <div className={styles.defaultContainer}>
             <figure className={styles.defaultImageContainer}>
               <img src={'/svgs/default.svg'} alt='default' />
@@ -39,7 +39,7 @@ export const All = () => {
             </p>
           </div>
         ) : (
-          transactionList.map(({ id, date, lists }) => (
+          transactionList?.map(({ id, date, lists }) => (
             <li key={id} className={styles.expenseItem}>
               <div className={styles.header}>
                 <div className={styles.date}>{Hook.formatDate(date)}</div>

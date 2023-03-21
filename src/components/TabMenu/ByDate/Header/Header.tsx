@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AMain, AOpen, ADate } from 'recoil/atom';
-import { SMain, SOpen, SDate } from 'recoil/selector';
+import { SOpen, SDate, STotal } from 'recoil/selector';
 import { Calendar } from 'components/Calendar/Calendar';
 import { CalendarIcon } from 'components/Icons';
 import { Hook } from 'utils';
@@ -12,12 +12,12 @@ export const Header = () => {
   const isOpenCalender = useRecoilValue(AOpen.isOpenByDateCalendarState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
+  const transactionList = useRecoilValue(AMain.transactionListState);
   const selectedDate = useRecoilValue(ADate.byDateSelectedDateState);
   const setSelectDate = useSetRecoilState(SDate.selectedByDateDateSelector);
-  const transactionList = useRecoilValue(AMain.transactionListState);
 
   const dateTotalExpense = useRecoilValue(AMain.totalPerDateByDateState);
-  const setDateTotalExpense = useSetRecoilState(SMain.getTotalPerDateSelector);
+  const setDateTotalExpense = useSetRecoilState(STotal.getTotalPerDateSelector);
 
   useEffect(() => {
     setDateTotalExpense('byDate');
