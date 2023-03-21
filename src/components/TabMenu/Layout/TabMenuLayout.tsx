@@ -61,7 +61,7 @@ export const TabMenu = () => {
           />
         }
       >
-        {clickedTabName === 'all' ? (
+        {clickedTabName === 'byAll' ? (
           <All />
         ) : clickedTabName === 'byWeek' ? (
           <ByWeek />

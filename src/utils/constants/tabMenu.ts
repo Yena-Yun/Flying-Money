@@ -5,7 +5,7 @@ export const TAB_MENU: {
   name: TTab.TabMenuStringType;
 }[] = [
   {
-    id: 'all',
+    id: 'byAll',
     name: '전체',
   },
   {

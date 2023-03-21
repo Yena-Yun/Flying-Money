@@ -23,7 +23,7 @@ export const deleteTagIndexState = atom({
 
 export const clickedTabNameState = atom<TTab.TabMenuIdType>({
   key: 'clickedTabName',
-  default: 'all',
+  default: 'byAll',
 });
 
 export const weekButtonIndexState = atom({

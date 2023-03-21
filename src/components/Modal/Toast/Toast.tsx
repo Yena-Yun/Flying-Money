@@ -27,7 +27,7 @@ export const Toast = ({ role }: ToastProp) => {
       setDeleteTransaction();
     } else if (role === 'byDate') {
       setDeleteList();
-    } else if (role === 'deleteTag') {
+    } else if (role === 'tag') {
       setSavedTagGroup((savedTagGroup) =>
         savedTagGroup.filter(({ id }) => id !== deleteTagIndex)
       );
@@ -46,17 +46,17 @@ export const Toast = ({ role }: ToastProp) => {
         <div
           className={classNames(
             styles.popup,
-            role === 'deleteTag' && styles.deleteTag
+            role === 'tag' && styles.deleteTag
           )}
         >
           <p className={styles.deleteGuide}>
-            {role === 'deleteTag'
+            {role === 'tag'
               ? TOAST_PHRASES.deleteTag.line1
               : role.includes('by')
               ? TOAST_PHRASES.deleteExpense.line1
               : ''}
             <br />
-            <span>{role === 'deleteTag' && TOAST_PHRASES.deleteTag.line2}</span>
+            <span>{role === 'tag' && TOAST_PHRASES.deleteTag.line2}</span>
             {role.includes('by') && TOAST_PHRASES.deleteExpense.line2}
           </p>
           <button className={styles.deleteButton} onClick={toastButtonHandler}>

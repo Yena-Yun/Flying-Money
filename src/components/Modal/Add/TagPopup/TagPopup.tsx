@@ -9,6 +9,11 @@ export const TagPopup = () => {
   const setAddTagToItem = useSetRecoilState(SMain.addTagToItemSelector);
   const setCloseTagPopup = useSetRecoilState(SOpen.toggleModalSelector);
 
+  const selectTagHandler = (name: string) => {
+    setAddTagToItem(name);
+    setCloseTagPopup('tagPopup');
+  };
+
   return (
     <>
       <ModalLayout role='tagPopup'>
@@ -26,10 +31,7 @@ export const TagPopup = () => {
                 <div
                   key={id}
                   className={styles.tagWrap}
-                  onClick={() => {
-                    setAddTagToItem(name);
-                    setCloseTagPopup('tagPopup');
-                  }}
+                  onClick={() => selectTagHandler(name)}
                 >
                   {name}
                 </div>
