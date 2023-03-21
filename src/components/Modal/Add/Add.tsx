@@ -11,9 +11,9 @@ import { AddItem } from './ActionButton/AddItem/AddItem';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
 import { blockInvalidInput } from '~/utils/hooks';
-import styles from './Add.module.scss';
 import { getFromLocalStorage } from '~/utils/hooks/localStorage';
 import { TagType } from '~/types/mainType';
+import styles from './Add.module.scss';
 
 export const AddModal = () => {
   const isOpenCalender = useRecoilValue(AOpen.isOpenAddCalendarState);
@@ -36,12 +36,13 @@ export const AddModal = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [addedCount]);
 
-  const selectTagHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+  const openTagHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     setOpenTagPopup('tagPopup');
     setClickedTagPopupIndex(String(e.currentTarget.dataset.id));
     isOpenNewModal.current = true;
   };
 
+  /* 항목 인풋(name, price) 입력 시 debounce로 최적화 */
   const debounced = useDebouncedCallback(({ id, flag, value }) => {
     setList({
       id,
@@ -75,7 +76,7 @@ export const AddModal = () => {
             />
           </div>
 
-          {/* 항목 입력란 리스트 */}
+          {/* 항목 입력란 (name, price) */}
           <div className={styles.inputGroupWrap}>
             <label className={styles.subTitle}>항목</label>
             {list.map(({ id, tag }) => {
@@ -116,7 +117,7 @@ export const AddModal = () => {
                       <div
                         className={styles.tagOpenButton}
                         data-id={id}
-                        onClick={selectTagHandler}
+                        onClick={openTagHandler}
                       >
                         <div className={styles.tag}>
                           {!isOpenNewModal.current || !tag ? '태그 추가' : tag}
@@ -139,6 +140,7 @@ export const AddModal = () => {
           <div ref={bottomRef} />
         </div>
 
+        {/* '등록' 버튼 (최종 데이터 제출) */}
         <SubmitBtn />
       </form>
     </ModalLayout>
