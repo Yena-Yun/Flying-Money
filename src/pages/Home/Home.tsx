@@ -26,6 +26,8 @@ export const Home = () => {
       {isOpenTagModal && <ManageTag />}
       {isOpenTagPopup && <TagPopup />}
       {isOpenDeleteTagToast && <Toast role='deleteTag' />}
+      {isOpenDeleteTagToast && <Toast role='deleteByAll' />}
+      {isOpenDeleteTagToast && <Toast role='deleteByDate' />}
 
       <div className={styles.container}>
         <Header />

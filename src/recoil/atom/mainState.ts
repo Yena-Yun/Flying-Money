@@ -1,6 +1,15 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 import uuid4 from 'uuid4';
 import { TMain } from 'types';
+
+const { persistAtom } = recoilPersist();
+
+export const savedTagGroupState = atom<TMain.TagType[]>({
+  key: 'savedTagGroup',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
 
 export const isValidateState = atom({
   key: '',
@@ -43,11 +52,6 @@ export const transactionState = atom<TMain.TransactionType>({
 
 export const transactionListState = atom<TMain.TransactionType[]>({
   key: 'transactionList',
-  default: [],
-});
-
-export const savedTagGroupState = atom<TMain.TagType[]>({
-  key: 'savedTagGroup',
   default: [],
 });
 

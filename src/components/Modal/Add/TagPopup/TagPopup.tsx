@@ -3,12 +3,9 @@ import { AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import styles from './TagPopup.module.scss';
-import { getFromLocalStorage } from '~/utils/hooks/localStorage';
-import { TagType } from '~/types/mainType';
 
 export const TagPopup = () => {
-  // const savedTagGroup = useRecoilValue(AMain.savedTagGroupState);
-  const savedTagGroup: TagType[] = getFromLocalStorage('savedTagGroup');
+  const savedTagGroup = useRecoilValue(AMain.savedTagGroupState);
   const setAddTagToItem = useSetRecoilState(SMain.addTagToItemSelector);
   const setCloseTagPopup = useSetRecoilState(SOpen.toggleModalSelector);
 

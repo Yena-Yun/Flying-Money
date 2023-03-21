@@ -12,6 +12,8 @@ import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
 import { blockInvalidInput } from '~/utils/hooks';
 import styles from './Add.module.scss';
+import { getFromLocalStorage } from '~/utils/hooks/localStorage';
+import { TagType } from '~/types/mainType';
 
 export const AddModal = () => {
   const isOpenCalender = useRecoilValue(AOpen.isOpenAddCalendarState);
@@ -20,7 +22,7 @@ export const AddModal = () => {
   const setTitle = useSetRecoilState(SMain.addModalTitleSelector);
   const list = useRecoilValue(AMain.addModalListState);
   const setList = useSetRecoilState(SMain.addModalListSelector);
-  const saveTagGroup = useRecoilValue(AMain.savedTagGroupState);
+  const saveTagGroup: TagType[] = getFromLocalStorage('savedTagGroup') || [];
 
   const setClickedTagPopupIndex = useSetRecoilState(
     AIndex.clickedTagPopupIndexState
