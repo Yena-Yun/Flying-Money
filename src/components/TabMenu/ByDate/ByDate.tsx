@@ -22,7 +22,7 @@ export const ByDate = () => {
   const openDetailModal = (id: string) => {
     setClickedIndex(index);
     setClickedListIndex(id);
-    setOpenModal('byDateDetail');
+    setOpenModal('byDate');
   };
 
   return (

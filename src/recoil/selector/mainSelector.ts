@@ -168,7 +168,7 @@ export const getTotalPerDateSelector = selector({
       .filter(({ date }) =>
         DateFn.isSameDay(
           date,
-          flag === 'all' ? allSelectedDate : byDateSelectedDate
+          flag === 'byAll' ? allSelectedDate : byDateSelectedDate
         )
       )
       .flatMap(({ lists }) =>
@@ -176,7 +176,7 @@ export const getTotalPerDateSelector = selector({
       )
       .reduce((acc, cur) => acc + cur, 0);
 
-    flag === 'all'
+    flag === 'byAll'
       ? set(AMain.totalPerDateAllState, total)
       : set(AMain.totalPerDateByDateState, total);
   },

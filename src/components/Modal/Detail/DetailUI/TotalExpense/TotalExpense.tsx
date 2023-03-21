@@ -4,7 +4,7 @@ import { Hook } from 'utils';
 import styles from './TotalExpense.module.scss';
 
 type TotalExpenseProp = {
-  where: 'all' | 'byDate';
+  where: 'byAll' | 'byDate';
 };
 export const TotalExpense = ({ where }: TotalExpenseProp) => {
   const allTotal = useRecoilValue(AMain.totalPerDateAllState);
@@ -13,7 +13,7 @@ export const TotalExpense = ({ where }: TotalExpenseProp) => {
   return (
     <div className={styles.totalExpense}>
       <span>Total</span>&nbsp;
-      {Hook.formatMoney(where === 'all' ? allTotal : byDateTotal)}
+      {Hook.formatMoney(where === 'byAll' ? allTotal : byDateTotal)}
     </div>
   );
 };

@@ -21,8 +21,8 @@ export const All = () => {
   const openDetailModal = (id: string, date: Date) => {
     setClickedIndex(id);
     setSelectedDate(date);
-    setAllTotalExpense('all');
-    setOpenModal('allDetail');
+    setAllTotalExpense('byAll');
+    setOpenModal('byAll');
   };
 
   return (

@@ -23,9 +23,9 @@ export const Toast = ({ role }: ToastProp) => {
   const toastButtonHandler = () => {
     setCloseToast(role);
 
-    if (role === 'deleteExpenseAll') {
+    if (role === 'byAll') {
       setDeleteTransaction();
-    } else if (role === 'deleteExpenseByDetail') {
+    } else if (role === 'byDate') {
       setDeleteList();
     } else if (role === 'deleteTag') {
       setSavedTagGroup((savedTagGroup) =>
@@ -52,13 +52,12 @@ export const Toast = ({ role }: ToastProp) => {
           <p className={styles.deleteGuide}>
             {role === 'deleteTag'
               ? TOAST_PHRASES.deleteTag.line1
-              : role.includes('deleteExpense')
+              : role.includes('by')
               ? TOAST_PHRASES.deleteExpense.line1
               : ''}
             <br />
             <span>{role === 'deleteTag' && TOAST_PHRASES.deleteTag.line2}</span>
-            {role.includes('deleteExpense') &&
-              TOAST_PHRASES.deleteExpense.line2}
+            {role.includes('by') && TOAST_PHRASES.deleteExpense.line2}
           </p>
           <button className={styles.deleteButton} onClick={toastButtonHandler}>
             삭제

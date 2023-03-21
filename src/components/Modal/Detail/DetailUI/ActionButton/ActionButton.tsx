@@ -21,7 +21,7 @@ export const ActionButton = ({ role }: ActionButtonProp) => {
       </button>
       <button
         className={classNames(styles.actionButton, styles.deleteButton)}
-        onClick={() => setIsOpenToast('deleteExpense')}
+        onClick={() => setIsOpenToast(role)}
       >
         삭제
       </button>
