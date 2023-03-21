@@ -9,13 +9,14 @@ import styles from './AllDetail.module.scss';
 const ROLE = 'byAll';
 
 export const AllDetail = () => {
-  const isOpenToast = useRecoilValue(AOpen.isOpenDeleteByAllToastState);
   const transactionList = useRecoilValue(AMain.transactionListState);
+  const isOpenToast = useRecoilValue(AOpen.isOpenDeleteByAllToastState);
   const clickedIndex = useRecoilValue(AIndex.clickedTransactionIndexState);
 
-  const { date, lists } = transactionList.find(
-    ({ id }) => id === clickedIndex
-  )!;
+  const filteredList =
+    transactionList.find(({ id }) => id === clickedIndex) || null;
+
+  const { date, lists } = filteredList || { date: new Date(), lists: [] };
 
   return (
     <>

@@ -28,7 +28,7 @@ export const All = () => {
   return (
     <div className={styles.container}>
       <ul className={styles.expenseItemList}>
-        {!transactionList ? (
+        {transactionList.length < 1 ? (
           <div className={styles.defaultContainer}>
             <figure className={styles.defaultImageContainer}>
               <img src={'/svgs/default.svg'} alt='default' />

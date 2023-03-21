@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useDebouncedCallback } from 'use-debounce';
-import { AIndex, AMain, AOpen, AUtil } from 'recoil/atom';
+import { AIndex, AMain, AOpen } from 'recoil/atom';
 import { SModal, SOpen } from '~/recoil/selector';
 import { Date, SubmitBtn, AddItem, RemoveItem } from './AddUI';
 import { ModalLayout } from '../Layout/ModalLayout';
@@ -13,7 +13,6 @@ import styles from './Add.module.scss';
 
 export const AddModal = () => {
   const isOpenCalender = useRecoilValue(AOpen.isOpenAddCalendarState);
-  const addedCount = useRecoilValue(AUtil.addedInputGroupCountState);
 
   const setTitle = useSetRecoilState(SModal.addModalTitleSelector);
   const list = useRecoilValue(AMain.addModalListState);
@@ -28,9 +27,9 @@ export const AddModal = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (addedCount < 1) return;
+    if (list.length < 2) return;
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [addedCount]);
+  }, [list]);
 
   const openTagHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     setOpenTagPopup('tagPopup');
