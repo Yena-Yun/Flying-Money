@@ -6,7 +6,7 @@ import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { IoIosClose as DeleteTagIcon } from 'react-icons/io';
 import styles from './ManageTag.module.scss';
-import { saveToLocalStorage } from '~/utils/hooks/localStorage';
+import { saveToLocalStorage } from '~/hooks/localStorage';
 
 export const ManageTag = () => {
   const tagFormRef = useRef<HTMLFormElement>(null);

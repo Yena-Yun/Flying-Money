@@ -10,8 +10,8 @@ import { RemoveItem } from './ActionButton/RemoveItem/RemoveItem';
 import { AddItem } from './ActionButton/AddItem/AddItem';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Calendar } from 'components/Calendar/Calendar';
-import { blockInvalidInput } from '~/utils/hooks';
-import { getFromLocalStorage } from '~/utils/hooks/localStorage';
+import { blockInvalidInput } from '~/hooks';
+import { getFromLocalStorage } from '~/hooks/localStorage';
 import { TagType } from '~/types/mainType';
 import styles from './Add.module.scss';
 
