@@ -22,6 +22,8 @@ export const SubmitBtn = () => {
   const resetItems = useResetRecoilState(AMain.itemState);
   const resetList = useResetRecoilState(AMain.listState);
   const resetTransaction = useResetRecoilState(AMain.transactionState);
+  const resetModalTitle = useResetRecoilState(AMain.addModalTitleState);
+  const resetModalList = useResetRecoilState(AMain.addModalListState);
 
   const setCurrentDateToAddModal = useSetRecoilState(
     SDate.setCurrentDateToAddModalSelector
@@ -59,6 +61,8 @@ export const SubmitBtn = () => {
       resetItems();
       resetList();
       resetTransaction();
+      resetModalTitle();
+      resetModalList();
 
       setCurrentDateToAddModal();
       setCloseModal('addModal');
