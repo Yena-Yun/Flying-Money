@@ -30,9 +30,17 @@ export const All = () => {
       <ul className={styles.expenseItemList}>
         {transactionList.length < 1 ? (
           <div className={styles.defaultContainer}>
-            <figure className={styles.defaultImageContainer}>
-              <img src={'/svgs/default.svg'} alt='default' />
-            </figure>
+            <picture className={styles.defaultImageContainer}>
+              <source
+                srcSet='svgs/default.svg'
+                media='all and (min-width: 768px)'
+              />
+              <img
+                className={styles.defaultImage}
+                src='svgs/default.svg'
+                alt='default'
+              />
+            </picture>
             <p className={styles.defaultGuide}>
               새 항목을 등록하기 전 <br />
               사용할 태그를 먼저 등록해주세요!

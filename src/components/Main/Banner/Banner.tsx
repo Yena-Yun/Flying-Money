@@ -10,9 +10,19 @@ export const Banner = () => {
       <div className={styles.titleHeader}>
         <h1 className={styles.title}>Flying Money</h1>
       </div>
-      <figure className={styles.mainImageContainer}>
-        <img src={'/images/flying_money.png'} alt='main' />
-      </figure>
+      <picture className={styles.mainImageContainer}>
+        <source
+          type='image/webp'
+          srcSet='images/logo.webp'
+          media='all and (min-width: 768px)'
+        />
+        <source
+          type='image/webp'
+          srcSet='images/logo.jpg'
+          media='all and (min-width: 768px)'
+        />
+        <img className={styles.mainImage} src='images/logo.jpg' alt='logo' />
+      </picture>
       <div className={styles.randomPhrases}>
         <p>{line1}</p>
         <p>{line2}</p>

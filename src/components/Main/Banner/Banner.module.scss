@@ -15,11 +15,14 @@
   }
 
   .mainImageContainer {
-    width: 5.2rem;
+    width: 83px;
+    height: 83px;
     margin-bottom: 0.6rem;
 
-    img {
+    .mainImage {
       width: 100%;
+      height: 100%;
+      max-width: 100%;
     }
   }
 
