@@ -1,8 +1,8 @@
 import { SetterOrUpdater } from 'recoil';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import classNames from 'classnames';
+import { LeftArrowIcon, RightArrowIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './CalendarArrow.module.scss';
-import classNames from 'classnames';
 
 interface CalendarArrowProp {
   direction: string;
@@ -30,7 +30,7 @@ export const CalendarArrow = ({
       className={classNames(styles.arrow, separate && styles.separate)}
       onClick={arrowHandler}
     >
-      {direction === 'left' ? <BsChevronLeft /> : <BsChevronRight />}
+      {direction === 'left' ? <LeftArrowIcon /> : <RightArrowIcon />}
     </div>
   );
 };

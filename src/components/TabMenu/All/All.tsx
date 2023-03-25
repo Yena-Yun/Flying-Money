@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AIndex, ADate, AMain } from 'recoil/atom';
 import { SOpen, STotal } from 'recoil/selector';
-import { PlusButton as PlusIcon } from 'components/Icons';
+import { PlusIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './All.module.scss';
 
@@ -85,9 +85,11 @@ export const All = () => {
           ))
         )}
       </ul>
-      <button className={styles.addNewItemButton} onClick={openAddModal}>
-        <PlusIcon size='lg' />
-        <p>새 항목 등록하기</p>
+      <button className={styles.addNewItemButtonWrap} onClick={openAddModal}>
+        <div className={styles.addNewItemButton}>
+          <PlusIcon />
+        </div>
+        <p className={styles.addNewItemText}>새 항목 등록하기</p>
       </button>
     </div>
   );

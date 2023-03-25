@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil';
-import { SModal } from '~/recoil/selector';
-import { PlusButton as PlusIcon } from 'components/Icons';
+import { SModal } from 'recoil/selector';
+import { PlusIcon } from 'components/Icons';
 import styles from './AddItem.module.scss';
 
 export const AddItem = () => {
@@ -16,8 +16,10 @@ export const AddItem = () => {
   };
 
   return (
-    <div className={styles.addItemButton} onClick={addItemHandler}>
-      <PlusIcon />
+    <div className={styles.addItemButtonWrap} onClick={addItemHandler}>
+      <div className={styles.addItemButton}>
+        <PlusIcon />
+      </div>
       <div className={styles.addItemText}>항목 추가</div>
     </div>
   );

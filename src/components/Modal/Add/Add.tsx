@@ -2,13 +2,13 @@ import { useEffect, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useDebouncedCallback } from 'use-debounce';
 import { AIndex, AMain, AOpen } from 'recoil/atom';
-import { SModal, SOpen } from '~/recoil/selector';
+import { SModal, SOpen } from 'recoil/selector';
 import { Date, SubmitBtn, AddItem, RemoveItem } from './AddUI';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Input } from 'components/Shared';
 import { Calendar } from 'components/Calendar/Calendar';
-import { blockInvalidInput, getFromLocalStorage } from '~/hooks';
-import { TagType } from '~/types/mainType';
+import { blockInvalidInput, getFromLocalStorage } from 'hooks';
+import { TagType } from 'types/mainType';
 import styles from './Add.module.scss';
 
 export const AddModal = () => {

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useSetRecoilState } from 'recoil';
 import { SOpen } from 'recoil/selector';
-import { TFlag } from '~/types';
+import { TFlag } from 'types';
 import styles from './ActionButton.module.scss';
 
 interface ActionButtonProp {

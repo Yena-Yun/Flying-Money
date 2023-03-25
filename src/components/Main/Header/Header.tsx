@@ -1,4 +1,4 @@
-import { IoWifi, IoBatteryHalfOutline, IoCellular } from 'react-icons/io5';
+import { WifiIcon, BatteryIcon, CellularIcon } from 'components/Icons';
 import { Hook } from 'utils';
 import styles from './Header.module.scss';
 
@@ -8,13 +8,13 @@ export const Header = () => {
       <div className={styles.time}>{Hook.formatRootHeaderDate(new Date())}</div>
       <div className={styles.status}>
         <div className={styles.wifi}>
-          <IoWifi />
+          <WifiIcon />
         </div>
         <div className={styles.cellular}>
-          <IoCellular />
+          <BatteryIcon />
         </div>
         <div className={styles.battery}>
-          <IoBatteryHalfOutline />
+          <CellularIcon />
         </div>
       </div>
     </div>

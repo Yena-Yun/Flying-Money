@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AMain } from '~/recoil/atom';
-import { SModal } from '~/recoil/selector';
-import { HiOutlineMinusCircle as MinusIcon } from 'react-icons/hi2';
+import { AMain } from 'recoil/atom';
+import { SModal } from 'recoil/selector';
+import { MinusIcon } from 'components/Icons';
 import styles from './RemoveItem.module.scss';
 
 interface RemoveItemProp {
