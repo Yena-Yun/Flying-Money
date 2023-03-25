@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { DateFn } from '~/utils';
+import { DateFn } from 'utils';
 import { ADate, AIndex, AMain } from '../atom';
 
 export const getTotalPerDateSelector = selector({

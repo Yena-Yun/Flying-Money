@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { AMain } from 'recoil/atom';
 import { Hook } from 'utils';
-import { TTab } from '~/types';
+import { TTab } from 'types';
 import styles from './TotalExpense.module.scss';
 
 type TotalExpenseProp = {

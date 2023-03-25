@@ -4,7 +4,7 @@ import { AIndex, AMain } from 'recoil/atom';
 import { SMain, SOpen } from 'recoil/selector';
 import { TOAST_PHRASES } from 'utils/constants';
 import styles from './Toast.module.scss';
-import { TFlag } from '~/types';
+import { TFlag } from 'types';
 
 interface ToastProp {
   role: TFlag.ToastType;
