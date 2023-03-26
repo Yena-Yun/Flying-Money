@@ -7,8 +7,5 @@ export {
   isSameMonth,
   isSameDay,
   addDays,
-  isMonday,
-  isWithinInterval,
-  subDays,
   getWeeksInMonth,
 } from 'date-fns';
