@@ -1,7 +1,7 @@
 import { selector } from 'recoil';
 import uuid4 from 'uuid4';
-import { isSameDay } from 'date-fns';
 import { AMain, AIndex } from 'recoil/atom';
+import { DateFn } from 'utils';
 
 export const setItemToListSelector = selector({
   key: 'setItemToList',
@@ -43,7 +43,7 @@ export const setTransactionListSelector = selector({
     const transactionList = get(AMain.transactionListState);
 
     const selectedTransaction = transactionList.find(({ date }) =>
-      isSameDay(date, transaction.date)
+      DateFn.isSameDay(date, transaction.date)
     );
 
     const addedTransaction = !selectedTransaction
