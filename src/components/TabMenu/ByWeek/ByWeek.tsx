@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { AMain } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { Header } from './Header/Header';
-import { formatMoney } from 'hooks';
+import { formatMoney } from 'utils/hooks';
 import styles from './ByWeek.module.scss';
 
 export const ByWeek = () => {

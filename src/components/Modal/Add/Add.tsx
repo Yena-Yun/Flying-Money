@@ -7,7 +7,7 @@ import { Date, SubmitBtn, AddItem, RemoveItem } from './AddUI';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Input } from 'components/Shared';
 import { Calendar } from 'components/Calendar/Calendar';
-import { blockInvalidInput, getFromLocalStorage } from 'hooks';
+import { blockInvalidInput, getFromLocalStorage } from 'utils/hooks';
 import { TagType } from 'types/mainType';
 import styles from './Add.module.scss';
 

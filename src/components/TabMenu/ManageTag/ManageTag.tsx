@@ -6,7 +6,7 @@ import { SOpen } from 'recoil/selector';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 
 import styles from './ManageTag.module.scss';
-import { saveToLocalStorage } from 'hooks/localStorage';
+import { saveToLocalStorage } from 'utils/hooks/localStorage';
 
 export const ManageTag = () => {
   const tagFormRef = useRef<HTMLFormElement>(null);
