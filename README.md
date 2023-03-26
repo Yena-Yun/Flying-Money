@@ -2,6 +2,8 @@
 
 수기로 쓰는 가계부를 웹으로 만들어보는 토이 프로젝트
 
+### [Lighthouse 최적화 기록](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)
+
 <img src="https://user-images.githubusercontent.com/68722179/223064450-6ebde80c-3b4a-40f7-9943-8026a5ffc8e4.png" width='400' />
 
 ## 🧨 실행 방법
