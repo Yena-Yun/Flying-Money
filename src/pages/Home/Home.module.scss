@@ -1,16 +1,13 @@
 @import 'src/styles/mixins';
 
 .container {
-  @include flexbox-column;
-  position: relative;
   width: 375px;
-  min-height: 667px;
+  height: 667px;
   margin: 0 auto;
   border-radius: 1.5rem;
   background-color: var(--color-white);
-  transform: translateY(3%);
+  transform: translateY(10%);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  overflow-y: hidden;
 
   .innerContainer {
     flex: 1;

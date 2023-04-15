@@ -13,7 +13,7 @@
 
     .filterTabItem {
       padding: 0.5rem;
-      font-size: var(--text-size-md);
+      font-size: var(--text-size-lg);
       opacity: 1;
       cursor: pointer;
 
@@ -27,17 +27,18 @@
     }
 
     .manageTagButton {
-      margin-left: 5rem;
-      padding: 0.2rem 0.5rem;
-      font-size: var(--text-size-md);
-      color: var(--color-primary);
-      border: 2px solid var(--color-primary);
+      margin-left: 4rem;
+      margin-bottom: 0.2rem;
+      padding: 0.3rem 0.5rem;
+      font-size: var(--text-size-lg);
+      color: var(--color-dark-pink);
+      border: 2px solid var(--color-dark-pink);
       border-radius: 0.4rem;
       transition: all 0.2s ease-in;
 
       &:hover {
         color: var(--color-white);
-        background-color: var(--color-primary);
+        background-color: var(--color-dark-pink);
       }
     }
   }
