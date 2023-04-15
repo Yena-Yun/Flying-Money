@@ -26,7 +26,9 @@ export const ByWeek = () => {
             <h3 className={styles.subTitle}>Total</h3>
             <div className={styles.expense}>{formatMoney(weekTotal)}</div>
           </div>
-          <button className={styles.actionButton}>상세</button>
+          {weekTotal !== 0 && (
+            <button className={styles.actionButton}>상세</button>
+          )}
         </div>
 
         <div className={styles.weekDiary}>
