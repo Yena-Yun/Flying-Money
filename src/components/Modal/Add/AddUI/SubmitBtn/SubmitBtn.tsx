@@ -81,7 +81,7 @@ export const SubmitBtn = () => {
           />
         }
       >
-        등록
+        등록하기
       </Suspense>
     </button>
   );
