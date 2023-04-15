@@ -8,7 +8,7 @@
 
 ## 🧨 실행 방법
 ```
-git clone -> yarn install -> yarn start
+git clone -> yarn install -> yarn 
 ```
 
 ## 🪀 기술 스택
