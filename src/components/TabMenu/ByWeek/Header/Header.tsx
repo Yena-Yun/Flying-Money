@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate, AIndex } from 'recoil/atom';
@@ -18,6 +18,10 @@ export const Header = () => {
   const [clickedButtonIndex, setClickedButtonIndex] = useRecoilState(
     AIndex.weekButtonIndexState
   );
+
+  const handleWeekButton = (e: MouseEvent<HTMLLIElement>) => {
+    setClickedButtonIndex(Number(e.currentTarget.id));
+  };
 
   useEffect(() => {
     setMonthTotalExpense();
@@ -48,7 +52,7 @@ export const Header = () => {
               styles.weekButton,
               clickedButtonIndex === id && styles.clicked
             )}
-            onClick={(e) => setClickedButtonIndex(Number(e.currentTarget.id))}
+            onClick={handleWeekButton}
           >
             {weekNum}주차
           </li>
