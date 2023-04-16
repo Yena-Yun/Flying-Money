@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useDebouncedCallback } from 'use-debounce';
 import { AIndex, AMain, AOpen } from 'recoil/atom';
@@ -46,6 +46,17 @@ export const AddModal = () => {
     });
   }, 400);
 
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    { id, flag }: { id: string; flag: string }
+  ) => {
+    return debounced({
+      id,
+      flag,
+      value: e.target.value,
+    });
+  };
+
   return (
     <ModalLayout role='addModal'>
       {isOpenCalender && <Calendar tabName='add' />}
@@ -83,13 +94,7 @@ export const AddModal = () => {
                         name='name'
                         className={styles.nameInput}
                         placeholder='항목명'
-                        onChange={(e) =>
-                          debounced({
-                            id,
-                            flag: 'name',
-                            value: e.target.value,
-                          })
-                        }
+                        onChange={(e) => handleChange(e, { id, flag: 'name' })}
                       />
                     </div>
 
@@ -100,13 +105,7 @@ export const AddModal = () => {
                         className={styles.priceInput}
                         placeholder='가격'
                         onKeyDown={blockInvalidInput}
-                        onChange={(e) =>
-                          debounced({
-                            id,
-                            flag: 'price',
-                            value: e.target.value,
-                          })
-                        }
+                        onChange={(e) => handleChange(e, { id, flag: 'price' })}
                       />
 
                       <div
