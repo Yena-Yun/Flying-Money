@@ -1,10 +1,12 @@
 # 💸 Flying Money (플라잉 머니)
 
-수기로 쓰는 가계부를 웹으로 만들어보는 토이 프로젝트
+수기로 쓰던 가계부를 웹으로 만들어본 토이 프로젝트
 
-### [Lighthouse 최적화 기록 ✨](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)
 ### [Vercel 배포 🚀](flying-money.vercel.app)
-<img src="https://user-images.githubusercontent.com/68722179/223064450-6ebde80c-3b4a-40f7-9943-8026a5ffc8e4.png" width='400' />
+### [Lighthouse 최적화 기록 ✨](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)
+
+![녹화_2023_04_16_20_46_49_431](https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif)
+
 
 ## 🧨 실행 방법
 ```
