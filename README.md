@@ -2,10 +2,14 @@
 
 수기로 쓰던 가계부를 웹으로 만들어본 토이 프로젝트
 
-### [Vercel 배포 🚀](flying-money.vercel.app)
-### [Lighthouse 최적화 기록 ✨](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)
 
 ![녹화_2023_04_16_20_46_49_431](https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif)
+
+
+## ⛳ 관련 링크
+
+### [Vercel 배포 링크 🚀](flying-money.vercel.app)
+### [Lighthouse 최적화 기록 ✨](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)
 
 
 ## 🧨 실행 방법
@@ -54,8 +58,6 @@ const ItemType = {
 ```
 
 ## 🍬 구현 기능
-* 데이터 depth: 총 3단계
-<img src="https://user-images.githubusercontent.com/68722179/226562127-84ae5106-3e9b-4409-b11c-78af04657fed.png" width='500'/>
 
 1. **새 지출항목 등록**
 <img src="https://user-images.githubusercontent.com/68722179/226583033-f2585e2c-ea79-4ace-bd74-26b618dd1c09.png" width='450'/>
