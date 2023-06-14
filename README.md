@@ -2,9 +2,17 @@
 
 * 수기로 쓰던 가계부를 앱으로 제작
 * 태그 등록과 지출 등록 및 조회가 가능한 가계부 앱
+* **기획, 디자인, 개발, 배포를 모두 혼자서 진행** 🎉
 
 
 ![녹화_2023_04_16_20_46_49_431](https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif)
+
+
+
+## 🧨 프로젝트 실행 방법
+```
+git clone -> yarn install -> yarn 
+```
 
 
 ## ⛳ 관련 링크
@@ -12,11 +20,6 @@
 ### [Vercel 배포 링크 🚀](flying-money.vercel.app)
 ### [Lighthouse 최적화 기록 ✨](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)
 
-
-## 🧨 실행 방법
-```
-git clone -> yarn install -> yarn 
-```
 
 ## 🪀 기술 스택
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -164,161 +167,4 @@ import { toggleCalendarSelector } from 'recoil';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ADate, AOpen } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
-```
-
-## 📚 폴더 구조
-
-```
-📦src
- ┣ 📂components
- ┃ ┣ 📂Calendar
- ┃ ┃ ┣ 📂DateCells
- ┃ ┃ ┃ ┣ 📜DateCells.module.scss
- ┃ ┃ ┃ ┗ 📜DateCells.tsx
- ┃ ┃ ┣ 📂Header
- ┃ ┃ ┃ ┣ 📜CalendarHeader.module.scss
- ┃ ┃ ┃ ┗ 📜CalendarHeader.tsx
- ┃ ┃ ┣ 📜Calendar.module.scss
- ┃ ┃ ┗ 📜Calendar.tsx
- ┃ ┣ 📂Icons
- ┃ ┃ ┣ 📂Calendar
- ┃ ┃ ┃ ┣ 📜Calendar.module.scss
- ┃ ┃ ┃ ┗ 📜Calendar.tsx
- ┃ ┃ ┣ 📂CalendarArrow
- ┃ ┃ ┃ ┣ 📜CalendarArrow.module.scss
- ┃ ┃ ┃ ┗ 📜CalendarArrow.tsx
- ┃ ┃ ┣ 📂PlusButton
- ┃ ┃ ┃ ┣ 📜PlusButton.module.scss
- ┃ ┃ ┃ ┗ 📜PlusButton.tsx
- ┃ ┃ ┗ 📜index.ts
- ┃ ┣ 📂Main
- ┃ ┃ ┣ 📂Banner
- ┃ ┃ ┃ ┣ 📜Banner.module.scss
- ┃ ┃ ┃ ┗ 📜Banner.tsx
- ┃ ┃ ┣ 📂Header
- ┃ ┃ ┃ ┣ 📜Header.module.scss
- ┃ ┃ ┃ ┗ 📜Header.tsx
- ┃ ┃ ┗ 📜index.ts
- ┃ ┣ 📂Modal
- ┃ ┃ ┣ 📂Add
- ┃ ┃ ┃ ┣ 📂ActionButton
- ┃ ┃ ┃ ┃ ┣ 📂AddItem
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AddItem.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜AddItem.tsx
- ┃ ┃ ┃ ┃ ┗ 📂RemoveItem
- ┃ ┃ ┃ ┃ ┃ ┣ 📜RemoveItem.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜RemoveItem.tsx
- ┃ ┃ ┃ ┣ 📂Date
- ┃ ┃ ┃ ┃ ┣ 📜Date.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜Date.tsx
- ┃ ┃ ┃ ┣ 📂SubmitBtn
- ┃ ┃ ┃ ┃ ┣ 📜SubmitBtn.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜SubmitBtn.tsx
- ┃ ┃ ┃ ┣ 📂TagPopup
- ┃ ┃ ┃ ┃ ┣ 📜TagPopup.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜TagPopup.tsx
- ┃ ┃ ┃ ┣ 📜Add.module.scss
- ┃ ┃ ┃ ┗ 📜Add.tsx
- ┃ ┃ ┣ 📂Detail
- ┃ ┃ ┃ ┣ 📂All
- ┃ ┃ ┃ ┃ ┣ 📜AllDetail.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜AllDetail.tsx
- ┃ ┃ ┃ ┣ 📂ByDate
- ┃ ┃ ┃ ┃ ┣ 📜ByDateDetail.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜ByDateDetail.tsx
- ┃ ┃ ┃ ┗ 📂DetailUI
- ┃ ┃ ┃ ┃ ┣ 📂ActionButton
- ┃ ┃ ┃ ┃ ┃ ┣ 📜ActionButton.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜ActionButton.tsx
- ┃ ┃ ┃ ┃ ┣ 📂ItemList
- ┃ ┃ ┃ ┃ ┃ ┣ 📜ItemList.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜ItemList.tsx
- ┃ ┃ ┃ ┃ ┣ 📂TotalExpense
- ┃ ┃ ┃ ┃ ┃ ┣ 📜TotalExpense.module.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜TotalExpense.tsx
- ┃ ┃ ┃ ┃ ┗ 📜index.ts
- ┃ ┃ ┣ 📂Layout
- ┃ ┃ ┃ ┣ 📜ModalLayout.module.scss
- ┃ ┃ ┃ ┗ 📜ModalLayout.tsx
- ┃ ┃ ┣ 📂Toast
- ┃ ┃ ┃ ┣ 📜Toast.module.scss
- ┃ ┃ ┃ ┗ 📜Toast.tsx
- ┃ ┃ ┗ 📜index.ts
- ┃ ┣ 📂RootToast
- ┃ ┃ ┗ 📜RootToast.tsx
- ┃ ┣ 📂Shared
- ┃ ┃ ┗ 📂Input
- ┃ ┃ ┃ ┗ 📜Input.tsx
- ┃ ┗ 📂TabMenu
- ┃ ┃ ┣ 📂All
- ┃ ┃ ┃ ┣ 📜All.module.scss
- ┃ ┃ ┃ ┗ 📜All.tsx
- ┃ ┃ ┣ 📂ByDate
- ┃ ┃ ┃ ┣ 📂Header
- ┃ ┃ ┃ ┃ ┣ 📜Header.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜Header.tsx
- ┃ ┃ ┃ ┣ 📜ByDate.module.scss
- ┃ ┃ ┃ ┗ 📜ByDate.tsx
- ┃ ┃ ┣ 📂ByWeek
- ┃ ┃ ┃ ┣ 📂Header
- ┃ ┃ ┃ ┃ ┣ 📜Header.module.scss
- ┃ ┃ ┃ ┃ ┗ 📜Header.tsx
- ┃ ┃ ┃ ┣ 📜ByWeek.module.scss
- ┃ ┃ ┃ ┗ 📜ByWeek.tsx
- ┃ ┃ ┣ 📂Layout
- ┃ ┃ ┃ ┣ 📜TabMenuLayout.module.scss
- ┃ ┃ ┃ ┗ 📜TabMenuLayout.tsx
- ┃ ┃ ┣ 📂ManageTag
- ┃ ┃ ┃ ┣ 📜ManageTag.module.scss
- ┃ ┃ ┃ ┗ 📜ManageTag.tsx
- ┃ ┃ ┗ 📜index.ts
- ┣ 📂hooks
- ┃ ┣ 📜blockInvalidInput.ts
- ┃ ┣ 📜changeMonth.ts
- ┃ ┣ 📜formatDate.ts
- ┃ ┣ 📜formatMoney.ts
- ┃ ┣ 📜index.ts
- ┃ ┣ 📜localStorage.ts
- ┃ ┗ 📜popupToast.ts
- ┣ 📂pages
- ┃ ┗ 📂Home
- ┃ ┃ ┣ 📜Home.module.scss
- ┃ ┃ ┗ 📜Home.tsx
- ┣ 📂recoil
- ┃ ┣ 📂atom
- ┃ ┃ ┣ 📜dateState.ts
- ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┣ 📜indexState.ts
- ┃ ┃ ┣ 📜mainState.ts
- ┃ ┃ ┣ 📜openState.ts
- ┃ ┃ ┗ 📜utilState.ts
- ┃ ┗ 📂selector
- ┃ ┃ ┣ 📜dateSelector.ts
- ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┣ 📜mainSelector.ts
- ┃ ┃ ┣ 📜modalSelector.ts
- ┃ ┃ ┣ 📜openSelector.ts
- ┃ ┃ ┗ 📜totalSelector.ts
- ┣ 📂styles
- ┃ ┣ 📜globals.scss
- ┃ ┗ 📜mixins.scss
- ┣ 📂types
- ┃ ┣ 📜flagType.ts
- ┃ ┣ 📜index.ts
- ┃ ┣ 📜mainType.ts
- ┃ ┗ 📜tabMenuType.ts
- ┣ 📂utils
- ┃ ┣ 📂constants
- ┃ ┃ ┣ 📜banner.ts
- ┃ ┃ ┣ 📜clickedIndex.ts
- ┃ ┃ ┣ 📜date.ts
- ┃ ┃ ┣ 📜index.ts
- ┃ ┃ ┣ 📜tabMenu.ts
- ┃ ┃ ┗ 📜toast.ts
- ┃ ┣ 📂libraries
- ┃ ┃ ┣ 📜dateFns.ts
- ┃ ┃ ┗ 📜index.ts
- ┃ ┗ 📜index.ts
- ┣ 📜App.tsx
- ┗ 📜main.tsx
 ```
