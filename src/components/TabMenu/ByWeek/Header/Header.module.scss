@@ -15,12 +15,12 @@
     .totalExpense {
       @include flexbox-row;
       margin-right: 1rem;
-      font-size: var(--text-size-md);
+      font-size: var(--text-size-sm);
       font-weight: var(--font-weight-bold);
       color: var(--color-blue);
 
       span {
-        font-size: var(--text-size-base);
+        font-size: var(--text-size-sm);
         color: var(--color-gray-4);
         font-weight: var(--font-weight-regular);
       }
@@ -29,11 +29,12 @@
 
   .weeksButtonWrap {
     @include flexbox;
-    gap: 0.5rem;
+    gap: 0.3rem;
     margin-bottom: 0.8rem;
 
     .weekButton {
       padding: 0.3rem 0.6rem;
+      font-size: var(--text-size-xs);
       color: var(--color-pink);
       border: 1.5px solid var(--color-pink);
       border-radius: 1rem;

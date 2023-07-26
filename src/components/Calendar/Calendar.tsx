@@ -2,7 +2,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { ADate } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
-import { CalendarHeader } from './Header/CalendarHeader';
+import { DateChanger } from './Header/DateChanger';
 import { DateCells } from './DateCells/DateCells';
 import { Const } from 'utils';
 import styles from './Calendar.module.scss';
@@ -29,10 +29,7 @@ export const Calendar = ({ mini, tabName }: CalendarProp) => {
 
       <div className={classNames(styles.container, mini && styles.mini)}>
         <div className={classNames(styles.innerContainer, mini && styles.mini)}>
-          <CalendarHeader
-            month={{ currentMonth, setCurrentMonth }}
-            mini={mini}
-          />
+          <DateChanger month={{ currentMonth, setCurrentMonth }} mini={mini} />
 
           <div className={classNames(styles.days, mini && styles.mini)}>
             {Const.DAYS.map((day, id) => (

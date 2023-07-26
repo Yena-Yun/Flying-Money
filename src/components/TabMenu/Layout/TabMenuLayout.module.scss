@@ -8,6 +8,7 @@
     @include flexbox-row(flex-start, center);
     width: 100%;
     gap: 0.2rem;
+    padding-bottom: 0.2rem;
     margin-bottom: 0.8rem;
     border-bottom: 2px solid var(--color-background);
 
@@ -27,8 +28,7 @@
     }
 
     .tagManageButton {
-      margin-left: 3.2rem;
-      margin-bottom: 0.2rem;
+      margin-left: 3.5rem;
       padding: 0.3rem 0.5rem;
       font-size: var(--text-size-sm);
       color: var(--color-dark-pink);

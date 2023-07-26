@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AMain, ADate, AIndex } from 'recoil/atom';
 import { STotal } from 'recoil/selector';
-import { CalendarHeader } from 'components/Calendar/Header/CalendarHeader';
+import { DateChanger } from 'components/Calendar/Header/DateChanger';
 import { DateFn, Hook } from 'utils';
 import styles from './Header.module.scss';
 
@@ -36,7 +36,7 @@ export const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <CalendarHeader month={{ currentMonth, setCurrentMonth }} separate />
+        <DateChanger month={{ currentMonth, setCurrentMonth }} separate />
         <div className={styles.totalExpense}>
           <span>Total</span>&nbsp;
           {Hook.formatMoney(monthTotal)}

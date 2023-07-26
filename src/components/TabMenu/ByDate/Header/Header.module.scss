@@ -5,9 +5,10 @@
 
   .header {
     @include flexbox-row(space-between, flex-start);
+    margin-bottom: 0.2rem;
 
     .period {
-      @include flexbox;
+      @include flexbox-row(flex-start, center);
       position: relative;
       gap: 0.5rem;
 
@@ -37,8 +38,8 @@
   }
 
   .guide {
-    margin-top: -0.3rem;
-    padding-left: 1.8rem;
+    padding-left: 1.4rem;
+    font-size: var(--text-size-sm);
     color: var(--color-gray-4);
   }
 }

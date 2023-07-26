@@ -9,6 +9,7 @@
 
   .subTitle {
     margin-bottom: 0.4rem;
+    font-size: var(--text-size-base);
   }
 
   .totalExpense {
@@ -25,6 +26,7 @@
   .weekDiary {
     @include flexbox-row(space-between, flex-start);
     width: 100%;
+    font-size: var(--text-size-base);
 
     .textarea {
       border: none;
@@ -37,14 +39,14 @@
     }
 
     .editedText {
-      font-size: var(--text-size-base);
+      font-size: var(--text-size-sm);
     }
   }
 
   .actionButton {
     width: 3rem;
     padding: 0.3rem 0.5rem;
-    font-size: var(--text-size-base);
+    font-size: var(--text-size-sm);
     color: var(--color-primary);
     border: 1px solid var(--color-primary);
     border-radius: 0.4rem;

@@ -2,9 +2,9 @@ import { SetterOrUpdater } from 'recoil';
 import classNames from 'classnames';
 import { CalendarArrow } from 'components/Icons';
 import { DateFn } from 'utils';
-import styles from './CalendarHeader.module.scss';
+import styles from './DateChanger.module.scss';
 
-interface CalendarHeaderProp {
+interface DateChangerProp {
   month: {
     currentMonth: Date;
     setCurrentMonth: SetterOrUpdater<Date>;
@@ -13,11 +13,11 @@ interface CalendarHeaderProp {
   separate?: boolean;
 }
 
-export const CalendarHeader = ({
+export const DateChanger = ({
   month: { currentMonth, setCurrentMonth },
   mini,
   separate,
-}: CalendarHeaderProp) => {
+}: DateChangerProp) => {
   return (
     <div
       className={classNames(
