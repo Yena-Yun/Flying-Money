@@ -31,7 +31,7 @@
       }
 
       .defaultGuide {
-        font-size: var(--text-size-lg);
+        font-size: var(--text-size-md);
         text-align: center;
       }
     }
@@ -48,18 +48,18 @@
 
         .date {
           margin-bottom: 0.2rem;
-          font-size: var(--text-size-md);
+          font-size: var(--text-size-base);
           color: var(--color-gray-4);
         }
 
         .totalExpense {
           @include flexbox-row;
-          font-size: var(--text-size-lg);
+          font-size: var(--text-size-md);
           font-weight: var(--font-weight-bold);
           color: var(--color-blue);
 
           span {
-            font-size: var(--text-size-md);
+            font-size: var(--text-size-base);
             color: var(--color-gray-4);
             font-weight: var(--font-weight-regular);
           }
@@ -79,7 +79,7 @@
             @include flexbox-column(center, flex-start);
 
             .title {
-              font-size: var(--text-size-md);
+              font-size: var(--text-size-base);
               font-weight: var(--font-weight-bold);
             }
 
@@ -106,7 +106,7 @@
           }
 
           .price {
-            font-size: var(--text-size-lg);
+            font-size: var(--text-size-md);
             font-weight: var(--font-weight-bold);
             color: var(--color-blue);
           }
@@ -131,12 +131,12 @@
     }
 
     .addNewItemButton {
-      font-size: var(--text-size-lg);
+      font-size: var(--text-size-md);
       color: var(--color-primary);
     }
 
     .addNewItemText {
-      font-size: var(--text-size-md);
+      font-size: var(--text-size-base);
       font-weight: var(--font-weight-semibold);
       color: var(--color-primary);
     }

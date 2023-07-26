@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
 
 :root {
   --color-primary: #7877b8;
@@ -22,17 +22,16 @@
   --font-weight-medium: 500;
   --font-weight-regular: 400;
 
+  --text-size-xxs: 10px;
   --text-size-xs: 12px;
   --text-size-sm: 14px;
   --text-size-base: 16px;
   --text-size-md: 18px;
   --text-size-lg: 20px;
-  --text-size-xl: 24px;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
 }
 
 html,
@@ -40,6 +39,7 @@ body,
 .content {
   width: 100%;
   height: 100vh;
+  margin: 0;
   overflow-wrap: break-word;
   background-color: var(--color-background);
 
@@ -53,9 +53,8 @@ body,
     border-radius: 10px;
   }
 
-  font-family: 'Nanum Pen Script', cursive, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
   -webkit-font-smoothing: antialiased;
 }
@@ -94,7 +93,6 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 button {
-  font-family: 'Nanum Pen Script';
   border: none;
   background: none;
   cursor: pointer;

@@ -21,7 +21,7 @@
 
       .title {
         margin-bottom: 0.8rem;
-        font-size: var(--text-size-md);
+        font-size: var(--text-size-base);
         font-weight: var(--font-weight-bold);
       }
 
@@ -50,7 +50,7 @@
         }
 
         .price {
-          font-size: var(--text-size-lg);
+          font-size: var(--text-size-md);
           font-weight: var(--font-weight-bold);
           color: var(--color-blue);
         }

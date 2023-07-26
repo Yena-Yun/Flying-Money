@@ -41,7 +41,7 @@
     .days {
       @include flexbox-row(space-between, center);
       padding: 0 0.6rem 0.7rem;
-      font-size: var(--text-size-sm);
+      font-size: var(--text-size-xs);
       font-weight: var(--font-weight-semibold);
 
       &.mini {
