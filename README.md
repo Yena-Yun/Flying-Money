@@ -15,20 +15,45 @@ git clone -> yarn install -> yarn dev
 ```
 
 ## 🍹  배운 점 & 구현 소감
-- 기획과 디자인을 무에서 유로 만드는 과정에서 **기획자와 디자이너 직군의 노고를 느낌**
-- '선 추상 후 구현'이라는 기치 아래 **주요 데이터 및 타입을 먼저 설계하고 시작**
-    - 사용할 상태 데이터에 대한 명확한 그림을 가지고 개발을 시작할 수 있었음
+- 코드 리팩토링
+1. 탭 선택에 따라 하단 컴포넌트를 다르게 렌더링
+```
+// BEFORE
+
+return (
+    {clickedTabName === 'byAll' ? (
+        <All />
+      ) : clickedTabName === 'byWeek' ? (
+        <ByWeek />
+      ) : clickedTabName === 'byDate' ? (
+        <ByDate />
+      ) : null}
+);
+```
+
+```
+// AFTER
+
+  const RENDER_BY_TAB = {
+    byAll: <All />,
+    byWeek: <ByWeek />,
+    byDate: <ByDate />,
+  };
+
+...
+return (
+    ...
+    {RENDER_BY_TAB[clickedTabName as keyof typeof RENDER_BY_TAB]}
+);
+```
+
+- '선 추상 후 구현'을 위해 **주요 데이터 및 타입을 먼저 설계하고 시작**
 - 색감에 신경 쓴 결과 화면을 보여준 지인에게서 **사이트의 색감이 예쁘다는 피드백을 받음**
-    - 색이 시각적인 면에서 직관적으로 다가오는 부분이라고 생각해서 색상 선정에 많은 고민을 한 보람을 느낌
-- **편리한 Recoil 전역 관리**
-    - 작업 중 전역으로 바꿔야 하는 상태가 새로 생기면 많은 boilerplate 코드 없이 atom으로 간편하게 추가 및 useRecoil~ 메서드로 바로 컴포넌트에 적용이 가능했음
-    - React와 호환이 잘 된다고 들어서 React를 사용한다면 Recoil 사용이 좋을 것 같다는 생각이 들었음
+- **Recoil 전역 관리**
 - **Vite를 도입해서 빌드 속도를 끌어올림**
-    - 새로운 기술을 접하고 좋은 점을 업무에 빨리 적용하려는 시도가 생산성 증진에 큰 도움이 되는 것을 느낌
-    - 실제 빌드 속도가 97.5% 빨라져서 이후 쾌적한 개발 진행
-- **Lighthouse 검사를 통한 성능 최적화** ([관련 기록](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D))🔗
-    - 검사 결과 분석을 통해 **문제를 정의**할 수 있었음
-    - 유저의 사용성에 큰 영향을 미치는 **원활한 렌더링과 초기 로딩 속도**를 위해 성능 최적화를 꼭 신경 써야겠다고 생각
+    - 빌드 속도가 97.5% 빨라져서 개발 생산성 증진에 큰 도움이 됨 
+- Lighthouse 성능 최적화
+    - [검사 결과 분석](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗을 통해 **문제를 구체적으로 정의**하고 해결
   
 
 ## 🪀 기술 스택
