@@ -1,7 +1,6 @@
-import { Suspense, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import classnames from 'classnames';
-import PulseLoader from 'react-spinners/PulseLoader';
 import { AOpen, AIndex } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
 import { All, ByDate, ByWeek } from 'components/TabMenu';
@@ -27,6 +26,12 @@ export const TabMenu = () => {
     setCloseByDateCalendar(false);
   };
 
+  const RENDER_BY_TAB = {
+    byAll: <All />,
+    byWeek: <ByWeek />,
+    byDate: <ByDate />,
+  };
+
   return (
     <section className={styles.showExpenseList}>
       <ul className={styles.filterTabList}>
@@ -44,31 +49,13 @@ export const TabMenu = () => {
           </li>
         ))}
         <button
-          className={styles.manageTagButton}
+          className={styles.tagManageButton}
           onClick={() => setOpenTagModal('tagModal')}
         >
           태그 관리
         </button>
       </ul>
-
-      <Suspense
-        /* API 로딩이 있다고 가정 */
-        fallback={
-          <PulseLoader
-            color='#83c7d5'
-            // loading={isLoading}
-            aria-label='loading-spinner'
-          />
-        }
-      >
-        {clickedTabName === 'byAll' ? (
-          <All />
-        ) : clickedTabName === 'byWeek' ? (
-          <ByWeek />
-        ) : clickedTabName === 'byDate' ? (
-          <ByDate />
-        ) : null}
-      </Suspense>
+      {RENDER_BY_TAB[clickedTabName as keyof typeof RENDER_BY_TAB]}
     </section>
   );
 };
