@@ -2,23 +2,29 @@
 
 .header {
   @include flexbox-row(space-between, center);
-  position: absolute;
-  top: 0;
   width: 100%;
-  padding: 0.5rem 1rem 0.3rem;
-  border-bottom: 0.8px solid var(--color-gray-3);
-  z-index: 10;
+  padding: 1.2rem 1rem 0.3rem;
 
-  .time {
-    font-weight: var(--font-weight-medium);
+  .logo {
+    @include flexbox;
+    gap: 0.3rem;
+
+    .logoIcon {
+      width: 1.5rem;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .title {
+      font-size: 0.9rem;
+      color: var(--color-gray-5);
+    }
   }
 
-  .status {
-    @include flexbox-row;
-    gap: 0.2rem;
-
-    .wifi {
-      margin-right: -0.1rem;
-    }
+  .search {
+    width: 1.2rem;
+    cursor: pointer;
   }
 }

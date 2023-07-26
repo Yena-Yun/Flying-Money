@@ -1,21 +1,16 @@
-import { WifiIcon, BatteryIcon, CellularIcon } from 'components/Icons';
-import { Hook } from 'utils';
 import styles from './Header.module.scss';
 
 export const Header = () => {
   return (
     <div className={styles.header}>
-      <div className={styles.time}>{Hook.formatRootHeaderDate(new Date())}</div>
-      <div className={styles.status}>
-        <div className={styles.wifi}>
-          <WifiIcon />
+      <div className={styles.logo}>
+        <div className={styles.logoIcon}>
+          <img src='images/logo.jpg' alt='logo' />
         </div>
-        <div className={styles.cellular}>
-          <BatteryIcon />
-        </div>
-        <div className={styles.battery}>
-          <CellularIcon />
-        </div>
+        <h1 className={styles.title}>Flying Money</h1>
+      </div>
+      <div className={styles.search}>
+        <img src='/search.svg' alt='search' />
       </div>
     </div>
   );

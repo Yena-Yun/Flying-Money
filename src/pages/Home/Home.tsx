@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { AOpen, AIndex } from 'recoil/atom';
-import { Banner, Header } from 'components/Main';
+import { Header } from 'components/Main';
 import { ManageTag, TabMenu } from 'components/TabMenu';
 import { AddModal, AllDetail, ByDateDetail } from 'components/Modal';
 import { TagPopup } from 'components/Modal/Add/AddUI';
@@ -28,7 +28,6 @@ export const Home = () => {
       <div className={styles.container}>
         <Header />
         <div className={styles.innerContainer}>
-          <Banner />
           <TabMenu />
         </div>
       </div>
