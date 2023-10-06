@@ -7,14 +7,14 @@ export const toggleModalSelector = selector({
     return 'addModal' || 'byAll' || 'byDate' || 'tagModal' || 'tagPopup';
   },
   set: ({ get, set }, flag) => {
-    const isOpenModal = get(A.isOpenAddModalState);
+    const isOpenAddModal = get(A.isOpenAddModalState);
     const isOpenDetailModal = get(A.isOpenAllDetailModalState);
     const isOpenByDateDetailModal = get(A.isOpenByDateDetailModalState);
     const isOpenTagModalState = get(A.isOpenTagModalState);
     const isOpenTagPopup = get(A.isOpenTagPopupState);
 
     if (flag === 'addModal') {
-      set(A.isOpenAddModalState, !isOpenModal);
+      set(A.isOpenAddModalState, !isOpenAddModal);
     } else if (flag === 'byAll') {
       set(A.isOpenAllDetailModalState, !isOpenDetailModal);
     } else if (flag === 'byDate') {
