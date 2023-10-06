@@ -22,13 +22,6 @@ export const ModalLayout = ({ role, children }: ModalLayoutProp) => {
 
   return (
     <>
-      {/* <div
-        className={classNames(
-          styles.popupBackground,
-          role === 'tagPopup' && styles.tagPopup
-        )}
-        onClick={handleClose}
-      ></div> */}
       <div
         className={classNames(
           styles.popupSection,
