@@ -4,6 +4,7 @@ import uuid4 from 'uuid4';
 import { AMain, AIndex } from 'recoil/atom';
 import { ModalLayout } from 'components/Modal/Layout/ModalLayout';
 import { saveToLocalStorage } from 'utils/hooks/localStorage';
+import { GrFormClose } from '@react-icons/all-files/gr/GrFormClose';
 import styles from './ManageTag.module.scss';
 
 export const ManageTag = () => {
@@ -40,23 +41,22 @@ export const ManageTag = () => {
   return (
     <>
       <ModalLayout role='tagModal'>
-        <h2 className={styles.title}>태그 관리</h2>
+        <h3 className={styles.title}>태그 관리</h3>
         <div className={styles.tagGroup}>
           {savedTagGroup.length > 0 ? (
             <>
               {savedTagGroup.map(({ id, name }) => (
-                <div
-                  key={id}
-                  className={styles.tagWrap}
-                  onClick={() => handleDeleteTag(id)}
-                >
-                  <div className={styles.tag}>{name}</div>
+                <div key={id} className={styles.tagWrap}>
+                  <span>{name}</span>
+                  <div className={styles.deleteTagButton}>
+                    <GrFormClose onClick={() => handleDeleteTag(id)} />
+                  </div>
                 </div>
               ))}
             </>
           ) : (
             <p className={styles.addNewTagGuide}>
-              등록하신 태그는 새 항목 등록하기에서 사용할 수 있어요!
+              등록하신 태그는 새 항목 등록 시 사용하실 수 있어요!
             </p>
           )}
         </div>
@@ -67,7 +67,7 @@ export const ManageTag = () => {
         >
           <input
             name='tag'
-            placeholder='엔터 키를 눌러 새 태그를 등록하세요.'
+            placeholder='엔터를 눌러 새 태그를 등록하세요.'
             autoFocus
           />
         </form>
