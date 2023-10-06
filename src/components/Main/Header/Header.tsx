@@ -9,9 +9,9 @@ export const Header = () => {
         </div>
         <h1 className={styles.title}>Flying Money</h1>
       </div>
-      <div className={styles.search}>
+      {/* <div className={styles.search}>
         <img src='/search.svg' alt='search' />
-      </div>
+      </div> */}
     </div>
   );
 };
