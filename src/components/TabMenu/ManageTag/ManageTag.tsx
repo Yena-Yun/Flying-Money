@@ -44,17 +44,15 @@ export const ManageTag = () => {
         <div className={styles.tagGroup}>
           {savedTagGroup.length > 0 ? (
             <>
-              {savedTagGroup.map(({ id, name }) => {
-                return (
-                  <div
-                    key={id}
-                    className={styles.tagWrap}
-                    onClick={() => handleDeleteTag(id)}
-                  >
-                    <div className={styles.tag}>{name}</div>
-                  </div>
-                );
-              })}
+              {savedTagGroup.map(({ id, name }) => (
+                <div
+                  key={id}
+                  className={styles.tagWrap}
+                  onClick={() => handleDeleteTag(id)}
+                >
+                  <div className={styles.tag}>{name}</div>
+                </div>
+              ))}
             </>
           ) : (
             <p className={styles.addNewTagGuide}>

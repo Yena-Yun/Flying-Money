@@ -3,6 +3,7 @@ import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import classNames from 'classnames';
 import { AOpen } from 'recoil/atom';
 import { SOpen } from 'recoil/selector';
+import { GrFormClose } from '@react-icons/all-files/gr/GrFormClose';
 import styles from './ModalLayout.module.scss';
 
 interface ModalLayoutProp {
@@ -21,19 +22,22 @@ export const ModalLayout = ({ role, children }: ModalLayoutProp) => {
 
   return (
     <>
-      <div
+      {/* <div
         className={classNames(
           styles.popupBackground,
           role === 'tagPopup' && styles.tagPopup
         )}
         onClick={handleClose}
-      ></div>
+      ></div> */}
       <div
         className={classNames(
           styles.popupSection,
           role === 'tagPopup' && styles.tagPopup
         )}
       >
+        <div className={styles.closeButton}>
+          <GrFormClose onClick={handleClose} />
+        </div>
         <div
           className={classNames(
             styles.popup,

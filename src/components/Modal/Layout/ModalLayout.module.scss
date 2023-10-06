@@ -25,6 +25,15 @@
   }
 }
 
+.closeButton {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  font-size: 24px;
+  z-index: 400;
+  cursor: pointer;
+}
+
 .popup {
   position: relative;
   width: 25rem;
