@@ -14,7 +14,7 @@
 
     .defaultContainer {
       @include flexbox-column;
-      margin: auto 0;
+      padding-top: 100px;
       opacity: 0.5;
 
       .defaultImageContainer {

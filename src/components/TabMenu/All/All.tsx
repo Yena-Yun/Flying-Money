@@ -42,7 +42,8 @@ export const All = () => {
               />
             </picture>
             <p className={styles.defaultGuide}>
-              '태그 관리'에서 태그를 먼저 등록 후 <br />새 항목을 등록해주세요!
+              상단 '태그 관리' 메뉴에서 <br /> 사용하실 태그를 먼저
+              등록해주세요!
             </p>
           </div>
         ) : (
