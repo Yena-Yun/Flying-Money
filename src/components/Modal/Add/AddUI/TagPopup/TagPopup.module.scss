@@ -6,14 +6,10 @@
 }
 
 .noTagGuide {
-  font-size: var(--text-size-base);
-  color: var(--color-gray-4);
+  margin-top: 2rem;
+  font-size: var(--text-size-sm);
+  color: var(--color-gray-3);
   text-align: center;
-
-  span {
-    font-size: var(--text-size-sm);
-    color: var(--color-gray-3);
-  }
 }
 
 .tagGroup {

@@ -21,6 +21,11 @@
   z-index: 250;
 
   &.tagPopup {
+    min-width: 22rem;
+    min-height: 12rem;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 350;
   }
 }

@@ -17,11 +17,11 @@ export const TagPopup = () => {
   return (
     <>
       <ModalLayout role='tagPopup'>
-        <h2 className={styles.title}>태그 추가</h2>
+        <h3 className={styles.title}>태그 추가</h3>
         {savedTagGroup.length < 1 && (
           <p className={styles.noTagGuide}>
-            등록된 태그가 없어요! <br />
-            <span>홈의 '태그 관리'에서 새로운 태그를 등록해주세요.</span>
+            홈 화면의 '태그 관리' 메뉴에서 <br />
+            사용하실 태그를 등록해주세요.
           </p>
         )}
         {savedTagGroup.length > 0 && (

@@ -62,9 +62,9 @@ export const AddModal = () => {
       {isOpenCalender && <Calendar tabName='add' />}
 
       <h2 className={styles.modalTitle}>항목 등록하기</h2>
-      <p className={styles.noTagGuide}>
+      {/* <p className={styles.noTagGuide}>
         {saveTagGroup.length < 1 && '등록하신 태그가 없어요!'}
-      </p>
+      </p> */}
 
       <form>
         <div className={styles.inputContainer}>
