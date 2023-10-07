@@ -14,9 +14,24 @@
 git clone -> yarn install -> yarn dev
 ```
 
-## 🍹  배운 점 & 구현 소감
-- 코드 리팩토링
-1. 탭 선택에 따라 하단 컴포넌트를 다르게 렌더링
+
+## ✨ 특징
+* **목표**: 수입과 관계 없이 **지출 줄이기에 집중 (지출만 기록)**
+* **일별, 주별, 태그별 지출 확인** 가능 
+* 각 지출별로 여러 개의 항목 등록 가능
+* 지출을 분류하기 위한 사용자 커스텀 태그 등록 가능
+* **눈이 편안하고 예쁜 UI**를 신경써서 적절한 색감 조합을 색상 사이트에서 골라 진행
+
+
+## 🚀 최적화 내역
+- **CRA를 Vite로 마이그레이션**
+    - 빌드 속도 97.5% 상승 (20초 -> 0.5초)
+- **Lighthouse 성능 최적화**
+    - 성능 점수 약 92% 상승 (48점 -> 92점)
+    - 해결 과정 [블로그 글](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗 참고
+
+## 🍹  리팩토링 내역
+- 분기문으로 각각의 컴포넌트를 렌더링하던 코드를 객체에 선언 후 `keyof typeof`를 활용하여 해당하는 컴포넌트를 렌더링하도록 리팩토링
 ```
 // BEFORE
 
@@ -47,15 +62,6 @@ return (
 );
 ```
 
-- '선 추상 후 구현'을 위해 **주요 데이터 및 타입을 먼저 설계하고 시작**
-- 색감에 신경 쓴 결과 화면을 보여준 지인에게서 **사이트의 색감이 예쁘다는 피드백을 받음**
-- **Recoil 전역 관리**
-- **Vite를 도입해서 빌드 속도를 끌어올림**
-    - 빌드 속도가 97.5% 빨라져서 개발 생산성 증진에 큰 도움이 됨 
-- Lighthouse 성능 최적화
-    - [검사 결과 분석](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗을 통해 **문제를 구체적으로 정의**하고 해결
-  
-
 ## 🪀 기술 스택
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
@@ -63,41 +69,7 @@ return (
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-
-## ✨ 특징
-* **목표**: 수입과 관계 없이 **지출 줄이기에 집중 (지출만 기록)**
-* **일별, 주별, 태그별 지출 확인** 가능 
-* 각 지출별로 여러 개의 항목 등록 가능
-* Main 화면에 지출에 대한 경각심을 일깨우는 랜덤 문구 등장
-* **눈이 편안하고 예쁜 UI**를 위해 색상 사이트에서 적절한 색감 조합을 골라서 디자인에 반영
-
-## 📘 주요 상태 데이터
-```
-const TransactionType = {
-  id: string;
-  date: Date;
-  lists: ListType[]; // 해당 날짜의 지출 리스트
-};
-
-// 해당 날짜의 지출 리스트
-const ListType = {
-  id: string;
-  title: string; // 지출 제목
-  items: ItemType[]; // 세부 지출 항목 리스트
-  diaries?: string[]; // 그날 있었던 일 간단 기록 (optional, 구현 예정)
-};
-
- // 세부 지출 항목 리스트
-const ItemType = {
-  id: string;
-  name: string; // 세부 항목명
-  price: number; // 세부 항목의 지출액
-  tag: string; // 항목 분류 태그: 까페, 밥, 화장품, 옷 등 (작성자가 직접 태그 등록)
-  description?: string; // 항목별 소감 및 기록 (optional, 구현 예정)
-};
-```
-
-## 🍬 구현 기능
+## 🍬 구현 기능 상세
 
 1. **새 지출항목 등록**
 <img src="https://user-images.githubusercontent.com/68722179/226583033-f2585e2c-ea79-4ace-bd74-26b618dd1c09.png" width='450'/>
@@ -132,41 +104,20 @@ const ItemType = {
 <img src="https://user-images.githubusercontent.com/68722179/226581086-8def2194-847c-43b3-8061-31820eba5cbc.png" width='400'/>
 
 
-## 🧙‍♀️ UX를 위한 장치
-1. 등록된 커스텀 태그는 시간이 지나도 유지 (localStorage)
+## 🧙‍♀️ UX 개선 내역
+1. 등록된 커스텀 태그는 브라우저 종료 후에도 유지 (localStorage)
 2. debounce로 인풋 입력 최적화 (use-debounce)
-```
-// 선언
-const debounced = useDebouncedCallback(({ id, flag, value }) => {
-    setList({
-      id,
-      flag,
-      input: value,
-    });
-  }, 400);
-  
-// 사용
-  <Input
-     ...
-     onChange={(e) =>
-     debounced({
-       id,
-       flag: 'name',
-       value: e.target.value,
-    })
-   }
- />
-```
-3. 제출 시 비어있는 입력란이 있으면 화면 상단 토스트 알림 (react-toastify)
+3. 제출 시 비어있는 입력란이 있으면 화면 상단에 toast 알림 (react-toastify)
 <img src="https://user-images.githubusercontent.com/68722179/226586966-0bab7157-5a5f-49c1-906c-8d8a9ed5e637.png" width='400'/>
 
-4. 원활한 앱 사용을 위한 가이드 문구 <br/>
+4. 원활한 앱 사용을 위한 가이드 문구 추가 <br/>
 
 <img src="https://user-images.githubusercontent.com/68722179/226577742-e451654f-49de-499b-8431-686330105914.png" width='400'/> <br/>
 <img src="https://user-images.githubusercontent.com/68722179/226592909-621bf8d9-a37d-4636-8a41-488aa2f2fd81.png" width='400'/>
 
 
-5. 새 등록 모달에서 항목 추가 시 아래로 자동 스크롤 + 항목이 2개 이상일 때만 오른쪽에 '-' 버튼 렌더링
+5. 새 등록 모달에서 항목 추가 시 아래로 자동 스크롤
+ - 항목이 2개 이상일 때만 오른쪽에 '-' 버튼 렌더링
 <img src="https://user-images.githubusercontent.com/68722179/226580631-f1ed00cc-d158-4623-a17a-463d5ec94667.png" width='400'/>
 
 ```
@@ -177,14 +128,14 @@ const debounced = useDebouncedCallback(({ id, flag, value }) => {
 ```
 
 
-## 🛍 파일/폴더 모듈화
+## 🛍 Recoil 파일/폴더 모듈화
 * 수많은 atom과 selector를 각각의 역할에 따라 파일 분리
 <img src="https://user-images.githubusercontent.com/68722179/226563795-c8566a16-592a-4242-9752-0bd8473309a4.png" width='200' />
 
 * 내보내기 예시
 <img src="https://user-images.githubusercontent.com/68722179/226566405-2d2d13d8-8465-4e7b-9298-9af12cedeee5.png" width='400' />
 
-[ 위와 같이 수정하기 전 ]
+[ 수정 전 ]
 * **라이브러리 recoil과 로컬 recoil 폴더가 잘 구분되지 않음**
 * recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
 * 구체적인 이름을 위해 **긴 변수명**을 사용하는 과정에서 **각 atom과 selector가 어떤 역할인지 잘 인지되지 않음**
