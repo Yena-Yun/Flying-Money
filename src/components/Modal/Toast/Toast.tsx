@@ -39,10 +39,10 @@ export const Toast = ({ role }: ToastProp) => {
 
   return (
     <>
-      <div
+      {/* <div
         className={styles.popupBackground}
         onClick={() => setCloseToast(role)}
-      ></div>
+      ></div> */}
       <div className={styles.popupSection}>
         <div
           className={classNames(
