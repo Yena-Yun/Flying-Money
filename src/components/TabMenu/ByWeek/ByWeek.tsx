@@ -14,7 +14,7 @@ export const ByWeek = () => {
   const weekTotal = useRecoilValue(AMain.totalPerWeekState);
   const setToggleCalendar = useSetRecoilState(SOpen.toggleCalendarSelector);
 
-  const TEXTAREA_DEFAULT = '한 주 소감을 작성해보세요!';
+  const TEXTAREA_DEFAULT = '이번 주 지출에 대한 소감을 작성해보세요.';
 
   const handleEditText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaInput(e.currentTarget.value);
