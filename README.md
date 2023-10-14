@@ -6,7 +6,7 @@
 ### 🚀 [Vercel 배포 링크](https://flying-money.vercel.app/)
 
 
-<img src="https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif" width="500" />
+<img src="https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif" width="450" />
 
 
 ## 🧨 실행 방법
@@ -152,7 +152,7 @@ import { SMain } from 'recoil/selector';
 ```
 
 * 로컬 recoil 폴더 내에 atom과 selector 폴더로 구분하여 **import할 때 라이브러리 recoil과 확실히 구분됨**
-* 역할과 관련된 **짧은 그룹명(예: Date 관련 atom => ADate)**으로 묶어서 내보내서 다음 효과를 얻음
+* 역할과 관련된 짧은 그룹명(예: Date 관련 atom => ADate)으로 묶어서 내보내서 다음 효과를 얻음
   * **atom인지 selector인지 바로 알아볼 수 있음**
   * **역할(Date인지 모달 Open인지) 바로 구분 가능**
   * **해당 그룹명이 import되어 있을 경우 개별 import 라인이 매번 추가되지 않음**
