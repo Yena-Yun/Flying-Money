@@ -66,12 +66,14 @@ git clone -> yarn install -> yarn dev
 
 
 ## 🧙‍♀️ UX 개선 내역
-1. 등록된 커스텀 태그는 브라우저 종료 후에도 유지 (localStorage)
-2. debounce로 인풋 입력 최적화 (use-debounce)
-3. 제출 시 비어있는 입력란이 있으면 화면 상단에 toast 알림 (react-toastify)
+1. **등록된 커스텀 태그**는 `localStorage`를 활용하여 **브라우저 종료 후에도 유지**
+2. 등록 모달에서 ‘항목 추가’ 클릭 시 **추가된 항목의 bottom 라인까지 자동 스크롤 다운**
+3. 하루에 2개 이상의 지출 등록 시 **‘~외 +(추가한 갯수)`로 조회**
+4. **`use-debounce`로 인풋 입력 최적화**
+5. 제출 시 비어있는 입력란이 있으면 **화면 상단에 toast 알림** (react-toastify)
 <img src="https://user-images.githubusercontent.com/68722179/226586966-0bab7157-5a5f-49c1-906c-8d8a9ed5e637.png" width='400'/>
 
-4. 원활한 앱 사용을 위한 가이드 문구 추가 <br/>
+6. 원활한 앱 사용을 위한 가이드 문구 추가 <br/>
 
 <img src="https://user-images.githubusercontent.com/68722179/226577742-e451654f-49de-499b-8431-686330105914.png" width='400'/> <br/>
 <img src="https://user-images.githubusercontent.com/68722179/226592909-621bf8d9-a37d-4636-8a41-488aa2f2fd81.png" width='400'/>
