@@ -141,7 +141,7 @@ import { toggleCalendarSelector } from 'recoil';
 ```
 
 1. import문에서 **라이브러리 recoil인지 로컬 recoil 폴더인지 잘 구분되지 않음**
-2. recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
+2. recoil 폴더에서 개별 atom이나 selector를 가져올 때마다 **매번 import 라인이 추가됨**
 3. 구체적인 이름을 위해 **긴 변수명**을 사용하며 **atom과 selector가 잘 구분되지 않음**
 
 **[ 수정 후 ]**
@@ -151,10 +151,9 @@ import { ADate, AOpen } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
 ```
 
-* 로컬 recoil 폴더 내에 atom과 selector 폴더로 구분하여 import할 때 라이브러리 recoil과 확실히 구분됨
-* 역할과 관련된 짧은 그룹명(예: Date 관련 atom => ADate)으로 묶어서 내보내서 다음 효과를 얻음
-  * atom인지 selector인지 바로 알아볼 수 있음
-  * 역할(Date인지 모달 Open인지) 바로 구분 가능
-  * 불필요하게 import문이 길어지지 않음 
-  * 해당 그룹명이 이미 import되어 있을 경우 개별 atom 및 selector마다 import 라인이 매번 추가되지 않음
+* 로컬 recoil 폴더 내에 atom과 selector 폴더로 구분하여 **import할 때 라이브러리 recoil과 확실히 구분됨**
+* 역할과 관련된 **짧은 그룹명(예: Date 관련 atom => ADate)**으로 묶어서 내보내서 다음 효과를 얻음
+  * **atom인지 selector인지 바로 알아볼 수 있음**
+  * **역할(Date인지 모달 Open인지) 바로 구분 가능**
+  * **해당 그룹명이 import되어 있을 경우 개별 import 라인이 매번 추가되지 않음**
 
