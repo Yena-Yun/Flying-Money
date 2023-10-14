@@ -3,7 +3,7 @@
 * 수기로 쓰던 가계부를 태그 등록 및 지출 등록/조회/삭제가 가능한 가계부 앱으로 제작
 * **기획, 디자인, 개발, 배포 1인 진행**
 
-## 🚀 [Vercel 배포 링크](https://flying-money.vercel.app/)
+### 🚀 [Vercel 배포 링크](https://flying-money.vercel.app/)
 
 
 <img src="https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif" width="500" />
@@ -132,28 +132,32 @@ return (
 
 
 ## 🛍 이슈 해결 - Recoil 파일/폴더 모듈화 고민
-**[ 문제 상황 ]**
+**[ 계기 ]**
 * 작업 과정에서 **atom과 selector 갯수가 늘어남**
 * **적절한 파일/폴더 구조로 분리**하여 이후 작업에 편할 수 있도록 관리하고 싶어짐
-<img src="https://user-images.githubusercontent.com/68722179/226563795-c8566a16-592a-4242-9752-0bd8473309a4.png" width='200' />
 
-**[ 수정 전 ]**
-* **라이브러리 recoil과 로컬 recoil 폴더가 잘 구분되지 않음**
-* recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
-* 구체적인 이름을 위해 **긴 변수명**을 사용하는 과정에서 **각 atom과 selector가 어떤 역할인지 잘 인지되지 않음**
-
+**[ 수정 전 문제 ]**
 ```
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { addModalDateState } from 'recoil';
 import { toggleCalendarSelector } from 'recoil';
 ```
 
-**[ 수정 후 ]**
-* **역할과 관련된 이름**으로 내보내서 **컴포넌트 파일에서 역할이 잘 인지됨**
-* 라이브러리 recoil과 로컬 recoil 폴더가 확실히 구분됨
-* 해당 이름이 이미 import 되어 있을 경우 import 라인이 매번 추가되지 않음
+1. import문에서 **라이브러리 recoil인지 로컬 recoil 폴더인지 잘 구분되지 않음**
+2. recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
+3. 구체적인 이름을 위해 **긴 변수명**을 사용하며 **atom과 selector가 잘 구분되지 않음**
+
+**[ 수정 후 효과 ]**
 ```
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ADate, AOpen } from 'recoil/atom';
 import { SMain } from 'recoil/selector';
 ```
+
+* 로컬 recoil 폴더 내에 atom과 selector 폴더로 구분하여 import할 때 라이브러리 recoil과 확실히 구분됨
+* 역할과 관련된 짧은 그룹명(예: Date 관련 atom => ADate)으로 묶어서 내보내어 다음 효과를 얻음
+  * atom인지 selector인지 바로 알아볼 수 있음
+  * 역할(Date인지 모달 Open인지) 바로 구분 가능
+  * 불필요하게 import문이 길어지지 않음 
+  * 해당 그룹명이 이미 import되어 있을 경우 개별 atom 및 selector마다 import 라인이 매번 추가되지 않음
+
