@@ -6,7 +6,7 @@
 ## 🚀 [Vercel 배포 링크](https://flying-money.vercel.app/)
 
 
-![녹화_2023_04_16_20_46_49_431](https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif)
+<img src="https://user-images.githubusercontent.com/68722179/232470181-881751ac-84e5-4276-aaed-a5176fe046c5.gif" width="500" />
 
 
 ## 🧨 실행 방법
@@ -33,20 +33,20 @@ git clone -> yarn install -> yarn dev
 ## 🍬 구현 기능 상세
 
 1. **새 지출항목 등록**
-<img src="https://user-images.githubusercontent.com/68722179/226583033-f2585e2c-ea79-4ace-bd74-26b618dd1c09.png" width='450'/>
+<img src="https://user-images.githubusercontent.com/68722179/226583033-f2585e2c-ea79-4ace-bd74-26b618dd1c09.png" width='400'/>
 
 2. **탭별 조회** (전체 보기, 날짜별 보기)
-<img src="https://user-images.githubusercontent.com/68722179/226578461-78b72872-4ec3-4aeb-929e-43545dd5833f.png" width='450'/>
+<img src="https://user-images.githubusercontent.com/68722179/226578461-78b72872-4ec3-4aeb-929e-43545dd5833f.png" width='400'/>
 
 3. **지출항목 상세 확인 모달**
-<img src="https://user-images.githubusercontent.com/68722179/226584845-ceafc8be-f517-408c-a6e7-60f988af6897.png" width='450'/>
+<img src="https://user-images.githubusercontent.com/68722179/226584845-ceafc8be-f517-408c-a6e7-60f988af6897.png" width='400'/>
 
 4. **커스텀 태그 등록**
 
-<img src="https://user-images.githubusercontent.com/68722179/226578099-028d3c6c-40cf-45aa-a198-af8dac4fa8c7.png" width='450'/>)
+<img src="https://user-images.githubusercontent.com/68722179/226578099-028d3c6c-40cf-45aa-a198-af8dac4fa8c7.png" width='400'/>)
 
 5. **상세 모달에서 확인 및 삭제**
-<img src="https://user-images.githubusercontent.com/68722179/226578903-65887a45-52f4-4822-ad7e-0f3fdc9278cd.png" width='450'/>
+<img src="https://user-images.githubusercontent.com/68722179/226578903-65887a45-52f4-4822-ad7e-0f3fdc9278cd.png" width='400'/>
 
 6.**캘린더 기능**<br/>
 * 총 2군데서 사용, 컴포넌트 모듈화하고 스타일은 prop으로 분기<br/>
@@ -89,10 +89,11 @@ git clone -> yarn install -> yarn dev
 ```
 
 ## 🍹 코드 리팩토링
-- 기존 형태: 조건에 맞는 컴포넌트 렌더링을 위해 삼항연산자 사용
-- 수정된 형태: 객체에 key: value로 선언 후 `keyof typeof`를 활용하여 key 변수에 맞게 할당
+- 목적: 조건에 맞는 컴포넌트 렌더링
+- 수정 전: 삼항연산자 사용 (문제: 컴포넌트 갯수가 많아질수록 JSX에 코드 계속 추가)
+- 수정 후: 객체에 key: value로 선언 후 `keyof typeof`를 활용하여 변수에 맞는 컴포넌트 렌더링
 ```
-// BEFORE
+// 수정 전
 
 return (
     {clickedTabName === 'byAll' ? (
@@ -106,7 +107,7 @@ return (
 ```
 
 ```
-// AFTER
+// 수정 후
 
   const RENDER_BY_TAB = {
     byAll: <All />,
@@ -130,13 +131,11 @@ return (
     - 해결 과정 [블로그 글](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗 참고
 
 
-
-## 🛍 이슈 해결 - Recoil 파일/폴더 모듈화
-* 수많은 atom과 selector를 각각의 역할에 따라 **파일을 분리하는 과정에서 고민 발생**
+## 🛍 이슈 해결 - Recoil 파일/폴더 모듈화 고민
+**[ 문제 상황 ]**
+* 작업 과정에서 **atom과 selector 갯수가 늘어남**
+* **적절한 파일/폴더 구조로 분리**하여 이후 작업에 편할 수 있도록 관리하고 싶어짐
 <img src="https://user-images.githubusercontent.com/68722179/226563795-c8566a16-592a-4242-9752-0bd8473309a4.png" width='200' />
-
-* 내보내기 예시
-<img src="https://user-images.githubusercontent.com/68722179/226566405-2d2d13d8-8465-4e7b-9298-9af12cedeee5.png" width='400' />
 
 **[ 수정 전 ]**
 * **라이브러리 recoil과 로컬 recoil 폴더가 잘 구분되지 않음**
