@@ -38,27 +38,26 @@ git clone -> yarn install -> yarn dev
 2. **탭별 조회** (전체 보기, 날짜별 보기)
 <img src="https://user-images.githubusercontent.com/68722179/226578461-78b72872-4ec3-4aeb-929e-43545dd5833f.png" width='400'/>
 
-3. **지출항목 상세 확인 모달**
+3. **커스텀 태그 등록**
+
+<img src="https://user-images.githubusercontent.com/68722179/226578099-028d3c6c-40cf-45aa-a198-af8dac4fa8c7.png" width='400'/>
+
+4. **지출항목 상세 확인**
 <img src="https://user-images.githubusercontent.com/68722179/226584845-ceafc8be-f517-408c-a6e7-60f988af6897.png" width='400'/>
-
-4. **커스텀 태그 등록**
-
-<img src="https://user-images.githubusercontent.com/68722179/226578099-028d3c6c-40cf-45aa-a198-af8dac4fa8c7.png" width='400'/>)
 
 5. **상세 모달에서 확인 및 삭제**
 <img src="https://user-images.githubusercontent.com/68722179/226578903-65887a45-52f4-4822-ad7e-0f3fdc9278cd.png" width='400'/>
 
-6.**캘린더 기능**<br/>
-* 총 2군데서 사용, 컴포넌트 모듈화하고 스타일은 prop으로 분기<br/>
-
+6. **캘린더**
+* 여러 곳에서 사용하여 재사용성을 위해 모듈화 (`mini` prop으로 분기)<br/>
 <img src="https://user-images.githubusercontent.com/68722179/226582636-f1a422dc-902e-47f4-a309-a7852c4aaff2.png" width='400'/>
 
 
-### 세부 기능
-* 같은 날짜로 추가할 경우 기존에 있던 날짜 항목 밑으로 들어감
+### 👒 세부 기능
+* 같은 날짜로 추가할 경우 기존에 있던 날짜 항목 밑에 바로 추가
 <img src="https://user-images.githubusercontent.com/68722179/226579850-32906b40-9807-4224-afd2-15caab3531ca.png" width='400'/>
 
-* 주별 탭에서 달 이동 시 해당 달의 week 수에 맞는 주차별 버튼 렌더링 <br/>
+* 주별 탭에서 월 이동 시 해당 월의 week 수에 맞는 주차별 버튼 렌더링 <br/>
 예: 2023년 3월 (총 5주차) <br/>
 <img src="https://user-images.githubusercontent.com/68722179/226581022-bf8a0388-6637-4f88-9a36-b0f1559feadb.png" width='400'/>
 예: 2023년 4월 (총 6주차) <br/>
@@ -67,28 +66,15 @@ git clone -> yarn install -> yarn dev
 
 ## 🧙‍♀️ UX 개선 내역
 1. **등록된 커스텀 태그**는 `localStorage`를 활용하여 **브라우저 종료 후에도 유지**
-2. 등록 모달에서 ‘항목 추가’ 클릭 시 **추가된 항목의 bottom 라인까지 자동 스크롤 다운**
-3. 하루에 2개 이상의 지출 등록 시 **‘~외 +(추가한 갯수)`로 조회**
-4. **`use-debounce`로 인풋 입력 최적화**
+2. 하루에 2개 이상의 지출 등록 시 **‘~외 +(추가한 갯수)`로 조회**
+3. **`use-debounce`로 인풋 입력 최적화**
+4. 등록 모달에서 ‘항목 추가’ 클릭 시 **추가된 항목의 bottom 라인까지 자동 스크롤 다운**
+   <img src="https://user-images.githubusercontent.com/68722179/226580631-f1ed00cc-d158-4623-a17a-463d5ec94667.png" width='400'/>
 5. 제출 시 비어있는 입력란이 있으면 **화면 상단에 toast 알림** (react-toastify)
 <img src="https://user-images.githubusercontent.com/68722179/226586966-0bab7157-5a5f-49c1-906c-8d8a9ed5e637.png" width='400'/>
-
-6. 원활한 앱 사용을 위한 가이드 문구 추가 <br/>
-
+6. **원활한 앱 사용을 위한 가이드 문구** <br/>
 <img src="https://user-images.githubusercontent.com/68722179/226577742-e451654f-49de-499b-8431-686330105914.png" width='400'/> <br/>
-<img src="https://user-images.githubusercontent.com/68722179/226592909-621bf8d9-a37d-4636-8a41-488aa2f2fd81.png" width='400'/>
 
-
-5. 새 등록 모달에서 항목 추가 시 아래로 자동 스크롤
- - 항목이 2개 이상일 때만 오른쪽에 '-' 버튼 렌더링
-<img src="https://user-images.githubusercontent.com/68722179/226580631-f1ed00cc-d158-4623-a17a-463d5ec94667.png" width='400'/>
-
-```
-  useEffect(() => {
-    if (list.length < 2) return;
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [list]);
-```
 
 ## 🍹 코드 리팩토링
 - 목적: **조건에 맞는 컴포넌트 렌더링**하기
