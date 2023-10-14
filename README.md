@@ -70,8 +70,7 @@ git clone -> yarn install -> yarn dev
 3. **`use-debounce`로 인풋 입력 최적화**
 4. 등록 모달에서 ‘항목 추가’ 클릭 시 **추가된 항목의 bottom 라인까지 자동 스크롤 다운**
    <img src="https://user-images.githubusercontent.com/68722179/226580631-f1ed00cc-d158-4623-a17a-463d5ec94667.png" width='400'/>
-5. 제출 시 비어있는 입력란이 있으면 **화면 상단에 toast 알림** (react-toastify)
-<img src="https://user-images.githubusercontent.com/68722179/226586966-0bab7157-5a5f-49c1-906c-8d8a9ed5e637.png" width='400'/>
+5. 제출 시 비어있는 입력란이 있으면 **화면 상단에 toast 알림** (`react-toastify`)
 6. **원활한 앱 사용을 위한 가이드 문구** <br/>
 <img src="https://user-images.githubusercontent.com/68722179/226577742-e451654f-49de-499b-8431-686330105914.png" width='400'/> <br/>
 
