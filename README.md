@@ -1,7 +1,7 @@
 # 💸 Flying Money (플라잉 머니)
 
-* 수기로 쓰던 가계부를 태그 등록 및 지출 등록/조회/삭제가 가능한 가계부 앱으로 제작
-* **기획, 디자인, 개발, 배포 1인 진행**
+* 수기로 작성하던 가계부를 웹으로 개발하고 싶어 제작
+* 역할: **기획, 디자인, 개발, 배포 1인 진행**
 
 ### 🚀 [Vercel 배포 링크](https://flying-money.vercel.app/)
 
@@ -24,13 +24,13 @@ git clone -> yarn install -> yarn dev
 
 ## ✨ 요약
 * 수입 상관 없이 **지출 줄이기에 집중하여 지출만 기록하는 가계부**
+* [**Lighthouse 성능 개선 과정** 블로그](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗
+
+## 🍬 구현 기능
+
 * **일별, 주별, 태그별 지출 확인** 
 * **날짜당 여러 개의 항목 등록** 가능 (조회에서 '~외 +(추가된 갯수)'로 조회)
 * 지출을 분류하기 위한 **사용자 커스텀 태그 등록**
-* **눈이 편안하고 예쁜 UI**를 고려하여 적절한 색감 조합을 색상 사이트에서 고름
-
-
-## 🍬 구현 기능 상세
 
 1. **새 지출항목 등록**
 <img src="https://user-images.githubusercontent.com/68722179/226583033-f2585e2c-ea79-4ace-bd74-26b618dd1c09.png" width='400'/>
@@ -89,9 +89,9 @@ git clone -> yarn install -> yarn dev
 ```
 
 ## 🍹 코드 리팩토링
-- 목적: 조건에 맞는 컴포넌트 렌더링
-- 수정 전: 삼항연산자 사용 (문제: 컴포넌트 갯수가 많아질수록 JSX에 코드 계속 추가)
-- 수정 후: 객체에 key: value로 선언 후 `keyof typeof`를 활용하여 변수에 맞는 컴포넌트 렌더링
+- 목적: **조건에 맞는 컴포넌트 렌더링**하기
+- 수정 전: 삼항연산자 사용 - 컴포넌트 갯수가 많아질수록 **JSX에 계속 코드가 추가되는 문제 예상됨**
+- 수정 후: 렌더링할 컴포넌트를 **객체로 선언**하여 **key에 맞는 컴포넌트 렌더링** (`keyof typeof`로 타입 지정)
 ```
 // 수정 전
 
@@ -124,19 +124,16 @@ return (
 
 
 ## 🚀 최적화
-- **CRA를 Vite로 마이그레이션**
-    - 빌드 속도 97.5% 상승 (20초 -> 0.5초)
-- **Lighthouse 성능 최적화**
-    - 성능 점수 약 92% 상승 (48점 -> 92점)
-    - 해결 과정 [블로그 글](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗 참고
+- **CRA를 Vite로 마이그레이션**하여 빌드 속도 97.5% 상승 (20초 -> 0.5초)
+- [**Lighthouse 성능 최적화**](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)로 성능 점수 91.6% 상승 (48점 -> 92점)
 
 
-## 🛍 이슈 해결 - Recoil 파일/폴더 모듈화 고민
+## 🛍 이슈 해결
 **[ 계기 ]**
-* 작업 과정에서 **atom과 selector 갯수가 늘어남**
+* 전역 상태 관리 과정에서 **atom과 selector 갯수가 늘어남**
 * **적절한 파일/폴더 구조로 분리**하여 이후 작업에 편할 수 있도록 관리하고 싶어짐
 
-**[ 수정 전 문제 ]**
+**[ 수정 전 ]**
 ```
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { addModalDateState } from 'recoil';
@@ -147,7 +144,7 @@ import { toggleCalendarSelector } from 'recoil';
 2. recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
 3. 구체적인 이름을 위해 **긴 변수명**을 사용하며 **atom과 selector가 잘 구분되지 않음**
 
-**[ 수정 후 효과 ]**
+**[ 수정 후 ]**
 ```
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ADate, AOpen } from 'recoil/atom';
@@ -155,7 +152,7 @@ import { SMain } from 'recoil/selector';
 ```
 
 * 로컬 recoil 폴더 내에 atom과 selector 폴더로 구분하여 import할 때 라이브러리 recoil과 확실히 구분됨
-* 역할과 관련된 짧은 그룹명(예: Date 관련 atom => ADate)으로 묶어서 내보내어 다음 효과를 얻음
+* 역할과 관련된 짧은 그룹명(예: Date 관련 atom => ADate)으로 묶어서 내보내서 다음 효과를 얻음
   * atom인지 selector인지 바로 알아볼 수 있음
   * 역할(Date인지 모달 Open인지) 바로 구분 가능
   * 불필요하게 import문이 길어지지 않음 
