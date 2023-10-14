@@ -15,6 +15,13 @@ git clone -> yarn install -> yarn dev
 ```
 
 
+## 🪀 기술 스택
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Recoil](https://img.shields.io/badge/recoil-f26b00?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI1MDAiIHdpZHRoPSIyMzY4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMwIDExIDI3LjUgNzgiPjxyZWN0IGZpbGw9IiNmMjZiMDAiIGhlaWdodD0iOTUiIHJ4PSIxMCIgd2lkdGg9IjYwIi8+PGNpcmNsZSBjeD0iNDMuNSIgY3k9IjE4LjUiIGZpbGw9IiNmZmYiIHI9IjcuNSIvPjxjaXJjbGUgY3g9IjQzLjUiIGN5PSI4MS41IiBmaWxsPSIjZmZmIiByPSI3LjUiLz48ZyBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyI+PHBhdGggZD0iTTQzLjk5OSAyNUM0Mi41IDM3IDU3LjUgMzQgNTcuNSA0Mi41YzAgNS01Ljg3OCA2LjM2NS0xMy41MDEgN0MzNy45OTkgNTAgMzAgNTAgMzAgNThzMTYgNS41IDEzLjk5OSAxN00zNC4xMzIgMzMuMzUzYzAgMTUuMjg5IDIzLjE1IDE4LjI4OSAyMy4xNSAzMi42MiIvPjwvZz48L3N2Zz4=)
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
 ## ✨ 특징
 * **목표**: 수입과 관계 없이 **지출 줄이기에 집중 (지출만 기록)**
 * **일별, 주별, 태그별 지출 확인** 가능 
@@ -22,52 +29,6 @@ git clone -> yarn install -> yarn dev
 * 지출을 분류하기 위한 사용자 커스텀 태그 등록 가능
 * **눈이 편안하고 예쁜 UI**를 신경써서 적절한 색감 조합을 색상 사이트에서 골라 진행
 
-## 🍹  리팩토링 내역
-- 분기문으로 각각의 컴포넌트를 렌더링하던 코드를 객체에 선언 후 `keyof typeof`를 활용하여 해당하는 컴포넌트를 렌더링하도록 리팩토링
-```
-// BEFORE
-
-return (
-    {clickedTabName === 'byAll' ? (
-        <All />
-      ) : clickedTabName === 'byWeek' ? (
-        <ByWeek />
-      ) : clickedTabName === 'byDate' ? (
-        <ByDate />
-      ) : null}
-);
-```
-
-```
-// AFTER
-
-  const RENDER_BY_TAB = {
-    byAll: <All />,
-    byWeek: <ByWeek />,
-    byDate: <ByDate />,
-  };
-
-...
-return (
-    ...
-    {RENDER_BY_TAB[clickedTabName as keyof typeof RENDER_BY_TAB]}
-);
-```
-
-
-## 🚀 최적화 내역
-- **CRA를 Vite로 마이그레이션**
-    - 빌드 속도 97.5% 상승 (20초 -> 0.5초)
-- **Lighthouse 성능 최적화**
-    - 성능 점수 약 92% 상승 (48점 -> 92점)
-    - 해결 과정 [블로그 글](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗 참고
-
-## 🪀 기술 스택
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![Recoil](https://img.shields.io/badge/recoil-f26b00?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI1MDAiIHdpZHRoPSIyMzY4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMwIDExIDI3LjUgNzgiPjxyZWN0IGZpbGw9IiNmMjZiMDAiIGhlaWdodD0iOTUiIHJ4PSIxMCIgd2lkdGg9IjYwIi8+PGNpcmNsZSBjeD0iNDMuNSIgY3k9IjE4LjUiIGZpbGw9IiNmZmYiIHI9IjcuNSIvPjxjaXJjbGUgY3g9IjQzLjUiIGN5PSI4MS41IiBmaWxsPSIjZmZmIiByPSI3LjUiLz48ZyBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyI+PHBhdGggZD0iTTQzLjk5OSAyNUM0Mi41IDM3IDU3LjUgMzQgNTcuNSA0Mi41YzAgNS01Ljg3OCA2LjM2NS0xMy41MDEgN0MzNy45OTkgNTAgMzAgNTAgMzAgNThzMTYgNS41IDEzLjk5OSAxN00zNC4xMzIgMzMuMzUzYzAgMTUuMjg5IDIzLjE1IDE4LjI4OSAyMy4xNSAzMi42MiIvPjwvZz48L3N2Zz4=)
-![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## 🍬 구현 기능 상세
 
@@ -127,15 +88,57 @@ return (
   }, [list]);
 ```
 
+## 🍹 코드 리팩토링
+- 기존 형태: 조건에 맞는 컴포넌트 렌더링을 위해 삼항연산자 사용
+- 수정된 형태: 객체에 key: value로 선언 후 `keyof typeof`를 활용하여 key 변수에 맞게 할당
+```
+// BEFORE
 
-## 🛍 Recoil 파일/폴더 모듈화
-* 수많은 atom과 selector를 각각의 역할에 따라 파일 분리
+return (
+    {clickedTabName === 'byAll' ? (
+        <All />
+      ) : clickedTabName === 'byWeek' ? (
+        <ByWeek />
+      ) : clickedTabName === 'byDate' ? (
+        <ByDate />
+      ) : null}
+);
+```
+
+```
+// AFTER
+
+  const RENDER_BY_TAB = {
+    byAll: <All />,
+    byWeek: <ByWeek />,
+    byDate: <ByDate />,
+  };
+
+...
+return (
+    ...
+    {RENDER_BY_TAB[clickedTabName as keyof typeof RENDER_BY_TAB]}
+);
+```
+
+
+## 🚀 최적화
+- **CRA를 Vite로 마이그레이션**
+    - 빌드 속도 97.5% 상승 (20초 -> 0.5초)
+- **Lighthouse 성능 최적화**
+    - 성능 점수 약 92% 상승 (48점 -> 92점)
+    - 해결 과정 [블로그 글](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗 참고
+
+
+
+## 🛍 이슈 해결 - Recoil 파일/폴더 모듈화
+* 수많은 atom과 selector를 각각의 역할에 따라 **파일을 분리하는 과정에서 고민 발생**
 <img src="https://user-images.githubusercontent.com/68722179/226563795-c8566a16-592a-4242-9752-0bd8473309a4.png" width='200' />
 
 * 내보내기 예시
 <img src="https://user-images.githubusercontent.com/68722179/226566405-2d2d13d8-8465-4e7b-9298-9af12cedeee5.png" width='400' />
 
-[ 수정 전 ]
+**[ 수정 전 ]**
 * **라이브러리 recoil과 로컬 recoil 폴더가 잘 구분되지 않음**
 * recoil 폴더에서 atom이나 selector를 가져올 때마다 매번 import 라인이 추가됨
 * 구체적인 이름을 위해 **긴 변수명**을 사용하는 과정에서 **각 atom과 selector가 어떤 역할인지 잘 인지되지 않음**
@@ -146,7 +149,7 @@ import { addModalDateState } from 'recoil';
 import { toggleCalendarSelector } from 'recoil';
 ```
 
-[ 수정 후 ]
+**[ 수정 후 ]**
 * **역할과 관련된 이름**으로 내보내서 **컴포넌트 파일에서 역할이 잘 인지됨**
 * 라이브러리 recoil과 로컬 recoil 폴더가 확실히 구분됨
 * 해당 이름이 이미 import 되어 있을 경우 import 라인이 매번 추가되지 않음
