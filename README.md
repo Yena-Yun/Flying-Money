@@ -22,12 +22,12 @@ git clone -> yarn install -> yarn dev
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-## ✨ 특징
-* **목표**: 수입과 관계 없이 **지출 줄이기에 집중 (지출만 기록)**
-* **일별, 주별, 태그별 지출 확인** 가능 
-* 각 지출별로 여러 개의 항목 등록 가능
-* 지출을 분류하기 위한 사용자 커스텀 태그 등록 가능
-* **눈이 편안하고 예쁜 UI**를 신경써서 적절한 색감 조합을 색상 사이트에서 골라 진행
+## ✨ 요약
+* 수입 상관 없이 **지출 줄이기에 집중하여 지출만 기록하는 가계부**
+* **일별, 주별, 태그별 지출 확인** 
+* 각 지출별로 여러 개의 항목 등록
+* 지출을 분류하기 위한 사용자 커스텀 태그 등록
+* **눈이 편안하고 예쁜 UI**를 고려하여 적절한 색감 조합을 색상 사이트에서 고름
 
 
 ## 🍬 구현 기능 상세
