@@ -22,7 +22,7 @@ git clone -> yarn install -> yarn dev
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-## ✨ 요약
+## ✨ 소개
 * 수입 상관 없이 **지출 줄이기에 집중하여 지출만 기록하는 가계부**
 * [**Lighthouse 성능 개선 과정** 블로그](https://velog.io/@yena1025/%ED%94%8C%EB%9D%BC%EC%9E%89-%EB%A8%B8%EB%8B%88-Lighthouse-%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B8%B0%EB%A1%9D)🔗
 
@@ -108,6 +108,11 @@ return (
     {RENDER_BY_TAB[clickedTabName as keyof typeof RENDER_BY_TAB]}
 );
 ```
+
+## 🥽 전역 관리에 Recoil을 사용한 이유
+* React를 만든 페이스북에서 만듦 - 호환이 잘 된다고 들음
+* atom이라는 원자적 단위 기반이어서 상태 추적 및 유지보수가 쉬움
+* Redux를 쓸 만큼 프로젝트 규모가 크지 않다고 판단, Redux의 무거운 boilerplate 없이 비교적 간단히 사용 가능한 Recoil 선택
 
 
 ## 🚀 최적화
