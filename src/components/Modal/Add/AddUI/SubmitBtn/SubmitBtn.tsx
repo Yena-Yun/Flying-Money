@@ -1,6 +1,4 @@
-import { Suspense } from 'react';
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
-import ClipLoader from 'react-spinners/ClipLoader';
 import { AMain } from 'recoil/atom';
 import { SDate, SMain, SOpen, STotal } from 'recoil/selector';
 import { Hook, Const } from 'utils';
@@ -71,18 +69,7 @@ export const SubmitBtn = () => {
 
   return (
     <button className={styles.submitButton} onClick={submitTransaction}>
-      <Suspense
-        /* API 로딩이 있다고 가정 */
-        fallback={
-          <ClipLoader
-            color='#83c7d5'
-            // loading={isLoading}
-            aria-label='loading-spinner'
-          />
-        }
-      >
-        등록하기
-      </Suspense>
+      등록하기
     </button>
   );
 };

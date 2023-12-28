@@ -7,17 +7,14 @@ import { Date, SubmitBtn, AddItem, RemoveItem } from './AddUI';
 import { ModalLayout } from '../Layout/ModalLayout';
 import { Input } from 'components/Shared';
 import { Calendar } from 'components/Calendar/Calendar';
-import { blockInvalidInput, getFromLocalStorage } from 'utils/hooks';
-import { TagType } from 'types/mainType';
+import { blockInvalidInput } from 'utils/hooks';
 import styles from './Add.module.scss';
 
 export const AddModal = () => {
   const isOpenCalender = useRecoilValue(AOpen.isOpenAddCalendarState);
-
   const setTitle = useSetRecoilState(SModal.addModalTitleSelector);
   const list = useRecoilValue(AMain.addModalListState);
   const setList = useSetRecoilState(SModal.addModalListSelector);
-  const saveTagGroup: TagType[] = getFromLocalStorage('savedTagGroup') || [];
 
   const setClickedTagPopupIndex = useSetRecoilState(
     AIndex.clickedTagPopupIndexState
@@ -62,9 +59,6 @@ export const AddModal = () => {
       {isOpenCalender && <Calendar tabName='add' />}
 
       <h2 className={styles.modalTitle}>항목 등록하기</h2>
-      {/* <p className={styles.noTagGuide}>
-        {saveTagGroup.length < 1 && '등록하신 태그가 없어요!'}
-      </p> */}
 
       <form>
         <div className={styles.inputContainer}>
